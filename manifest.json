@@ -1,0 +1,17 @@
+{
+  "name": "Flagstaff — US flag half-staff status",
+  "short_name": "Flagstaff",
+  "description": "Whether the US flag should be at half-staff today, by state. Federal proclamations and governor orders, with the official source for every answer.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0A0C10",
+  "theme_color": "#0A0C10",
+  "categories": ["utilities", "news", "government"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

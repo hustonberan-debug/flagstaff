@@ -1,0 +1,270 @@
+{
+  "DC": {
+    "hash": "d5f18102a2bc121d",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "AL": {
+    "hash": "0fd0758cff2ed548",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://governor.alabama.gov/flag-status/",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status: Full Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "AK": {
+    "hash": "b0cbfd6597c73e91",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "AR": {
+    "hash": "e0556183d55a4170",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "CA": {
+    "hash": "c98c289cb927397a",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "FL": {
+    "hash": "946b079707889a7f",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "IA": {
+    "hash": "93fb9335f5864a21",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "CO": {
+    "hash": "6e63234c11515c48",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "HI": {
+    "hash": "40061970d647b52f",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "LA": {
+    "hash": "bdadd5a7a3387751",
+    "state_status": "half",
+    "state_order": {
+      "title": null,
+      "url": "https://gov.louisiana.gov/page/flag-status-half-staff",
+      "status": "half",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status- Half Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "MI": {
+    "hash": "6b955c96f116a26d",
+    "state_status": "half",
+    "state_order": {
+      "title": null,
+      "url": "https://www.michigan.gov/whitmer/news/flag-honors",
+      "status": "half",
+      "authority": "governor",
+      "evidence": "declaration: 'flag at half-staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "DE": {
+    "hash": "0f175599e357f074",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "ME": {
+    "hash": "72f3122dbe767c76",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "GA": {
+    "hash": "bc765ba70568eab1",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "KY": {
+    "hash": "60f3712a492810d2",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "MD": {
+    "hash": "d79bd04c1a4143ee",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "NE": {
+    "hash": "294b8e85edb44a83",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "NC": {
+    "hash": "288b18993a591f1e",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "NV": {
+    "hash": "eb0cdbf805bb8e34",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://www.gov.nv.gov/constituent-services/flag-status/",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flags at Full-Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "MN": {
+    "hash": "122b87a462085722",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "ND": {
+    "hash": "975b1417245dc512",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "OK": {
+    "hash": "d259021dc8cc15be",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "SC": {
+    "hash": "852ccee39f6bd9b4",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "NM": {
+    "hash": "0cbed27ae07397fd",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "OH": {
+    "hash": "7331e8dcb360aec9",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "RI": {
+    "hash": "9e1f52df71e34959",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "PA": {
+    "hash": "66392dd50b78e1d1",
+    "state_status": "half",
+    "state_order": {
+      "title": null,
+      "url": "https://www.pa.gov/agencies/dgs/flag-notices.html",
+      "status": "half",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag at Half-Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "MO": {
+    "hash": "9addb1003e7e3996",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "NJ": {
+    "hash": "0c57d776f0639905",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "OR": {
+    "hash": "db8312b01675f756",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "MS": {
+    "hash": "425c096b91889e1f",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "UT": {
+    "hash": "7e18e67416004230",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "CT": {
+    "hash": "e83c8871519c7136",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:40+00:00"
+  },
+  "WA": {
+    "hash": "bcaa29590d408e27",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "WV": {
+    "hash": "8786919f7a078dca",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "VT": {
+    "hash": "1e48f33811a65aa4",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "WI": {
+    "hash": "95a77d65587aada9",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  },
+  "TX": {
+    "hash": "d4a034203078f7bf",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-13T00:56:41+00:00"
+  }
+}
