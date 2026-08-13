@@ -1,0 +1,413 @@
+{
+  "generated": "2026-08-12",
+  "years": {
+    "2026": [
+      {
+        "id": "peace-officers-memorial-day",
+        "name": "Peace Officers Memorial Day",
+        "date": "2026-05-15",
+        "active": true,
+        "scope": "full-day",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m); 36 U.S.C. § 136",
+        "reason": "Honoring federal, state, and local law enforcement officers killed or disabled in the line of duty.",
+        "note": null
+      },
+      {
+        "id": "memorial-day",
+        "name": "Memorial Day",
+        "date": "2026-05-25",
+        "active": true,
+        "scope": "until-noon",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m)",
+        "reason": "Honoring Americans who died in military service.",
+        "note": "Half-staff from sunrise until noon only, then raised briskly to the top of the staff for the remainder of the day."
+      },
+      {
+        "id": "korean-war-armistice-day",
+        "name": "National Korean War Veterans Armistice Day",
+        "date": "2026-07-27",
+        "active": false,
+        "scope": "full-day",
+        "authority": "lapsed",
+        "citation": "36 U.S.C. § 127",
+        "reason": "Honoring veterans of the Korean War.",
+        "note": "The statutory half-staff provision expired after 2003. Half-staff applies only if a proclamation is issued for this specific year. Must be confirmed against live proclamation data — not assumed."
+      },
+      {
+        "id": "patriot-day",
+        "name": "Patriot Day",
+        "date": "2026-09-11",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 144(b)",
+        "reason": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      },
+      {
+        "id": "fallen-firefighters-memorial",
+        "name": "National Fallen Firefighters Memorial Service",
+        "date": "2026-10-04",
+        "active": false,
+        "scope": "full-day",
+        "authority": "variable",
+        "citation": "Pub. L. 107-51",
+        "reason": "Honoring firefighters who died in the line of duty, observed during the national memorial service in Emmitsburg, Maryland.",
+        "note": "DATE IS AN ESTIMATE (historical norm: first Sunday in October). The actual date is set each year by proclamation and must be resolved from live data before display."
+      },
+      {
+        "id": "pearl-harbor-remembrance-day",
+        "name": "National Pearl Harbor Remembrance Day",
+        "date": "2026-12-07",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 129(b)",
+        "reason": "Honoring the individuals who died as a result of their service at Pearl Harbor on December 7, 1941.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      }
+    ],
+    "2027": [
+      {
+        "id": "peace-officers-memorial-day",
+        "name": "Peace Officers Memorial Day",
+        "date": "2027-05-15",
+        "active": false,
+        "scope": "full-day",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m); 36 U.S.C. § 136",
+        "reason": "Honoring federal, state, and local law enforcement officers killed or disabled in the line of duty.",
+        "note": "Suppressed this year: May 15, 2027 is also Armed Forces Day (third Saturday in May), and 4 U.S.C. § 7(m) exempts that case. The flag is NOT flown at half-staff."
+      },
+      {
+        "id": "memorial-day",
+        "name": "Memorial Day",
+        "date": "2027-05-31",
+        "active": true,
+        "scope": "until-noon",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m)",
+        "reason": "Honoring Americans who died in military service.",
+        "note": "Half-staff from sunrise until noon only, then raised briskly to the top of the staff for the remainder of the day."
+      },
+      {
+        "id": "korean-war-armistice-day",
+        "name": "National Korean War Veterans Armistice Day",
+        "date": "2027-07-27",
+        "active": false,
+        "scope": "full-day",
+        "authority": "lapsed",
+        "citation": "36 U.S.C. § 127",
+        "reason": "Honoring veterans of the Korean War.",
+        "note": "The statutory half-staff provision expired after 2003. Half-staff applies only if a proclamation is issued for this specific year. Must be confirmed against live proclamation data — not assumed."
+      },
+      {
+        "id": "patriot-day",
+        "name": "Patriot Day",
+        "date": "2027-09-11",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 144(b)",
+        "reason": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      },
+      {
+        "id": "fallen-firefighters-memorial",
+        "name": "National Fallen Firefighters Memorial Service",
+        "date": "2027-10-03",
+        "active": false,
+        "scope": "full-day",
+        "authority": "variable",
+        "citation": "Pub. L. 107-51",
+        "reason": "Honoring firefighters who died in the line of duty, observed during the national memorial service in Emmitsburg, Maryland.",
+        "note": "DATE IS AN ESTIMATE (historical norm: first Sunday in October). The actual date is set each year by proclamation and must be resolved from live data before display."
+      },
+      {
+        "id": "pearl-harbor-remembrance-day",
+        "name": "National Pearl Harbor Remembrance Day",
+        "date": "2027-12-07",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 129(b)",
+        "reason": "Honoring the individuals who died as a result of their service at Pearl Harbor on December 7, 1941.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      }
+    ],
+    "2028": [
+      {
+        "id": "peace-officers-memorial-day",
+        "name": "Peace Officers Memorial Day",
+        "date": "2028-05-15",
+        "active": true,
+        "scope": "full-day",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m); 36 U.S.C. § 136",
+        "reason": "Honoring federal, state, and local law enforcement officers killed or disabled in the line of duty.",
+        "note": null
+      },
+      {
+        "id": "memorial-day",
+        "name": "Memorial Day",
+        "date": "2028-05-29",
+        "active": true,
+        "scope": "until-noon",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m)",
+        "reason": "Honoring Americans who died in military service.",
+        "note": "Half-staff from sunrise until noon only, then raised briskly to the top of the staff for the remainder of the day."
+      },
+      {
+        "id": "korean-war-armistice-day",
+        "name": "National Korean War Veterans Armistice Day",
+        "date": "2028-07-27",
+        "active": false,
+        "scope": "full-day",
+        "authority": "lapsed",
+        "citation": "36 U.S.C. § 127",
+        "reason": "Honoring veterans of the Korean War.",
+        "note": "The statutory half-staff provision expired after 2003. Half-staff applies only if a proclamation is issued for this specific year. Must be confirmed against live proclamation data — not assumed."
+      },
+      {
+        "id": "patriot-day",
+        "name": "Patriot Day",
+        "date": "2028-09-11",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 144(b)",
+        "reason": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      },
+      {
+        "id": "fallen-firefighters-memorial",
+        "name": "National Fallen Firefighters Memorial Service",
+        "date": "2028-10-01",
+        "active": false,
+        "scope": "full-day",
+        "authority": "variable",
+        "citation": "Pub. L. 107-51",
+        "reason": "Honoring firefighters who died in the line of duty, observed during the national memorial service in Emmitsburg, Maryland.",
+        "note": "DATE IS AN ESTIMATE (historical norm: first Sunday in October). The actual date is set each year by proclamation and must be resolved from live data before display."
+      },
+      {
+        "id": "pearl-harbor-remembrance-day",
+        "name": "National Pearl Harbor Remembrance Day",
+        "date": "2028-12-07",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 129(b)",
+        "reason": "Honoring the individuals who died as a result of their service at Pearl Harbor on December 7, 1941.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      }
+    ],
+    "2029": [
+      {
+        "id": "peace-officers-memorial-day",
+        "name": "Peace Officers Memorial Day",
+        "date": "2029-05-15",
+        "active": true,
+        "scope": "full-day",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m); 36 U.S.C. § 136",
+        "reason": "Honoring federal, state, and local law enforcement officers killed or disabled in the line of duty.",
+        "note": null
+      },
+      {
+        "id": "memorial-day",
+        "name": "Memorial Day",
+        "date": "2029-05-28",
+        "active": true,
+        "scope": "until-noon",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m)",
+        "reason": "Honoring Americans who died in military service.",
+        "note": "Half-staff from sunrise until noon only, then raised briskly to the top of the staff for the remainder of the day."
+      },
+      {
+        "id": "korean-war-armistice-day",
+        "name": "National Korean War Veterans Armistice Day",
+        "date": "2029-07-27",
+        "active": false,
+        "scope": "full-day",
+        "authority": "lapsed",
+        "citation": "36 U.S.C. § 127",
+        "reason": "Honoring veterans of the Korean War.",
+        "note": "The statutory half-staff provision expired after 2003. Half-staff applies only if a proclamation is issued for this specific year. Must be confirmed against live proclamation data — not assumed."
+      },
+      {
+        "id": "patriot-day",
+        "name": "Patriot Day",
+        "date": "2029-09-11",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 144(b)",
+        "reason": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      },
+      {
+        "id": "fallen-firefighters-memorial",
+        "name": "National Fallen Firefighters Memorial Service",
+        "date": "2029-10-07",
+        "active": false,
+        "scope": "full-day",
+        "authority": "variable",
+        "citation": "Pub. L. 107-51",
+        "reason": "Honoring firefighters who died in the line of duty, observed during the national memorial service in Emmitsburg, Maryland.",
+        "note": "DATE IS AN ESTIMATE (historical norm: first Sunday in October). The actual date is set each year by proclamation and must be resolved from live data before display."
+      },
+      {
+        "id": "pearl-harbor-remembrance-day",
+        "name": "National Pearl Harbor Remembrance Day",
+        "date": "2029-12-07",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 129(b)",
+        "reason": "Honoring the individuals who died as a result of their service at Pearl Harbor on December 7, 1941.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      }
+    ],
+    "2030": [
+      {
+        "id": "peace-officers-memorial-day",
+        "name": "Peace Officers Memorial Day",
+        "date": "2030-05-15",
+        "active": true,
+        "scope": "full-day",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m); 36 U.S.C. § 136",
+        "reason": "Honoring federal, state, and local law enforcement officers killed or disabled in the line of duty.",
+        "note": null
+      },
+      {
+        "id": "memorial-day",
+        "name": "Memorial Day",
+        "date": "2030-05-27",
+        "active": true,
+        "scope": "until-noon",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m)",
+        "reason": "Honoring Americans who died in military service.",
+        "note": "Half-staff from sunrise until noon only, then raised briskly to the top of the staff for the remainder of the day."
+      },
+      {
+        "id": "korean-war-armistice-day",
+        "name": "National Korean War Veterans Armistice Day",
+        "date": "2030-07-27",
+        "active": false,
+        "scope": "full-day",
+        "authority": "lapsed",
+        "citation": "36 U.S.C. § 127",
+        "reason": "Honoring veterans of the Korean War.",
+        "note": "The statutory half-staff provision expired after 2003. Half-staff applies only if a proclamation is issued for this specific year. Must be confirmed against live proclamation data — not assumed."
+      },
+      {
+        "id": "patriot-day",
+        "name": "Patriot Day",
+        "date": "2030-09-11",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 144(b)",
+        "reason": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      },
+      {
+        "id": "fallen-firefighters-memorial",
+        "name": "National Fallen Firefighters Memorial Service",
+        "date": "2030-10-06",
+        "active": false,
+        "scope": "full-day",
+        "authority": "variable",
+        "citation": "Pub. L. 107-51",
+        "reason": "Honoring firefighters who died in the line of duty, observed during the national memorial service in Emmitsburg, Maryland.",
+        "note": "DATE IS AN ESTIMATE (historical norm: first Sunday in October). The actual date is set each year by proclamation and must be resolved from live data before display."
+      },
+      {
+        "id": "pearl-harbor-remembrance-day",
+        "name": "National Pearl Harbor Remembrance Day",
+        "date": "2030-12-07",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 129(b)",
+        "reason": "Honoring the individuals who died as a result of their service at Pearl Harbor on December 7, 1941.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      }
+    ],
+    "2031": [
+      {
+        "id": "peace-officers-memorial-day",
+        "name": "Peace Officers Memorial Day",
+        "date": "2031-05-15",
+        "active": true,
+        "scope": "full-day",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m); 36 U.S.C. § 136",
+        "reason": "Honoring federal, state, and local law enforcement officers killed or disabled in the line of duty.",
+        "note": null
+      },
+      {
+        "id": "memorial-day",
+        "name": "Memorial Day",
+        "date": "2031-05-26",
+        "active": true,
+        "scope": "until-noon",
+        "authority": "mandatory",
+        "citation": "4 U.S.C. § 7(m)",
+        "reason": "Honoring Americans who died in military service.",
+        "note": "Half-staff from sunrise until noon only, then raised briskly to the top of the staff for the remainder of the day."
+      },
+      {
+        "id": "korean-war-armistice-day",
+        "name": "National Korean War Veterans Armistice Day",
+        "date": "2031-07-27",
+        "active": false,
+        "scope": "full-day",
+        "authority": "lapsed",
+        "citation": "36 U.S.C. § 127",
+        "reason": "Honoring veterans of the Korean War.",
+        "note": "The statutory half-staff provision expired after 2003. Half-staff applies only if a proclamation is issued for this specific year. Must be confirmed against live proclamation data — not assumed."
+      },
+      {
+        "id": "patriot-day",
+        "name": "Patriot Day",
+        "date": "2031-09-11",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 144(b)",
+        "reason": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      },
+      {
+        "id": "fallen-firefighters-memorial",
+        "name": "National Fallen Firefighters Memorial Service",
+        "date": "2031-10-05",
+        "active": false,
+        "scope": "full-day",
+        "authority": "variable",
+        "citation": "Pub. L. 107-51",
+        "reason": "Honoring firefighters who died in the line of duty, observed during the national memorial service in Emmitsburg, Maryland.",
+        "note": "DATE IS AN ESTIMATE (historical norm: first Sunday in October). The actual date is set each year by proclamation and must be resolved from live data before display."
+      },
+      {
+        "id": "pearl-harbor-remembrance-day",
+        "name": "National Pearl Harbor Remembrance Day",
+        "date": "2031-12-07",
+        "active": true,
+        "scope": "full-day",
+        "authority": "requested",
+        "citation": "36 U.S.C. § 129(b)",
+        "reason": "Honoring the individuals who died as a result of their service at Pearl Harbor on December 7, 1941.",
+        "note": "Statute requests an annual presidential proclamation rather than mandating half-staff directly. Observed every year in practice."
+      }
+    ]
+  }
+}
