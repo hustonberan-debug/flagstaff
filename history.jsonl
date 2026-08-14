@@ -23,3 +23,5 @@
 {"at": "2026-08-14T16:14:12+00:00", "state": "DE", "status": "full", "reason": null}
 {"at": "2026-08-14T16:14:12+00:00", "state": "TX", "status": "full", "reason": null}
 {"at": "2026-08-14T17:27:08+00:00", "state": "CA", "status": "full", "reason": null}
+{"at": "2026-08-14T18:25:08+00:00", "state": "NV", "status": "half", "reason": "State order"}
+{"at": "2026-08-14T18:25:08+00:00", "state": "TX", "status": "full", "reason": null}
