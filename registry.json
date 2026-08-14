@@ -800,11 +800,12 @@
     "stale": true,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "medium",
+    "confidence": "low",
     "confidence_caps": [
       "last order 336d old"
     ],
-    "buildable": true
+    "buildable": true,
+    "blocked_reason": "Press page is JavaScript-rendered; listings are absent from the HTML response. Needs a feed, an API, or a browser-based fetch."
   },
   {
     "state": "Maine",
@@ -919,9 +920,10 @@
     "stale": false,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "high",
+    "confidence": "low",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": false,
+    "blocked_reason": "Radware bot-detection captcha. Do not scrape. Use the state's GovDelivery notification subscription instead."
   },
   {
     "state": "Missouri",
@@ -1357,7 +1359,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "index",
+    "ingest_mode": "diff",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1435,7 +1437,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "archive",
+    "ingest_mode": "index",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1455,9 +1457,14 @@
     "stale": false,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "high",
+    "confidence": "medium",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "url_candidates": [
+      "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts",
+      "https://www.oregon.gov/gov/pages/newsroom.aspx",
+      "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts/Search?org=GOV"
+    ]
   },
   {
     "state": "Pennsylvania",
@@ -1614,7 +1621,7 @@
       "script"
     ],
     "flag_page_url": null,
-    "press_url": "https://www.tn.gov/news",
+    "press_url": "https://www.tn.gov/governor/news.html",
     "signup_url": null,
     "root_domain": "www.tn.gov",
     "rss_url": null,
@@ -1643,7 +1650,12 @@
     "confidence_source": "script only (unresearched)",
     "confidence": "medium",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "url_candidates": [
+      "https://www.tn.gov/governor/news.html",
+      "https://www.tn.gov/governor/news",
+      "https://www.tn.gov/content/tn/governor/news.html"
+    ]
   },
   {
     "state": "Texas",
@@ -1698,7 +1710,7 @@
     "rss_verified": true,
     "rss_item_count": 10,
     "rss_evidence": "script parsed live feed items",
-    "ingest_mode": "feed",
+    "ingest_mode": "diff",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1719,7 +1731,7 @@
     "methods_disagree": false,
     "confidence_source": "script only (unresearched)",
     "provisional": true,
-    "confidence": "high",
+    "confidence": "medium",
     "confidence_caps": [],
     "buildable": true
   },
@@ -1729,7 +1741,7 @@
     "sources_used": [
       "script"
     ],
-    "flag_page_url": null,
+    "flag_page_url": "https://www.governor.virginia.gov/constituent-services/flag-information/",
     "press_url": "https://www.virginia.gov",
     "signup_url": null,
     "root_domain": "www.virginia.gov",
@@ -1737,7 +1749,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "index",
+    "ingest_mode": "diff",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1753,9 +1765,9 @@
     "stale": false,
     "methods_disagree": false,
     "confidence_source": "script only (unresearched)",
-    "confidence": "low",
+    "confidence": "medium",
     "confidence_caps": [],
-    "buildable": false
+    "buildable": true
   },
   {
     "state": "Vermont",

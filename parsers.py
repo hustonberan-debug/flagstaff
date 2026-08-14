@@ -90,6 +90,16 @@ DECLARATION_RE = [
     # "The flag is being flown at half-staff today"
     re.compile(r"\bflags?\s+(?:will\s+be\s+|are\s+being\s+)?(?:flown|displayed)\s+"
                r"at\s+(half|full)[-\s]?(?:staff|mast)\s+(?:today|now|until)", re.I),
+    # "...the flag of the state of Utah are currently at Half Staff" (Utah).
+    # The subject can be a long compound noun phrase, so anchoring on "flag"
+    # immediately before the verb fails. "currently" is the reliable anchor:
+    # it only ever appears in a statement about the present.
+    re.compile(r"\b(?:is|are)\s+currently\s+(?:being\s+flown\s+)?"
+               r"(?:at\s+)?(half|full)[-\s]?(?:staff|mast)\b", re.I),
+    # "National Flag: Half Staff  State Flag: Half Staff" (Virginia)
+    re.compile(r"national\s+flag\s*[:\-–]\s*(half|full)\s*staff", re.I),
+    # "Flag Status Full Staff" (Ohio — no separator at all, just adjacency)
+    re.compile(r"flags?\s*status\s+(half|full)[-\s]?(?:staff|mast)\b", re.I),
     # "Status: FULL STAFF" (District of Columbia — no "flag" prefix)
     re.compile(r"\bstatus\s*[:\-–]\s*(half|full)[-\s]?(?:staff|mast)\b", re.I),
     # "United States flag to be flown at half staff" (Alaska)
@@ -243,7 +253,16 @@ PRESIDENT_SIGNALS = [
     r"\bunited\s+states\s+embassies,?\s+legations\b",
 ]
 GOVERNOR_SIGNALS = [
-    r"\bgovernor\s+\w+\s+(?:has\s+)?(?:ordered|issued|directed|announced|signed)\b",
+    # Real headlines use present tense and multi-word names:
+    #   "Governor Ned Lamont Directs Flags Lowered..."
+    #   "Gov. Cox orders flags lowered to half-staff"
+    # The original pattern required past tense and exactly one name word, so
+    # it matched almost no actual press release.
+    r"\bgov(?:ernor)?\.?\s+(?:\w+[.'-]?\s+){1,3}"
+    r"(?:has\s+|is\s+)?(?:orders?|ordered|directs?|directed|announces?|"
+    r"announced|signs?|signed|lowers?|lowered|issues?|issued|proclaims?|"
+    r"proclaimed)\b",
+    r"\bgovernor'?s?\s+flag\s+order\b",
     r"\bby\s+order\s+of\s+(?:the\s+)?governor\b",
     r"\bgovernor'?s?\s+(?:proclamation|order|executive\s+order)\b",
     r"\bexecutive\s+order\s+(?:no\.?\s*)?[\d-]+\b",

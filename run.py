@@ -41,7 +41,7 @@ import parsers as P
 # Bump whenever parsing logic changes. A cache keyed only on page content is
 # wrong when the CODE changes: identical pages produce stale verdicts computed
 # by the old parser. The key must be (content, code version).
-PARSER_VERSION = "3"
+PARSER_VERSION = "7"
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"
@@ -53,6 +53,7 @@ TIMEOUT = 20
 WORKERS = 10
 MAX_ORDER_AGE_DAYS = 21      # how far back to look for candidate orders
 AMBIGUOUS_WINDOW_DAYS = 2    # undated order this recent -> unknown, not full
+RECENT_ORDER_GRACE_DAYS = 2  # an order this fresh with no end date is treated as live
 
 
 def covers_today(start, end, d):
@@ -75,13 +76,20 @@ def covers_today(start, end, d):
     if e:
         return (d <= e), f"ends {e}"
     if s:
-        # A start date with no end is nearly always a single-day order
-        # ("from sunrise to sunset on Tuesday").
         if s == d:
-            return True, f"single-day order dated {s}"
+            return True, f"order dated {s}"
         if s > d:
             return False, f"scheduled for {s}, not yet active"
-        return False, f"started {s}, no end date, presumed concluded"
+        age = (d - s).days
+        # Governors routinely announce an order a day or two before it takes
+        # effect, and many run "until the date of interment" with no stated
+        # end. Treating those as concluded caused the app to report FULL on a
+        # day when seven states were genuinely at half-staff — the worst
+        # failure this product can have. A short grace window fixes that
+        # without reviving the 60-day false positives from before.
+        if age <= RECENT_ORDER_GRACE_DAYS:
+            return True, f"order dated {s} ({age}d ago), no stated end - treated as live"
+        return False, f"started {s}, no end date, {age}d old, presumed concluded"
     return None, "no dates parsed"
 FETCH_BODY_LIMIT = 400_000   # don't hash megabytes of junk
 
@@ -320,15 +328,38 @@ def check_state(rec, cache, session, verbose=False):
                     pass
                 if item_date and item_date < cutoff:
                     continue
+            # Use each source for what it is actually reliable at.
+            #
+            #   HEADLINE -> status and authority. "Governor Orders Flags to
+            #     Half-Staff" is unambiguous by construction.
+            #   BODY     -> dates. "from sunrise to sunset on Friday, August
+            #     14" only ever appears in the body.
+            #
+            # Feeding the whole body to the status classifier backfires: a
+            # press release routinely contains both "half-staff" and "full
+            # staff" (orders usually say when the flag goes back up), and the
+            # classifier correctly refuses to guess when it sees both. That
+            # turned real orders into UNKNOWN and dropped them.
             rec_o = P.extract_order(i["title"], i["url"], i["title"])
             if rec_o["status"] != P.HALF:
                 continue
             if rec.get("signature_check_required") and \
                     rec_o["authority"] != P.GOVERNOR:
                 continue
+            # Now open the order for its dates only.
+            if i.get("url") and i["url"] != url and not rec_o["end_date"]:
+                art, _ = fetch(i["url"], session)
+                if art:
+                    bstart, bend = P.date_range(P.strip_html(art)[:8000])
+                    if bstart and not rec_o["start_date"]:
+                        rec_o["start_date"] = bstart.isoformat()
+                    if bend:
+                        rec_o["end_date"] = bend.isoformat()
+                    rec_o["dates_from"] = "order body"
+
             rec_o["date"] = d
-            # Fall back to the item's publication date as the start when the
-            # title itself carries no date.
+            # Fall back to the item's publication date as the start when
+            # neither the headline nor the body carries one.
             start = rec_o["start_date"] or d
             v, w = covers_today(start, rec_o["end_date"], today())
             if v:                       # provably active — take it and stop
