@@ -78,40 +78,62 @@ NEGATED_HALF = [
 
 # High-precision declaration patterns. Group 1 must be 'half' or 'full'.
 DECLARATION_RE = [
-    # "Flag Status: Full Staff" (Alabama)
+    # ORDER MATTERS: most specific first, most generic LAST.
+    #
+    # These are tried in order and the first match wins. An earlier version
+    # had the generic "flags at half-staff" phrase in position 1, so it fired
+    # on Pennsylvania's nav label and on Michigan's protocol prose before
+    # either state's own specific declaration was ever reached. Both states
+    # reported half-staff while their pages plainly said full.
+    #
+    # --- Tier 1: an explicit labelled status field --------------------------
+    # "Flag Status: Full Staff" (Alabama, Louisiana, Mississippi, Texas, FL)
     re.compile(r"flags?\s*status\s*[:\-–]\s*(half|full)[-\s]?(?:staff|mast)", re.I),
-    # "Flags at Full-Staff" (Nevada)
-    re.compile(r"\bflags?\s+at\s+(half|full)[-\s]?(?:staff|mast)\b", re.I),
-    # "Flags are currently at half-staff" / "flag is at full staff"
-    re.compile(r"\bflags?\s+(?:is|are)\s+(?:currently\s+)?(?:flying\s+|being\s+flown\s+)?"
-               r"(?:at\s+)?(half|full)[-\s]?(?:staff|mast)\b", re.I),
-    # "Current status: half-staff"
-    re.compile(r"current(?:ly)?\s+(?:flag\s+)?status\s*[:\-–]\s*(half|full)", re.I),
-    # "The flag is being flown at half-staff today"
-    re.compile(r"\bflags?\s+(?:will\s+be\s+|are\s+being\s+)?(?:flown|displayed)\s+"
-               r"at\s+(half|full)[-\s]?(?:staff|mast)\s+(?:today|now|until)", re.I),
-    # "...the flag of the state of Utah are currently at Half Staff" (Utah).
-    # The subject can be a long compound noun phrase, so anchoring on "flag"
-    # immediately before the verb fails. "currently" is the reliable anchor:
-    # it only ever appears in a statement about the present.
-    re.compile(r"\b(?:is|are)\s+currently\s+(?:being\s+flown\s+)?"
-               r"(?:at\s+)?(half|full)[-\s]?(?:staff|mast)\b", re.I),
-    # "National Flag: Half Staff  State Flag: Half Staff" (Virginia)
-    re.compile(r"national\s+flag\s*[:\-–]\s*(half|full)\s*staff", re.I),
-    # "Flag Status Full Staff" (Ohio — no separator at all, just adjacency)
+    # "Flag Status Full Staff" (Ohio — no separator at all)
     re.compile(r"flags?\s*status\s+(half|full)[-\s]?(?:staff|mast)\b", re.I),
     # "Status: FULL STAFF" (District of Columbia — no "flag" prefix)
     re.compile(r"\bstatus\s*[:\-–]\s*(half|full)[-\s]?(?:staff|mast)\b", re.I),
+    # "Current status: half-staff"
+    re.compile(r"current(?:ly)?\s+(?:flag\s+)?status\s*[:\-–]\s*(half|full)", re.I),
+    # "National Flag: Half Staff  State Flag: Half Staff" (Virginia)
+    re.compile(r"national\s+flag\s*[:\-–]\s*(half|full)\s*staff", re.I),
+    # "United States Flag: Full-Staff" (Pennsylvania). County-scoped lines are
+    # stripped before this runs, so this is the statewide value.
+    re.compile(r"united\s+states\s+flags?\s*:\s*(half|full)[-\s]?staff", re.I),
+    # "Michigan Flag Honor status notification including text, Full Staff"
+    re.compile(r"status\s+notification[^.]{0,40}?,\s*(half|full)[-\s]?staff", re.I),
+
+    # --- Tier 2: a present-tense sentence about right now -------------------
+    # "...the flag of the state of Utah are currently at Half Staff"
+    re.compile(r"\b(?:is|are)\s+currently\s+(?:being\s+flown\s+)?"
+               r"(?:at\s+)?(half|full)[-\s]?(?:staff|mast)\b", re.I),
+    # "Flags are currently flying at half-staff"
+    re.compile(r"\bflags?\s+(?:is|are)\s+(?:currently\s+)?(?:flying\s+|being\s+flown\s+)?"
+               r"(?:at\s+)?(half|full)[-\s]?(?:staff|mast)\b", re.I),
+    # "The flag is being flown at half-staff today"
+    re.compile(r"\bflags?\s+(?:will\s+be\s+|are\s+being\s+)?(?:flown|displayed)\s+"
+               r"at\s+(half|full)[-\s]?(?:staff|mast)\s+(?:today|now|until)", re.I),
     # "United States flag to be flown at half staff" (Alaska)
     re.compile(r"\bflags?\s+(?:is\s+|are\s+)?to\s+be\s+flown\s+at\s+"
                r"(half|full)[-\s]?(?:staff|mast)", re.I),
-    # "Michigan Flag Honor status notification including text, Full Staff"
-    # (Michigan states its status in image alt-text)
-    re.compile(r"status\s+notification[^.]{0,40}?,\s*(half|full)[-\s]?staff", re.I),
-    # "United States Flag: Full-Staff" (Pennsylvania). Statewide line only;
-    # county-scoped lines are picked up separately by COUNTY_SCOPED_RE.
-    re.compile(r"united\s+states\s+flags?\s*:\s*(half|full)[-\s]?staff", re.I),
+
+    # --- Tier 3: bare phrase. LAST, and context-guarded ---------------------
+    # "Flags at Full-Staff" (Nevada) is a standalone label. The same words
+    # also appear inside every flag-protocol explainer in the country, so a
+    # match here is only accepted if it is not sitting in descriptive prose.
+    re.compile(r"\bflags?\s+at\s+(half|full)[-\s]?(?:staff|mast)\b", re.I),
 ]
+
+# Index of the first context-guarded (Tier 3) pattern.
+GUARDED_FROM = 11
+
+# If any of these appear just before a Tier 3 match, the sentence is
+# describing the rules rather than stating today's status.
+PROSE_BEFORE = re.compile(
+    r"\b(?:may|should|shall|when|whenever|if|authorized|proclaim|code|"
+    r"event|death|order(?:s|ed)?\s+that|policy|protocol|means|lower(?:ed|ing)?|"
+    r"raise[sd]?|display(?:ed|s)?|fly|flown|flying|honou?r|memory|respect|"
+    r"newsroom|archive|notices?|history|past|previous)\b", re.I)
 
 # Pennsylvania reports statewide AND county status on one page:
 #   "United States Flag: Full-Staff"
@@ -119,6 +141,16 @@ DECLARATION_RE = [
 # We report the statewide value and surface counties as a note. The data model
 # is state-level; pretending to county precision we cannot maintain for all 51
 # jurisdictions would be false precision.
+# Matches a whole county-scoped clause so it can be deleted from the text
+# before statewide classification.
+# The (?<![-\w]) lookbehind matters more than it looks. Under re.I, [A-Z][a-z]+
+# matches ANY word, so without it the pattern happily started at "Staff" inside
+# "Full-Staff Allegheny County Only ..." and deleted the statewide line along
+# with the county line, turning a clean FULL into UNKNOWN.
+COUNTY_LINE_RE = re.compile(
+    r"(?<![-\w])[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?\s+count(?:y|ies)\s+only"
+    r"[^:]{0,60}:\s*(?:half|full)[-\s]?staff", re.I)
+
 COUNTY_SCOPED_RE = re.compile(
     r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+count(?:y|ies)\s+only[^:]{0,60}:\s*"
     r"(half|full)[-\s]?staff", re.I)
@@ -143,6 +175,33 @@ def diff_page_dates(html):
     m = UNTIL_RE.search(text)
     e = parse_any_date(m.group(1)) if m else None
     return s, e
+
+
+def parse_toggle(html, base_url=None):
+    """Two-static-page states (Oklahoma).
+
+    The site serves flag-status-half.html and flag-status-full.html. Both
+    always exist and each always says its own name. The status is encoded in
+    WHICH ONE the site links to, so we read a hub page and look at the link,
+    not at the destination.
+
+    Returns (status, evidence).
+    """
+    text = html or ""
+    hrefs = re.findall(r'href=[\"\'"]([^\"\'"]*flag[-_]?status[^\"\'"]*)', text, re.I)
+    half = [h for h in hrefs if re.search(r"[-_]half", h, re.I)]
+    full = [h for h in hrefs if re.search(r"[-_]full", h, re.I)]
+
+    # Exactly one of the two should be linked. Both or neither means the page
+    # is a directory listing rather than a status indicator, and we say so
+    # instead of picking one.
+    if half and not full:
+        return HALF, f"site links to {half[0]}"
+    if full and not half:
+        return FULL, f"site links to {full[0]}"
+    if half and full:
+        return UNKNOWN, "both half and full pages linked - not a status signal"
+    return UNKNOWN, "no flag-status link found on this page"
 
 
 def county_exceptions(html):
@@ -194,9 +253,25 @@ def classify_current_status(html):
     if not text:
         return UNKNOWN, None
 
-    for pat in DECLARATION_RE:
-        m = pat.search(text)
-        if m:
+    # Remove county-scoped lines BEFORE looking for the statewide answer.
+    # Pennsylvania publishes:
+    #     United States Flag: Full-Staff
+    #     Allegheny County Only United States Flags: Half-Staff
+    # Both match the same declaration pattern, and whichever the regex reaches
+    # first wins — so a single county at half-staff was being reported as the
+    # whole state. The county data is still captured by county_exceptions();
+    # it just must not answer the statewide question.
+    text = COUNTY_LINE_RE.sub(" ", text)
+
+    for idx, pat in enumerate(DECLARATION_RE):
+        for m in pat.finditer(text):
+            if idx >= GUARDED_FROM:
+                # Tier 3 is a bare phrase. Reject it if the preceding words
+                # show it is describing flag rules or labelling an archive
+                # rather than stating the current status.
+                before = text[max(0, m.start() - 70):m.start()]
+                if PROSE_BEFORE.search(before):
+                    continue
             word = m.group(1).lower()
             return (HALF if word == "half" else FULL,
                     f"declaration: {m.group(0).strip()!r}")

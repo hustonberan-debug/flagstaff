@@ -211,7 +211,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "archive",
+    "ingest_mode": "diff",
     "cms": "Drupal",
     "js_blocked": false,
     "signature_check_required": false,
@@ -233,7 +233,8 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "_mode_fixed_by": "audit_modes.py"
   },
   {
     "state": "Connecticut",
@@ -330,7 +331,7 @@
     "rss_verified": true,
     "rss_item_count": 8,
     "rss_evidence": "script parsed live feed items",
-    "ingest_mode": "archive",
+    "ingest_mode": "diff",
     "cms": "WordPress",
     "js_blocked": false,
     "signature_check_required": false,
@@ -352,7 +353,8 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "_mode_fixed_by": "audit_modes.py"
   },
   {
     "state": "Florida",
@@ -369,7 +371,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "archive",
+    "ingest_mode": "diff",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -391,7 +393,8 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "_mode_fixed_by": "audit_modes.py"
   },
   {
     "state": "Georgia",
@@ -702,7 +705,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "diff",
+    "ingest_mode": "toggle",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -722,9 +725,14 @@
     "stale": false,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "high",
+    "confidence": "medium",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "toggle_hub_url": "https://gov.louisiana.gov/",
+    "url_candidates": [
+      "https://gov.louisiana.gov/",
+      "https://gov.louisiana.gov/index.cfm/newsroom"
+    ]
   },
   {
     "state": "Massachusetts",
@@ -979,7 +987,7 @@
     "rss_verified": true,
     "rss_item_count": 10,
     "rss_evidence": "script parsed live feed items",
-    "ingest_mode": "archive",
+    "ingest_mode": "diff",
     "cms": "WordPress",
     "js_blocked": false,
     "signature_check_required": false,
@@ -1001,7 +1009,8 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "_mode_fixed_by": "audit_modes.py"
   },
   {
     "state": "Montana",
@@ -1398,7 +1407,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "index",
+    "ingest_mode": "toggle",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1418,9 +1427,14 @@
     "stale": false,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "high",
+    "confidence": "medium",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "toggle_hub_url": "https://oklahoma.gov/governor.html",
+    "url_candidates": [
+      "https://oklahoma.gov/governor.html",
+      "https://oklahoma.gov/governor/newsroom.html"
+    ]
   },
   {
     "state": "Oregon",
@@ -1671,7 +1685,7 @@
     "rss_verified": true,
     "rss_item_count": 10,
     "rss_evidence": "script parsed live feed items",
-    "ingest_mode": "feed",
+    "ingest_mode": "diff",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1694,7 +1708,8 @@
     "provisional": true,
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "_mode_fixed_by": "audit_modes.py"
   },
   {
     "state": "Utah",

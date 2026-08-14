@@ -41,7 +41,7 @@ import parsers as P
 # Bump whenever parsing logic changes. A cache keyed only on page content is
 # wrong when the CODE changes: identical pages produce stale verdicts computed
 # by the old parser. The key must be (content, code version).
-PARSER_VERSION = "7"
+PARSER_VERSION = "10"
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"
@@ -203,6 +203,10 @@ def federal_proclamation(session, cache):
 
 def pick_url(rec):
     mode = rec.get("ingest_mode")
+    if mode == "toggle":
+        # Read the hub page, not the status pages. The signal is which of the
+        # two static pages the site links to.
+        return rec.get("toggle_hub_url") or rec.get("press_url")
     if mode == "feed":
         return rec.get("rss_url")
     if mode in ("archive", "diff"):
@@ -267,7 +271,17 @@ def check_state(rec, cache, session, verbose=False):
         return code, out, new_cache
 
     # --- Changed or first seen: parse ---------------------------------------
-    if mode == "diff":
+    if mode == "toggle":
+        st, ev = P.parse_toggle(text, url)
+        out["state_status"] = st
+        out["changed"] = bool(prev.get("hash")) and prev["hash"] != h
+        if st != P.UNKNOWN:
+            out["state_order"] = {"title": None, "url": url, "status": st,
+                                  "authority": P.GOVERNOR, "evidence": ev,
+                                  "start_date": None, "end_date": None}
+        else:
+            out["error"] = ev
+    elif mode == "diff":
         # No history exists on these pages. The page IS the status.
         d = P.parse_diff(text, previous_hash=prev.get("hash"),
                          selector_hint="flag")
