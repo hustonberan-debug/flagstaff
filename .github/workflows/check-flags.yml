@@ -1,0 +1,97 @@
+name: Check flag status
+
+# The whole backend. Free on public repos, forever. Every run rewrites
+# status.json and commits it, so git history doubles as a permanent audit log
+# of every status change — useful the first time someone insists you were
+# wrong about a date.
+
+on:
+  schedule:
+    # Every 30 minutes. GitHub's scheduler is best-effort and can lag several
+    # minutes under load, which is fine here. Don't go below 15 minutes; you
+    # get throttled and gain nothing.
+    - cron: '*/30 * * * *'
+  workflow_dispatch:          # lets you trigger a run by hand from the Actions tab
+  push:
+    branches: [main]
+    paths:
+      - 'parsers.py'
+      - 'run.py'
+      - 'registry.json'
+
+permissions:
+  contents: write             # needed to commit status.json back
+
+concurrency:
+  # Two runs writing cache.json at once would corrupt it. Skip rather than stack.
+  group: flag-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Check all sources
+        run: python3 run.py
+
+      - name: Sanity-check before publishing
+        # Guard against publishing garbage. If coverage collapses, something
+        # upstream broke — fail the job and keep the last good status.json.
+        # Stale-but-correct beats fresh-and-wrong.
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          s = json.load(open('status.json'))
+          m = s['meta']
+          print(f"covered={m['covered']} not_covered={m['not_covered']} "
+                f"stale={m['stale']} errors={m['errors']}")
+          if m['covered'] < 20:
+              sys.exit(f"REFUSING TO PUBLISH: only {m['covered']} states covered "
+                       f"(expected ~39). Keeping the previous status.json.")
+          if not s.get('states'):
+              sys.exit("REFUSING TO PUBLISH: no states in output.")
+          PY
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name  "flag-bot"
+          git config user.email "flag-bot@users.noreply.github.com"
+          git add status.json cache.json history.jsonl
+          if git diff --staged --quiet; then
+            echo "No change."
+          else
+            git commit -m "status: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            for i in 1 2 3; do
+              git pull --rebase --autostash origin main && git push && break
+              sleep 5
+            done
+          fi
+
+      - name: Warn about failing sources
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json
+          try:
+              s = json.load(open('status.json'))
+          except Exception:
+              raise SystemExit(0)
+          bad = [c for c, v in s['states'].items()
+                 if v.get('error') and v.get('coverage') != 'not_covered']
+          if bad:
+              print(f"::warning::Sources with errors: {' '.join(sorted(bad))}")
+          stale = [c for c, v in s['states'].items() if v.get('coverage') == 'stale']
+          if stale:
+              print(f"::warning::Serving stale data for: {' '.join(sorted(stale))}")
+          PY
