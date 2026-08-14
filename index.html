@@ -63,29 +63,31 @@ body{
     linear-gradient(180deg,#131B28 0%,#0C1119 60%,#090C12 100%);
   border-right:1px solid var(--line);z-index:10;overflow:hidden}
 
-.truck{position:absolute;left:26%;top:6%;width:16px;height:16px;
+.truck{position:absolute;left:22%;top:6%;width:16px;height:16px;
   margin-left:-8px;border-radius:50%;
   background:radial-gradient(circle at 35% 30%,#C6CDDA,#6C7589);
   box-shadow:0 2px 6px #0008}
-.staff{position:absolute;left:26%;top:calc(6% + 12px);bottom:0;width:9px;
+.staff{position:absolute;left:22%;top:calc(6% + 12px);bottom:0;width:9px;
   margin-left:-4.5px;border-radius:4px 4px 0 0;
   background:linear-gradient(90deg,#52607A 0%,#33405A 40%,#1B2432 100%)}
-.halyard{position:absolute;left:26%;top:calc(6% + 14px);bottom:0;width:1px;
+.halyard{position:absolute;left:22%;top:calc(6% + 14px);bottom:0;width:1px;
   margin-left:-14px;background:#232E40}
-.cleat{position:absolute;left:26%;bottom:9%;width:20px;height:4px;
+.cleat{position:absolute;left:22%;bottom:9%;width:20px;height:4px;
   margin-left:-24px;border-radius:2px;background:#46536B}
 
 /* Tick marks make the pole a measure — the same precision the data claims. */
-.tick{position:absolute;left:calc(26% - 22px);width:14px;height:1px;
+.tick{position:absolute;left:calc(22% - 20px);width:14px;height:1px;
   background:#222C3D}
-.tick.major{width:26px;left:calc(26% - 34px);background:#2E3A4E}
+.tick.major{width:26px;left:calc(22% - 30px);background:#2E3A4E}
 .tick-label{position:absolute;left:0;font-family:var(--mono);font-size:10px;
   letter-spacing:.12em;text-transform:uppercase;color:#414C61;
-  transform:translate(calc(26% - 34px - 100%),-50%);padding-right:10px;
+  transform:translate(calc(22% - 30px - 100%),-50%);padding-right:10px;
   white-space:nowrap}
 
-.flagwrap{position:absolute;left:26%;margin-left:4px;
-  width:min(64%,340px);
+.flagwrap{position:absolute;left:22%;margin-left:5px;
+  /* Must always fit: left offset + width has to stay under 100% of the
+     stage at every viewport, or overflow:hidden crops the canton off. */
+  width:min(56%,300px);
   top:var(--flag-top,calc(6% + 26px));
   transition:top 1.3s cubic-bezier(.22,.85,.24,1),opacity .6s;
   transform-origin:left center}
@@ -93,9 +95,9 @@ body{
   filter:drop-shadow(0 6px 18px rgba(0,0,0,.6))}
 .flagwrap.waving{animation:wave 6.5s ease-in-out infinite}
 @keyframes wave{
-  0%,100%{transform:perspective(700px) rotateY(0deg)   skewY(0deg)}
-  35%    {transform:perspective(700px) rotateY(-8deg)  skewY(.7deg)}
-  70%    {transform:perspective(700px) rotateY(-3deg)  skewY(-.5deg)}
+  0%,100%{transform:perspective(900px) rotateY(0deg)}
+  35%    {transform:perspective(900px) rotateY(-6deg)}
+  70%    {transform:perspective(900px) rotateY(-2deg)}
 }
 /* Cloth shading: a soft moving highlight, clipped to the flag. */
 .fold{animation:fold 6.5s ease-in-out infinite}
@@ -431,7 +433,15 @@ function render(){
   } else if(s.effective_status==='half'){
     vEl.textContent = s.scope==='until-noon' ? 'Half until noon' : 'Half-staff';
     vEl.className='verdict half';
-    rEl.textContent = s.reason || 'A half-staff order is in effect.';
+    // Say WHOSE order it is. Without this the page reads as a contradiction:
+    // a big "HALF-STAFF" headline directly above "no national order in
+    // effect". Both are true — it is a governor's order — but the page has to
+    // say so or the user has to work it out.
+    const who = s.reason_source==='federal'
+      ? 'By presidential proclamation'
+      : `By order of the Governor of ${s.state}`;
+    const detail = (s.reason && s.reason!=='State order') ? s.reason : null;
+    rEl.innerHTML = `<strong>${who}</strong>` + (detail?`<br>${detail}`:'');
   } else {
     vEl.textContent='Full staff'; vEl.className='verdict full';
     rEl.innerHTML = '<em>No half-staff order is in effect today.</em>';
@@ -460,11 +470,24 @@ function render(){
 function renderFederal(){
   const el=document.getElementById('federal');
   const f=DATA.federal;
-  el.innerHTML = f
-    ? `<div class="row"><span class="when">now</span><span class="what">${f.reason}
-        <span class="note">${f.citation||f.authority||''}</span></span></div>`
-    : `<div class="row"><span class="when">—</span><span class="what">
-        <em style="color:var(--muted)">No national half-staff order in effect.</em></span></div>`;
+  const s=(DATA.states||{})[current];
+  if(f){
+    el.innerHTML = `<div class="row"><span class="when">now</span><span class="what">${f.reason}
+        <span class="note">Applies to all 50 states &middot; ${f.citation||f.authority||''}</span></span></div>`;
+    return;
+  }
+  // When a state order is live, saying only "no national order" invites the
+  // reader to think the page contradicts its own headline. Name the reason
+  // the two facts coexist.
+  const stateIsHalf = s && s.effective_status==='half' && s.reason_source!=='federal';
+  el.innerHTML = `<div class="row"><span class="when">&mdash;</span><span class="what">
+      <em style="color:var(--muted)">Nothing nationwide today.</em>` +
+      (stateIsHalf
+        ? `<span class="note">${s.state}'s order above is the governor's,
+             and applies only within ${s.state}.</span>`
+        : `<span class="note">A presidential proclamation would lower flags
+             in every state at once.</span>`)
+    + `</span></div>`;
 }
 
 function renderUpcoming(){
@@ -488,7 +511,7 @@ function buildSelect(){
   const codes=Object.keys(DATA.states||{}).sort();
   sel.innerHTML=codes.map(c=>
     `<option value="${c}"${c===current?' selected':''}>${DATA.states[c].state||c}</option>`).join('');
-  sel.onchange=()=>{current=sel.value;render()};
+  sel.onchange=()=>{current=sel.value;render();renderFederal()};
   if(!DATA.states[current] && codes.length){current=codes[0];sel.value=current}
 }
 
@@ -503,7 +526,7 @@ document.getElementById('locate').onclick=function(){
       if(d<bd){bd=d;best=c}
     }
     if(best && DATA.states[best]){
-      current=best;document.getElementById('state').value=best;render();
+      current=best;document.getElementById('state').value=best;render();renderFederal();
       btn.textContent='use my location';
     } else { btn.textContent='no data for your state'; }
   },()=>{btn.textContent='location denied'},{timeout:8000});
