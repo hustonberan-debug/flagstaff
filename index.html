@@ -9,6 +9,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Flagstaff">
 <link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <title>Flagstaff — is the flag at half-staff today?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -343,7 +345,8 @@ const SAMPLE = {
   federal: null, _sample: true,
   states: {
     NE:{state:"Nebraska",coverage:"covered",effective_status:"full",reason:null,
-        source_url:"https://governor.nebraska.gov/press",checked_at:new Date().toISOString()},
+        source_url:"https://governor.nebraska.gov/press",checked_at:new Date().toISOString(),
+        last_changed_at:new Date(Date.now()-3*86400000).toISOString()},
     PA:{state:"Pennsylvania",coverage:"covered",effective_status:"full",reason:null,
         county_exceptions:[{county:"Allegheny",status:"half"}],
         source_url:"https://www.pa.gov/agencies/dgs/flag-notices.html",checked_at:new Date().toISOString()},
@@ -394,6 +397,16 @@ function timeAgo(iso){
   return Math.round(s/86400)+' days ago';
 }
 
+function sinceChange(iso){
+  if(!iso) return null;
+  const d=new Date(iso), now=new Date();
+  const days=Math.floor((now-d)/86400000);
+  if(days<1) return 'today';
+  if(days===1) return 'yesterday';
+  if(days<7) return days+' days';
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+
 function render(){
   const s=(DATA.states||{})[current];
   const nameEl=document.getElementById('stateName');
@@ -430,11 +443,16 @@ function render(){
       + '.';
   }
 
+  // Two separate facts. "Checked" answers "is this app awake?" and always
+  // moves. "Unchanged since" answers "when did the flag last move?" and may
+  // be days old, which is normal and reassuring rather than alarming.
   const stale = s.coverage==='stale';
+  const changed = sinceChange(s.last_changed_at);
   recEl.innerHTML =
     `<span><span class="dot ${stale?'stale':'live'}"></span> checked ${timeAgo(s.checked_at||DATA.generated_at)}</span>`
+    + (changed?` <span>&middot; unchanged since ${changed}</span>`:'')
     + (s.source_url?` <a href="${s.source_url}" target="_blank" rel="noopener">official source &nearr;</a>`:'')
-    + (stale?' <span>serving last known value</span>':'');
+    + (stale?' <span>&middot; serving last known value</span>':'');
 
   setFlag(s.effective_status);
 }

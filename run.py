@@ -215,7 +215,14 @@ def check_state(rec, cache, session, verbose=False):
         "state_status": P.UNKNOWN,
         "state_order": None,
         "source_url": None,
+        # checked_at means "we fetched this source on this run" — it always
+        # advances. last_changed_at means "the source's content last moved",
+        # which may be days ago and that is fine. Collapsing the two makes a
+        # healthy unchanged source look like a stale one, and a user who
+        # thinks the data is stale goes and checks the governor's site
+        # instead. Two facts, two fields.
         "checked_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "last_changed_at": prev.get("last_changed_at"),
         "changed": False,
         "error": None,
     }
@@ -234,6 +241,7 @@ def check_state(rec, cache, session, verbose=False):
         out.update(error=err,
                    state_status=prev.get("state_status", P.UNKNOWN),
                    state_order=prev.get("state_order"),
+                   last_changed_at=prev.get("last_changed_at"),
                    coverage="stale" if prev else "not_covered")
         return code, out, prev
 
@@ -244,7 +252,10 @@ def check_state(rec, cache, session, verbose=False):
     if prev.get("hash") == h and "state_status" in prev:
         out["state_status"] = prev["state_status"]
         out["state_order"] = prev.get("state_order")
-        new_cache = dict(prev, hash=h)
+        out["last_changed_at"] = prev.get("last_changed_at")
+        # checked_at already reflects this run; the cache keeps the older
+        # last_changed_at untouched.
+        new_cache = dict(prev, hash=h, last_checked=out["checked_at"])
         return code, out, new_cache
 
     # --- Changed or first seen: parse ---------------------------------------
@@ -348,11 +359,17 @@ def check_state(rec, cache, session, verbose=False):
             out["state_status"] = P.UNKNOWN
             out["error"] = "source readable but no items parsed"
 
+    # Content moved (or this is the first sighting), so the change stamp
+    # advances. On a first sighting we have no prior state to compare against,
+    # so we record now rather than claiming a change we did not observe.
+    out["last_changed_at"] = out["checked_at"]
     new_cache = {
         "hash": h,
         "state_status": out["state_status"],
         "state_order": out["state_order"],
         "last_parsed": out["checked_at"],
+        "last_checked": out["checked_at"],
+        "last_changed_at": out["checked_at"],
     }
     if verbose:
         print(json.dumps(out, indent=2))
