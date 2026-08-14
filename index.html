@@ -364,19 +364,66 @@ const STATUTORY = [
   {date:"05-15", name:"Peace Officers Memorial Day", cite:"4 U.S.C. § 7(m)", scope:"full-day"}
 ];
 
-/* Centroids, used only to pick a state from GPS. State-level resolution is
-   the honest limit of this data — we never claim to know a city. */
-const CENTROIDS={AL:[32.8,-86.8],AK:[64.0,-152.2],AZ:[34.3,-111.7],AR:[34.9,-92.4],
-CA:[37.2,-119.5],CO:[39.0,-105.5],CT:[41.6,-72.7],DE:[39.0,-75.5],DC:[38.9,-77.0],
-FL:[28.6,-82.4],GA:[32.6,-83.4],HI:[20.3,-156.4],ID:[44.4,-114.6],IL:[40.0,-89.2],
-IN:[39.9,-86.3],IA:[42.1,-93.5],KS:[38.5,-98.4],KY:[37.5,-85.3],LA:[31.1,-92.0],
-ME:[45.4,-69.2],MD:[39.0,-76.8],MA:[42.3,-71.8],MI:[44.3,-85.4],MN:[46.3,-94.3],
-MS:[32.7,-89.7],MO:[38.4,-92.5],MT:[47.0,-109.6],NE:[41.5,-99.8],NV:[39.3,-116.6],
-NH:[43.7,-71.6],NJ:[40.2,-74.7],NM:[34.4,-106.1],NY:[42.9,-75.5],NC:[35.5,-79.4],
-ND:[47.4,-100.5],OH:[40.3,-82.8],OK:[35.6,-97.5],OR:[43.9,-120.6],PA:[40.9,-77.8],
-RI:[41.7,-71.6],SC:[33.9,-80.9],SD:[44.4,-100.2],TN:[35.8,-86.4],TX:[31.5,-99.3],
-UT:[39.3,-111.7],VT:[44.1,-72.7],VA:[37.5,-78.9],WA:[47.4,-120.5],WV:[38.6,-80.6],
-WI:[44.6,-89.7],WY:[43.0,-107.6]};
+/* State bounding boxes, used only to turn GPS coordinates into a state.
+   State-level resolution is the honest limit of this data — we never claim to
+   know a city.
+
+   Boxes, not centroids. The first version picked the nearest state centre,
+   which put a user in Colby, Kansas into Nebraska: Colby sits far west in a
+   wide state, so it is a long way from the middle of Kansas and almost due
+   south of the middle of Nebraska. Distance to the centre of a rectangle says
+   nothing about which rectangle you are in.
+
+   Rectangles still cannot settle river borders — Omaha and Manhattan fall
+   inside two boxes each — so when more than one box matches we pick the
+   likelier one AND say we are unsure, rather than guessing silently. */
+const BBOX={
+AL:[30.14,35.01,-88.47,-84.89],AK:[51.20,71.44,-179.15,-129.97],
+AZ:[31.33,37.00,-114.82,-109.04],AR:[33.00,36.50,-94.62,-89.64],
+CA:[32.53,42.01,-124.41,-114.13],CO:[36.99,41.00,-109.06,-102.04],
+CT:[40.98,42.05,-73.73,-71.79],DE:[38.45,39.84,-75.79,-75.04],
+DC:[38.79,39.00,-77.12,-76.91],FL:[24.40,31.00,-87.63,-79.97],
+GA:[30.36,35.00,-85.61,-80.84],HI:[18.91,22.24,-160.25,-154.81],
+ID:[41.99,49.00,-117.24,-111.04],IL:[36.97,42.51,-91.51,-87.02],
+IN:[37.77,41.76,-88.10,-84.78],IA:[40.38,43.50,-96.64,-90.14],
+KS:[36.99,40.00,-102.05,-94.59],KY:[36.50,39.15,-89.57,-81.96],
+LA:[28.93,33.02,-94.04,-88.76],ME:[42.98,47.46,-71.08,-66.95],
+MD:[37.89,39.72,-79.49,-75.05],MA:[41.24,42.89,-73.51,-69.93],
+MI:[41.70,48.31,-90.42,-82.41],MN:[43.50,49.38,-97.24,-89.49],
+MS:[30.17,35.00,-91.65,-88.10],MO:[35.99,40.61,-95.77,-89.10],
+MT:[44.36,49.00,-116.05,-104.04],NE:[40.00,43.00,-104.05,-95.31],
+NV:[35.00,42.00,-120.01,-114.04],NH:[42.70,45.31,-72.56,-70.61],
+NJ:[38.93,41.36,-75.56,-73.89],NM:[31.33,37.00,-109.05,-102.99],
+NY:[40.50,45.02,-79.76,-71.86],NC:[33.84,36.59,-84.32,-75.46],
+ND:[45.94,49.00,-104.05,-96.55],OH:[38.40,41.98,-84.82,-80.52],
+OK:[33.62,37.00,-103.00,-94.43],OR:[41.99,46.29,-124.57,-116.46],
+PA:[39.72,42.27,-80.52,-74.69],RI:[41.15,42.02,-71.86,-71.12],
+SC:[32.03,35.22,-83.35,-78.54],SD:[42.48,45.95,-104.06,-96.44],
+TN:[34.98,36.68,-90.31,-81.65],TX:[25.84,36.50,-106.65,-93.51],
+UT:[36.99,42.00,-114.05,-109.04],VT:[42.73,45.02,-73.44,-71.46],
+VA:[36.54,39.47,-83.68,-75.24],WA:[45.54,49.00,-124.85,-116.92],
+WV:[37.20,40.64,-82.64,-77.72],WI:[42.49,47.31,-92.89,-86.76],
+WY:[40.99,45.01,-111.06,-104.05]};
+
+/* Returns {code, ambiguous, candidates}. */
+function stateFromCoords(lat,lon){
+  const hits=Object.keys(BBOX).filter(c=>{
+    const [a,b,x,y]=BBOX[c];
+    return lat>=a && lat<=b && lon>=x && lon<=y;
+  });
+  // A degree of longitude is narrower than a degree of latitude everywhere
+  // but the equator, so east-west distance has to be scaled by cos(lat) or
+  // it dominates the comparison.
+  const k=Math.cos(lat*Math.PI/180);
+  const pool = hits.length ? hits : Object.keys(BBOX);
+  let best=null,bd=Infinity;
+  for(const c of pool){
+    const [a,b,x,y]=BBOX[c];
+    const d=((a+b)/2-lat)**2 + (((x+y)/2-lon)*k)**2;
+    if(d<bd){bd=d;best=c}
+  }
+  return {code:best, ambiguous:hits.length>1, candidates:hits};
+}
 
 let DATA=null, current='NE';
 
@@ -520,14 +567,16 @@ document.getElementById('locate').onclick=function(){
   if(!navigator.geolocation){btn.textContent='location unavailable';return}
   btn.textContent='locating…';
   navigator.geolocation.getCurrentPosition(p=>{
-    let best=null,bd=1e9;
-    for(const [c,[la,lo]] of Object.entries(CENTROIDS)){
-      const d=(la-p.coords.latitude)**2+(lo-p.coords.longitude)**2;
-      if(d<bd){bd=d;best=c}
-    }
-    if(best && DATA.states[best]){
-      current=best;document.getElementById('state').value=best;render();renderFederal();
-      btn.textContent='use my location';
+    const r=stateFromCoords(p.coords.latitude,p.coords.longitude);
+    if(r.code && DATA.states[r.code]){
+      current=r.code;document.getElementById('state').value=r.code;
+      render();renderFederal();
+      // Near a state line the rectangles overlap and we genuinely cannot
+      // tell. Say so and let the person correct it, rather than quietly
+      // showing another state's flag status.
+      btn.textContent = r.ambiguous
+        ? `near a state line \u2014 showing ${r.code}, change above if wrong`
+        : 'use my location';
     } else { btn.textContent='no data for your state'; }
   },()=>{btn.textContent='location denied'},{timeout:8000});
 };
