@@ -5,7 +5,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:20+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "DC": {
     "hash": "d5f18102a2bc121d",
@@ -20,14 +20,15 @@
       "end_date": null
     },
     "last_parsed": "2026-08-14T03:27:20+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "CA": {
-    "hash": "01807eacd58791db",
+    "hash": "d1304539cce0f171",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-14T03:27:20+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00"
+    "last_parsed": "2026-08-14T17:27:06+00:00",
+    "last_checked": "2026-08-14T17:27:06+00:00",
+    "last_changed_at": "2026-08-14T17:27:06+00:00"
   },
   "AL": {
     "hash": "0fd0758cff2ed548",
@@ -42,7 +43,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-14T03:27:20+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "AK": {
     "hash": "b0cbfd6597c73e91",
@@ -57,28 +58,28 @@
       "end_date": null
     },
     "last_parsed": "2026-08-14T03:27:20+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "AR": {
     "hash": "7f6d36db0a8ad7d2",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:20+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "IA": {
     "hash": "b71f3ee5ec784a91",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "FL": {
     "hash": "592e298047afb953",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T14:13:30+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00",
+    "last_checked": "2026-08-14T17:27:06+00:00",
     "last_changed_at": "2026-08-14T14:13:30+00:00"
   },
   "HI": {
@@ -86,21 +87,21 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "CO": {
     "hash": "6e63234c11515c48",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:20+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "KY": {
     "hash": "60f3712a492810d2",
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "LA": {
     "hash": "bdadd5a7a3387751",
@@ -115,28 +116,28 @@
       "end_date": null
     },
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "MD": {
     "hash": "634e285cda4cc5b8",
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "GA": {
     "hash": "bc765ba70568eab1",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "DE": {
     "hash": "0d9e3eff037b05f1",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T16:14:09+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00",
+    "last_checked": "2026-08-14T17:27:06+00:00",
     "last_changed_at": "2026-08-14T16:14:09+00:00"
   },
   "ME": {
@@ -144,49 +145,49 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "MO": {
     "hash": "9addb1003e7e3996",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "MN": {
     "hash": "122b87a462085722",
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "NC": {
     "hash": "288b18993a591f1e",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "NE": {
     "hash": "734b11536af6c29f",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "ND": {
     "hash": "c1766bb5889b1952",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "OK": {
     "hash": "d259021dc8cc15be",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "NV": {
     "hash": "0bb57b527647536a",
@@ -201,7 +202,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-14T16:14:10+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00",
+    "last_checked": "2026-08-14T17:27:07+00:00",
     "last_changed_at": "2026-08-14T16:14:10+00:00"
   },
   "NM": {
@@ -209,14 +210,14 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "MS": {
     "hash": "e60153bdc2b360af",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T05:14:36+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00",
+    "last_checked": "2026-08-14T17:27:06+00:00",
     "last_changed_at": "2026-08-14T05:14:36+00:00"
   },
   "MI": {
@@ -232,49 +233,49 @@
       "end_date": null
     },
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "RI": {
     "hash": "9e1f52df71e34959",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:11+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "CT": {
     "hash": "313c092c04aec570",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:20+00:00",
-    "last_checked": "2026-08-14T16:14:09+00:00"
+    "last_checked": "2026-08-14T17:27:06+00:00"
   },
   "NJ": {
     "hash": "0c57d776f0639905",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "OR": {
     "hash": "db8312b01675f756",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "UT": {
     "hash": "7e18e67416004230",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:22+00:00",
-    "last_checked": "2026-08-14T16:14:11+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "WA": {
     "hash": "bcaa29590d408e27",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:22+00:00",
-    "last_checked": "2026-08-14T16:14:11+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "TN": {
     "hash": "50ac5df2ca0679de",
@@ -288,14 +289,14 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:22+00:00",
-    "last_checked": "2026-08-14T16:14:11+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "WV": {
     "hash": "10881dadc21e6e09",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T14:13:31+00:00",
-    "last_checked": "2026-08-14T16:14:11+00:00",
+    "last_checked": "2026-08-14T17:27:07+00:00",
     "last_changed_at": "2026-08-14T14:13:31+00:00"
   },
   "WI": {
@@ -303,28 +304,28 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:22+00:00",
-    "last_checked": "2026-08-14T16:14:11+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "OH": {
     "hash": "7331e8dcb360aec9",
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:10+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "VT": {
     "hash": "1e48f33811a65aa4",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T03:27:22+00:00",
-    "last_checked": "2026-08-14T16:14:11+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   },
   "TX": {
     "hash": "377908845a56beca",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-14T16:14:11+00:00",
-    "last_checked": "2026-08-14T16:14:11+00:00",
+    "last_checked": "2026-08-14T17:27:07+00:00",
     "last_changed_at": "2026-08-14T16:14:11+00:00"
   },
   "PA": {
@@ -340,6 +341,6 @@
       "end_date": null
     },
     "last_parsed": "2026-08-14T03:27:21+00:00",
-    "last_checked": "2026-08-14T16:14:11+00:00"
+    "last_checked": "2026-08-14T17:27:07+00:00"
   }
 }
