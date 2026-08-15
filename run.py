@@ -41,7 +41,7 @@ import parsers as P
 # Bump whenever parsing logic changes. A cache keyed only on page content is
 # wrong when the CODE changes: identical pages produce stale verdicts computed
 # by the old parser. The key must be (content, code version).
-PARSER_VERSION = "10"
+PARSER_VERSION = "14"
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"
@@ -54,6 +54,7 @@ WORKERS = 10
 MAX_ORDER_AGE_DAYS = 21      # how far back to look for candidate orders
 AMBIGUOUS_WINDOW_DAYS = 2    # undated order this recent -> unknown, not full
 RECENT_ORDER_GRACE_DAYS = 2  # an order this fresh with no end date is treated as live
+FROZEN_PAGE_DAYS = 180       # a status page unchanged this long is not trusted
 
 
 def covers_today(start, end, d):
@@ -93,18 +94,89 @@ def covers_today(start, end, d):
     return None, "no dates parsed"
 FETCH_BODY_LIMIT = 400_000   # don't hash megabytes of junk
 
+# Edge WAFs fingerprint the whole header set, not just the User-Agent. Sending
+# a Chrome UA with none of Chrome's other headers still reads as automation,
+# which is why AZ, KS and MA returned 403 even after the UA was fixed.
 BROWSER = {
     "User-Agent": (
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
     ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept": ("text/html,application/xhtml+xml,application/xml;q=0.9,"
+               "image/avif,image/webp,*/*;q=0.8"),
+    "Accept-Language": "en-US,en;q=0.9",
+    # NOTE: no Accept-Encoding here on purpose. requests sets it from the
+    # codecs actually installed. Hardcoding "gzip, deflate, br" made servers
+    # reply with Brotli, which requests cannot decode without the optional
+    # brotli package — r.text came back as binary noise and 14 states silently
+    # stopped parsing. Never advertise a codec you cannot decode.
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Cache-Control": "max-age=0",
 }
 
+# --- robots.txt -------------------------------------------------------------
+# Looking like a browser is a grey area; ignoring a site's stated policy is
+# not. robots.txt is the machine-readable rule a site publishes on purpose, so
+# it is honoured absolutely. A WAF filtering on User-Agent is a blunt tool and
+# not a policy statement; robots.txt is.
+_ROBOTS = {}
 
-# ---------------------------------------------------------------------------
-# I/O helpers
-# ---------------------------------------------------------------------------
+
+def robots_allows(url, session=None):
+    """False only when a site's robots.txt explicitly disallows this path.
+
+    Two things this gets right that the stdlib default does not:
+
+    1. It fetches robots.txt with the SAME headers as every other request.
+       RobotFileParser uses urllib's default Python user-agent, which the very
+       WAFs we are dealing with reject — so robots.txt itself came back 403.
+
+    2. It treats an unreadable robots.txt as "no rules", not "forbidden".
+       RobotFileParser sets disallow_all on a 403, which turns "I could not
+       read your policy" into "your policy forbids everything". RFC 9309 says
+       a 4xx makes robots.txt unavailable and the crawler may proceed. The
+       stdlib behaviour blocked 15 states that had never said no.
+
+    Explicit Disallow rules from a real 200 response are still obeyed
+    absolutely. That is the part that is actually a policy statement.
+    """
+    from urllib.parse import urlparse
+    from urllib.robotparser import RobotFileParser
+
+    try:
+        p = urlparse(url)
+        base = f"{p.scheme}://{p.netloc}"
+    except Exception:
+        return True
+
+    if base not in _ROBOTS:
+        rp = None
+        try:
+            s = session or requests
+            resp = s.get(base + "/robots.txt", timeout=10, headers=BROWSER)
+            ctype = (resp.headers.get("Content-Type") or "").lower()
+            # Only a real 200 text/plain robots.txt counts as a policy. Some
+            # sites serve an HTML 200 error page for missing files; parsing
+            # that as rules is meaningless.
+            if resp.status_code == 200 and "html" not in ctype:
+                rp = RobotFileParser()
+                rp.parse(resp.text.splitlines())
+        except Exception:
+            rp = None
+        _ROBOTS[base] = rp
+
+    rp = _ROBOTS[base]
+    if rp is None:
+        return True
+    try:
+        return rp.can_fetch("*", url)
+    except Exception:
+        return True
+
 
 def load_json(path, default):
     try:
@@ -122,6 +194,8 @@ def fetch(url, session):
     """Returns (text, error). Never raises."""
     if not url:
         return None, "no url"
+    if not robots_allows(url, session):
+        return None, "blocked by robots.txt"
     try:
         r = session.get(url, timeout=TIMEOUT, headers=BROWSER, allow_redirects=True)
         if r.status_code != 200:
@@ -282,6 +356,26 @@ def check_state(rec, cache, session, verbose=False):
         else:
             out["error"] = ev
     elif mode == "diff":
+        # A status page unchanged for months is not reporting today's status,
+        # it is reporting the day it froze. Arizona's half-staff page still
+        # announces a January 2025 order; trusting it would mean half-staff
+        # every day forever — a confident lie, which is worse than a gap.
+        lastmod = P.page_last_modified(text)
+        if lastmod:
+            age = (today() - lastmod).days
+            out["source_last_modified"] = lastmod.isoformat()
+            out["source_age_days"] = age
+            if age > FROZEN_PAGE_DAYS:
+                out["state_status"] = P.UNKNOWN
+                out["coverage"] = "stale"
+                out["error"] = (f"source appears frozen: newest date on page is "
+                                f"{lastmod} ({age}d old) - not trusted")
+                return code, out, {
+                    "hash": h, "state_status": P.UNKNOWN, "state_order": None,
+                    "last_parsed": out["checked_at"],
+                    "last_checked": out["checked_at"],
+                    "last_changed_at": prev.get("last_changed_at")}
+
         # No history exists on these pages. The page IS the status.
         d = P.parse_diff(text, previous_hash=prev.get("hash"),
                          selector_hint="flag")
@@ -356,6 +450,14 @@ def check_state(rec, cache, session, verbose=False):
             # turned real orders into UNKNOWN and dropped them.
             rec_o = P.extract_order(i["title"], i["url"], i["title"])
             if rec_o["status"] != P.HALF:
+                continue
+            # A capitol-only or single-county order is not a statewide
+            # half-staff day. South Dakota issues both kinds and titles them
+            # differently; counting them the same over-reports the state.
+            scope, scope_ev = P.order_scope(i["title"])
+            if scope == "limited":
+                out.setdefault("limited_orders", []).append(
+                    {"title": i["title"], "url": i["url"], "scope": scope_ev})
                 continue
             if rec.get("signature_check_required") and \
                     rec_o["authority"] != P.GOVERNOR:
@@ -517,6 +619,23 @@ def main():
     print(f"  CHANGED this run: {' '.join(sorted(changed)) or 'none'}")
     print(f"  not covered: {status['meta']['not_covered']}   "
           f"stale: {status['meta']['stale']}   errors: {status['meta']['errors']}")
+    # Break the error total out by cause. "16 errors" hides whether the
+    # pipeline is blocked, broken, or simply pointed at nothing.
+    causes = {}
+    for s in results.values():
+        e = s.get("error")
+        if not e:
+            continue
+        if "robots.txt" in e:            k = "blocked by robots.txt"
+        elif "HTTP 4" in e or "HTTP 5" in e: k = "HTTP error"
+        elif "timeout" in e.lower():     k = "timeout"
+        elif "frozen" in e:              k = "frozen source"
+        elif "no verified source" in e:  k = "no source"
+        elif "no items parsed" in e:     k = "parsed nothing"
+        else:                            k = e[:40]
+        causes[k] = causes.get(k, 0) + 1
+    for k, v in sorted(causes.items(), key=lambda x: -x[1]):
+        print(f"      {v:3d}  {k}")
     print(f"{'='*54}")
 
     if args.dry_run:

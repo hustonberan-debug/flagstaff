@@ -177,6 +177,70 @@ def diff_page_dates(html):
     return s, e
 
 
+# --- Scope: statewide vs a single building ---------------------------------
+# South Dakota titles orders two ways:
+#   "Flags at Half-Staff at State Capitol in Honor of..."   <- capitol only
+#   "Flags at Half-Staff in Honor of..."                    <- statewide
+# A capitol-only order is NOT a statewide half-staff day. Reporting one boolean
+# per state without this over-reports South Dakota constantly, and the same
+# distinction almost certainly exists in other states' wording.
+LIMITED_SCOPE_RE = re.compile(
+    r"\bat\s+(?:the\s+)?state\s+capitol\b"
+    r"|\bcapitol\s+(?:building\s+)?only\b"
+    r"|\bat\s+the\s+capitol\s+complex\b"
+    r"|\bonly\s+at\s+the\s+state\s+capitol\b"
+    r"|\b(?:in|within)\s+[A-Z][a-z]+\s+County\s+only\b",
+    re.I,
+)
+
+
+def order_scope(text):
+    """'statewide' or 'limited', plus the phrase that decided it."""
+    t = strip_html(text) if "<" in (text or "") else (text or "")
+    m = LIMITED_SCOPE_RE.search(t)
+    return ("limited", m.group(0).strip()) if m else ("statewide", None)
+
+
+# --- Freshness --------------------------------------------------------------
+# Arizona's half-staff page fetches cleanly, is server-rendered, and has been
+# frozen since January 2025 — it still announces the Jimmy Carter order. Wired
+# up naively it would report half-staff every day forever. A page that cannot
+# be observed changing is not a status source, and staleness is detectable:
+# Idaho publishes DCTERMS.modified and a visible "last updated" line.
+LASTMOD_PATTERNS = [
+    re.compile(r'name=["\']DCTERMS\.modified["\'][^>]*content=["\']([^"\']+)', re.I),
+    re.compile(r'property=["\']article:modified_time["\'][^>]*content=["\']([^"\']+)', re.I),
+    re.compile(r'name=["\']last-modified["\'][^>]*content=["\']([^"\']+)', re.I),
+    re.compile(r"last\s+updated\s*:?\s*([A-Z][a-z]+\s+\d{1,2},?\s+20\d\d)", re.I),
+    re.compile(r"updated\s+on\s+([A-Z][a-z]+\s+\d{1,2},?\s+20\d\d)", re.I),
+]
+
+
+def page_last_modified(html, headers=None):
+    """Best available freshness signal for a page, or None."""
+    if headers:
+        for k in ("Last-Modified", "last-modified"):
+            if headers.get(k):
+                d = parse_any_date(headers[k])
+                if d:
+                    return d
+    for pat in LASTMOD_PATTERNS:
+        m = pat.search(html or "")
+        if m:
+            d = parse_any_date(m.group(1))
+            if d:
+                return d
+    # Fall back to the newest date mentioned anywhere in the visible text.
+    text = strip_html(html)
+    best = None
+    for pat in DATE_PATTERNS:
+        for m in pat.finditer(text):
+            d = parse_any_date(m.group(0))
+            if d and (best is None or d > best):
+                best = d
+    return best
+
+
 def parse_toggle(html, base_url=None):
     """Two-static-page states (Oklahoma).
 
