@@ -211,6 +211,29 @@ h2{font-family:var(--display);font-weight:400;font-size:13px;
 .status-line{font-family:var(--mono);font-size:12px;color:var(--muted);
   margin-top:10px}
 
+/* Subscription management. Being unable to change your mind without
+   deleting the app is not a thing to warn people about, it is a thing to
+   fix. */
+.subs{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.subs h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);font-weight:400;margin-bottom:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--ink);
+  border:1px solid var(--line);border-radius:2px;padding:6px 8px 6px 11px;
+  margin:0 6px 6px 0;font-size:14px}
+.chip button{background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:16px;line-height:1;padding:0 2px}
+.chip button:hover{color:var(--red-lit)}
+.chip button:focus-visible{outline:2px solid var(--navy-lit);outline-offset:2px}
+.subs .add{margin-top:6px;font-family:var(--body);font-size:14px;
+  background:none;border:1px solid var(--line);color:var(--paper);
+  border-radius:2px;padding:9px 14px;cursor:pointer}
+.subs .add:hover{border-color:var(--navy-lit)}
+.subs .add:disabled{color:var(--muted);cursor:default;border-color:var(--line)}
+.subs .off{display:block;margin-top:12px;background:none;border:none;
+  color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:11px;
+  text-decoration:underline;text-underline-offset:3px;padding:0}
+.subs .off:hover{color:var(--red-lit)}
+
 footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
   font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.8}
 
@@ -322,9 +345,11 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
       <div class="action" id="notifyCard">
         <h3>Turn on alerts</h3>
         <p id="notifyWhy">One notification when the flag goes to half-staff, one
-          when it goes back up. Nothing on the days nothing happens.</p>
+          when it goes back up. Nothing on the days nothing happens. National
+          proclamations always come through.</p>
         <button class="btn" id="notifyBtn">Turn on alerts</button>
         <div class="status-line" id="notifyStatus"></div>
+        <div id="subList" class="subs" hidden></div>
       </div>
     </section>
     </div>
@@ -558,7 +583,7 @@ function buildSelect(){
   const codes=Object.keys(DATA.states||{}).sort();
   sel.innerHTML=codes.map(c=>
     `<option value="${c}"${c===current?' selected':''}>${DATA.states[c].state||c}</option>`).join('');
-  sel.onchange=()=>{current=sel.value;render();renderFederal()};
+  sel.onchange=()=>{current=sel.value;render();renderFederal();renderSubs()};
   if(!DATA.states[current] && codes.length){current=codes[0];sel.value=current}
 }
 
@@ -684,8 +709,8 @@ renderInstall();
    registers permission and captures the subscription so nothing is lost. It
    never claims alerts are working when they are not.
 ------------------------------------------------------------------------- */
-const VAPID_PUBLIC_KEY='BLxqFxBsh6CnsC4KfpQHg-0oBDF8s-A0gGz7E8A8T-odCsVtFN0-DZvdL2DUokAHJWH0ErkFwNjbArTejV9i6Ao';
-const SUBSCRIBE_ENDPOINT='https://halfstaff-push.hustonberan.workers.dev/subscribe';
+const VAPID_PUBLIC_KEY='';   // <- paste your VAPID public key here
+const SUBSCRIBE_ENDPOINT='';  // <- your /subscribe URL
 
 function b64ToU8(b64){
   const pad='='.repeat((4-b64.length%4)%4);
@@ -697,7 +722,7 @@ function notifyStatus(msg){document.getElementById('notifyStatus').textContent=m
 let swReg=null;
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('sw.js')
-    .then(r=>{swReg=r;refreshNotifyUI()})
+    .then(r=>{swReg=r;refreshNotifyUI();refreshSubs()})
     .catch(()=>notifyStatus('Alerts need the page served over https (or localhost).'));
 } else {
   refreshNotifyUI();
@@ -740,12 +765,87 @@ document.getElementById('notifyBtn').onclick=async function(){
       await fetch(SUBSCRIBE_ENDPOINT,{method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({subscription:sub,state:current})});
-      notifyStatus('Subscribed for '+current+'.');
+      notifyStatus('Subscribed for '+current+'.'); refreshSubs();
     }catch(e){ notifyStatus('Permission granted, but subscribing failed: '+e.message); }
   } else {
     notifyStatus('Permission granted. Push delivery is not wired up yet.');
   }
 };
+
+
+/* --- Subscription management ---------------------------------------------
+   Shows exactly which states you will be notified about, and lets you add or
+   remove them. The alternative — a note telling people to be careful which
+   state they subscribe in — makes the user responsible for a limitation of
+   the app.
+------------------------------------------------------------------------- */
+let mySubs=[];
+
+function workerBase(){
+  return SUBSCRIBE_ENDPOINT ? SUBSCRIBE_ENDPOINT.replace(/\/subscribe$/,'') : '';
+}
+async function currentEndpoint(){
+  if(!swReg) return null;
+  const s=await swReg.pushManager.getSubscription();
+  return s ? s.endpoint : null;
+}
+async function refreshSubs(){
+  const box=document.getElementById('subList');
+  const base=workerBase(); const ep=await currentEndpoint();
+  if(!base || !ep){ box.hidden=true; return; }
+  try{
+    const r=await fetch(base+'/my-states',{method:'POST',
+      headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:ep})});
+    mySubs=(await r.json()).states||[];
+  }catch(_){ mySubs=[]; }
+  renderSubs();
+}
+function renderSubs(){
+  const box=document.getElementById('subList');
+  const base=workerBase();
+  if(!base){ box.hidden=true; return; }
+  box.hidden=false;
+  const chips = mySubs.length
+    ? mySubs.map(c=>`<span class="chip">${(DATA.states[c]||{}).state||c}
+        <button data-drop="${c}" aria-label="Stop alerts for ${c}">&times;</button></span>`).join('')
+    : '<span style="color:var(--muted);font-size:14px">No states yet.</span>';
+  const here=(DATA.states[current]||{}).state||current;
+  const has=mySubs.includes(current);
+  box.innerHTML=`<h4>Alerting you about</h4>${chips}
+    <button class="add" id="addState" ${has?'disabled':''}>
+      ${has?`${here} is on`:`Add ${here}`}</button>
+    ${mySubs.length?'<button class="off" id="allOff">turn off all alerts</button>':''}`;
+
+  box.querySelectorAll('[data-drop]').forEach(b=>{
+    b.onclick=()=>changeSub('drop-state',{state:b.dataset.drop});
+  });
+  const add=document.getElementById('addState');
+  if(add && !has) add.onclick=()=>changeSub('subscribe',{state:current});
+  const off=document.getElementById('allOff');
+  if(off) off.onclick=async()=>{
+    const ep=await currentEndpoint(); if(!ep) return;
+    await fetch(workerBase()+'/unsubscribe',{method:'POST',
+      headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:ep})});
+    const s=await swReg.pushManager.getSubscription(); if(s) await s.unsubscribe();
+    mySubs=[]; renderSubs(); notifyStatus('Alerts off.');
+    const btn=document.getElementById('notifyBtn');
+    btn.disabled=false; btn.textContent='Turn on alerts';
+  };
+}
+async function changeSub(path,extra){
+  const ep=await currentEndpoint(); if(!ep) return;
+  let body={endpoint:ep,...extra};
+  if(path==='subscribe'){
+    const s=await swReg.pushManager.getSubscription();
+    body={subscription:s.toJSON(),state:extra.state};
+  }
+  try{
+    const r=await fetch(workerBase()+'/'+path,{method:'POST',
+      headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    mySubs=(await r.json()).states||[];
+    renderSubs();
+  }catch(e){ notifyStatus('Could not update: '+e.message); }
+}
 
 /* --- Boot -------------------------------------------------------------- */
 fetch('status.json',{cache:'no-store'})
