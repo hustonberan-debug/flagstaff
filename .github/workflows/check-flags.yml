@@ -78,6 +78,47 @@ jobs:
             done
           fi
 
+      - name: Notify subscribers of any change
+        if: always()
+        env:
+          NOTIFY_URL: ${{ vars.NOTIFY_URL }}
+          NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+
+          url = os.environ.get("NOTIFY_URL")
+          secret = os.environ.get("NOTIFY_SECRET")
+          if not url or not secret:
+              print("NOTIFY_URL/NOTIFY_SECRET not set - skipping push (fine until the worker is deployed)")
+              raise SystemExit(0)
+
+          s = json.load(open("status.json"))
+          changed = [c for c, v in s["states"].items() if v.get("changed")]
+          if s.get("federal") and s["federal"].get("_changed"):
+              changed.append("US")
+
+          for code in changed:
+              st = s["states"].get(code, {})
+              payload = json.dumps({
+                  "state": code,
+                  "status": st.get("effective_status", "unknown"),
+                  "reason": st.get("reason"),
+                  "url": "https://halfstaffnow.com/",
+              }).encode()
+              req = urllib.request.Request(
+                  url.rstrip("/") + "/notify", data=payload,
+                  headers={"Content-Type": "application/json",
+                          "Authorization": f"Bearer {secret}"})
+              try:
+                  with urllib.request.urlopen(req, timeout=15) as r:
+                      print(code, r.read().decode())
+              except Exception as e:
+                  print(f"::warning::notify failed for {code}: {e}")
+          if not changed:
+              print("No changes this run - nothing to notify.")
+          PY
+
       - name: Warn about failing sources
         if: always()
         run: |
