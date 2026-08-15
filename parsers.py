@@ -113,6 +113,13 @@ DECLARATION_RE = [
     # "The flag is being flown at half-staff today"
     re.compile(r"\bflags?\s+(?:will\s+be\s+|are\s+being\s+)?(?:flown|displayed)\s+"
                r"at\s+(half|full)[-\s]?(?:staff|mast)\s+(?:today|now|until)", re.I),
+    # "Governor Healey has ordered that ... be lowered to half-staff at all
+    # state buildings from sunrise until sunset on Friday, August 14, 2026"
+    # (Massachusetts). The order and the status are the same sentence there,
+    # so the date gate afterwards is what expires it.
+    re.compile(r"\bhas\s+ordered\s+that\b[^.]{0,200}?\bbe\s+"
+               r"(?:lowered|flown|raised|displayed)\s+(?:to|at)\s+"
+               r"(half|full)[-\s]?(?:staff|mast)", re.I),
     # "United States flag to be flown at half staff" (Alaska)
     re.compile(r"\bflags?\s+(?:is\s+|are\s+)?to\s+be\s+flown\s+at\s+"
                r"(half|full)[-\s]?(?:staff|mast)", re.I),

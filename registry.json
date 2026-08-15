@@ -151,11 +151,13 @@
     "stale": true,
     "methods_disagree": false,
     "confidence_source": "cowork, promoted by verified feed",
-    "confidence": "medium",
+    "confidence": "low",
     "confidence_caps": [
       "last order 517d old"
     ],
-    "buildable": true
+    "buildable": false,
+    "expected_status_text": "Flags are at half-staff today.",
+    "blocked_reason": "Source page has been frozen since January 2025 \u2014 it still announces the Jimmy Carter order. Would report half-staff every day. Needs a human check before enabling."
   },
   {
     "state": "California",
@@ -514,15 +516,15 @@
     "sources_used": [
       "script"
     ],
-    "flag_page_url": null,
-    "press_url": "https://idaho.gov",
+    "flag_page_url": "https://gov.idaho.gov/flag-status/",
+    "press_url": "https://gov.idaho.gov/pressrelease/",
     "signup_url": null,
     "root_domain": "idaho.gov",
     "rss_url": null,
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "index",
+    "ingest_mode": "diff",
     "cms": "WordPress",
     "js_blocked": false,
     "signature_check_required": false,
@@ -531,16 +533,21 @@
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": null,
+    "quirk": "Publishes DCTERMS.modified and a visible 'last updated' line \u2014 the most reliable freshness signal in the set.",
     "last_order_seen": null,
     "last_order_date": null,
     "staleness_days": null,
     "stale": false,
     "methods_disagree": false,
     "confidence_source": "script only (unresearched)",
-    "confidence": "low",
+    "confidence": "high",
     "confidence_caps": [],
-    "buildable": false
+    "buildable": true,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "public.govdelivery.com/accounts/IDITS/subscriber/new?topic_id=IDITS_152 -- a FLAG-SPECIFIC topic, linked from the flag page as 'Sign up for Flag Notifications'"
+    },
+    "expected_status_text": "Flag at full staff"
   },
   {
     "state": "Illinois",
@@ -548,8 +555,8 @@
     "sources_used": [
       "script"
     ],
-    "flag_page_url": null,
-    "press_url": null,
+    "flag_page_url": "https://www.illinois.gov/about/flag-honors.html",
+    "press_url": "https://gov.illinois.gov/news.html",
     "signup_url": null,
     "root_domain": null,
     "rss_url": null,
@@ -558,7 +565,7 @@
     "rss_evidence": null,
     "ingest_mode": "unknown",
     "cms": null,
-    "js_blocked": false,
+    "js_blocked": true,
     "signature_check_required": false,
     "dedupe_translations": false,
     "foreign_owner": null,
@@ -576,7 +583,12 @@
     "confidence_caps": [
       "no usable ingest path"
     ],
-    "buildable": false
+    "buildable": false,
+    "notification_channel": {
+      "type": "email_form",
+      "detail": "https://www.illinois.gov/about/communications-opt-in.html -- per the flag-honors page, select 'Specific Subjects/Agencies' then 'Flag Honors'. NOT independently verified that the Flag Honors option is actually present in the form."
+    },
+    "blocked_reason": "BLOCKED. illinois.gov/about/flag-honors.html exists, is official, is server-rendered, and explains the Flag Display Act -- but it carries NO current status and its 'Latest News' region renders the literal string 'No Data' on a plain fetch, "
   },
   {
     "state": "Indiana",
@@ -585,7 +597,7 @@
       "script"
     ],
     "flag_page_url": null,
-    "press_url": "https://gov.in.gov/newsroom",
+    "press_url": "https://events.in.gov/group/gov",
     "signup_url": null,
     "root_domain": "gov.in.gov",
     "rss_url": null,
@@ -601,16 +613,16 @@
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": null,
+    "quirk": "Release date and effective lowering date differ by days. Take the effective date from the body, not the dateline.",
     "last_order_seen": null,
     "last_order_date": null,
     "staleness_days": null,
     "stale": false,
     "methods_disagree": false,
     "confidence_source": "script only (unresearched)",
-    "confidence": "low",
+    "confidence": "medium",
     "confidence_caps": [],
-    "buildable": false
+    "buildable": true
   },
   {
     "state": "Kansas",
@@ -627,7 +639,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "archive",
+    "ingest_mode": "diff",
     "cms": "WordPress",
     "js_blocked": false,
     "signature_check_required": false,
@@ -636,7 +648,7 @@
     "govdelivery": true,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": null,
+    "quirk": "Only the full-staff wording was ever observed; the half-staff wording is unconfirmed.",
     "last_order_seen": {
       "date": "2026-05-22",
       "title": "Governor Kelly Directs Flags be Flown at Half-Staff for Memorial Day",
@@ -649,7 +661,12 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "public.govdelivery.com/accounts/KSOG/subscriber/new -- linked from the flag page as 'Sign-up here to be notified when the Governor orders flags to half-staff'"
+    },
+    "expected_status_text": "Flag Status: Full-Staff"
   },
   {
     "state": "Kentucky",
@@ -771,7 +788,12 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "notification_channel": {
+      "type": "listserv",
+      "detail": "Send a blank email (no body, no signature) to subscribe-bsb-halfstaffnotification@listserv.state.ma.us. Bulk requests: sh.events@state.ma.us, subject 'Subscribe to Half-Staff Notifications'. Both addresses read verbatim off the official page."
+    },
+    "expected_status_text": "Please be advised that Massachusetts Governor Maura Healey has ordered that the United States of America flag and the Commonwealth of Massachusetts flag be lowered to half-staff at all state buildings from sunrise until sunset on Friday, August 14, 2026, the date of interment, in honor of Corporal N"
   },
   {
     "state": "Maryland",
@@ -797,7 +819,7 @@
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": null,
+    "quirk": "og:updated_time is stale relative to page content \u2014 do not use it as a freshness signal. Possible second legacy URL tree at /news/press/pages/*.aspx.",
     "last_order_seen": {
       "date": "2025-09-10",
       "title": "Governor Moore Statement Following the Death of Charlie Kirk (ordered flags on state facilities to half-staff)",
@@ -812,8 +834,7 @@
     "confidence_caps": [
       "last order 336d old"
     ],
-    "buildable": true,
-    "blocked_reason": "Press page is JavaScript-rendered; listings are absent from the HTML response. Needs a feed, an API, or a browser-based fetch."
+    "buildable": true
   },
   {
     "state": "Maine",
@@ -1052,7 +1073,8 @@
       "last order 1953d old",
       "JS-blocked with no feed or push fallback"
     ],
-    "buildable": false
+    "buildable": false,
+    "blocked_reason": "BLOCKED, client-side rendering. news.mt.gov/Governors-Office returned an EMPTY BODY (headers only, zero text) to a browser-like UA. Prior research established that governor.mt.gov/flag-status is also a shell whose status is injected by an A"
   },
   {
     "state": "North Carolina",
@@ -1173,8 +1195,8 @@
       "cowork",
       "script"
     ],
-    "flag_page_url": null,
-    "press_url": null,
+    "flag_page_url": "https://www.nh.gov/flag-status",
+    "press_url": "https://www.governor.nh.gov/news",
     "signup_url": null,
     "root_domain": "governor.nh.gov",
     "rss_url": null,
@@ -1202,7 +1224,8 @@
       "JS-blocked with no feed or push fallback",
       "no usable ingest path"
     ],
-    "buildable": false
+    "buildable": false,
+    "blocked_reason": "BLOCKED on every route tried. www.nh.gov/flag-status -- which DOES exist and is a genuine dedicated flag page per search results, and which the previous pass never found -- returned an EMPTY BODY. www.governor.nh.gov/news likewise returned "
   },
   {
     "state": "New Jersey",
@@ -1337,21 +1360,21 @@
     "cms": "Drupal",
     "js_blocked": false,
     "signature_check_required": false,
-    "dedupe_translations": false,
+    "dedupe_translations": true,
     "foreign_owner": null,
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": null,
+    "quirk": "Every release is duplicated in Spanish; de-duplicate.",
     "last_order_seen": null,
     "last_order_date": null,
     "staleness_days": null,
     "stale": false,
     "methods_disagree": false,
     "confidence_source": "script only (unresearched)",
-    "confidence": "low",
+    "confidence": "high",
     "confidence_caps": [],
-    "buildable": false
+    "buildable": true
   },
   {
     "state": "Ohio",
@@ -1471,14 +1494,18 @@
     "stale": false,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "medium",
+    "confidence": "high",
     "confidence_caps": [],
     "buildable": true,
     "url_candidates": [
       "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts",
       "https://www.oregon.gov/gov/pages/newsroom.aspx",
       "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts/Search?org=GOV"
-    ]
+    ],
+    "notification_channel": {
+      "type": "email_form",
+      "detail": "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts/Subscribe"
+    }
   },
   {
     "state": "Pennsylvania",
@@ -1601,7 +1628,7 @@
       "script"
     ],
     "flag_page_url": null,
-    "press_url": "https://governor.sd.gov",
+    "press_url": "https://governor.sd.gov/news/press-releases.aspx",
     "signup_url": null,
     "root_domain": "governor.sd.gov",
     "rss_url": null,
@@ -1617,16 +1644,16 @@
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": null,
+    "quirk": "Titles distinguish 'at State Capitol' (capitol-only) from statewide. Capitol-only is NOT a statewide half-staff day.",
     "last_order_seen": null,
     "last_order_date": null,
     "staleness_days": null,
     "stale": false,
     "methods_disagree": false,
     "confidence_source": "script only (unresearched)",
-    "confidence": "low",
+    "confidence": "high",
     "confidence_caps": [],
-    "buildable": false
+    "buildable": true
   },
   {
     "state": "Tennessee",
@@ -1935,8 +1962,8 @@
     "sources_used": [
       "script"
     ],
-    "flag_page_url": null,
-    "press_url": "https://governor.wy.gov/newsroom",
+    "flag_page_url": "https://governor.wyo.gov/flag-status",
+    "press_url": "https://governor.wyo.gov/media/news-releases",
     "signup_url": null,
     "root_domain": "governor.wy.gov",
     "rss_url": null,
@@ -1945,7 +1972,7 @@
     "rss_evidence": null,
     "ingest_mode": "index",
     "cms": null,
-    "js_blocked": false,
+    "js_blocked": true,
     "signature_check_required": false,
     "dedupe_translations": false,
     "foreign_owner": null,
@@ -1961,6 +1988,11 @@
     "confidence_source": "script only (unresearched)",
     "confidence": "low",
     "confidence_caps": [],
-    "buildable": false
+    "buildable": false,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "GovDelivery account WYGOV is confirmed to exist and to carry flag bulletins (observed bulletin URL shape content.govdelivery.com/accounts/WYGOV/bulletins/...). I did NOT fetch a subscribe URL, so no signup link is recorded here."
+    },
+    "blocked_reason": "BLOCKED, client-side rendering. governor.wyo.gov/flag-status and governor.wyo.gov/media/news-releases BOTH returned only <head> metadata and an empty body -- and both returned the identical generic title 'Wyoming Governor Mark Gordon' with "
   }
 ]
