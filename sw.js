@@ -1,35 +1,33 @@
 /* sw.js — service worker.
  *
- * Two jobs:
- *   1. Serve the app shell offline so a dead connection shows the last known
- *      status rather than a browser error page.
- *   2. Receive push notifications. On iOS this ONLY works once the app has
- *      been added to the home screen — which is why the install prompt is a
- *      gate on the notification flow, not a nice-to-have.
+ * CACHE STRATEGY, and why it differs per file
  *
- * CACHE STRATEGY, and the reason it differs per file:
- *   shell (html/css/js/manifest) -> cache-first. It rarely changes and we want
- *                                   instant loads.
- *   status.json                  -> network-first. It is the whole point of
- *                                   the app; a cached flag status is worse
- *                                   than a slow one. We fall back to cache
- *                                   only when the network fails, and the UI
- *                                   shows the age of what it is displaying.
+ *   HTML  -> NETWORK FIRST. This is the one that matters. The previous version
+ *            served index.html cache-first under a version string that never
+ *            changed, so anyone who had visited once kept that copy forever.
+ *            A friend testing the app sat on a build from before the push keys
+ *            were added and saw "not wired up yet" no matter what shipped.
+ *            An app that cannot update itself is worse than no cache at all.
+ *
+ *   status.json -> NETWORK FIRST. It is the entire point of the app. A cached
+ *            flag status is worse than a slow one. Cache is the offline
+ *            fallback only, and the UI shows the age of what it displays.
+ *
+ *   icons, manifest -> cache first. They genuinely never change, and when they
+ *            do the filename changes with them.
+ *
+ * Bump VERSION on any release that changes cached assets.
  */
 
-const VERSION = 'flagstaff-v1';
-const SHELL = [
-  './',
-  './index.html',
-  './manifest.json',
-];
+const VERSION = 'flagstaff-v3';
+const SHELL = ['./index.html', './manifest.json'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(VERSION)
       .then((c) => c.addAll(SHELL))
+      .catch(() => {})            // a missing shell file must not brick install
       .then(() => self.skipWaiting())
-      .catch(() => self.skipWaiting())   // a missing shell file must not brick install
   );
 });
 
@@ -37,38 +35,51 @@ self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys()
       .then((keys) => Promise.all(
-        keys.filter((k) => k !== VERSION).map((k) => caches.delete(k))
-      ))
+        keys.filter((k) => k !== VERSION).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
 
-self.addEventListener('fetch', (e) => {
-  const url = new URL(e.request.url);
-  if (e.request.method !== 'GET') return;
+function networkFirst(request) {
+  return fetch(request)
+    .then((resp) => {
+      const copy = resp.clone();
+      caches.open(VERSION).then((c) => c.put(request, copy)).catch(() => {});
+      return resp;
+    })
+    .catch(() => caches.match(request).then((hit) => hit || Response.error()));
+}
 
-  // status.json: always try the network first.
-  if (url.pathname.endsWith('status.json')) {
-    e.respondWith(
-      fetch(e.request)
-        .then((r) => {
-          const copy = r.clone();
-          caches.open(VERSION).then((c) => c.put(e.request, copy));
-          return r;
-        })
-        .catch(() => caches.match(e.request))
-    );
+self.addEventListener('fetch', (e) => {
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+
+  // Any page navigation, plus the HTML itself.
+  const isPage = req.mode === 'navigate'
+    || url.pathname.endsWith('/')
+    || url.pathname.endsWith('.html');
+
+  if (isPage || url.pathname.endsWith('status.json')) {
+    e.respondWith(networkFirst(req));
     return;
   }
 
-  // Everything else: cache first, refresh in the background.
+  // Static assets: cache first, refresh quietly in the background.
   e.respondWith(
-    caches.match(e.request).then((hit) => hit || fetch(e.request))
+    caches.match(req).then((hit) => {
+      const net = fetch(req).then((resp) => {
+        const copy = resp.clone();
+        caches.open(VERSION).then((c) => c.put(req, copy)).catch(() => {});
+        return resp;
+      }).catch(() => hit);
+      return hit || net;
+    })
   );
 });
 
 /* --- Push -----------------------------------------------------------------
- * Payload shape the server should send:
+ * Payload from the worker:
  *   { "state": "NE", "status": "half", "reason": "...", "url": "..." }
  */
 self.addEventListener('push', (e) => {
@@ -81,7 +92,8 @@ self.addEventListener('push', (e) => {
     : `Flags back to full staff${d.state ? ' in ' + d.state : ''}`;
 
   e.waitUntil(self.registration.showNotification(title, {
-    body: d.reason || (half ? 'An order is now in effect.' : 'No order is in effect.'),
+    body: d.reason || (half ? 'An order is now in effect.'
+                            : 'No order is in effect.'),
     icon: './icon-192.png',
     badge: './icon-192.png',
     tag: 'flag-' + (d.state || 'us'),   // replaces rather than stacks
