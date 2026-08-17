@@ -42,6 +42,16 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      - name: Read notification emails
+        # Push ingest for states that cannot be scraped. Never fails the job:
+        # a mail outage should degrade those states to full-staff, not block
+        # the 40 that are working.
+        continue-on-error: true
+        env:
+          MAIL_USER: ${{ secrets.MAIL_USER }}
+          MAIL_PASS: ${{ secrets.MAIL_PASS }}
+        run: python3 read_email.py
+
       - name: Check all sources
         run: python3 run.py
 
@@ -67,7 +77,7 @@ jobs:
         run: |
           git config user.name  "flag-bot"
           git config user.email "flag-bot@users.noreply.github.com"
-          git add status.json cache.json history.jsonl
+          git add status.json cache.json history.jsonl email-orders.json
           if git diff --staged --quiet; then
             echo "No change."
           else
