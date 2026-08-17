@@ -199,3 +199,7 @@
 {"at": "2026-08-17T16:21:23+00:00", "state": "AL", "status": "unknown", "reason": null}
 {"at": "2026-08-17T16:21:23+00:00", "state": "FL", "status": "unknown", "reason": null}
 {"at": "2026-08-17T16:21:23+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-08-17T16:53:58+00:00", "state": "FL", "status": "full", "reason": null}
+{"at": "2026-08-17T16:53:58+00:00", "state": "NC", "status": "full", "reason": null}
+{"at": "2026-08-17T16:53:58+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-08-17T16:53:58+00:00", "state": "OR", "status": "full", "reason": null}
