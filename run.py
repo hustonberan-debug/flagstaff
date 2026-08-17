@@ -41,7 +41,7 @@ import parsers as P
 # Bump whenever parsing logic changes. A cache keyed only on page content is
 # wrong when the CODE changes: identical pages produce stale verdicts computed
 # by the old parser. The key must be (content, code version).
-PARSER_VERSION = "18"
+PARSER_VERSION = "21"
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"
@@ -428,6 +428,12 @@ def check_state(rec, cache, session, verbose=False):
         # announces a January 2025 order; trusting it would mean half-staff
         # every day forever — a confident lie, which is worse than a gap.
         lastmod = P.page_last_modified(text)
+        if not lastmod:
+            # No date anywhere on the page means the freshness alarm cannot
+            # run. Say so rather than letting the state look guarded when it
+            # is not — an unverifiable source should be visibly unverifiable.
+            out["source_age_days"] = None
+            out["freshness_unknown"] = True
         if lastmod:
             age = (today() - lastmod).days
             out["source_last_modified"] = lastmod.isoformat()

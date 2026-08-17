@@ -223,6 +223,19 @@ LASTMOD_PATTERNS = [
 ]
 
 
+# "Aug. 15" / "July 29" — month and day with no year. Built on first use
+# because MONTH_RE is defined further down the module.
+_YEARLESS = None
+
+
+def yearless_re():
+    global _YEARLESS
+    if _YEARLESS is None:
+        _YEARLESS = re.compile(
+            r"\b(" + MONTH_RE + r")\.?\s+(\d{1,2})\b(?!\s*,?\s*20\d\d)", re.I)
+    return _YEARLESS
+
+
 def page_last_modified(html, headers=None):
     """Best available freshness signal for a page, or None."""
     if headers:
@@ -245,33 +258,109 @@ def page_last_modified(html, headers=None):
             d = parse_any_date(m.group(0))
             if d and (best is None or d > best):
                 best = d
+    if best:
+        return best
+
+    # Last resort: dates written without a year, e.g. Arizona's "Aug. 15".
+    # Only used for FRESHNESS, never for an order window — guessing a year on
+    # an order's end date could keep a state at half-staff for twelve months.
+    # Here the worst case is a page looking fresher or staler than it is, and
+    # having no signal at all is worse than an inferred one.
+    today = date.today()
+    for m in yearless_re().finditer(text):
+        try:
+            mo = _month_num(m.group(1))
+            day = int(m.group(2))
+        except (ValueError, TypeError):
+            continue
+        for yr in (today.year, today.year - 1):
+            try:
+                d = date(yr, mo, day)
+            except ValueError:
+                continue
+            # A date more than a month ahead is last year's, not next year's.
+            if (d - today).days > 31:
+                continue
+            if best is None or d > best:
+                best = d
+            break
     return best
+
+
+# A container whose class marks it as the flag-status widget. Oklahoma's
+# homepage carries two links to its flag pages: a live badge inside
+# <div class="text flag-status">, and a stale nav link in a list of
+# miscellaneous items whose own title attribute contradicts its text. Only the
+# first is a status; scoping to the container is what separates them.
+FLAG_WIDGET_RE = re.compile(
+    r"<([a-z]+)[^>]*class=[\"'][^\"']*flag[-_]status[^\"']*[\"'][^>]*>(.{0,3000}?)</\1>",
+    re.S | re.I)
+
+
+def _status_votes(fragment):
+    """Every independent half/full signal inside a fragment."""
+    votes = []
+    for m in re.finditer(r"href=[\"'][^\"']*flag[-_]?status[-_](half|full)",
+                         fragment, re.I):
+        votes.append(("href", m.group(1).lower()))
+    for m in re.finditer(r"flags?\s*status\s*[:\-–]?\s*(half|full)[-\s]?staff",
+                         strip_html(fragment), re.I):
+        votes.append(("text", m.group(1).lower()))
+    for m in re.finditer(r"(half|full)[-_]staff[^\"']*\.(?:png|jpg|svg|gif)",
+                         fragment, re.I):
+        votes.append(("image", m.group(1).lower()))
+    return votes
 
 
 def parse_toggle(html, base_url=None):
     """Two-static-page states (Oklahoma).
 
     The site serves flag-status-half.html and flag-status-full.html. Both
-    always exist and each always says its own name. The status is encoded in
-    WHICH ONE the site links to, so we read a hub page and look at the link,
-    not at the destination.
+    always exist and each always says its own name, so reading either one
+    directly returns a constant. The status is encoded in which one the live
+    badge points at.
 
     Returns (status, evidence).
     """
     text = html or ""
-    hrefs = re.findall(r'href=[\"\'"]([^\"\'"]*flag[-_]?status[^\"\'"]*)', text, re.I)
+
+    # Preferred: the badge container. Inside it, href, link text and image
+    # filename are three independent statements of the same fact — if they
+    # disagree, the widget is broken and we say so rather than pick one.
+    # If BOTH variants appear anywhere in the source, the page is shipping
+    # both and choosing one at render time. Oklahoma does exactly this: a
+    # widget whose href, text and image all said "half" while the site
+    # displayed full staff. Agreement inside one fragment proves nothing when
+    # its twin is sitting in the same document.
+    all_half = re.search(r"flag[-_]?status[-_]half", text, re.I)
+    all_full = re.search(r"flag[-_]?status[-_]full", text, re.I)
+    if all_half and all_full:
+        return UNKNOWN, ("both half and full variants present in the source; "
+                         "the visible one is chosen client-side")
+
+    for m in FLAG_WIDGET_RE.finditer(text):
+        votes = _status_votes(m.group(0))
+        if not votes:
+            continue
+        vals = {v for _, v in votes}
+        if len(vals) == 1:
+            val = vals.pop()
+            how = "+".join(sorted({k for k, _ in votes}))
+            return (HALF if val == "half" else FULL,
+                    f"flag-status widget ({how} all say {val})")
+        return UNKNOWN, f"flag-status widget disagrees with itself: {votes}"
+
+    # Fallback: no widget container. Only usable if exactly one of the two
+    # pages is linked anywhere.
+    hrefs = re.findall(r"href=[\"']([^\"']*flag[-_]?status[^\"']*)", text, re.I)
     half = [h for h in hrefs if re.search(r"[-_]half", h, re.I)]
     full = [h for h in hrefs if re.search(r"[-_]full", h, re.I)]
-
-    # Exactly one of the two should be linked. Both or neither means the page
-    # is a directory listing rather than a status indicator, and we say so
-    # instead of picking one.
     if half and not full:
-        return HALF, f"site links to {half[0]}"
+        return HALF, f"only half page linked: {half[0]}"
     if full and not half:
-        return FULL, f"site links to {full[0]}"
+        return FULL, f"only full page linked: {full[0]}"
     if half and full:
-        return UNKNOWN, "both half and full pages linked - not a status signal"
+        return UNKNOWN, "both half and full pages linked, and no flag-status widget"
     return UNKNOWN, "no flag-status link found on this page"
 
 

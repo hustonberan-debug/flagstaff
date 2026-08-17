@@ -131,7 +131,7 @@
     "rss_verified": true,
     "rss_item_count": 10,
     "rss_evidence": "script parsed live feed items",
-    "ingest_mode": "archive",
+    "ingest_mode": "diff",
     "cms": "Drupal",
     "js_blocked": true,
     "signature_check_required": false,
@@ -151,13 +151,18 @@
     "stale": true,
     "methods_disagree": false,
     "confidence_source": "cowork, promoted by verified feed",
-    "confidence": "low",
+    "confidence": "medium",
     "confidence_caps": [
       "last order 517d old"
     ],
-    "buildable": false,
+    "buildable": true,
     "expected_status_text": "Flags are at half-staff today.",
-    "blocked_reason": "Source page has been frozen since January 2025 \u2014 it still announces the Jimmy Carter order. Would report half-staff every day. Needs a human check before enabling."
+    "blocked_reason": "Source page has been frozen since January 2025 \u2014 it still announces the Jimmy Carter order. Would report half-staff every day. Needs a human check before enabling.",
+    "url_candidates": [
+      "https://az.gov/half-staff-notices",
+      "https://www.az.gov/half-staff-notices",
+      "https://azgovernor.gov/office-arizona-governor/half-staff-notices"
+    ]
   },
   {
     "state": "California",
@@ -726,7 +731,7 @@
       "cowork",
       "script"
     ],
-    "flag_page_url": "https://gov.louisiana.gov/page/flag-status-half-staff",
+    "flag_page_url": "https://gov.louisiana.gov/page/flag-status",
     "press_url": "https://gov.louisiana.gov/news",
     "signup_url": null,
     "root_domain": "gov.louisiana.gov",
@@ -734,7 +739,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "toggle",
+    "ingest_mode": "diff",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -757,10 +762,9 @@
     "confidence": "medium",
     "confidence_caps": [],
     "buildable": true,
-    "toggle_hub_url": "https://gov.louisiana.gov/",
     "url_candidates": [
-      "https://gov.louisiana.gov/",
-      "https://gov.louisiana.gov/index.cfm/newsroom"
+      "https://gov.louisiana.gov/page/flag-status",
+      "https://gov.louisiana.gov/index.cfm/page/flag-status"
     ]
   },
   {
@@ -1253,7 +1257,11 @@
       "no usable ingest path"
     ],
     "buildable": false,
-    "blocked_reason": "BLOCKED on every route tried. www.nh.gov/flag-status -- which DOES exist and is a genuine dedicated flag page per search results, and which the previous pass never found -- returned an EMPTY BODY. www.governor.nh.gov/news likewise returned "
+    "blocked_reason": "BLOCKED on every route tried. www.nh.gov/flag-status -- which DOES exist and is a genuine dedicated flag page per search results, and which the previous pass never found -- returned an EMPTY BODY. www.governor.nh.gov/news likewise returned ",
+    "notification_channel": {
+      "type": "mailing_list",
+      "detail": "https://maillist.nh.gov/list/nhgov/?p=subscribe&id=6"
+    }
   },
   {
     "state": "New Jersey",
@@ -1458,7 +1466,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "toggle",
+    "ingest_mode": "none",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1478,14 +1486,15 @@
     "stale": false,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "medium",
+    "confidence": "low",
     "confidence_caps": [],
-    "buildable": true,
+    "buildable": false,
     "toggle_hub_url": "https://oklahoma.gov/governor.html",
     "url_candidates": [
       "https://oklahoma.gov/governor.html",
       "https://oklahoma.gov/governor/newsroom.html"
-    ]
+    ],
+    "blocked_reason": "Homepage contains BOTH half-staff and full-staff indicators; which one is shown is decided client-side. Static HTML gave a confidently wrong answer. Needs a rendered fetch or an official notification channel."
   },
   {
     "state": "Oregon",
