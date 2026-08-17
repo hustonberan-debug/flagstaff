@@ -545,7 +545,8 @@
     "buildable": true,
     "notification_channel": {
       "type": "govdelivery",
-      "detail": "public.govdelivery.com/accounts/IDITS/subscriber/new?topic_id=IDITS_152 -- a FLAG-SPECIFIC topic, linked from the flag page as 'Sign up for Flag Notifications'"
+      "detail": "https://public.govdelivery.com/accounts/IDITS/subscriber/new",
+      "account": "IDITS"
     },
     "expected_status_text": "Flag at full staff"
   },
@@ -710,7 +711,13 @@
     "confidence_source": "cowork (researched)",
     "confidence": "medium",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "https://public.govdelivery.com/accounts/KYGOV/subscriber/new",
+      "account": "KYGOV"
+    },
+    "expected_sender_domain": "subscriptions.kentucky.gov"
   },
   {
     "state": "Louisiana",
@@ -918,7 +925,13 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "https://public.govdelivery.com/accounts/MIEOG/subscriber/new",
+      "account": "MIEOG"
+    },
+    "expected_sender_domain": "govsubscriptions.michigan.gov"
   },
   {
     "state": "Minnesota",
@@ -1000,7 +1013,13 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "https://public.govdelivery.com/accounts/MOOA/subscriber/new",
+      "account": "MOOA"
+    },
+    "expected_sender_domain": "mooa.dmarc.public.govdelivery.com"
   },
   {
     "state": "Mississippi",
@@ -2000,7 +2019,8 @@
     "buildable": false,
     "notification_channel": {
       "type": "govdelivery",
-      "detail": "GovDelivery account WYGOV is confirmed to exist and to carry flag bulletins (observed bulletin URL shape content.govdelivery.com/accounts/WYGOV/bulletins/...). I did NOT fetch a subscribe URL, so no signup link is recorded here."
+      "detail": "https://public.govdelivery.com/accounts/WYGOV/subscriber/new",
+      "account": "WYGOV"
     },
     "blocked_reason": "BLOCKED, client-side rendering. governor.wyo.gov/flag-status and governor.wyo.gov/media/news-releases BOTH returned only <head> metadata and an empty body -- and both returned the identical generic title 'Wyoming Governor Mark Gordon' with "
   }

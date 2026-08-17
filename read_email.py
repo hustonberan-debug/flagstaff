@@ -68,6 +68,11 @@ STATES = {
 # far safer than guessing from body text, because a Wyoming bulletin can
 # easily mention another state in passing.
 SENDER_HINTS = {
+    # Observed on real bulletins from this project's inbox. These cannot be
+    # learned from a signup page — GovDelivery accounts configure their own
+    # sending subdomains — so they are recorded only after a message arrived.
+    "subscriptions.kentucky.gov": "KY",
+    "govsubscriptions.michigan.gov": "MI",
     "wyo.gov": "WY", "wyoming.gov": "WY",
     "mt.gov": "MT", "montana.gov": "MT",
     "nh.gov": "NH",
@@ -90,6 +95,13 @@ def load_seen():
         return json.load(open(OUTPUT)).get("channels_seen", {}) or {}
     except Exception:
         return {}
+
+
+# Senders that are never a state bulletin. Google's security mail trips the
+# flag regex on stray wording in its body and then clutters the unattributed
+# report, which is where genuinely unmapped states need to be visible.
+IGNORE_SENDERS = ("accounts.google.com", "no-reply@google.com",
+                  "mail-noreply@google.com", "googlemail.com")
 
 
 def decoded(value):
@@ -134,7 +146,25 @@ def body_text(msg):
     return plain if len(plain) >= len(html_text) else html_text
 
 
-def state_from(sender, subject, body, allowed):
+# GovDelivery embeds the account slug in the sending subdomain and in its
+# List-* headers: MOOA mail arrives from mooa.dmarc.public.govdelivery.com.
+# Since the registry already records each state's account, that turns into a
+# general attribution rule instead of a hand-maintained domain list.
+GOVDELIVERY_ACCOUNTS = {}
+
+
+def load_govdelivery_accounts(reg):
+    """account slug -> state code, from notification_channel URLs."""
+    for r in reg:
+        nc = r.get("notification_channel") or {}
+        detail = nc.get("detail") or ""
+        m = re.search(r"/accounts/([A-Za-z0-9_-]+)/", detail)
+        if m:
+            GOVDELIVERY_ACCOUNTS[m.group(1).lower()] = r["state_code"]
+    return GOVDELIVERY_ACCOUNTS
+
+
+def state_from(sender, subject, body, allowed, headers=None):
     """(code, how) or (None, reason).
 
     Sender domain first — it is an identity, not a mention. Falling back to
@@ -145,6 +175,17 @@ def state_from(sender, subject, body, allowed):
     for domain, code in SENDER_HINTS.items():
         if domain in s and (not allowed or code in allowed):
             return code, f"sender domain {domain}"
+
+    # GovDelivery account slug, from the sending subdomain or the List-*
+    # headers it always sets. This resolves the generic
+    # "public.govdelivery.com" senders that carry no state in the domain.
+    hay = s + " " + " ".join((headers or {}).values()).lower()
+    for slug, code in GOVDELIVERY_ACCOUNTS.items():
+        if not slug:
+            continue
+        if re.search(r"\b" + re.escape(slug) + r"\b", hay) and \
+                (not allowed or code in allowed):
+            return code, f"govdelivery account {slug.upper()}"
 
     # Fall back to a state named in the SUBJECT only, and only if exactly one
     # candidate matches. Ambiguity means we do not know.
@@ -161,13 +202,19 @@ def state_from(sender, subject, body, allowed):
 def parse_message(msg, allowed):
     subject = decoded(msg.get("Subject"))
     sender = decoded(msg.get("From"))
+    low = sender.lower()
+    if any(x in low for x in IGNORE_SENDERS):
+        return None, "not flag-related"
     body = body_text(msg)
     blob = f"{subject}\n{body}"
 
     if not P.FLAG_RE.search(blob):
         return None, "not flag-related"
 
-    code, how = state_from(sender, subject, body, allowed)
+    hdrs = {k: str(msg.get(k) or "") for k in
+            ("List-Id", "List-Unsubscribe", "Return-Path", "Sender",
+             "X-Original-Sender", "Reply-To")}
+    code, how = state_from(sender, subject, body, allowed, hdrs)
     if not code:
         return None, how
 
@@ -233,6 +280,7 @@ def main():
             d = (r.get("expected_sender_domain") or "").strip().lower()
             if d:
                 SENDER_HINTS[d] = r["state_code"]
+        load_govdelivery_accounts(reg)
     except Exception:
         allowed = set()
 
@@ -270,7 +318,11 @@ def main():
                 if "no state identified" in why:
                     frm = decoded(msg.get("From"))
                     dom = frm.split("@")[-1].strip("> ").lower() if "@" in frm else frm
-                    unattributed[dom] = unattributed.get(dom, 0) + 1
+                    entry = unattributed.setdefault(dom, {"count": 0, "subjects": []})
+                    entry["count"] += 1
+                    subj = decoded(msg.get("Subject"))[:70]
+                    if subj and subj not in entry["subjects"]:
+                        entry["subjects"].append(subj)
             continue
         seen[rec["state_code"]] = rec.get("sent_date") or seen.get(rec["state_code"])
         code = rec["state_code"]
@@ -293,8 +345,10 @@ def main():
 
     if unattributed:
         print("\n  Flag mail we could not attribute to a state:")
-        for dom, n in sorted(unattributed.items(), key=lambda x: -x[1]):
-            print(f"    {n:3d}  from {dom}")
+        for dom, e in sorted(unattributed.items(), key=lambda x: -x[1]["count"]):
+            print(f"    {e['count']:3d}  {dom}")
+            for sj in e["subjects"][:2]:
+                print(f"         \"{sj}\"")
         print("  -> add these to expected_sender_domain in registry.json")
 
     if args.dry_run:
