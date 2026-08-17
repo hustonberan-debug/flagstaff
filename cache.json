@@ -1,20 +1,20 @@
 {
-  "_parser_version": "15",
+  "_parser_version": "18",
   "AL": {
     "hash": "0fd0758cff2ed548",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-08-15T04:36:14+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
     "last_changed_at": null
   },
   "CA": {
     "hash": "3712a0e69850ad43",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-15T04:36:14+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-15T04:36:14+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
   "DC": {
     "hash": "d5f18102a2bc121d",
@@ -28,9 +28,25 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-15T04:36:14+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-15T04:36:14+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
+  },
+  "CO": {
+    "hash": "39115882509bdb4c",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": null
+  },
+  "HI": {
+    "hash": "fef6ba955f61e9ed",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
   "AK": {
     "hash": "b0cbfd6597c73e91",
@@ -44,113 +60,33 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-15T04:36:14+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-15T04:36:14+00:00"
-  },
-  "HI": {
-    "hash": "fef6ba955f61e9ed",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-16T03:43:16+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-16T03:43:16+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
   "IA": {
     "hash": "5e47b69ffc733aab",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-15T20:17:07+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-15T20:17:07+00:00"
-  },
-  "FL": {
-    "hash": "592e298047afb953",
-    "state_status": "full",
-    "state_order": {
-      "title": null,
-      "url": "https://www.flgov.com/eog/info/flag-information",
-      "status": "full",
-      "authority": "governor",
-      "evidence": "declaration: 'Flag Status: Full Staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-16T20:45:48+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-16T20:45:48+00:00"
-  },
-  "CO": {
-    "hash": "39115882509bdb4c",
-    "state_status": "unknown",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:14+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": null
-  },
-  "AR": {
-    "hash": "7f6d36db0a8ad7d2",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:14+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-15T04:36:14+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
   "GA": {
     "hash": "bd858c5ce6e33690",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-15T04:36:14+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-15T04:36:14+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
-  "ME": {
-    "hash": "72f3122dbe767c76",
+  "AR": {
+    "hash": "7f6d36db0a8ad7d2",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-15T04:36:15+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:15+00:00"
-  },
-  "MD": {
-    "hash": "634e285cda4cc5b8",
-    "state_status": "unknown",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:15+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:15+00:00"
-  },
-  "KY": {
-    "hash": "60f3712a492810d2",
-    "state_status": "unknown",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:15+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-15T04:36:15+00:00"
-  },
-  "LA": {
-    "hash": "786329ff9e041495",
-    "state_status": "unknown",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:15+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:15+00:00"
-  },
-  "ID": {
-    "hash": "3f5ffd8e0bce1001",
-    "state_status": "half",
-    "state_order": {
-      "title": null,
-      "url": "https://gov.idaho.gov/flag-status/",
-      "status": "half",
-      "authority": "governor",
-      "evidence": "declaration: 'flags to be flown at half-staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-15T04:36:14+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-15T04:36:14+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
   "DE": {
     "hash": "0d9e3eff037b05f1",
@@ -164,97 +100,65 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-15T04:36:14+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-15T04:36:14+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
-  "IN": {
-    "hash": "3a5df0a1e80ba867",
+  "KY": {
+    "hash": "60f3712a492810d2",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-08-16T04:31:06+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-16T04:31:06+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
+  },
+  "LA": {
+    "hash": "786329ff9e041495",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
+  },
+  "MD": {
+    "hash": "634e285cda4cc5b8",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
+  },
+  "ME": {
+    "hash": "72f3122dbe767c76",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
   "NC": {
     "hash": "288b18993a591f1e",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-15T04:36:15+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:15+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
-  "NE": {
-    "hash": "734b11536af6c29f",
-    "state_status": "full",
+  "IN": {
+    "hash": "b60837c798219e2b",
+    "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-08-15T04:36:15+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:15+00:00"
-  },
-  "NV": {
-    "hash": "5a0ea2f14337b5f8",
-    "state_status": "full",
-    "state_order": {
-      "title": null,
-      "url": "https://www.gov.nv.gov/constituent-services/flag-status/",
-      "status": "full",
-      "authority": "governor",
-      "evidence": "declaration: 'Flags at Full-Staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-17T00:58:12+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-17T00:58:12+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
   "MO": {
     "hash": "9addb1003e7e3996",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-15T04:36:15+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:15+00:00"
-  },
-  "OK": {
-    "hash": "851b9c9791c7b0ec",
-    "state_status": "unknown",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
-  },
-  "ND": {
-    "hash": "c1766bb5889b1952",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:15+00:00",
-    "last_checked": "2026-08-16T23:42:35+00:00",
-    "last_changed_at": "2026-08-15T04:36:15+00:00"
-  },
-  "NJ": {
-    "hash": "0c57d776f0639905",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:15+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:15+00:00"
-  },
-  "SC": {
-    "hash": "852ccee39f6bd9b4",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
-  },
-  "RI": {
-    "hash": "9e1f52df71e34959",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
   "MI": {
     "hash": "6b955c96f116a26d",
@@ -268,25 +172,9 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-15T04:36:15+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:15+00:00"
-  },
-  "OH": {
-    "hash": "aea5ba112940324d",
-    "state_status": "full",
-    "state_order": {
-      "title": null,
-      "url": "https://governor.ohio.gov/flag-honors",
-      "status": "full",
-      "authority": "governor",
-      "evidence": "declaration: 'Flag Status Full Staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
   "MS": {
     "hash": "5d3807e73d3e5a23",
@@ -300,129 +188,65 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-16T05:22:43+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-16T05:22:43+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
-  "NM": {
-    "hash": "5e7102280be410f1",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
-  },
-  "UT": {
-    "hash": "23adc4f038e95c3f",
+  "ID": {
+    "hash": "3f5ffd8e0bce1001",
     "state_status": "half",
     "state_order": {
       "title": null,
-      "url": "https://governor.utah.gov/flag-status",
+      "url": "https://gov.idaho.gov/flag-status/",
       "status": "half",
       "authority": "governor",
-      "evidence": "declaration: 'are currently at Half Staff'",
+      "evidence": "declaration: 'flags to be flown at half-staff'",
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:13+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
+  },
+  "NE": {
+    "hash": "734b11536af6c29f",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
+  },
+  "ND": {
+    "hash": "c1766bb5889b1952",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
+  },
+  "OK": {
+    "hash": "851b9c9791c7b0ec",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
   },
   "CT": {
     "hash": "d470710f072c446c",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-16T21:43:12+00:00",
-    "last_checked": "2026-08-17T00:58:11+00:00",
-    "last_changed_at": "2026-08-16T21:43:12+00:00"
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   },
-  "WA": {
-    "hash": "bcaa29590d408e27",
+  "RI": {
+    "hash": "9e1f52df71e34959",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-16T22:45:50+00:00",
-    "last_checked": "2026-08-17T00:58:13+00:00",
-    "last_changed_at": "2026-08-16T22:45:50+00:00"
-  },
-  "WV": {
-    "hash": "e91923bde825821e",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T17:16:34+00:00",
-    "last_checked": "2026-08-17T00:58:13+00:00",
-    "last_changed_at": "2026-08-15T17:16:34+00:00"
-  },
-  "TN": {
-    "hash": "3228b365df5b4da2",
-    "state_status": "unknown",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:13+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
-  },
-  "VA": {
-    "hash": "f4e5e7e99aae7800",
-    "state_status": "full",
-    "state_order": {
-      "title": null,
-      "url": "https://www.governor.virginia.gov/constituent-services/flag-information/",
-      "status": "full",
-      "authority": "governor",
-      "evidence": "declaration: 'National Flag: Full Staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-16T04:31:07+00:00",
-    "last_checked": "2026-08-17T00:58:13+00:00",
-    "last_changed_at": "2026-08-16T04:31:07+00:00"
-  },
-  "SD": {
-    "hash": "f36283032308baf1",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
-  },
-  "VT": {
-    "hash": "1e48f33811a65aa4",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:13+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
-  },
-  "OR": {
-    "hash": "b1fab6d6028709d3",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
-  },
-  "WI": {
-    "hash": "95a77d65587aada9",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-15T04:36:17+00:00",
-    "last_checked": "2026-08-16T23:42:36+00:00",
-    "last_changed_at": "2026-08-15T04:36:17+00:00"
-  },
-  "TX": {
-    "hash": "dfc79024e44defef",
-    "state_status": "full",
-    "state_order": {
-      "title": null,
-      "url": "https://gov.texas.gov/flag-status",
-      "status": "full",
-      "authority": "governor",
-      "evidence": "declaration: 'Flag Status: Full-Staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:13+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
   },
   "PA": {
     "hash": "66392dd50b78e1d1",
@@ -436,8 +260,192 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-15T04:36:16+00:00",
-    "last_checked": "2026-08-17T00:58:12+00:00",
-    "last_changed_at": "2026-08-15T04:36:16+00:00"
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "NJ": {
+    "hash": "0c57d776f0639905",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "OH": {
+    "hash": "aea5ba112940324d",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://governor.ohio.gov/flag-honors",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status Full Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "TN": {
+    "hash": "3228b365df5b4da2",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "SC": {
+    "hash": "852ccee39f6bd9b4",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "NV": {
+    "hash": "0a3a99a62e82005b",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://www.gov.nv.gov/constituent-services/flag-status/",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flags at Full-Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "UT": {
+    "hash": "23adc4f038e95c3f",
+    "state_status": "half",
+    "state_order": {
+      "title": null,
+      "url": "https://governor.utah.gov/flag-status",
+      "status": "half",
+      "authority": "governor",
+      "evidence": "declaration: 'are currently at Half Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "VT": {
+    "hash": "1e48f33811a65aa4",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "WA": {
+    "hash": "bcaa29590d408e27",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "VA": {
+    "hash": "f4e5e7e99aae7800",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://www.governor.virginia.gov/constituent-services/flag-information/",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'National Flag: Full Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "WV": {
+    "hash": "e91923bde825821e",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "WI": {
+    "hash": "95a77d65587aada9",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "SD": {
+    "hash": "f36283032308baf1",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "OR": {
+    "hash": "b1fab6d6028709d3",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "NM": {
+    "hash": "5e7102280be410f1",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "MN": {
+    "hash": "2ed25a8477421472",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
+  },
+  "TX": {
+    "hash": "dfc79024e44defef",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://gov.texas.gov/flag-status",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status: Full-Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-17T02:10:00+00:00",
+    "last_checked": "2026-08-17T02:10:00+00:00",
+    "last_changed_at": "2026-08-17T02:10:00+00:00"
+  },
+  "FL": {
+    "hash": "5e9a671ae154fd40",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://www.flgov.com/eog/info/flag-information",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status: Full Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-17T02:09:59+00:00",
+    "last_checked": "2026-08-17T02:09:59+00:00",
+    "last_changed_at": "2026-08-17T02:09:59+00:00"
   }
 }
