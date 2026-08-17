@@ -228,3 +228,5 @@
 {"at": "2026-08-17T22:49:13+00:00", "state": "AL", "status": "unknown", "reason": null}
 {"at": "2026-08-17T22:49:13+00:00", "state": "FL", "status": "full", "reason": null}
 {"at": "2026-08-17T22:49:13+00:00", "state": "IN", "status": "unknown", "reason": null}
+{"at": "2026-08-17T23:18:24+00:00", "state": "AK", "status": "full", "reason": null}
+{"at": "2026-08-17T23:18:24+00:00", "state": "OR", "status": "full", "reason": null}
