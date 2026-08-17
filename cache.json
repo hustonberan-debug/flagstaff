@@ -5,7 +5,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T15:48:59+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T15:48:59+00:00"
   },
   "AL": {
@@ -13,7 +13,7 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-17T20:20:25+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": null
   },
   "AK": {
@@ -29,7 +29,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T03:08:13+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T03:08:13+00:00"
   },
   "DC": {
@@ -45,7 +45,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T03:08:13+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T03:08:13+00:00"
   },
   "AZ": {
@@ -61,7 +61,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T03:08:13+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T03:08:13+00:00"
   },
   "FL": {
@@ -77,7 +77,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T16:53:54+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T16:53:54+00:00"
   },
   "HI": {
@@ -85,7 +85,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T05:07:41+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T05:07:41+00:00"
   },
   "IA": {
@@ -93,7 +93,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:14+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T03:08:14+00:00"
   },
   "AR": {
@@ -101,7 +101,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:13+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T03:08:13+00:00"
   },
   "CO": {
@@ -109,7 +109,7 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-17T18:31:33+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": null
   },
   "LA": {
@@ -125,7 +125,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T03:08:14+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T03:08:14+00:00"
   },
   "ME": {
@@ -133,7 +133,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:14+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T03:08:14+00:00"
   },
   "MD": {
@@ -141,7 +141,7 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:14+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T03:08:14+00:00"
   },
   "GA": {
@@ -149,7 +149,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T19:23:49+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T19:23:49+00:00"
   },
   "ID": {
@@ -165,7 +165,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T03:08:14+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T03:08:14+00:00"
   },
   "IN": {
@@ -173,11 +173,11 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-17T20:20:26+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T20:20:26+00:00"
   },
   "DE": {
-    "hash": "0d48496aa01878e8",
+    "hash": "5bb20c386e05920e",
     "state_status": "full",
     "state_order": {
       "title": null,
@@ -188,16 +188,16 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-17T15:48:59+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
-    "last_changed_at": "2026-08-17T15:48:59+00:00"
+    "last_parsed": "2026-08-17T20:52:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
+    "last_changed_at": "2026-08-17T20:52:25+00:00"
   },
   "MO": {
     "hash": "9addb1003e7e3996",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:14+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T03:08:14+00:00"
   },
   "NC": {
@@ -205,7 +205,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T16:53:55+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T16:53:55+00:00"
   },
   "NE": {
@@ -213,7 +213,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:15+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T03:08:15+00:00"
   },
   "MI": {
@@ -229,7 +229,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T03:08:14+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T03:08:14+00:00"
   },
   "ND": {
@@ -237,11 +237,11 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:15+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T03:08:15+00:00"
   },
   "NV": {
-    "hash": "73c9dcc8ec6d6246",
+    "hash": "6d8153bd2f5759c9",
     "state_status": "half",
     "state_order": {
       "title": null,
@@ -252,16 +252,16 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-17T20:20:26+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
-    "last_changed_at": "2026-08-17T20:20:26+00:00"
+    "last_parsed": "2026-08-17T20:52:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
+    "last_changed_at": "2026-08-17T20:52:26+00:00"
   },
   "KY": {
     "hash": "60f3712a492810d2",
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:14+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T03:08:14+00:00"
   },
   "MS": {
@@ -277,7 +277,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T05:07:42+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T05:07:42+00:00"
   },
   "SC": {
@@ -285,7 +285,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:15+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T03:08:15+00:00"
   },
   "NJ": {
@@ -293,7 +293,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T19:23:50+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T19:23:50+00:00"
   },
   "RI": {
@@ -301,7 +301,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T15:20:17+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T15:20:17+00:00"
   },
   "CT": {
@@ -309,7 +309,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T17:21:32+00:00",
-    "last_checked": "2026-08-17T20:20:25+00:00",
+    "last_checked": "2026-08-17T20:52:25+00:00",
     "last_changed_at": "2026-08-17T17:21:32+00:00"
   },
   "OH": {
@@ -325,7 +325,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T20:20:26+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T20:20:26+00:00"
   },
   "UT": {
@@ -341,7 +341,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T03:08:16+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T03:08:16+00:00"
   },
   "PA": {
@@ -357,7 +357,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T03:08:15+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T03:08:15+00:00"
   },
   "NM": {
@@ -365,7 +365,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:15+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T03:08:15+00:00"
   },
   "WV": {
@@ -373,7 +373,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T17:21:35+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T17:21:35+00:00"
   },
   "WA": {
@@ -381,7 +381,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:16+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T03:08:16+00:00"
   },
   "TN": {
@@ -389,7 +389,7 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:15+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T03:08:15+00:00"
   },
   "VT": {
@@ -397,7 +397,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:16+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T03:08:16+00:00"
   },
   "VA": {
@@ -413,7 +413,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T04:11:37+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T04:11:37+00:00"
   },
   "SD": {
@@ -421,7 +421,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:15+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T03:08:15+00:00"
   },
   "OR": {
@@ -429,7 +429,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T16:53:56+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T16:53:56+00:00"
   },
   "MN": {
@@ -437,7 +437,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:14+00:00",
-    "last_checked": "2026-08-17T20:20:26+00:00",
+    "last_checked": "2026-08-17T20:52:26+00:00",
     "last_changed_at": "2026-08-17T03:08:14+00:00"
   },
   "WI": {
@@ -445,7 +445,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-17T03:08:16+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T03:08:16+00:00"
   },
   "TX": {
@@ -461,7 +461,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-17T03:08:15+00:00",
-    "last_checked": "2026-08-17T20:20:27+00:00",
+    "last_checked": "2026-08-17T20:52:27+00:00",
     "last_changed_at": "2026-08-17T03:08:15+00:00"
   }
 }
