@@ -664,9 +664,14 @@
     "buildable": true,
     "notification_channel": {
       "type": "govdelivery",
-      "detail": "public.govdelivery.com/accounts/KSOG/subscriber/new -- linked from the flag page as 'Sign-up here to be notified when the Governor orders flags to half-staff'"
+      "detail": "https://public.govdelivery.com/accounts/KSOG/subscriber/new"
     },
-    "expected_status_text": "Flag Status: Full-Staff"
+    "expected_status_text": "Flag Status: Full-Staff",
+    "url_candidates": [
+      "https://www.governor.ks.gov/newsroom/kansas-flag-honors",
+      "https://governor.kansas.gov/newsroom/kansas-flag-honors/",
+      "https://www.governor.ks.gov/newsroom/kansas-flag-honors/"
+    ]
   },
   {
     "state": "Kentucky",
@@ -834,7 +839,8 @@
     "confidence_caps": [
       "last order 336d old"
     ],
-    "buildable": true
+    "buildable": true,
+    "blocked_reason": "Press page is JavaScript-rendered; listings are absent from the HTML response. Needs a feed, an API, or a browser-based fetch."
   },
   {
     "state": "Maine",
@@ -922,14 +928,14 @@
       "script"
     ],
     "flag_page_url": "https://mn.gov/governor/newsroom/flag-status/index.jsp",
-    "press_url": "https://mn.gov/governor/newsroom/press-releases/index.jsp",
+    "press_url": "https://mn.gov/governor/newsroom/flag-status/",
     "signup_url": "https://mn.gov/governor/connect/flag-status/index.jsp",
     "root_domain": "mn.gov",
     "rss_url": "https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp",
     "rss_verified": true,
     "rss_item_count": null,
     "rss_evidence": "cowork verified",
-    "ingest_mode": "archive",
+    "ingest_mode": "feed",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -949,10 +955,13 @@
     "stale": false,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "low",
+    "confidence": "high",
     "confidence_caps": [],
-    "buildable": false,
-    "blocked_reason": "Radware bot-detection captcha. Do not scrape. Use the state's GovDelivery notification subscription instead."
+    "buildable": true,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "https://mn.gov/governor/connect/flag-status/"
+    }
   },
   {
     "state": "Missouri",
@@ -1494,7 +1503,7 @@
     "stale": false,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "high",
+    "confidence": "medium",
     "confidence_caps": [],
     "buildable": true,
     "url_candidates": [

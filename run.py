@@ -41,11 +41,12 @@ import parsers as P
 # Bump whenever parsing logic changes. A cache keyed only on page content is
 # wrong when the CODE changes: identical pages produce stale verdicts computed
 # by the old parser. The key must be (content, code version).
-PARSER_VERSION = "15"
+PARSER_VERSION = "18"
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"
 CALENDAR = "statutory-calendar.json"
+EMAIL_ORDERS = "email-orders.json"
 OUTPUT = "status.json"
 HISTORY = "history.jsonl"
 
@@ -277,6 +278,8 @@ def federal_proclamation(session, cache):
 
 def pick_url(rec):
     mode = rec.get("ingest_mode")
+    if mode == "email":
+        return None                 # nothing to fetch; the state emails us
     if mode == "toggle":
         # Read the hub page, not the status pages. The signal is which of the
         # two static pages the site links to.
@@ -313,6 +316,56 @@ def check_state(rec, cache, session, verbose=False):
         "error": None,
     }
 
+    # --- email mode: read what the state sent us, not what its site serves --
+    if rec.get("ingest_mode") == "email":
+        mail = load_json(EMAIL_ORDERS, {})
+        inbox = mail.get("orders", {})
+        seen = mail.get("channels_seen", {})
+        o = inbox.get(code)
+        out["source_url"] = (rec.get("notification_channel") or {}).get("detail")
+
+        if not o:
+            # Silence means two very different things, and they must not share
+            # a value. A channel that has delivered before and is quiet today
+            # is telling us there is no order. A channel we have never heard
+            # from might simply not be working — an unconfirmed signup, a
+            # spam-foldered bulletin, a sender domain we cannot attribute.
+            # Reporting FULL on that is claiming knowledge we do not have.
+            if code in seen:
+                out["state_status"] = P.FULL
+                out["coverage"] = "covered"
+                out["channel_last_heard"] = seen.get(code)
+            else:
+                out["state_status"] = P.UNKNOWN
+                out["coverage"] = "not_covered"
+                out["error"] = ("subscription pending - no bulletin received "
+                                "from this channel yet")
+            out["last_changed_at"] = prev.get("last_changed_at")
+            return code, out, dict(prev, last_checked=out["checked_at"])
+        v, why = covers_today(o.get("start_date"), o.get("end_date"), today())
+        if v:
+            out["state_status"] = P.HALF
+            out["state_order"] = {
+                "title": o.get("subject"), "url": out["source_url"],
+                "status": P.HALF, "authority": o.get("authority"),
+                "start_date": o.get("start_date"), "end_date": o.get("end_date"),
+                "until_noon": o.get("until_noon"), "coverage_reason": why,
+                "via": "official notification email",
+            }
+        else:
+            out["state_status"] = P.FULL
+        h = content_hash(json.dumps(o, sort_keys=True))
+        out["changed"] = bool(prev.get("hash")) and prev["hash"] != h
+        if out["changed"] or not prev.get("hash"):
+            out["last_changed_at"] = out["checked_at"]
+        else:
+            out["last_changed_at"] = prev.get("last_changed_at")
+        return code, out, {"hash": h, "state_status": out["state_status"],
+                           "state_order": out["state_order"],
+                           "last_parsed": out["checked_at"],
+                           "last_checked": out["checked_at"],
+                           "last_changed_at": out["last_changed_at"]}
+
     if not rec.get("buildable"):
         out.update(coverage="not_covered",
                    error="no verified source for this jurisdiction")
@@ -321,6 +374,20 @@ def check_state(rec, cache, session, verbose=False):
     url = pick_url(rec)
     out["source_url"] = url
     text, err = fetch(url, session)
+
+    # Some states 403 one hostname and serve another perfectly well. Try the
+    # recorded alternates rather than writing the state off on one failure.
+    if err and rec.get("url_candidates"):
+        for alt in rec["url_candidates"]:
+            if alt == url:
+                continue
+            text, err2 = fetch(alt, session)
+            if not err2 and text:
+                url, err = alt, None
+                out["source_url"] = alt
+                out["used_alternate_url"] = True
+                break
+
     if err:
         # Keep serving the last known good value, but mark it stale so the UI
         # can show its age. A fetch failure is not evidence of full-staff.
