@@ -208,3 +208,5 @@
 {"at": "2026-08-17T17:21:42+00:00", "state": "CT", "status": "full", "reason": null}
 {"at": "2026-08-17T17:21:42+00:00", "state": "WV", "status": "full", "reason": null}
 {"at": "2026-08-17T17:54:44+00:00", "state": "NV", "status": "half", "reason": "State order"}
+{"at": "2026-08-17T18:31:38+00:00", "state": "CO", "status": "unknown", "reason": null}
+{"at": "2026-08-17T18:31:38+00:00", "state": "NV", "status": "half", "reason": "State order"}
