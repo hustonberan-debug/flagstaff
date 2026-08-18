@@ -459,6 +459,12 @@ HALF_SIGNALS = [
     r"\bhalf[-\s]?(?:staff|mast)\b",
     r"\bflags?\s+(?:are|is|will\s+be|shall\s+be)\s+lowered\b",
     r"\blower(?:ed|ing)?\s+the\s+flags?\b",
+    # "Gov. Whitmer Lowers Flags to Honor Detroit Fire Fighter Patrick Trout"
+    # is a real half-staff headline that never uses the words "half-staff".
+    # Without this the order is read as flag-related but statusless, and
+    # dropped — which is exactly how Michigan was missed on a live order.
+    r"\blower(?:s|ed|ing)?\s+(?:the\s+)?flags?\b",
+    r"\bflags?\s+lowered\b",
 ]
 
 # Phrases that indicate the flag is UP.

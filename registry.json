@@ -900,14 +900,14 @@
       "script"
     ],
     "flag_page_url": "https://www.michigan.gov/whitmer/news/flag-honors",
-    "press_url": "https://www.michigan.gov/whitmer/news/press-releases",
+    "press_url": "https://www.michigan.gov/whitmer/news/flag-honors",
     "signup_url": "https://public.govdelivery.com/accounts/MIEOG/subscriber/new?topic_id=MIEOG_13",
     "root_domain": "michigan.gov",
     "rss_url": null,
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "diff",
+    "ingest_mode": "email",
     "cms": null,
     "js_blocked": true,
     "signature_check_required": false,
@@ -927,7 +927,7 @@
     "stale": false,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "high",
+    "confidence": "medium",
     "confidence_caps": [],
     "buildable": true,
     "notification_channel": {
@@ -935,7 +935,11 @@
       "detail": "https://public.govdelivery.com/accounts/MIEOG/subscriber/new",
       "account": "MIEOG"
     },
-    "expected_sender_domain": "govsubscriptions.michigan.gov"
+    "expected_sender_domain": "govsubscriptions.michigan.gov",
+    "url_candidates": [
+      "https://www.michigan.gov/whitmer/news/flag-honors",
+      "https://www.michigan.gov/whitmer/news"
+    ]
   },
   {
     "state": "Minnesota",

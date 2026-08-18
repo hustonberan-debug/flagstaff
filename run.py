@@ -31,6 +31,7 @@ import concurrent.futures as cf
 import hashlib
 import json
 import os
+import re
 import sys
 from datetime import date, datetime, timedelta, timezone
 
@@ -41,7 +42,7 @@ import parsers as P
 # Bump whenever parsing logic changes. A cache keyed only on page content is
 # wrong when the CODE changes: identical pages produce stale verdicts computed
 # by the old parser. The key must be (content, code version).
-PARSER_VERSION = "21"
+PARSER_VERSION = "22"
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"
@@ -522,6 +523,32 @@ def check_state(rec, cache, session, verbose=False):
             # classifier correctly refuses to guess when it sees both. That
             # turned real orders into UNKNOWN and dropped them.
             rec_o = P.extract_order(i["title"], i["url"], i["title"])
+
+            # A flag headline that does not state its status is common:
+            # "Gov. Whitmer Lowers Flags to Honor Detroit Fire Fighter
+            # Patrick Trout" never says half-staff. When that happens, read
+            # the OPENING of the order, which almost always says it outright
+            # ("...to be lowered to half-staff on Tuesday, August 18").
+            #
+            # Only the first few sentences, not the whole body: further down,
+            # a release routinely mentions returning to full staff, and the
+            # classifier correctly refuses to choose when it sees both.
+            if rec_o["status"] == P.UNKNOWN and i.get("url") and i["url"] != url:
+                art, _ = fetch(i["url"], session)
+                if art:
+                    opening = " ".join(
+                        re.split(r"(?<=[.!?])\s+", P.strip_html(art))[:3])[:700]
+                    st2, ev2 = P.classify_status(opening)
+                    if st2 != P.UNKNOWN:
+                        rec_o["status"] = st2
+                        rec_o["status_evidence"] = f"from order body: {ev2}"
+                        a2, aev2 = P.classify_authority(opening)
+                        if a2 != P.UNKNOWN:
+                            rec_o["authority"] = a2
+                            rec_o["authority_evidence"] = aev2
+                        rec_o["usable_as_state_order"] = (
+                            st2 == P.HALF and rec_o["authority"] == P.GOVERNOR)
+
             if rec_o["status"] != P.HALF:
                 continue
             # A capitol-only or single-county order is not a statewide

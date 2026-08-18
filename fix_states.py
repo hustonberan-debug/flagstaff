@@ -45,6 +45,20 @@ CHANNELS = {
     "ID": ("IDITS", None),
 }
 
+# Channels that are NOT GovDelivery, so the account-slug trick does not apply.
+# These attribute on sender domain alone, which means the domain has to be
+# confirmed from a real bulletin before the state can be trusted.
+OTHER_CHANNELS = {
+    "NH": {
+        "type": "mailing_list",
+        "detail": "https://maillist.nh.gov/list/nhgov/?p=subscribe&id=6",
+        # maillist.nh.gov is the list host; mail may well arrive as nh.gov or
+        # something else entirely. Left unset on purpose — a guessed sender
+        # domain does not fail safely, it files another state's order here.
+        "sender_domain": None,
+    },
+}
+
 CHANGES = {
     "OH": {
         "ingest_mode": "diff",
@@ -59,6 +73,14 @@ CHANGES = {
         "ingest_mode": "diff",
         "flag_page_url": "https://governor.utah.gov/flag-status",
         "_note": "declarative status page, was wrongly on feed mode",
+    },
+    "AZ": {
+        # Declarative status page with a dated order list. Reads
+        # "Flags are at full staff." plus recent orders. Fetching has 403'd,
+        # so alternates are supplied and the email channel is the fallback.
+        "ingest_mode": "diff",
+        "flag_page_url": "https://az.gov/half-staff-notices",
+        "_note": "current status page; verify freshness alarm covers it",
     },
     "VA": {
         # Virginia publishes a dated current-status page:
@@ -113,27 +135,47 @@ for r in reg:
         changed.append("TN: press_url -> " + TN_CANDIDATES[0])
 
     if code == "OK":
-        # Oklahoma serves flag-status-half.html and flag-status-full.html.
-        # Both always exist; each always says its own name. Reading either
-        # directly gives a constant. The signal is which one the governor's
-        # page links to, so we read the hub and follow the link.
-        r["ingest_mode"] = "toggle"
-        r["toggle_hub_url"] = "https://oklahoma.gov/governor.html"
-        r["url_candidates"] = ["https://oklahoma.gov/governor.html",
-                               "https://oklahoma.gov/governor/newsroom.html"]
-        r["confidence"] = "medium"
-        changed.append("OK: mode -> toggle (two-page status, read the hub link)")
+        # NOT SOLVABLE FROM STATIC HTML, and this was proven the hard way.
+        #
+        # oklahoma.gov/governor.html carries a badge inside
+        # <div class="text flag-status"> whose href, link text and image
+        # filename ALL said "half" — and the site was displaying full staff at
+        # the same moment. The page evidently ships both variants in the
+        # markup and decides client-side which to show, so agreement among
+        # three signals in the source proves nothing about what a visitor
+        # sees.
+        #
+        # A parser that reads that markup returns a confident wrong answer,
+        # which is worse than the gap it replaces. Oklahoma stays uncovered
+        # until there is a source that can actually be read: a rendered-page
+        # fetch, an official feed, or a notification subscription.
+        r["ingest_mode"] = "none"
+        r["buildable"] = False
+        r["confidence"] = "low"
+        r["blocked_reason"] = (
+            "Homepage contains BOTH half-staff and full-staff indicators; "
+            "which one is shown is decided client-side. Static HTML gave a "
+            "confidently wrong answer. Needs a rendered fetch or an official "
+            "notification channel.")
+        changed.append("OK: disabled - static HTML cannot determine status")
 
     if code == "LA":
-        # /page/flag-status-half-staff is a permanent page, not a status. It
-        # reads "Half Staff" every day of the year. Louisiana works like
-        # Oklahoma: two pages, and the menu link is the actual signal.
-        r["ingest_mode"] = "toggle"
-        r["toggle_hub_url"] = "https://gov.louisiana.gov/"
-        r["url_candidates"] = ["https://gov.louisiana.gov/",
-                               "https://gov.louisiana.gov/index.cfm/newsroom"]
+        # The registry pointed at /page/flag-status-half-staff — a permanent
+        # page whose PATH encodes the answer, so it read "half staff" every
+        # day forever. Toggle mode was a workaround for that.
+        #
+        # /page/flag-status is the real status page: one URL, content changes.
+        # With a proper source the workaround is not needed, so LA goes back
+        # to plain diff mode and the freshness alarm guards it like any other.
+        r["ingest_mode"] = "diff"
+        r["flag_page_url"] = "https://gov.louisiana.gov/page/flag-status"
+        r["url_candidates"] = [
+            "https://gov.louisiana.gov/page/flag-status",
+            "https://gov.louisiana.gov/index.cfm/page/flag-status",
+        ]
+        r.pop("toggle_hub_url", None)
         r["confidence"] = "medium"
-        changed.append("LA: mode -> toggle (URL encoded the status, always read half)")
+        changed.append("LA: toggle -> diff on the real /page/flag-status URL")
 
     if code in CHANNELS:
         slug, domain = CHANNELS[code]
@@ -146,6 +188,41 @@ for r in reg:
             r["expected_sender_domain"] = domain
         changed.append(f"{code}: GovDelivery {slug}"
                        + (f" (sends from {domain})" if domain else ""))
+
+    if code in OTHER_CHANNELS:
+        ch = OTHER_CHANNELS[code]
+        r["notification_channel"] = {"type": ch["type"], "detail": ch["detail"]}
+        if ch.get("sender_domain"):
+            r["expected_sender_domain"] = ch["sender_domain"]
+        changed.append(f"{code}: {ch['type']} channel recorded "
+                       f"(sender domain unknown until first bulletin)")
+
+    if code == "MI":
+        # EMAIL, not scraping. Michigan's own page reported "Full Staff" in
+        # unmaintained image alt text during a live half-staff order, and its
+        # headline ("Gov. Whitmer Lowers Flags to Honor...") never contains
+        # the words half-staff. The GovDelivery bulletin said it outright and
+        # arrived the day before.
+        #
+        # When a state emails you the fact directly, that beats inferring it
+        # from a page the state does not keep current. The newsroom stays as
+        # the fallback URL if the channel ever goes quiet.
+        r["ingest_mode"] = "email"
+        r["press_url"] = "https://www.michigan.gov/whitmer/news/flag-honors"
+        r["url_candidates"] = [
+            "https://www.michigan.gov/whitmer/news/flag-honors",
+            "https://www.michigan.gov/whitmer/news",
+        ]
+        r["confidence"] = "medium"
+        changed.append("MI: -> email mode (channel delivered a live order the page missed)")
+
+    if code == "AZ":
+        r["url_candidates"] = [
+            "https://az.gov/half-staff-notices",
+            "https://www.az.gov/half-staff-notices",
+            "https://azgovernor.gov/office-arizona-governor/half-staff-notices",
+        ]
+        changed.append("AZ: re-enabled as diff mode (page is current, not frozen)")
 
     if code == "KS":
         # 403s even with full browser headers. Try alternates before falling
