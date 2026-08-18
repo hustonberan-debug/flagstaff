@@ -233,3 +233,5 @@
 {"at": "2026-08-17T23:46:34+00:00", "state": "AL", "status": "unknown", "reason": null}
 {"at": "2026-08-17T23:46:34+00:00", "state": "MD", "status": "unknown", "reason": null}
 {"at": "2026-08-17T23:46:34+00:00", "state": "NV", "status": "half", "reason": "State order"}
+{"at": "2026-08-18T00:56:57+00:00", "state": "AL", "status": "unknown", "reason": null}
+{"at": "2026-08-18T00:56:57+00:00", "state": "NV", "status": "full", "reason": null}
