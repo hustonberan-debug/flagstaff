@@ -272,3 +272,9 @@
 {"at": "2026-08-18T14:28:29+00:00", "state": "AR", "status": "full", "reason": null}
 {"at": "2026-08-18T14:28:29+00:00", "state": "DE", "status": "full", "reason": null}
 {"at": "2026-08-18T14:28:29+00:00", "state": "NC", "status": "full", "reason": null}
+{"at": "2026-08-18T15:03:31+00:00", "state": "AL", "status": "unknown", "reason": null}
+{"at": "2026-08-18T15:03:31+00:00", "state": "CA", "status": "full", "reason": null}
+{"at": "2026-08-18T15:03:31+00:00", "state": "DE", "status": "full", "reason": null}
+{"at": "2026-08-18T15:03:31+00:00", "state": "FL", "status": "full", "reason": null}
+{"at": "2026-08-18T15:03:31+00:00", "state": "ME", "status": "full", "reason": null}
+{"at": "2026-08-18T15:03:31+00:00", "state": "NV", "status": "full", "reason": null}
