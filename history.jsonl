@@ -383,3 +383,10 @@
 {"at": "2026-08-19T20:21:00+00:00", "state": "AL", "status": "unknown", "reason": null}
 {"at": "2026-08-19T20:21:00+00:00", "state": "IN", "status": "unknown", "reason": null}
 {"at": "2026-08-19T20:21:00+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-08-19T20:52:57+00:00", "state": "AL", "status": "unknown", "reason": null}
+{"at": "2026-08-19T20:52:57+00:00", "state": "AR", "status": "full", "reason": null}
+{"at": "2026-08-19T20:52:57+00:00", "state": "HI", "status": "full", "reason": null}
+{"at": "2026-08-19T20:52:57+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-08-19T20:52:57+00:00", "state": "RI", "status": "full", "reason": null}
+{"at": "2026-08-19T20:52:57+00:00", "state": "TN", "status": "unknown", "reason": null}
+{"at": "2026-08-19T20:52:57+00:00", "state": "FL", "status": "full", "reason": null}
