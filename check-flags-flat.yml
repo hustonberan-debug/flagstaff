@@ -143,13 +143,26 @@ jobs:
                   "reason": st.get("reason"),
                   "url": "https://halfstaffnow.com/",
               }).encode()
+              # urllib sends "Python-urllib/3.x" by default, which
+              # Cloudflare's bot protection rejects with 403 before the
+              # request ever reaches the Worker. A named User-Agent gets
+              # through and also makes the traffic identifiable in logs.
               req = urllib.request.Request(
                   url.rstrip("/") + "/notify", data=payload,
                   headers={"Content-Type": "application/json",
-                          "Authorization": f"Bearer {secret}"})
+                           "Authorization": f"Bearer {secret}",
+                           "User-Agent": "halfstaffnow-pipeline/1.0 "
+                                         "(+https://halfstaffnow.com)",
+                           "Accept": "application/json"})
               try:
                   with urllib.request.urlopen(req, timeout=15) as r:
                       print(code, r.read().decode())
+              except urllib.error.HTTPError as e:
+                  # Print the body: the Worker explains itself, and a bare
+                  # status code costs a round trip to diagnose.
+                  body = e.read().decode(errors="replace")[:200]
+                  print(f"::warning::notify failed for {code}: "
+                        f"HTTP {e.code} {body}")
               except Exception as e:
                   print(f"::warning::notify failed for {code}: {e}")
           if not changed:
