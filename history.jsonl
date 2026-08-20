@@ -436,3 +436,7 @@
 {"at": "2026-08-20T12:37:38+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-08-20T12:37:38+00:00", "state": "MN", "status": "full", "reason": null}
 {"at": "2026-08-20T13:42:02+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-08-20T14:31:53+00:00", "state": "CA", "status": "full", "reason": null}
+{"at": "2026-08-20T14:31:53+00:00", "state": "LA", "status": "half", "reason": "State order"}
+{"at": "2026-08-20T14:31:53+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-08-20T14:31:53+00:00", "state": "MN", "status": "full", "reason": null}
