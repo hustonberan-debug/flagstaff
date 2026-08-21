@@ -524,3 +524,8 @@
 {"at": "2026-08-21T15:06:05+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-08-21T15:57:57+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-08-21T15:57:57+00:00", "state": "MN", "status": "full", "reason": null}
+{"at": "2026-08-21T16:37:28+00:00", "state": "DE", "status": "full", "reason": null}
+{"at": "2026-08-21T16:37:28+00:00", "state": "IN", "status": "unknown", "reason": null}
+{"at": "2026-08-21T16:37:28+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-08-21T16:37:28+00:00", "state": "MN", "status": "full", "reason": null}
+{"at": "2026-08-21T16:37:28+00:00", "state": "TX", "status": "full", "reason": null}
