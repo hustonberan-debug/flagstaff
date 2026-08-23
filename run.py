@@ -42,7 +42,7 @@ import parsers as P
 # Bump whenever parsing logic changes. A cache keyed only on page content is
 # wrong when the CODE changes: identical pages produce stale verdicts computed
 # by the old parser. The key must be (content, code version).
-PARSER_VERSION = "22"
+PARSER_VERSION = "23"
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"

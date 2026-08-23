@@ -781,14 +781,23 @@ def parse_archive(html, base_url=None):
 # ---------------------------------------------------------------------------
 
 def parse_index(html, base_url=None):
-    """Press index -> candidate flag orders from headline text."""
+    """Press index -> ALL headlines, each marked with is_flag.
+
+    Returns every headline, not just flag ones, to match parse_feed and
+    parse_archive. That consistency matters more than it looks: callers use
+    "did this page yield any items at all?" to tell a readable page with no
+    orders apart from a page they could not read.
+
+    Returning only flag headlines made those two cases identical — an empty
+    list. Every index-mode state with no current order was reported UNKNOWN
+    instead of FULL, which is 18 of the 51 and included Nebraska sitting at
+    "confidence: high" while parsing nothing.
+    """
     cands = []
     for m in HEADLINE_RE.finditer(html or ""):
         block = m.group(0)
         text = strip_html(block)
         if not text or len(text) < 12 or len(text) > 300:
-            continue
-        if not FLAG_RE.search(text):
             continue
         href = HREF_RE.search(block)
         d = parse_any_date(text)
@@ -796,7 +805,7 @@ def parse_index(html, base_url=None):
             "title": text[:200],
             "url": _abs(href.group(1), base_url) if href else base_url,
             "date": d.isoformat() if d else None,
-            "is_flag": True,
+            "is_flag": bool(FLAG_RE.search(text)),
         })
     return dedupe_orders(cands)
 
