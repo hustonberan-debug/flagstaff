@@ -450,7 +450,21 @@ function stateFromCoords(lat,lon){
   return {code:best, ambiguous:hits.length>1, candidates:hits};
 }
 
-let DATA=null, current='NE';
+/* The chosen state must survive a reload. Without this the app reset to a
+   hardcoded default on every visit: a subscriber in Texas would reopen it and
+   be shown Nebraska, and — worse — the "Add [state]" button follows the
+   dropdown, so they could subscribe to the wrong state by accident.
+
+   Browser storage is wrapped because Safari throws on access in private
+   browsing rather than returning null, which would break the whole page. */
+const STORE_KEY='flagstaff.state';
+function saveState(code){
+  try{ localStorage.setItem(STORE_KEY, code); }catch(_){}
+}
+function loadState(){
+  try{ return localStorage.getItem(STORE_KEY); }catch(_){ return null; }
+}
+let DATA=null, current=loadState()||'NE';
 
 /* --- Rendering --------------------------------------------------------- */
 function setFlag(status){
@@ -583,8 +597,10 @@ function buildSelect(){
   const codes=Object.keys(DATA.states||{}).sort();
   sel.innerHTML=codes.map(c=>
     `<option value="${c}"${c===current?' selected':''}>${DATA.states[c].state||c}</option>`).join('');
-  sel.onchange=()=>{current=sel.value;render();renderFederal();renderSubs()};
-  if(!DATA.states[current] && codes.length){current=codes[0];sel.value=current}
+  sel.onchange=()=>{current=sel.value;saveState(current);render();renderFederal();renderSubs()};
+  if(!DATA.states[current] && codes.length){
+    current=codes[0]; sel.value=current; saveState(current);
+  }
 }
 
 document.getElementById('locate').onclick=function(){
@@ -594,8 +610,9 @@ document.getElementById('locate').onclick=function(){
   navigator.geolocation.getCurrentPosition(p=>{
     const r=stateFromCoords(p.coords.latitude,p.coords.longitude);
     if(r.code && DATA.states[r.code]){
-      current=r.code;document.getElementById('state').value=r.code;
-      render();renderFederal();
+      current=r.code;saveState(current);
+      document.getElementById('state').value=r.code;
+      render();renderFederal();renderSubs();
       // Near a state line the rectangles overlap and we genuinely cannot
       // tell. Say so and let the person correct it, rather than quietly
       // showing another state's flag status.
