@@ -702,3 +702,9 @@
 {"at": "2026-08-24T15:34:25+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-08-24T15:34:25+00:00", "state": "WV", "status": "full", "reason": null}
 {"at": "2026-08-24T15:34:25+00:00", "state": "MN", "status": "full", "reason": null}
+{"at": "2026-08-24T16:31:02+00:00", "state": "DE", "status": "full", "reason": null}
+{"at": "2026-08-24T16:31:02+00:00", "state": "MD", "status": "full", "reason": null}
+{"at": "2026-08-24T16:31:02+00:00", "state": "IN", "status": "full", "reason": null}
+{"at": "2026-08-24T16:31:02+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-08-24T16:31:02+00:00", "state": "MN", "status": "full", "reason": null}
+{"at": "2026-08-24T16:31:02+00:00", "state": "UT", "status": "half", "reason": "State order"}
