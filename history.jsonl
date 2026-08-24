@@ -720,3 +720,5 @@
 {"at": "2026-08-24T18:42:18+00:00", "state": "CT", "status": "full", "reason": null}
 {"at": "2026-08-24T19:24:42+00:00", "state": "FL", "status": "full", "reason": null}
 {"at": "2026-08-24T19:24:42+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-08-24T19:53:59+00:00", "state": "FL", "status": "unknown", "reason": null}
+{"at": "2026-08-24T19:53:59+00:00", "state": "NV", "status": "full", "reason": null}
