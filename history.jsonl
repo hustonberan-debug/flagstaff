@@ -818,3 +818,8 @@
 {"at": "2026-08-25T21:22:25+00:00", "state": "MN", "status": "full", "reason": null}
 {"at": "2026-08-25T21:52:49+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-08-25T21:52:49+00:00", "state": "MN", "status": "full", "reason": null}
+{"at": "2026-08-25T22:21:20+00:00", "state": "AK", "status": "unknown", "reason": null}
+{"at": "2026-08-25T22:21:20+00:00", "state": "NV", "status": "half", "reason": "State order"}
+{"at": "2026-08-25T22:21:20+00:00", "state": "ND", "status": "half", "reason": "Armstrong directs flags at half-staff in remembrance of country music icon Dolly Parton"}
+{"at": "2026-08-25T22:21:20+00:00", "state": "WV", "status": "half", "reason": "Governor Morrisey Orders Flags Lowered to Honor Dolly Parton"}
+{"at": "2026-08-25T22:21:20+00:00", "state": "MN", "status": "full", "reason": null}
