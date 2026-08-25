@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T19:27:20+00:00",
+  "generated_at": "2026-08-25T19:55:42+00:00",
   "orders": {
     "MI": {
       "state_code": "MI",
@@ -13,10 +13,24 @@
       "end_date": null,
       "until_noon": false,
       "evidence": "Lowers Flags"
+    },
+    "KY": {
+      "state_code": "KY",
+      "identified_by": "sender domain subscriptions.kentucky.gov",
+      "status": "half",
+      "authority": "governor",
+      "subject": "Gov. Beshear Orders Flags Lowered to Half-Staff in Honor of Dolly Parton",
+      "from": "Governor's Communications Office <governor@subscriptions.kentucky.gov>",
+      "sent_date": "2026-08-25",
+      "start_date": "2026-08-25",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "to Half-Staff"
     }
   },
   "channels_seen": {
-    "MI": "2026-08-17"
+    "MI": "2026-08-17",
+    "KY": "2026-08-25"
   },
   "unattributed_senders": {}
 }
