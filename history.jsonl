@@ -810,3 +810,9 @@
 {"at": "2026-08-25T20:24:19+00:00", "state": "WV", "status": "full", "reason": null}
 {"at": "2026-08-25T20:54:55+00:00", "state": "DC", "status": "half", "reason": "State order"}
 {"at": "2026-08-25T20:54:55+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-08-25T21:22:25+00:00", "state": "CA", "status": "full", "reason": null}
+{"at": "2026-08-25T21:22:25+00:00", "state": "MI", "status": "half", "reason": "RELEASE: Gov. Whitmer Lowers Flags to Honor Dolly Parton"}
+{"at": "2026-08-25T21:22:25+00:00", "state": "DE", "status": "full", "reason": null}
+{"at": "2026-08-25T21:22:25+00:00", "state": "ME", "status": "half", "reason": "Governor Mills Orders Flags Lowered in Honor of Dolly Parton"}
+{"at": "2026-08-25T21:22:25+00:00", "state": "NE", "status": "full", "reason": null}
+{"at": "2026-08-25T21:22:25+00:00", "state": "MN", "status": "full", "reason": null}

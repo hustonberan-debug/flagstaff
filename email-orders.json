@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-25T20:54:51+00:00",
+  "generated_at": "2026-08-25T21:22:21+00:00",
   "orders": {
     "MI": {
       "state_code": "MI",
       "identified_by": "sender domain govsubscriptions.michigan.gov",
       "status": "half",
       "authority": "governor",
-      "subject": "RELEASE: Gov. Whitmer Lowers Flags to Honor\u00a0Detroit\u00a0Fire\u00a0Fighter\u00a0Patrick Trout",
+      "subject": "RELEASE: Gov. Whitmer Lowers Flags to Honor Dolly Parton",
       "from": "Michigan Executive Office of the Governor <mieog@govsubscriptions.michigan.gov>",
-      "sent_date": "2026-08-17",
-      "start_date": "2026-08-17",
+      "sent_date": "2026-08-25",
+      "start_date": "2026-08-25",
       "end_date": null,
       "until_noon": false,
       "evidence": "Lowers Flags"
@@ -26,11 +26,25 @@
       "end_date": null,
       "until_noon": false,
       "evidence": "to Half-Staff"
+    },
+    "MO": {
+      "state_code": "MO",
+      "identified_by": "sender domain mooa.dmarc.public.govdelivery.com",
+      "status": "half",
+      "authority": "unknown",
+      "subject": "President Trump ordered all U.S. flags to half-staff August 25, 2026 - September 1, 2026 to honor Dolly Parton.",
+      "from": "Missouri OA \u2013 Facilities Management, Design & Construction <missourioa@mooa.dmarc.public.govdelivery.com>",
+      "sent_date": "2026-08-25",
+      "start_date": "2026-08-25",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "to half-staff"
     }
   },
   "channels_seen": {
-    "MI": "2026-08-17",
-    "KY": "2026-08-25"
+    "MI": "2026-08-25",
+    "KY": "2026-08-25",
+    "MO": "2026-08-25"
   },
   "unattributed_senders": {}
 }
