@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T18:05:23+00:00",
+  "generated_at": "2026-08-26T18:14:09+00:00",
   "date": "2026-08-26",
   "federal": {
     "status": "half",
@@ -11,7 +11,7 @@
     "start_date": "2026-08-25",
     "end_date": "2026-09-01",
     "coverage_reason": "window 2026-08-25..2026-09-01",
-    "_changed": true
+    "_changed": false
   },
   "states": {
     "AK": {
@@ -23,12 +23,10 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://gov.alaska.gov/services/status-of-the-flag/",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
-      "error": "authority unproven (president); not claimed as state order",
-      "source_last_modified": "2026-08-25",
-      "source_age_days": 1,
+      "error": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -43,24 +41,22 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "AL": {
       "state": "Alabama",
       "state_code": "AL",
-      "coverage": "stale",
+      "coverage": "covered",
       "ingest_mode": "diff",
       "confidence": "high",
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governor.alabama.gov/flag-status/",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": null,
       "changed": false,
-      "error": "source appears frozen: newest date on page is 2019-12-10 (2451d old) - not trusted",
-      "source_last_modified": "2019-12-10",
-      "source_age_days": 2451,
+      "error": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -75,7 +71,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "AR": {
@@ -87,15 +83,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.arkansas.gov/newsroom/",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": {
-        "title": "Sanders Orders Flags to Half-Staff on August 7, 2026",
-        "url": "https://governor.arkansas.gov/news_post/sanders-orders-flags-to-half-staff-on-august-7-2026/",
-        "why": "started 2026-08-07, no end date, 19d old, presumed concluded"
-      },
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -110,7 +101,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "AZ": {
@@ -130,12 +121,10 @@
         "end_date": null
       },
       "source_url": "https://az.gov/half-staff-notices",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-09-01",
-      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -150,7 +139,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "CA": {
@@ -162,11 +151,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.gov.ca.gov/feed/",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -181,24 +169,22 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "CO": {
       "state": "Colorado",
       "state_code": "CO",
-      "coverage": "stale",
+      "coverage": "covered",
       "ingest_mode": "diff",
       "confidence": "high",
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governorsoffice.colorado.gov/governor/flag-status",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": null,
       "changed": false,
-      "error": "source appears frozen: newest date on page is 2007-06-29 (6998d old) - not trusted",
-      "source_last_modified": "2007-06-29",
-      "source_age_days": 6998,
+      "error": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -213,7 +199,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "CT": {
@@ -225,11 +211,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://portal.ct.gov/governor/news/press-releases",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -244,7 +229,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "DC": {
@@ -264,12 +249,10 @@
         "end_date": null
       },
       "source_url": "https://os.dc.gov/service/flag-status",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-09-01",
-      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -284,7 +267,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "DE": {
@@ -304,9 +287,9 @@
         "end_date": null
       },
       "source_url": "https://news.delaware.gov/flag-status/",
-      "checked_at": "2026-08-26T18:05:18+00:00",
-      "last_changed_at": "2026-08-26T18:05:18+00:00",
-      "changed": false,
+      "checked_at": "2026-08-26T18:13:36+00:00",
+      "last_changed_at": "2026-08-26T18:13:36+00:00",
+      "changed": true,
       "error": null,
       "source_last_modified": "2026-08-25",
       "source_age_days": 1,
@@ -324,7 +307,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "FL": {
@@ -344,12 +327,10 @@
         "end_date": null
       },
       "source_url": "https://www.flgov.com/eog/info/flag-information",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-09-01",
-      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -364,7 +345,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "GA": {
@@ -376,11 +357,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://gov.ga.gov/rss.xml",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -395,7 +375,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "HI": {
@@ -421,7 +401,7 @@
         "coverage_reason": "window 2026-08-25..2026-09-01"
       },
       "source_url": "https://governor.hawaii.gov/category/newsroom/feed/",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
@@ -439,7 +419,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "IA": {
@@ -465,7 +445,7 @@
         "coverage_reason": "order dated 2026-08-26"
       },
       "source_url": "https://governor.iowa.gov/news/all/all/all/rss.xml",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
@@ -483,7 +463,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "ID": {
@@ -503,12 +483,10 @@
         "end_date": null
       },
       "source_url": "https://gov.idaho.gov/flag-status/",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-08-26",
-      "source_age_days": 0,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -523,7 +501,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "IL": {
@@ -535,7 +513,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -553,7 +531,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "IN": {
@@ -579,7 +557,7 @@
         "coverage_reason": "order dated 2026-08-26"
       },
       "source_url": "https://events.in.gov/group/gov",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
@@ -597,7 +575,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "KS": {
@@ -609,7 +587,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.governor.ks.gov/newsroom/kansas-flag-honors",
-      "checked_at": "2026-08-26T18:05:18+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
@@ -627,7 +605,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "KY": {
@@ -639,12 +617,10 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governor.ky.gov/flag-status",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-09-11",
-      "source_age_days": -16,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -659,7 +635,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "LA": {
@@ -679,12 +655,10 @@
         "end_date": null
       },
       "source_url": "https://gov.louisiana.gov/page/flag-status",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "source_age_days": null,
-      "freshness_unknown": true,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -699,7 +673,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "MA": {
@@ -711,7 +685,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.mass.gov/info-details/flag-status",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:36+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
@@ -729,7 +703,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "MD": {
@@ -741,11 +715,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.maryland.gov/news/press-releases",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -760,7 +733,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "ME": {
@@ -786,7 +759,7 @@
         "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://www.maine.gov/governor/mills/newsroom",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
@@ -804,7 +777,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "MI": {
@@ -826,7 +799,7 @@
         "via": "official notification email"
       },
       "source_url": "https://public.govdelivery.com/accounts/MIEOG/subscriber/new",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
@@ -844,7 +817,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "MN": {
@@ -856,15 +829,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": {
-        "title": "Governor Walz Orders Flags at Half-Staff to Honor Leslie R. Washington",
-        "url": "https://mn.gov/governor/newsroom/flag-status/index.jsp?id=1055-763873",
-        "why": "started 2026-08-13, no end date, 13d old, presumed concluded"
-      },
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -879,7 +847,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "MO": {
@@ -905,7 +873,7 @@
         "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://oa.mo.gov/facilities/facilities-operations/flag-display/flag-notifications",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
@@ -923,7 +891,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "MS": {
@@ -943,12 +911,10 @@
         "end_date": null
       },
       "source_url": "https://governorreeves.ms.gov/flag-status/",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-08-25",
-      "source_age_days": 1,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -963,7 +929,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "MT": {
@@ -975,7 +941,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -993,7 +959,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "NC": {
@@ -1005,11 +971,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nc.gov/news/feed",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1024,7 +989,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "ND": {
@@ -1050,7 +1015,7 @@
         "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://www.governor.nd.gov/rss/news",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
@@ -1068,7 +1033,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "NE": {
@@ -1080,11 +1045,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nebraska.gov/press-releases",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1099,7 +1063,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "NH": {
@@ -1111,7 +1075,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -1129,7 +1093,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "NJ": {
@@ -1141,11 +1105,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://newjersey.gov/newsroom",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1160,7 +1123,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "NM": {
@@ -1172,15 +1135,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nm.gov/newsroom",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": {
-        "title": "Gov. Lujan Grisham orders flags to half-staff",
-        "url": "https://governor.nm.gov/newsroom/gov-lujan-grisham-orders-flags-to-half-staff-100004483",
-        "why": "started 2025-06-05, no end date, 447d old, presumed concluded"
-      },
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1195,7 +1153,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "NV": {
@@ -1215,9 +1173,9 @@
         "end_date": null
       },
       "source_url": "https://www.gov.nv.gov/constituent-services/flag-status/",
-      "checked_at": "2026-08-26T18:05:19+00:00",
-      "last_changed_at": "2026-08-26T18:05:19+00:00",
-      "changed": false,
+      "checked_at": "2026-08-26T18:13:37+00:00",
+      "last_changed_at": "2026-08-26T18:13:37+00:00",
+      "changed": true,
       "error": null,
       "source_last_modified": "2026-08-25",
       "source_age_days": 1,
@@ -1235,7 +1193,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "NY": {
@@ -1247,7 +1205,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.governor.ny.gov/news",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
@@ -1265,7 +1223,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "OH": {
@@ -1285,12 +1243,10 @@
         "end_date": null
       },
       "source_url": "https://governor.ohio.gov/flag-honors",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-09-01",
-      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1305,7 +1261,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "OK": {
@@ -1317,7 +1273,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -1335,7 +1291,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "OR": {
@@ -1361,7 +1317,7 @@
         "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:37+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
@@ -1379,7 +1335,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "PA": {
@@ -1399,12 +1355,10 @@
         "end_date": null
       },
       "source_url": "https://www.pa.gov/agencies/dgs/flag-notices.html",
-      "checked_at": "2026-08-26T18:05:19+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-09-01",
-      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1419,7 +1373,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "RI": {
@@ -1431,11 +1385,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.ri.gov/press-releases.xml",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1450,7 +1403,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "SC": {
@@ -1462,11 +1415,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.sc.gov/taxonomy/term/3/feed",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1481,7 +1433,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "SD": {
@@ -1493,11 +1445,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.sd.gov/news/press-releases.aspx",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1512,7 +1463,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "TN": {
@@ -1524,11 +1475,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.tn.gov/governor/news.html",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1543,7 +1493,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "TX": {
@@ -1563,12 +1513,10 @@
         "end_date": null
       },
       "source_url": "https://gov.texas.gov/flag-status",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-09-01",
-      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1583,7 +1531,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "UT": {
@@ -1603,12 +1551,10 @@
         "end_date": null
       },
       "source_url": "https://governor.utah.gov/flag-status",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-09-01",
-      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1623,7 +1569,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "VA": {
@@ -1643,12 +1589,10 @@
         "end_date": null
       },
       "source_url": "https://www.governor.virginia.gov/constituent-services/flag-information/",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "source_last_modified": "2026-08-26",
-      "source_age_days": 0,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1663,7 +1607,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "VT": {
@@ -1675,11 +1619,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.vermont.gov/taxonomy/term/3/feed",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1694,7 +1637,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "WA": {
@@ -1706,11 +1649,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.wa.gov/rss.xml",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1725,23 +1667,22 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "WI": {
       "state": "Wisconsin",
       "state_code": "WI",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "index",
       "confidence": "medium",
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.wi.gov/newsroom",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
-      "error": null,
-      "last_expired_order": null,
+      "error": "timeout",
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1756,7 +1697,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "WV": {
@@ -1782,7 +1723,7 @@
         "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://governor.wv.gov/rss.xml",
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:38+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
@@ -1800,7 +1741,7 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     },
     "WY": {
@@ -1812,7 +1753,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-08-26T18:05:20+00:00",
+      "checked_at": "2026-08-26T18:13:39+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -1830,15 +1771,15 @@
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
         "coverage_reason": "window 2026-08-25..2026-09-01",
-        "_changed": true
+        "_changed": false
       }
     }
   },
   "meta": {
-    "covered": 41,
+    "covered": 42,
     "not_covered": 8,
-    "stale": 2,
-    "errors": 11,
+    "stale": 1,
+    "errors": 9,
     "total": 51
   }
 }
