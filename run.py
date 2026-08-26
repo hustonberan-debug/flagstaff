@@ -42,7 +42,7 @@ import parsers as P
 # Bump whenever parsing logic changes. A cache keyed only on page content is
 # wrong when the CODE changes: identical pages produce stale verdicts computed
 # by the old parser. The key must be (content, code version).
-PARSER_VERSION = "23"
+PARSER_VERSION = "25"
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"
@@ -236,46 +236,138 @@ def federal_statutory(d):
     return None
 
 
-def federal_proclamation(session, cache):
-    """Active presidential half-staff proclamation, if any.
+# The White House proclamations listing. Presidential half-staff orders are
+# published here — and they are titled things like "Honoring the Victims of
+# the Tragedy in Minneapolis, Minnesota". The words "flag" and "half-staff"
+# appear nowhere in the title, only in the body. So this cannot be a headline
+# scan; each recent proclamation has to be opened and read.
+FEDERAL_SOURCES = [
+    "https://www.whitehouse.gov/presidential-actions/proclamations/",
+    "https://www.whitehouse.gov/presidential-actions/",
+]
+FEDERAL_LOOKBACK_DAYS = 21
 
-    NOTE: the source URL below is a placeholder and must be replaced with a
-    verified White House presidential-actions endpoint before this is trusted.
-    Until then it returns None and the federal layer relies on statute alone.
-    We return None rather than a guess, deliberately.
+# Titles that carry a half-staff order almost always take one of these forms.
+# Used only to prioritise which articles to open first, never to reject one.
+FEDERAL_TITLE_HINTS = re.compile(
+    r"honoring\s+the\s+(?:victims|memory|life)|in\s+memory\s+of|death\s+of"
+    r"|passing\s+of|tragedy|honoring\s+", re.I)
+
+
+def federal_proclamation(session, cache):
+    """Active presidential half-staff proclamation, or None.
+
+    Opens recent proclamations and reads their bodies. Article text is cached
+    by URL, so each proclamation is fetched exactly once ever — the listing is
+    the only thing re-fetched each run.
     """
-    url = os.environ.get("FEDERAL_PROCLAMATION_URL")
-    if not url:
+    url = os.environ.get("FEDERAL_PROCLAMATION_URL") or FEDERAL_SOURCES[0]
+    listing, err = fetch(url, session)
+    if err or not listing:
+        for alt in FEDERAL_SOURCES:
+            if alt == url:
+                continue
+            listing, err = fetch(alt, session)
+            if listing:
+                url = alt
+                break
+    if not listing:
+        print(f"  federal: could not fetch proclamations listing ({err})")
         return None
-    text, err = fetch(url, session)
-    if err or not text:
-        return None
-    h = content_hash(text)
-    if cache.get("_federal", {}).get("hash") == h:
-        return cache["_federal"].get("result")
-    orders = P.parse_index(text, url) or P.parse_feed(text, url)
-    for o in orders:
-        if not o.get("is_flag"):
+
+    items = P.parse_index(listing, url)
+    cutoff = today() - timedelta(days=FEDERAL_LOOKBACK_DAYS)
+
+    # Only proclamation article URLs, newest first, recent ones only.
+    cands = []
+    for i in items:
+        u = i.get("url") or ""
+        if "/presidential-actions/" not in u or u.rstrip("/").endswith(
+                ("presidential-actions", "proclamations")):
             continue
-        rec = P.extract_order(o["title"], o["url"], o["title"])
-        if rec["status"] == P.HALF:
-            result = {
-                "status": P.HALF,
-                "scope": "full-day",
-                "reason": o["title"],
-                "authority": "presidential proclamation",
-                "source_url": o["url"],
-                "end_date": rec["end_date"],
-            }
-            cache["_federal"] = {"hash": h, "result": result}
-            return result
-    cache["_federal"] = {"hash": h, "result": None}
+        d = None
+        m = re.search(r"/(20\d\d)/(\d{2})/", u)
+        if i.get("date"):
+            try:
+                d = date.fromisoformat(i["date"])
+            except ValueError:
+                d = None
+        if d is None and m:
+            try:
+                d = date(int(m.group(1)), int(m.group(2)), 1)
+            except ValueError:
+                d = None
+        if d and d < cutoff.replace(day=1):
+            continue
+        cands.append((d, i))
+
+    # Likely half-staff titles first, so the usual case costs one fetch.
+    cands.sort(key=lambda x: (not FEDERAL_TITLE_HINTS.search(x[1]["title"] or ""),
+                              -(x[0].toordinal() if x[0] else 0)))
+
+    art_cache = cache.setdefault("_federal_articles", {})
+    checked = 0
+    for d, i in cands:
+        if checked >= 12:
+            break
+        u = i["url"]
+        body = art_cache.get(u)
+        if body is None:
+            text, ferr = fetch(u, session)
+            if ferr or not text:
+                art_cache[u] = ""
+                continue
+            body = P.strip_html(text)[:6000]
+            art_cache[u] = body
+            checked += 1
+        if not body:
+            continue
+
+        m = P.FLAG_RE.search(body)
+        if not m:
+            continue
+
+        # Classify a window around the flag language, NOT the top of the page.
+        # whitehouse.gov article pages open with ~3000 characters of site
+        # navigation, so classifying body[:1500] classified a menu: the flag
+        # regex matched further down and the status came back unknown while
+        # a live national proclamation sat right there.
+        lo = max(0, m.start() - 300)
+        window = body[lo:m.start() + 2000]
+        status, sev = P.classify_status(window)
+        if status != P.HALF:
+            continue
+        auth, aev = P.classify_authority(window)
+        if auth == P.GOVERNOR:
+            continue          # a governor's order does not belong here
+        start, end = P.date_range(window)
+
+        # A proclamation usually states only its END ("...until sunset,
+        # August 31, 2026"). With no earlier date in the text, date_range
+        # returns that same date as the start too, which makes the order look
+        # like it has not begun yet — and the site keeps showing full staff
+        # through the entire order. If the only date we have is the end, the
+        # start is when it was published.
+        if start and end and start >= end:
+            start = d if (d and d < end) else None
+        v, why = covers_today(start.isoformat() if start else None,
+                              end.isoformat() if end else None, today())
+        if v is not True:
+            continue
+
+        return {
+            "status": P.HALF,
+            "scope": "until-noon" if P.until_noon(window) else "full-day",
+            "reason": i["title"],
+            "authority": "presidential proclamation",
+            "citation": None,
+            "source_url": u,
+            "start_date": start.isoformat() if start else None,
+            "end_date": end.isoformat() if end else None,
+            "coverage_reason": why,
+        }
     return None
 
-
-# ---------------------------------------------------------------------------
-# Per-state check
-# ---------------------------------------------------------------------------
 
 def pick_url(rec):
     mode = rec.get("ingest_mode")

@@ -507,6 +507,21 @@ function render(){
 
   nameEl.textContent=s.state||current;
 
+  // A presidential proclamation lowers flags in every state, including ones
+  // whose own source we cannot read. Showing "not covered" during a national
+  // order would be wrong in the worst direction — the answer is knowable and
+  // it is half-staff.
+  const fed = DATA.federal;
+  if(fed && s.coverage!=='covered'){
+    vEl.textContent = fed.scope==='until-noon' ? 'Half until noon' : 'Half-staff';
+    vEl.className='verdict half';
+    rEl.innerHTML = `<strong>By presidential proclamation</strong><br>${fed.reason||''}`;
+    recEl.innerHTML = `<span><span class="dot live"></span> national order in effect</span>`
+      + (fed.source_url?` <a href="${fed.source_url}" target="_blank" rel="noopener">official source &nearr;</a>`:'');
+    setFlag('half');
+    return;
+  }
+
   if(s.coverage==='not_covered'){
     vEl.textContent='Not covered'; vEl.className='verdict unknown';
     rEl.innerHTML=`<em>We don't have a verified official source for ${s.state} yet, so we won't guess. `
