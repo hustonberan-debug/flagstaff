@@ -1,36 +1,23 @@
 {
-  "_parser_version": "23",
-  "AZ": {
-    "hash": "13552ed2c6ecef74",
-    "state_status": "half",
-    "state_order": {
-      "title": null,
-      "url": "https://az.gov/half-staff-notices",
-      "status": "half",
-      "authority": "governor",
-      "evidence": "declaration: 'Flags are at half-staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-25T23:47:34+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-25T23:47:34+00:00"
+  "_federal_articles": {
+    "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/": "Honoring the Memory of Dolly Parton &#8211; The White House Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Ratepayer Protection Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Photo Gallery Video Library Livestream White House Wire Media Offenders Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions HONORING THE MEMORY OF DOLLY PARTON Proclamations August 25, 2026 BY THE PRESIDENT OF THE UNITED STATES OF AMERICA A PROCLAMATION As a mark of respect for the memory of Dolly Parton, I hereby order, by the authority vested in me by the Constitution and the laws of the United States of America, that the flag of the United States shall be flown at half-staff at the White House and upon all public buildings and grounds, at all military posts and naval stations, and on all naval vessels of the Federal Government in the District of Columbia and throughout the United States and its Territories and possessions until sunset, September 1, 2026. I also direct that the flag shall be flown at half\u2011staff for the same period at all United States embassies, legations, consular offices, and other facilities abroad, including all military facilities and naval vessels and stations. IN WITNESS WHEREOF, I have hereunto set my hand this twenty-fifth day of August, in the year of our Lord two thousand twenty-six, and of the Independence of the United States of America the two hundred and fifty-first. DONALD J. TRUMP Related Honoring the Memory of Charlie Kirk Presidential Actions , Proclamations September 10, 2025 Honoring the Memory of His Holiness Pope Francis Presidential Actions , Proclamations April 21, 2025 Honoring the Memory of Specialist Sarah Beckstrom, West Virginia Army National Guard Presidential Actions , Proclamations December 4, 2025 Honoring the Victims of the Tragedy in Minneapolis, Minnesota Presidential Actions , Proclamations August 27, 2025 Death of Senator Lindsey Graham Presidential Actions , Proclamations July 13, 2026 1 2 3 &hellip; 68 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Notifications"
   },
-  "AK": {
-    "hash": "f845b0691b383108",
-    "state_status": "unknown",
-    "state_order": null,
-    "last_parsed": "2026-08-25T22:21:17+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-25T22:21:17+00:00"
-  },
+  "_parser_version": "25",
   "AL": {
     "hash": "0fd0758cff2ed548",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-08-24T10:32:35+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
     "last_changed_at": null
+  },
+  "CA": {
+    "hash": "17c61d2a0e71f0cd",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
   },
   "DC": {
     "hash": "183f7746694b479a",
@@ -44,139 +31,41 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-25T20:54:51+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-25T20:54:51+00:00"
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
   },
-  "CA": {
-    "hash": "17c61d2a0e71f0cd",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-26T01:00:40+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-26T01:00:40+00:00"
-  },
-  "AR": {
-    "hash": "7c95ef3d60af5100",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-23T20:18:22+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-23T20:18:22+00:00"
+  "AZ": {
+    "hash": "13552ed2c6ecef74",
+    "state_status": "half",
+    "state_order": {
+      "title": null,
+      "url": "https://az.gov/half-staff-notices",
+      "status": "half",
+      "authority": "governor",
+      "evidence": "declaration: 'Flags are at half-staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
   },
   "CO": {
     "hash": "39115882509bdb4c",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-08-25T23:20:55+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
     "last_changed_at": null
   },
-  "FL": {
-    "hash": "5e9a671ae154fd40",
-    "state_status": "full",
-    "state_order": {
-      "title": null,
-      "url": "https://www.flgov.com/eog/info/flag-information",
-      "status": "full",
-      "authority": "governor",
-      "evidence": "declaration: 'Flag Status: Full Staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-25T20:24:15+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-25T20:24:15+00:00"
-  },
-  "IA": {
-    "hash": "5e47b69ffc733aab",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-23T20:18:22+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-23T20:18:22+00:00"
-  },
-  "DE": {
-    "hash": "75a053fb78a08a89",
-    "state_status": "half",
-    "state_order": {
-      "title": null,
-      "url": "https://news.delaware.gov/flag-status/",
-      "status": "half",
-      "authority": "governor",
-      "evidence": "declaration: 'Flag Status - HALF STAFF'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-26T01:00:40+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-26T01:00:40+00:00"
-  },
-  "LA": {
-    "hash": "ee739b557f5f11e4",
-    "state_status": "full",
-    "state_order": {
-      "title": null,
-      "url": "https://gov.louisiana.gov/page/flag-status",
-      "status": "full",
-      "authority": "governor",
-      "evidence": "declaration: 'Flag Status: Full-Staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-23T20:18:23+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-23T20:18:23+00:00"
-  },
-  "MI": {
-    "hash": "309b7cedb6408832",
-    "state_status": "half",
-    "state_order": {
-      "title": "RELEASE: Gov. Whitmer Lowers Flags to Honor Dolly Parton",
-      "url": "https://public.govdelivery.com/accounts/MIEOG/subscriber/new",
-      "status": "half",
-      "authority": "governor",
-      "start_date": "2026-08-25",
-      "end_date": null,
-      "until_noon": false,
-      "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live",
-      "via": "official notification email"
-    },
-    "last_parsed": "2026-08-26T01:00:41+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-25T21:22:22+00:00"
-  },
-  "KY": {
-    "hash": "60f3712a492810d2",
+  "AK": {
+    "hash": "f845b0691b383108",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-08-23T20:18:23+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-23T20:18:23+00:00"
-  },
-  "ID": {
-    "hash": "3f5ffd8e0bce1001",
-    "state_status": "half",
-    "state_order": {
-      "title": null,
-      "url": "https://gov.idaho.gov/flag-status/",
-      "status": "half",
-      "authority": "governor",
-      "evidence": "declaration: 'flags to be flown at half-staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-23T20:18:22+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-23T20:18:22+00:00"
-  },
-  "IN": {
-    "hash": "69f386ca1036ead0",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-25T15:37:26+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-25T15:37:26+00:00"
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
   },
   "HI": {
     "hash": "61dcfb37fa4aae0c",
@@ -196,85 +85,131 @@
       "date": "2026-08-25",
       "coverage_reason": "window 2026-08-25..2026-09-01"
     },
-    "last_parsed": "2026-08-25T23:47:34+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-25T23:47:34+00:00"
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
   },
   "GA": {
     "hash": "d9cd064117d18bfa",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-24T13:46:24+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-24T13:46:24+00:00"
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
+  },
+  "IA": {
+    "hash": "5e47b69ffc733aab",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
+  },
+  "DE": {
+    "hash": "75a053fb78a08a89",
+    "state_status": "half",
+    "state_order": {
+      "title": null,
+      "url": "https://news.delaware.gov/flag-status/",
+      "status": "half",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status - HALF STAFF'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
+  },
+  "FL": {
+    "hash": "946b079707889a7f",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://www.flgov.com/eog/info/flag-information",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status: Full Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
+  },
+  "LA": {
+    "hash": "ee739b557f5f11e4",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://gov.louisiana.gov/page/flag-status",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status: Full-Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
+  },
+  "MI": {
+    "hash": "309b7cedb6408832",
+    "state_status": "half",
+    "state_order": {
+      "title": "RELEASE: Gov. Whitmer Lowers Flags to Honor Dolly Parton",
+      "url": "https://public.govdelivery.com/accounts/MIEOG/subscriber/new",
+      "status": "half",
+      "authority": "governor",
+      "start_date": "2026-08-25",
+      "end_date": null,
+      "until_noon": false,
+      "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live",
+      "via": "official notification email"
+    },
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
+  },
+  "AR": {
+    "hash": "7c95ef3d60af5100",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
   },
   "MD": {
     "hash": "5f76979c664a4e03",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-25T20:24:16+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-25T20:24:16+00:00"
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
   },
-  "NE": {
-    "hash": "f16fe27628381cae",
+  "KY": {
+    "hash": "60f3712a492810d2",
+    "state_status": "unknown",
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
+  },
+  "NC": {
+    "hash": "ddcef40267b978df",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-25T21:22:23+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-25T21:22:23+00:00"
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
   },
-  "MO": {
-    "hash": "aff06c537a8bcb6c",
-    "state_status": "half",
-    "state_order": {
-      "title": "August 25, 2026 President Trump ordered all U.S. flags to half-staff August 25, 2026 - September 1, 2026 to honor Dolly Parton. More information and President Trump's official Truth Social post are av",
-      "url": "https://flagsexpress.com/blog/flags-half-staff/united-states/august-25-2026/Dolly-Parton/",
-      "status": "half",
-      "authority": "unknown",
-      "start_date": "2026-08-25",
-      "end_date": null,
-      "until_noon": false,
-      "status_evidence": "to half-staff",
-      "authority_evidence": null,
-      "usable_as_state_order": false,
-      "dates_from": "order body",
-      "date": "2026-08-25",
-      "coverage_reason": "order dated 2026-08-25"
-    },
-    "last_parsed": "2026-08-25T22:53:46+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-25T22:53:46+00:00"
-  },
-  "CT": {
-    "hash": "615163ed96e6d66a",
+  "IN": {
+    "hash": "69f386ca1036ead0",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-25T19:27:20+00:00",
-    "last_checked": "2026-08-26T01:00:40+00:00",
-    "last_changed_at": "2026-08-25T19:27:20+00:00"
-  },
-  "ND": {
-    "hash": "1e451d01c2c04884",
-    "state_status": "half",
-    "state_order": {
-      "title": "Armstrong directs flags at half-staff in remembrance of country music icon Dolly Parton",
-      "url": "https://www.governor.nd.gov/news/armstrong-directs-flags-half-staff-remembrance-country-music-icon-dolly-parton",
-      "status": "half",
-      "authority": "unknown",
-      "start_date": "2026-08-25",
-      "end_date": null,
-      "until_noon": false,
-      "status_evidence": "at half-staff",
-      "authority_evidence": null,
-      "usable_as_state_order": false,
-      "dates_from": "order body",
-      "date": "2026-08-25",
-      "coverage_reason": "order dated 2026-08-25"
-    },
-    "last_parsed": "2026-08-25T22:21:18+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-25T22:21:18+00:00"
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
   },
   "ME": {
     "hash": "05164de37217b6d0",
@@ -292,22 +227,14 @@
       "usable_as_state_order": true,
       "dates_from": "order body",
       "date": null,
-      "coverage_reason": "order dated 2026-08-25"
+      "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
     },
-    "last_parsed": "2026-08-25T21:22:22+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-25T21:22:22+00:00"
-  },
-  "NC": {
-    "hash": "ddcef40267b978df",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-25T20:24:16+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-25T20:24:16+00:00"
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
   },
   "NV": {
-    "hash": "64309d650c395043",
+    "hash": "36668456ebc3edeb",
     "state_status": "half",
     "state_order": {
       "title": null,
@@ -318,9 +245,17 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-26T01:00:42+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-26T01:00:42+00:00"
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
+  },
+  "NE": {
+    "hash": "f16fe27628381cae",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
   },
   "MS": {
     "hash": "35685109f666d6c4",
@@ -334,41 +269,55 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-25T19:27:21+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-25T19:27:21+00:00"
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
   },
-  "RI": {
-    "hash": "8a437183e91d95fa",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-25T08:36:10+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-25T08:36:10+00:00"
-  },
-  "OH": {
-    "hash": "8d07101f5ca0290f",
+  "ID": {
+    "hash": "3f5ffd8e0bce1001",
     "state_status": "half",
     "state_order": {
       "title": null,
-      "url": "https://governor.ohio.gov/flag-honors",
+      "url": "https://gov.idaho.gov/flag-status/",
       "status": "half",
       "authority": "governor",
-      "evidence": "declaration: 'Flag Status Half-Staff'",
+      "evidence": "declaration: 'flags to be flown at half-staff'",
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-25T20:24:17+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-25T20:24:17+00:00"
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
   },
-  "SC": {
-    "hash": "852ccee39f6bd9b4",
+  "CT": {
+    "hash": "615163ed96e6d66a",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-23T20:18:24+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-23T20:18:24+00:00"
+    "last_parsed": "2026-08-26T02:03:57+00:00",
+    "last_checked": "2026-08-26T02:03:57+00:00",
+    "last_changed_at": "2026-08-26T02:03:57+00:00"
+  },
+  "MO": {
+    "hash": "aff06c537a8bcb6c",
+    "state_status": "half",
+    "state_order": {
+      "title": "August 25, 2026 President Trump ordered all U.S. flags to half-staff August 25, 2026 - September 1, 2026 to honor Dolly Parton. More information and President Trump's official Truth Social post are av",
+      "url": "https://flagsexpress.com/blog/flags-half-staff/united-states/august-25-2026/Dolly-Parton/",
+      "status": "half",
+      "authority": "unknown",
+      "start_date": "2026-08-25",
+      "end_date": null,
+      "until_noon": false,
+      "status_evidence": "to half-staff",
+      "authority_evidence": null,
+      "usable_as_state_order": false,
+      "dates_from": "order body",
+      "date": "2026-08-25",
+      "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
+    },
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
   },
   "PA": {
     "hash": "e98a91c4a7df20d6",
@@ -382,33 +331,95 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-25T23:20:56+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-25T23:20:56+00:00"
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
   },
-  "TN": {
-    "hash": "ea3212e7b4682434",
+  "RI": {
+    "hash": "8a437183e91d95fa",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-23T20:18:24+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-23T20:18:24+00:00"
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
+  },
+  "SC": {
+    "hash": "852ccee39f6bd9b4",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
+  },
+  "OH": {
+    "hash": "8d07101f5ca0290f",
+    "state_status": "half",
+    "state_order": {
+      "title": null,
+      "url": "https://governor.ohio.gov/flag-honors",
+      "status": "half",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status Half-Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
+  },
+  "ND": {
+    "hash": "1e451d01c2c04884",
+    "state_status": "half",
+    "state_order": {
+      "title": "Armstrong directs flags at half-staff in remembrance of country music icon Dolly Parton",
+      "url": "https://www.governor.nd.gov/news/armstrong-directs-flags-half-staff-remembrance-country-music-icon-dolly-parton",
+      "status": "half",
+      "authority": "unknown",
+      "start_date": "2026-08-25",
+      "end_date": null,
+      "until_noon": false,
+      "status_evidence": "at half-staff",
+      "authority_evidence": null,
+      "usable_as_state_order": false,
+      "dates_from": "order body",
+      "date": "2026-08-25",
+      "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
+    },
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
   },
   "NJ": {
     "hash": "c4bfb85933cbefec",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-23T20:18:24+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-23T20:18:24+00:00"
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
   },
-  "NM": {
-    "hash": "ec79a296e6cd55d3",
+  "WA": {
+    "hash": "cbf262413cc076f7",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-25T17:55:50+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-25T17:55:50+00:00"
+    "last_parsed": "2026-08-26T02:03:59+00:00",
+    "last_checked": "2026-08-26T02:03:59+00:00",
+    "last_changed_at": "2026-08-26T02:03:59+00:00"
+  },
+  "TN": {
+    "hash": "ea3212e7b4682434",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:59+00:00",
+    "last_checked": "2026-08-26T02:03:59+00:00",
+    "last_changed_at": "2026-08-26T02:03:59+00:00"
+  },
+  "VT": {
+    "hash": "1e48f33811a65aa4",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:59+00:00",
+    "last_checked": "2026-08-26T02:03:59+00:00",
+    "last_changed_at": "2026-08-26T02:03:59+00:00"
   },
   "VA": {
     "hash": "6b38e39ea569c562",
@@ -422,41 +433,9 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-26T01:00:42+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-26T01:00:42+00:00"
-  },
-  "VT": {
-    "hash": "1e48f33811a65aa4",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-23T20:18:25+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-23T20:18:25+00:00"
-  },
-  "SD": {
-    "hash": "7b004ddff55d830c",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-23T20:18:24+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-23T20:18:24+00:00"
-  },
-  "MN": {
-    "hash": "2ed25a8477421472",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-25T22:21:18+00:00",
-    "last_checked": "2026-08-26T01:00:41+00:00",
-    "last_changed_at": "2026-08-25T22:21:18+00:00"
-  },
-  "WA": {
-    "hash": "cbf262413cc076f7",
-    "state_status": "full",
-    "state_order": null,
-    "last_parsed": "2026-08-25T22:53:47+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-25T22:53:47+00:00"
+    "last_parsed": "2026-08-26T02:03:59+00:00",
+    "last_checked": "2026-08-26T02:03:59+00:00",
+    "last_changed_at": "2026-08-26T02:03:59+00:00"
   },
   "WV": {
     "hash": "93b6135c9a7c0e82",
@@ -474,11 +453,11 @@
       "usable_as_state_order": true,
       "dates_from": "order body",
       "date": "2026-08-25",
-      "coverage_reason": "order dated 2026-08-25"
+      "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
     },
-    "last_parsed": "2026-08-25T22:21:19+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-25T22:21:19+00:00"
+    "last_parsed": "2026-08-26T02:03:59+00:00",
+    "last_checked": "2026-08-26T02:03:59+00:00",
+    "last_changed_at": "2026-08-26T02:03:59+00:00"
   },
   "UT": {
     "hash": "90afa505fac29b41",
@@ -492,33 +471,41 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-08-24T16:30:59+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-24T16:30:59+00:00"
+    "last_parsed": "2026-08-26T02:03:59+00:00",
+    "last_checked": "2026-08-26T02:03:59+00:00",
+    "last_changed_at": "2026-08-26T02:03:59+00:00"
+  },
+  "SD": {
+    "hash": "7b004ddff55d830c",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:59+00:00",
+    "last_checked": "2026-08-26T02:03:59+00:00",
+    "last_changed_at": "2026-08-26T02:03:59+00:00"
   },
   "WI": {
     "hash": "95a77d65587aada9",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-08-23T20:18:25+00:00",
-    "last_checked": "2026-08-25T23:47:35+00:00",
-    "last_changed_at": "2026-08-23T20:18:25+00:00"
+    "last_parsed": "2026-08-26T02:03:59+00:00",
+    "last_checked": "2026-08-26T02:03:59+00:00",
+    "last_changed_at": "2026-08-26T02:03:59+00:00"
   },
-  "TX": {
-    "hash": "91a0c66f0aa6444d",
+  "MN": {
+    "hash": "2ed25a8477421472",
     "state_status": "full",
-    "state_order": {
-      "title": null,
-      "url": "https://gov.texas.gov/flag-status",
-      "status": "full",
-      "authority": "governor",
-      "evidence": "declaration: 'Flag Status: Full-Staff'",
-      "start_date": null,
-      "end_date": null
-    },
-    "last_parsed": "2026-08-23T20:18:25+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-23T20:18:25+00:00"
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
+  },
+  "NM": {
+    "hash": "ec79a296e6cd55d3",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
   },
   "OR": {
     "hash": "fc45c766fc8595bb",
@@ -536,10 +523,26 @@
       "usable_as_state_order": false,
       "dates_from": "order body",
       "date": null,
-      "coverage_reason": "order dated 2026-08-25"
+      "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
     },
-    "last_parsed": "2026-08-25T23:47:35+00:00",
-    "last_checked": "2026-08-26T01:00:42+00:00",
-    "last_changed_at": "2026-08-25T23:47:35+00:00"
+    "last_parsed": "2026-08-26T02:03:58+00:00",
+    "last_checked": "2026-08-26T02:03:58+00:00",
+    "last_changed_at": "2026-08-26T02:03:58+00:00"
+  },
+  "TX": {
+    "hash": "91a0c66f0aa6444d",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://gov.texas.gov/flag-status",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status: Full-Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-08-26T02:03:59+00:00",
+    "last_checked": "2026-08-26T02:03:59+00:00",
+    "last_changed_at": "2026-08-26T02:03:59+00:00"
   }
 }
