@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0A0C10">
 <link rel="manifest" href="manifest.json">
+<script src="config.js"></script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Flagstaff">
@@ -358,6 +359,7 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
   <footer>
     Half-staff on land; half-mast at sea.<br>
     Only the President and state governors may order the flag lowered — 4 U.S.C. § 7(m).
+    <span id="buildStamp" style="float:right;opacity:.45"></span>
   </footer>
 </div>
 
@@ -741,8 +743,23 @@ renderInstall();
    registers permission and captures the subscription so nothing is lost. It
    never claims alerts are working when they are not.
 ------------------------------------------------------------------------- */
-const VAPID_PUBLIC_KEY='BLxqFxBsh6CnsC4KfpQHg-0oBDF8s-A0gGz7E8A8T-odCsVtFN0-DZvdL2DUokAHJWH0ErkFwNjbArTejV9i6Ao';
-const SUBSCRIBE_ENDPOINT='https://halfstaff-push.hustonberan.workers.dev/subscribe';
+/* Keys come from config.js, which is never regenerated.
+   They used to be hardcoded right here — and every updated index.html
+   silently reset them to '', which killed notifications with no visible
+   symptom: the app loaded, the button worked, nobody was ever subscribed.
+   The file that gets regenerated and the file holding your keys must not be
+   the same file. */
+const CFG = (typeof window !== 'undefined' && window.FLAGSTAFF_CONFIG) || {};
+const VAPID_PUBLIC_KEY = CFG.VAPID_PUBLIC_KEY || '';
+const SUBSCRIBE_ENDPOINT = CFG.SUBSCRIBE_ENDPOINT || '';
+
+if(!VAPID_PUBLIC_KEY || !SUBSCRIBE_ENDPOINT){
+  // Loud. The old failure was a working-looking app that quietly subscribed
+  // nobody, which took hours to notice.
+  console.error('Flagstaff: config.js missing or incomplete — notifications '
+    + 'cannot work. VAPID_PUBLIC_KEY=' + (VAPID_PUBLIC_KEY ? 'set' : 'MISSING')
+    + ', SUBSCRIBE_ENDPOINT=' + (SUBSCRIBE_ENDPOINT ? 'set' : 'MISSING'));
+}
 
 function b64ToU8(b64){
   const pad='='.repeat((4-b64.length%4)%4);
@@ -878,6 +895,9 @@ async function changeSub(path,extra){
     renderSubs();
   }catch(e){ notifyStatus('Could not update: '+e.message); }
 }
+
+// Build stamp in the footer, so which version is live is visible at a glance.
+try{ document.getElementById('buildStamp').textContent = CFG.BUILD || ''; }catch(_){}
 
 /* --- Boot -------------------------------------------------------------- */
 fetch('status.json',{cache:'no-store'})
