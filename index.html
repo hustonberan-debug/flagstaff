@@ -741,8 +741,8 @@ renderInstall();
    registers permission and captures the subscription so nothing is lost. It
    never claims alerts are working when they are not.
 ------------------------------------------------------------------------- */
-const VAPID_PUBLIC_KEY='';   // <- paste your VAPID public key here
-const SUBSCRIBE_ENDPOINT='';  // <- your /subscribe URL
+const VAPID_PUBLIC_KEY='BLxqFxBsh6CnsC4KfpQHg-0oBDF8s-A0gGz7E8A8T-odCsVtFN0-DZvdL2DUokAHJWH0ErkFwNjbArTejV9i6Ao';
+const SUBSCRIBE_ENDPOINT='https://halfstaff-push.hustonberan.workers.dev/subscribe';
 
 function b64ToU8(b64){
   const pad='='.repeat((4-b64.length%4)%4);
