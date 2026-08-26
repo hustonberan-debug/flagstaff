@@ -42,7 +42,7 @@ import parsers as P
 # Bump whenever parsing logic changes. A cache keyed only on page content is
 # wrong when the CODE changes: identical pages produce stale verdicts computed
 # by the old parser. The key must be (content, code version).
-PARSER_VERSION = "25"
+PARSER_VERSION = "26"
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"
@@ -783,6 +783,22 @@ def main():
             s["reason"] = None
             s["reason_source"] = None
             s["scope"] = None
+
+    # Has this exact national order already been announced?
+    #
+    # This lived in the notify step and wrote federal-last.json — but notify
+    # runs AFTER the commit step, so that file was never committed. Every run
+    # started from a repo without it, concluded the order was new, and pushed
+    # again. Every 30 minutes, all night.
+    #
+    # It belongs here: run.py writes cache.json BEFORE the commit, so the
+    # memory actually survives to the next run.
+    fed_key = (fed or {}).get("reason")
+    already = cache.get("_federal_announced")
+    fed_is_new = bool(fed_key) and fed_key != already
+    new_cache["_federal_announced"] = fed_key      # None clears it when it ends
+    if fed:
+        fed["_changed"] = fed_is_new
 
     status = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
