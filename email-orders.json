@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T12:41:08+00:00",
+  "generated_at": "2026-08-26T13:50:37+00:00",
   "orders": {
     "MI": {
       "state_code": "MI",
@@ -39,12 +39,26 @@
       "end_date": null,
       "until_noon": false,
       "evidence": "to half-staff"
+    },
+    "WY": {
+      "state_code": "WY",
+      "identified_by": "govdelivery account WYGOV",
+      "status": "half",
+      "authority": "governor",
+      "subject": "Governor Gordon Orders Flags Lowered for Dolly Parton",
+      "from": "Office of Governor Mark Gordon <WYGOV@public.govdelivery.com>",
+      "sent_date": "2026-08-26",
+      "start_date": "2026-08-26",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "Flags Lowered"
     }
   },
   "channels_seen": {
     "MI": "2026-08-25",
     "KY": "2026-08-25",
-    "MO": "2026-08-25"
+    "MO": "2026-08-25",
+    "WY": "2026-08-26"
   },
   "unattributed_senders": {
     "azdoa.gov": {
