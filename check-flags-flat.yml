@@ -77,7 +77,15 @@ jobs:
         run: |
           git config user.name  "flag-bot"
           git config user.email "flag-bot@users.noreply.github.com"
-          git add status.json cache.json history.jsonl email-orders.json
+          # Add only the generated files that actually exist. Not all of
+          # them do on every run — federal-last.json is written by the NOTIFY
+          # step, which runs AFTER this one, so on a first run it is absent
+          # and a bare `git add` of it aborts the whole step.
+          for f in status.json cache.json history.jsonl email-orders.json \
+                   federal-last.json; do
+            [ -f "$f" ] && git add "$f" || true
+          done
+
           if git diff --staged --quiet; then
             echo "No change."
             exit 0
@@ -126,12 +134,7 @@ jobs:
               print("NOTIFY_URL/NOTIFY_SECRET not set - skipping push (fine until the worker is deployed)")
               raise SystemExit(0)
 
-          try:
-              s = json.load(open("status.json"))
-          except Exception as e:
-              print(f"::warning::status.json unreadable ({e}) - skipping notify")
-              raise SystemExit(0)
-          changed = [c for c, v in s["states"].items() if v.get("changed")]
+
           if s.get("federal") and s["federal"].get("_changed"):
               changed.append("US")
 
