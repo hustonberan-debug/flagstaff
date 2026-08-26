@@ -117,8 +117,10 @@ jobs:
           python3 -c "import json; json.load(open('status.json')); print('status.json parses')"
 
       - name: Notify subscribers of any change
-        # Never fail the job. Notifications are a nice-to-have; a push
-        # failure must not stop status.json from being published.
+        # Never fail the job: a push problem must not stop status.json from
+        # being published. But DO surface the error — this step silently
+        # crashed on its first line for days, so every notification the
+        # pipeline should have sent was simply never sent.
         if: always()
         continue-on-error: true
         env:
@@ -126,30 +128,67 @@ jobs:
           NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
         run: |
           python3 - <<'PY'
-          import json, os, urllib.request
+          import json, os, urllib.request, urllib.error
 
           url = os.environ.get("NOTIFY_URL")
           secret = os.environ.get("NOTIFY_SECRET")
           if not url or not secret:
-              print("NOTIFY_URL/NOTIFY_SECRET not set - skipping push (fine until the worker is deployed)")
+              print("NOTIFY_URL / NOTIFY_SECRET not set - skipping push")
               raise SystemExit(0)
 
+          try:
+              s = json.load(open("status.json"))
+          except Exception as e:
+              print(f"::warning::status.json unreadable ({e}) - skipping notify")
+              raise SystemExit(0)
 
-          if s.get("federal") and s["federal"].get("_changed"):
-              changed.append("US")
+          # A national proclamation lowers flags in every state at once, so
+          # every state's "changed" flag flips together. That is ONE event,
+          # not 51 — send a single broadcast on the "US" channel, which the
+          # Worker fans out to all subscribers.
+          fed = s.get("federal")
+          if fed:
+              previous = None
+              try:
+                  previous = json.load(open("federal-last.json")).get("reason")
+              except Exception:
+                  previous = None
+              if previous == fed.get("reason"):
+                  changed = []                       # already announced
+              else:
+                  changed = ["US"]
+              with open("federal-last.json", "w") as f:
+                  json.dump({"reason": fed.get("reason")}, f)
+          else:
+              # No national order. Clear the marker so the next one announces.
+              try:
+                  os.remove("federal-last.json")
+              except OSError:
+                  pass
+              changed = [c for c, v in s["states"].items() if v.get("changed")]
+
+          if not changed:
+              print("No changes this run - nothing to notify.")
+              raise SystemExit(0)
 
           for code in changed:
-              st = s["states"].get(code, {})
+              if code == "US":
+                  status = "half"
+                  reason = (fed or {}).get("reason") or "National half-staff order"
+              else:
+                  st = s["states"].get(code, {})
+                  status = st.get("effective_status", "unknown")
+                  reason = st.get("reason")
+
               payload = json.dumps({
                   "state": code,
-                  "status": st.get("effective_status", "unknown"),
-                  "reason": st.get("reason"),
+                  "status": status,
+                  "reason": reason,
                   "url": "https://halfstaffnow.com/",
               }).encode()
-              # urllib sends "Python-urllib/3.x" by default, which
-              # Cloudflare's bot protection rejects with 403 before the
-              # request ever reaches the Worker. A named User-Agent gets
-              # through and also makes the traffic identifiable in logs.
+
+              # urllib sends "Python-urllib/3.x" by default, which Cloudflare
+              # rejects with 403 before the request reaches the Worker.
               req = urllib.request.Request(
                   url.rstrip("/") + "/notify", data=payload,
                   headers={"Content-Type": "application/json",
@@ -161,15 +200,10 @@ jobs:
                   with urllib.request.urlopen(req, timeout=15) as r:
                       print(code, r.read().decode())
               except urllib.error.HTTPError as e:
-                  # Print the body: the Worker explains itself, and a bare
-                  # status code costs a round trip to diagnose.
                   body = e.read().decode(errors="replace")[:200]
-                  print(f"::warning::notify failed for {code}: "
-                        f"HTTP {e.code} {body}")
+                  print(f"::warning::notify failed for {code}: HTTP {e.code} {body}")
               except Exception as e:
                   print(f"::warning::notify failed for {code}: {e}")
-          if not changed:
-              print("No changes this run - nothing to notify.")
           PY
 
       - name: Warn about failing sources
