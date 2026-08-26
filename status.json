@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T16:14:05+00:00",
+  "generated_at": "2026-08-26T18:05:23+00:00",
   "date": "2026-08-26",
   "federal": {
     "status": "half",
@@ -10,7 +10,8 @@
     "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
     "start_date": "2026-08-25",
     "end_date": "2026-09-01",
-    "coverage_reason": "window 2026-08-25..2026-09-01"
+    "coverage_reason": "window 2026-08-25..2026-09-01",
+    "_changed": true
   },
   "states": {
     "AK": {
@@ -22,10 +23,12 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://gov.alaska.gov/services/status-of-the-flag/",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T02:03:57+00:00",
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
-      "error": null,
+      "error": "authority unproven (president); not claimed as state order",
+      "source_last_modified": "2026-08-25",
+      "source_age_days": 1,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -39,22 +42,25 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "AL": {
       "state": "Alabama",
       "state_code": "AL",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "diff",
       "confidence": "high",
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governor.alabama.gov/flag-status/",
-      "checked_at": "2026-08-26T16:14:01+00:00",
+      "checked_at": "2026-08-26T18:05:18+00:00",
       "last_changed_at": null,
       "changed": false,
-      "error": null,
+      "error": "source appears frozen: newest date on page is 2019-12-10 (2451d old) - not trusted",
+      "source_last_modified": "2019-12-10",
+      "source_age_days": 2451,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -68,7 +74,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "AR": {
@@ -80,10 +87,15 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.arkansas.gov/newsroom/",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T02:03:57+00:00",
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": {
+        "title": "Sanders Orders Flags to Half-Staff on August 7, 2026",
+        "url": "https://governor.arkansas.gov/news_post/sanders-orders-flags-to-half-staff-on-august-7-2026/",
+        "why": "started 2026-08-07, no end date, 19d old, presumed concluded"
+      },
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -97,7 +109,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "AZ": {
@@ -117,10 +130,12 @@
         "end_date": null
       },
       "source_url": "https://az.gov/half-staff-notices",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T07:24:19+00:00",
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
+      "source_last_modified": "2026-09-01",
+      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -134,7 +149,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "CA": {
@@ -146,67 +162,9 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.gov.ca.gov/feed/",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T02:03:57+00:00",
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
-      "error": null,
-      "effective_status": "half",
-      "reason": "Honoring the Memory of Dolly Parton",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Honoring the Memory of Dolly Parton",
-        "authority": "presidential proclamation",
-        "citation": null,
-        "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
-        "start_date": "2026-08-25",
-        "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
-      }
-    },
-    "CO": {
-      "state": "Colorado",
-      "state_code": "CO",
-      "coverage": "covered",
-      "ingest_mode": "diff",
-      "confidence": "high",
-      "state_status": "unknown",
-      "state_order": null,
-      "source_url": "https://governorsoffice.colorado.gov/governor/flag-status",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": null,
-      "changed": false,
-      "error": null,
-      "effective_status": "half",
-      "reason": "Honoring the Memory of Dolly Parton",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Honoring the Memory of Dolly Parton",
-        "authority": "presidential proclamation",
-        "citation": null,
-        "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
-        "start_date": "2026-08-25",
-        "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
-      }
-    },
-    "CT": {
-      "state": "Connecticut",
-      "state_code": "CT",
-      "coverage": "covered",
-      "ingest_mode": "index",
-      "confidence": "high",
-      "state_status": "full",
-      "state_order": null,
-      "source_url": "https://portal.ct.gov/governor/news/press-releases",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T16:14:01+00:00",
-      "changed": true,
       "error": null,
       "last_expired_order": null,
       "effective_status": "half",
@@ -222,7 +180,71 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
+      }
+    },
+    "CO": {
+      "state": "Colorado",
+      "state_code": "CO",
+      "coverage": "stale",
+      "ingest_mode": "diff",
+      "confidence": "high",
+      "state_status": "unknown",
+      "state_order": null,
+      "source_url": "https://governorsoffice.colorado.gov/governor/flag-status",
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": null,
+      "changed": false,
+      "error": "source appears frozen: newest date on page is 2007-06-29 (6998d old) - not trusted",
+      "source_last_modified": "2007-06-29",
+      "source_age_days": 6998,
+      "effective_status": "half",
+      "reason": "Honoring the Memory of Dolly Parton",
+      "reason_source": "federal",
+      "scope": "full-day",
+      "federal": {
+        "status": "half",
+        "scope": "full-day",
+        "reason": "Honoring the Memory of Dolly Parton",
+        "authority": "presidential proclamation",
+        "citation": null,
+        "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
+        "start_date": "2026-08-25",
+        "end_date": "2026-09-01",
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
+      }
+    },
+    "CT": {
+      "state": "Connecticut",
+      "state_code": "CT",
+      "coverage": "covered",
+      "ingest_mode": "index",
+      "confidence": "high",
+      "state_status": "full",
+      "state_order": null,
+      "source_url": "https://portal.ct.gov/governor/news/press-releases",
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
+      "changed": false,
+      "error": null,
+      "last_expired_order": null,
+      "effective_status": "half",
+      "reason": "Honoring the Memory of Dolly Parton",
+      "reason_source": "federal",
+      "scope": "full-day",
+      "federal": {
+        "status": "half",
+        "scope": "full-day",
+        "reason": "Honoring the Memory of Dolly Parton",
+        "authority": "presidential proclamation",
+        "citation": null,
+        "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
+        "start_date": "2026-08-25",
+        "end_date": "2026-09-01",
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "DC": {
@@ -242,9 +264,9 @@
         "end_date": null
       },
       "source_url": "https://os.dc.gov/service/flag-status",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T16:14:01+00:00",
-      "changed": true,
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
+      "changed": false,
       "error": null,
       "source_last_modified": "2026-09-01",
       "source_age_days": -6,
@@ -261,7 +283,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "DE": {
@@ -281,9 +304,9 @@
         "end_date": null
       },
       "source_url": "https://news.delaware.gov/flag-status/",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T16:14:01+00:00",
-      "changed": true,
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
+      "changed": false,
       "error": null,
       "source_last_modified": "2026-08-25",
       "source_age_days": 1,
@@ -300,7 +323,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "FL": {
@@ -320,10 +344,12 @@
         "end_date": null
       },
       "source_url": "https://www.flgov.com/eog/info/flag-information",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T13:50:38+00:00",
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
+      "source_last_modified": "2026-09-01",
+      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -337,7 +363,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "GA": {
@@ -349,10 +376,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://gov.ga.gov/rss.xml",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T02:03:57+00:00",
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -366,7 +394,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "HI": {
@@ -392,8 +421,8 @@
         "coverage_reason": "window 2026-08-25..2026-09-01"
       },
       "source_url": "https://governor.hawaii.gov/category/newsroom/feed/",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T03:50:15+00:00",
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
@@ -409,7 +438,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "IA": {
@@ -435,9 +465,9 @@
         "coverage_reason": "order dated 2026-08-26"
       },
       "source_url": "https://governor.iowa.gov/news/all/all/all/rss.xml",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T16:14:01+00:00",
-      "changed": true,
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
+      "changed": false,
       "error": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
@@ -452,7 +482,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "ID": {
@@ -472,9 +503,9 @@
         "end_date": null
       },
       "source_url": "https://gov.idaho.gov/flag-status/",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T16:14:01+00:00",
-      "changed": true,
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
+      "changed": false,
       "error": null,
       "source_last_modified": "2026-08-26",
       "source_age_days": 0,
@@ -491,7 +522,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "IL": {
@@ -503,7 +535,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-08-26T16:14:01+00:00",
+      "checked_at": "2026-08-26T18:05:18+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -520,7 +552,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "IN": {
@@ -546,9 +579,9 @@
         "coverage_reason": "order dated 2026-08-26"
       },
       "source_url": "https://events.in.gov/group/gov",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T16:14:01+00:00",
-      "changed": true,
+      "checked_at": "2026-08-26T18:05:18+00:00",
+      "last_changed_at": "2026-08-26T18:05:18+00:00",
+      "changed": false,
       "error": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
@@ -563,7 +596,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "KS": {
@@ -575,7 +609,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.governor.ks.gov/newsroom/kansas-flag-honors",
-      "checked_at": "2026-08-26T16:14:01+00:00",
+      "checked_at": "2026-08-26T18:05:18+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
@@ -592,7 +626,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "KY": {
@@ -604,10 +639,12 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governor.ky.gov/flag-status",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "source_last_modified": "2026-09-11",
+      "source_age_days": -16,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -621,7 +658,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "LA": {
@@ -641,10 +679,12 @@
         "end_date": null
       },
       "source_url": "https://gov.louisiana.gov/page/flag-status",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "source_age_days": null,
+      "freshness_unknown": true,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -658,7 +698,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "MA": {
@@ -670,7 +711,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.mass.gov/info-details/flag-status",
-      "checked_at": "2026-08-26T16:14:01+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
@@ -687,7 +728,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "MD": {
@@ -699,10 +741,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.maryland.gov/news/press-releases",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -716,7 +759,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "ME": {
@@ -742,8 +786,8 @@
         "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://www.maine.gov/governor/mills/newsroom",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
@@ -759,7 +803,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "MI": {
@@ -781,8 +826,8 @@
         "via": "official notification email"
       },
       "source_url": "https://public.govdelivery.com/accounts/MIEOG/subscriber/new",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
@@ -798,7 +843,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "MN": {
@@ -810,10 +856,15 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp",
-      "checked_at": "2026-08-26T16:14:01+00:00",
-      "last_changed_at": "2026-08-26T12:41:09+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": {
+        "title": "Governor Walz Orders Flags at Half-Staff to Honor Leslie R. Washington",
+        "url": "https://mn.gov/governor/newsroom/flag-status/index.jsp?id=1055-763873",
+        "why": "started 2026-08-13, no end date, 13d old, presumed concluded"
+      },
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -827,7 +878,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "MO": {
@@ -853,8 +905,8 @@
         "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://oa.mo.gov/facilities/facilities-operations/flag-display/flag-notifications",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
@@ -870,7 +922,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "MS": {
@@ -890,10 +943,12 @@
         "end_date": null
       },
       "source_url": "https://governorreeves.ms.gov/flag-status/",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T05:29:02+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "source_last_modified": "2026-08-25",
+      "source_age_days": 1,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -907,7 +962,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "MT": {
@@ -919,7 +975,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-08-26T16:14:02+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -936,7 +992,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "NC": {
@@ -948,10 +1005,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nc.gov/news/feed",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -965,7 +1023,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "ND": {
@@ -991,8 +1050,8 @@
         "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://www.governor.nd.gov/rss/news",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
@@ -1008,7 +1067,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "NE": {
@@ -1020,10 +1080,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nebraska.gov/press-releases",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1037,7 +1098,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "NH": {
@@ -1049,7 +1111,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-08-26T16:14:02+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -1066,7 +1128,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "NJ": {
@@ -1078,10 +1141,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://newjersey.gov/newsroom",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1095,7 +1159,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "NM": {
@@ -1107,10 +1172,15 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nm.gov/newsroom",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": {
+        "title": "Gov. Lujan Grisham orders flags to half-staff",
+        "url": "https://governor.nm.gov/newsroom/gov-lujan-grisham-orders-flags-to-half-staff-100004483",
+        "why": "started 2025-06-05, no end date, 447d old, presumed concluded"
+      },
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1124,7 +1194,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "NV": {
@@ -1144,9 +1215,9 @@
         "end_date": null
       },
       "source_url": "https://www.gov.nv.gov/constituent-services/flag-status/",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T16:14:02+00:00",
-      "changed": true,
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
+      "changed": false,
       "error": null,
       "source_last_modified": "2026-08-25",
       "source_age_days": 1,
@@ -1163,7 +1234,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "NY": {
@@ -1175,7 +1247,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.governor.ny.gov/news",
-      "checked_at": "2026-08-26T16:14:02+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
@@ -1192,7 +1264,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "OH": {
@@ -1212,10 +1285,12 @@
         "end_date": null
       },
       "source_url": "https://governor.ohio.gov/flag-honors",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "source_last_modified": "2026-09-01",
+      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1229,7 +1304,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "OK": {
@@ -1241,7 +1317,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-08-26T16:14:02+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -1258,7 +1334,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "OR": {
@@ -1284,8 +1361,8 @@
         "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T04:34:50+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
@@ -1301,7 +1378,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "PA": {
@@ -1321,10 +1399,12 @@
         "end_date": null
       },
       "source_url": "https://www.pa.gov/agencies/dgs/flag-notices.html",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:19+00:00",
+      "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
+      "source_last_modified": "2026-09-01",
+      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1338,7 +1418,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "RI": {
@@ -1350,10 +1431,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.ri.gov/press-releases.xml",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1367,7 +1449,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "SC": {
@@ -1379,10 +1462,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.sc.gov/taxonomy/term/3/feed",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:58+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1396,7 +1480,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "SD": {
@@ -1408,10 +1493,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.sd.gov/news/press-releases.aspx",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:59+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1425,7 +1511,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "TN": {
@@ -1437,10 +1524,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.tn.gov/governor/news.html",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:59+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1454,7 +1542,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "TX": {
@@ -1474,10 +1563,12 @@
         "end_date": null
       },
       "source_url": "https://gov.texas.gov/flag-status",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T14:39:19+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
+      "source_last_modified": "2026-09-01",
+      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1491,7 +1582,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "UT": {
@@ -1511,10 +1603,12 @@
         "end_date": null
       },
       "source_url": "https://governor.utah.gov/flag-status",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T14:39:19+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
+      "source_last_modified": "2026-09-01",
+      "source_age_days": -6,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1528,7 +1622,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "VA": {
@@ -1548,10 +1643,12 @@
         "end_date": null
       },
       "source_url": "https://www.governor.virginia.gov/constituent-services/flag-information/",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T04:34:51+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
+      "source_last_modified": "2026-08-26",
+      "source_age_days": 0,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1565,7 +1662,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "VT": {
@@ -1577,10 +1675,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.vermont.gov/taxonomy/term/3/feed",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:59+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1594,7 +1693,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "WA": {
@@ -1606,10 +1706,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.wa.gov/rss.xml",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T11:00:08+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1623,7 +1724,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "WI": {
@@ -1635,10 +1737,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.wi.gov/newsroom",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T02:03:59+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
       "reason_source": "federal",
@@ -1652,7 +1755,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "WV": {
@@ -1678,9 +1782,9 @@
         "coverage_reason": "order dated 2026-08-25 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://governor.wv.gov/rss.xml",
-      "checked_at": "2026-08-26T16:14:02+00:00",
-      "last_changed_at": "2026-08-26T16:14:02+00:00",
-      "changed": true,
+      "checked_at": "2026-08-26T18:05:20+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
+      "changed": false,
       "error": null,
       "effective_status": "half",
       "reason": "Honoring the Memory of Dolly Parton",
@@ -1695,7 +1799,8 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     },
     "WY": {
@@ -1707,7 +1812,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-08-26T16:14:02+00:00",
+      "checked_at": "2026-08-26T18:05:20+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -1724,15 +1829,16 @@
         "source_url": "https://www.whitehouse.gov/presidential-actions/2026/08/honoring-the-memory-of-dolly-parton/",
         "start_date": "2026-08-25",
         "end_date": "2026-09-01",
-        "coverage_reason": "window 2026-08-25..2026-09-01"
+        "coverage_reason": "window 2026-08-25..2026-09-01",
+        "_changed": true
       }
     }
   },
   "meta": {
-    "covered": 43,
+    "covered": 41,
     "not_covered": 8,
-    "stale": 0,
-    "errors": 8,
+    "stale": 2,
+    "errors": 11,
     "total": 51
   }
 }
