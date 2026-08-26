@@ -77,12 +77,10 @@ jobs:
         run: |
           git config user.name  "flag-bot"
           git config user.email "flag-bot@users.noreply.github.com"
-          # Add only the generated files that actually exist. Not all of
-          # them do on every run — federal-last.json is written by the NOTIFY
-          # step, which runs AFTER this one, so on a first run it is absent
-          # and a bare `git add` of it aborts the whole step.
-          for f in status.json cache.json history.jsonl email-orders.json \
-                   federal-last.json; do
+          # Add only the generated files that actually exist — not all of
+          # them are produced on every run, and a bare `git add` of a missing
+          # path aborts the whole step with exit 128.
+          for f in status.json cache.json history.jsonl email-orders.json; do
             [ -f "$f" ] && git add "$f" || true
           done
 
@@ -146,25 +144,13 @@ jobs:
           # every state's "changed" flag flips together. That is ONE event,
           # not 51 — send a single broadcast on the "US" channel, which the
           # Worker fans out to all subscribers.
+          # run.py decides whether a national order is NEW, because it
+          # writes cache.json before the commit step and so its memory
+          # actually persists between runs. This step just obeys.
           fed = s.get("federal")
           if fed:
-              previous = None
-              try:
-                  previous = json.load(open("federal-last.json")).get("reason")
-              except Exception:
-                  previous = None
-              if previous == fed.get("reason"):
-                  changed = []                       # already announced
-              else:
-                  changed = ["US"]
-              with open("federal-last.json", "w") as f:
-                  json.dump({"reason": fed.get("reason")}, f)
+              changed = ["US"] if fed.get("_changed") else []
           else:
-              # No national order. Clear the marker so the next one announces.
-              try:
-                  os.remove("federal-last.json")
-              except OSError:
-                  pass
               changed = [c for c, v in s["states"].items() if v.get("changed")]
 
           if not changed:
@@ -223,4 +209,3 @@ jobs:
           if stale:
               print(f"::warning::Serving stale data for: {' '.join(sorted(stale))}")
           PY
-
