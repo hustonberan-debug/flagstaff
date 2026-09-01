@@ -1,19 +1,6 @@
 {
-  "generated_at": "2026-08-31T20:36:03+00:00",
+  "generated_at": "2026-09-01T00:19:46+00:00",
   "orders": {
-    "MI": {
-      "state_code": "MI",
-      "identified_by": "sender domain govsubscriptions.michigan.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "RELEASE: Gov. Whitmer Lowers Flags to Honor Dolly Parton",
-      "from": "Michigan Executive Office of the Governor <mieog@govsubscriptions.michigan.gov>",
-      "sent_date": "2026-08-25",
-      "start_date": "2026-08-25",
-      "end_date": null,
-      "until_noon": false,
-      "evidence": "Lowers Flags"
-    },
     "KY": {
       "state_code": "KY",
       "identified_by": "sender domain subscriptions.kentucky.gov",
@@ -39,6 +26,19 @@
       "end_date": null,
       "until_noon": false,
       "evidence": "to half-staff"
+    },
+    "MI": {
+      "state_code": "MI",
+      "identified_by": "sender domain govsubscriptions.michigan.gov",
+      "status": "half",
+      "authority": "governor",
+      "subject": "RELEASE: Gov. Whitmer Lowers Flags to Honor Dolly Parton",
+      "from": "Michigan Executive Office of the Governor <mieog@govsubscriptions.michigan.gov>",
+      "sent_date": "2026-08-25",
+      "start_date": "2026-08-25",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "Lowers Flags"
     },
     "WY": {
       "state_code": "WY",
