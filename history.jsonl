@@ -1065,3 +1065,11 @@
 {"at": "2026-09-02T02:32:36+00:00", "state": "RI", "status": "full", "reason": null}
 {"at": "2026-09-02T02:32:36+00:00", "state": "MN", "status": "full", "reason": null}
 {"at": "2026-09-02T02:32:36+00:00", "state": "OR", "status": "half", "reason": "Flag at half staff"}
+{"at": "2026-09-02T07:33:04+00:00", "state": "AZ", "status": "full", "reason": null}
+{"at": "2026-09-02T07:33:04+00:00", "state": "FL", "status": "half", "reason": "State order"}
+{"at": "2026-09-02T07:33:04+00:00", "state": "IN", "status": "full", "reason": null}
+{"at": "2026-09-02T07:33:04+00:00", "state": "MS", "status": "full", "reason": null}
+{"at": "2026-09-02T07:33:04+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-09-02T07:33:04+00:00", "state": "WA", "status": "full", "reason": null}
+{"at": "2026-09-02T07:33:04+00:00", "state": "VA", "status": "full", "reason": null}
+{"at": "2026-09-02T07:33:04+00:00", "state": "OH", "status": "full", "reason": null}
