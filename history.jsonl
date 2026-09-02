@@ -1073,3 +1073,4 @@
 {"at": "2026-09-02T07:33:04+00:00", "state": "WA", "status": "full", "reason": null}
 {"at": "2026-09-02T07:33:04+00:00", "state": "VA", "status": "full", "reason": null}
 {"at": "2026-09-02T07:33:04+00:00", "state": "OH", "status": "full", "reason": null}
+{"at": "2026-09-02T12:28:32+00:00", "state": "DE", "status": "half", "reason": "State order"}
