@@ -1100,3 +1100,7 @@
 {"at": "2026-09-02T19:36:20+00:00", "state": "OH", "status": "full", "reason": null}
 {"at": "2026-09-02T19:36:20+00:00", "state": "UT", "status": "full", "reason": null}
 {"at": "2026-09-02T19:36:20+00:00", "state": "OR", "status": "half", "reason": "Flag at half staff"}
+{"at": "2026-09-02T22:17:23+00:00", "state": "AK", "status": "half", "reason": "State order"}
+{"at": "2026-09-02T22:17:23+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-09-02T22:17:23+00:00", "state": "SD", "status": "full", "reason": null}
+{"at": "2026-09-02T22:17:23+00:00", "state": "OH", "status": "full", "reason": null}
