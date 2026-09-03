@@ -1115,3 +1115,6 @@
 {"at": "2026-09-03T09:24:15+00:00", "state": "FL", "status": "half", "reason": "State order"}
 {"at": "2026-09-03T09:24:15+00:00", "state": "MS", "status": "full", "reason": null}
 {"at": "2026-09-03T09:24:15+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-09-03T13:44:41+00:00", "state": "AL", "status": "unknown", "reason": null}
+{"at": "2026-09-03T13:44:41+00:00", "state": "DE", "status": "full", "reason": null}
+{"at": "2026-09-03T13:44:41+00:00", "state": "NV", "status": "full", "reason": null}
