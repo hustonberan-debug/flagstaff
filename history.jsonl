@@ -1129,3 +1129,12 @@
 {"at": "2026-09-03T17:28:38+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-09-03T17:28:38+00:00", "state": "RI", "status": "full", "reason": null}
 {"at": "2026-09-03T17:28:38+00:00", "state": "MN", "status": "full", "reason": null}
+{"at": "2026-09-03T20:03:13+00:00", "state": "CA", "status": "full", "reason": null}
+{"at": "2026-09-03T20:03:13+00:00", "state": "IA", "status": "full", "reason": null}
+{"at": "2026-09-03T20:03:13+00:00", "state": "HI", "status": "full", "reason": null}
+{"at": "2026-09-03T20:03:13+00:00", "state": "DE", "status": "full", "reason": null}
+{"at": "2026-09-03T20:03:13+00:00", "state": "NC", "status": "full", "reason": null}
+{"at": "2026-09-03T20:03:13+00:00", "state": "FL", "status": "half", "reason": "State order"}
+{"at": "2026-09-03T20:03:13+00:00", "state": "RI", "status": "full", "reason": null}
+{"at": "2026-09-03T20:03:13+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-09-03T20:03:13+00:00", "state": "WA", "status": "full", "reason": null}
