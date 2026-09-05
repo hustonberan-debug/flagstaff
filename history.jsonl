@@ -1192,3 +1192,8 @@
 {"at": "2026-09-05T00:14:56+00:00", "state": "MD", "status": "full", "reason": null}
 {"at": "2026-09-05T00:14:56+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-09-05T00:14:56+00:00", "state": "OR", "status": "full", "reason": null}
+{"at": "2026-09-05T04:46:15+00:00", "state": "FL", "status": "half", "reason": "State order"}
+{"at": "2026-09-05T04:46:15+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-09-05T04:46:15+00:00", "state": "OH", "status": "full", "reason": null}
+{"at": "2026-09-05T04:46:15+00:00", "state": "VA", "status": "full", "reason": null}
+{"at": "2026-09-05T04:46:15+00:00", "state": "OR", "status": "full", "reason": null}
