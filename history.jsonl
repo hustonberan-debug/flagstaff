@@ -1187,3 +1187,8 @@
 {"at": "2026-09-04T22:02:32+00:00", "state": "HI", "status": "full", "reason": null}
 {"at": "2026-09-04T22:02:32+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-09-04T22:02:32+00:00", "state": "MO", "status": "full", "reason": null}
+{"at": "2026-09-05T00:14:56+00:00", "state": "CA", "status": "full", "reason": null}
+{"at": "2026-09-05T00:14:56+00:00", "state": "HI", "status": "full", "reason": null}
+{"at": "2026-09-05T00:14:56+00:00", "state": "MD", "status": "full", "reason": null}
+{"at": "2026-09-05T00:14:56+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-09-05T00:14:56+00:00", "state": "OR", "status": "full", "reason": null}
