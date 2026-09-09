@@ -1,45 +1,6 @@
 {
-  "generated_at": "2026-09-08T22:50:47+00:00",
+  "generated_at": "2026-09-09T00:59:27+00:00",
   "orders": {
-    "KY": {
-      "state_code": "KY",
-      "identified_by": "sender domain subscriptions.kentucky.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "Gov. Beshear Orders Flags to Half-Staff Monday for Overdose Victims",
-      "from": "Governor's Communications Office <governor@subscriptions.kentucky.gov>",
-      "sent_date": "2026-08-28",
-      "start_date": "2026-08-28",
-      "end_date": null,
-      "until_noon": false,
-      "evidence": "to Half-Staff"
-    },
-    "MO": {
-      "state_code": "MO",
-      "identified_by": "sender domain mooa.dmarc.public.govdelivery.com",
-      "status": "half",
-      "authority": "unknown",
-      "subject": "President Trump ordered all U.S. flags to half-staff August 25, 2026 - September 1, 2026 to honor Dolly Parton.",
-      "from": "Missouri OA \u2013 Facilities Management, Design & Construction <missourioa@mooa.dmarc.public.govdelivery.com>",
-      "sent_date": "2026-08-25",
-      "start_date": "2026-08-25",
-      "end_date": null,
-      "until_noon": false,
-      "evidence": "to half-staff"
-    },
-    "MI": {
-      "state_code": "MI",
-      "identified_by": "sender domain govsubscriptions.michigan.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "RELEASE: Gov. Whitmer Lowers Flags to Honor Dolly Parton",
-      "from": "Michigan Executive Office of the Governor <mieog@govsubscriptions.michigan.gov>",
-      "sent_date": "2026-08-25",
-      "start_date": "2026-08-25",
-      "end_date": null,
-      "until_noon": false,
-      "evidence": "Lowers Flags"
-    },
     "WY": {
       "state_code": "WY",
       "identified_by": "govdelivery account WYGOV",
@@ -52,6 +13,19 @@
       "end_date": null,
       "until_noon": false,
       "evidence": "Flags Lowered"
+    },
+    "KY": {
+      "state_code": "KY",
+      "identified_by": "sender domain subscriptions.kentucky.gov",
+      "status": "half",
+      "authority": "governor",
+      "subject": "Gov. Beshear Orders Flags to Half-Staff Monday for Overdose Victims",
+      "from": "Governor's Communications Office <governor@subscriptions.kentucky.gov>",
+      "sent_date": "2026-08-28",
+      "start_date": "2026-08-28",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "to Half-Staff"
     }
   },
   "channels_seen": {
@@ -60,12 +34,5 @@
     "MO": "2026-08-25",
     "WY": "2026-08-26"
   },
-  "unattributed_senders": {
-    "azdoa.gov": {
-      "count": 1,
-      "subjects": [
-        "Gov. Hobbs Orders Flags to Half-Staff for Dolly Parton"
-      ]
-    }
-  }
+  "unattributed_senders": {}
 }
