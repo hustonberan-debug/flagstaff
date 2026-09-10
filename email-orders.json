@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T21:20:36+00:00",
+  "generated_at": "2026-09-10T23:18:35+00:00",
   "orders": {
     "KY": {
       "state_code": "KY",
@@ -52,14 +52,34 @@
       "end_date": null,
       "until_noon": false,
       "evidence": "at Half-Staff"
+    },
+    "WY": {
+      "state_code": "WY",
+      "identified_by": "govdelivery account WYGOV",
+      "status": "half",
+      "authority": "governor",
+      "subject": "Governor Orders Flags Lowered to Half-Staff in Observance of Patriot Day",
+      "from": "Office of Governor Mark Gordon <WYGOV@public.govdelivery.com>",
+      "sent_date": "2026-09-10",
+      "start_date": "2026-09-10",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "to Half-Staff"
     }
   },
   "channels_seen": {
     "MI": "2026-09-10",
     "KY": "2026-09-10",
     "MO": "2026-09-10",
-    "WY": "2026-08-26",
+    "WY": "2026-09-10",
     "KS": "2026-09-10"
   },
-  "unattributed_senders": {}
+  "unattributed_senders": {
+    "azdoa.gov": {
+      "count": 1,
+      "subjects": [
+        "Gov. Hobbs Orders Flags to Half-Staff in Honor of Patriot Day"
+      ]
+    }
+  }
 }

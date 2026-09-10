@@ -1377,3 +1377,9 @@
 {"at": "2026-09-10T21:20:40+00:00", "state": "OH", "status": "unknown", "reason": null}
 {"at": "2026-09-10T21:20:40+00:00", "state": "PA", "status": "half", "reason": "State order"}
 {"at": "2026-09-10T21:20:40+00:00", "state": "OR", "status": "half", "reason": "Flag at half staff"}
+{"at": "2026-09-10T23:19:08+00:00", "state": "DC", "status": "half", "reason": "State order"}
+{"at": "2026-09-10T23:19:08+00:00", "state": "CA", "status": "full", "reason": null}
+{"at": "2026-09-10T23:19:08+00:00", "state": "ME", "status": "half", "reason": "Governor Mills Orders Flags Lowered in Honor of Victims and Survivors of September 11th"}
+{"at": "2026-09-10T23:19:08+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-09-10T23:19:08+00:00", "state": "MN", "status": "full", "reason": null}
+{"at": "2026-09-10T23:19:08+00:00", "state": "OH", "status": "full", "reason": null}
