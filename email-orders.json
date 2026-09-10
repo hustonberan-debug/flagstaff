@@ -1,19 +1,6 @@
 {
-  "generated_at": "2026-09-09T23:24:47+00:00",
+  "generated_at": "2026-09-10T01:16:17+00:00",
   "orders": {
-    "WY": {
-      "state_code": "WY",
-      "identified_by": "govdelivery account WYGOV",
-      "status": "half",
-      "authority": "governor",
-      "subject": "Governor Gordon Orders Flags Lowered for Dolly Parton",
-      "from": "Office of Governor Mark Gordon <WYGOV@public.govdelivery.com>",
-      "sent_date": "2026-08-26",
-      "start_date": "2026-08-26",
-      "end_date": null,
-      "until_noon": false,
-      "evidence": "Flags Lowered"
-    },
     "KY": {
       "state_code": "KY",
       "identified_by": "sender domain subscriptions.kentucky.gov",
