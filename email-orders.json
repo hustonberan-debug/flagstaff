@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T11:37:46+00:00",
+  "generated_at": "2026-09-10T15:43:53+00:00",
   "orders": {
     "KY": {
       "state_code": "KY",
@@ -13,10 +13,23 @@
       "end_date": null,
       "until_noon": false,
       "evidence": "to Half-Staff"
+    },
+    "MI": {
+      "state_code": "MI",
+      "identified_by": "sender domain govsubscriptions.michigan.gov",
+      "status": "half",
+      "authority": "governor",
+      "subject": "RELEASE: Gov. Whitmer Lowers Flags\u00a0to Honor Patriot Day",
+      "from": "Michigan Executive Office of the Governor <mieog@govsubscriptions.michigan.gov>",
+      "sent_date": "2026-09-10",
+      "start_date": "2026-09-10",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "Lowers Flags"
     }
   },
   "channels_seen": {
-    "MI": "2026-08-25",
+    "MI": "2026-09-10",
     "KY": "2026-08-28",
     "MO": "2026-08-25",
     "WY": "2026-08-26"
