@@ -1348,3 +1348,6 @@
 {"at": "2026-09-10T06:17:23+00:00", "state": "IN", "status": "full", "reason": null}
 {"at": "2026-09-10T06:17:23+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-09-10T06:17:23+00:00", "state": "VA", "status": "full", "reason": null}
+{"at": "2026-09-10T11:37:51+00:00", "state": "IA", "status": "full", "reason": null}
+{"at": "2026-09-10T11:37:51+00:00", "state": "NV", "status": "full", "reason": null}
+{"at": "2026-09-10T11:37:51+00:00", "state": "MN", "status": "full", "reason": null}
