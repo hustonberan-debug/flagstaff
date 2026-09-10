@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-09-10T15:43:53+00:00",
+  "generated_at": "2026-09-10T18:53:55+00:00",
   "orders": {
     "KY": {
       "state_code": "KY",
       "identified_by": "sender domain subscriptions.kentucky.gov",
       "status": "half",
       "authority": "governor",
-      "subject": "Gov. Beshear Orders Flags to Half-Staff Monday for Overdose Victims",
+      "subject": "Gov. Beshear Orders Flags to Half-Staff for Patriot Day",
       "from": "Governor's Communications Office <governor@subscriptions.kentucky.gov>",
-      "sent_date": "2026-08-28",
-      "start_date": "2026-08-28",
+      "sent_date": "2026-09-10",
+      "start_date": "2026-09-10",
       "end_date": null,
       "until_noon": false,
       "evidence": "to Half-Staff"
@@ -26,13 +26,27 @@
       "end_date": null,
       "until_noon": false,
       "evidence": "Lowers Flags"
+    },
+    "KS": {
+      "state_code": "KS",
+      "identified_by": "sender domain ks.gov",
+      "status": "half",
+      "authority": "governor",
+      "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of the 25th Anniversary of 9/11",
+      "from": "Kansas Office of the Governor <govpress@list.ks.gov>",
+      "sent_date": "2026-09-10",
+      "start_date": "2026-09-10",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "at Half-Staff"
     }
   },
   "channels_seen": {
     "MI": "2026-09-10",
-    "KY": "2026-08-28",
+    "KY": "2026-09-10",
     "MO": "2026-08-25",
-    "WY": "2026-08-26"
+    "WY": "2026-08-26",
+    "KS": "2026-09-10"
   },
   "unattributed_senders": {}
 }
