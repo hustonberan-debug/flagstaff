@@ -1383,3 +1383,11 @@
 {"at": "2026-09-10T23:19:08+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-09-10T23:19:08+00:00", "state": "MN", "status": "full", "reason": null}
 {"at": "2026-09-10T23:19:08+00:00", "state": "OH", "status": "full", "reason": null}
+{"at": "2026-09-11T01:18:38+00:00", "state": "CA", "status": "half", "reason": "Patriot Day"}
+{"at": "2026-09-11T01:18:38+00:00", "state": "IA", "status": "half", "reason": "Patriot Day"}
+{"at": "2026-09-11T01:18:38+00:00", "state": "MD", "status": "half", "reason": "Patriot Day"}
+{"at": "2026-09-11T01:18:38+00:00", "state": "NV", "status": "half", "reason": "Patriot Day"}
+{"at": "2026-09-11T01:18:38+00:00", "state": "MS", "status": "half", "reason": "Patriot Day"}
+{"at": "2026-09-11T01:18:38+00:00", "state": "OH", "status": "half", "reason": "Patriot Day"}
+{"at": "2026-09-11T01:18:38+00:00", "state": "WV", "status": "half", "reason": "Patriot Day"}
+{"at": "2026-09-11T01:18:38+00:00", "state": "MO", "status": "half", "reason": "Patriot Day"}
