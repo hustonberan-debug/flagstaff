@@ -35,7 +35,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-10T23:18:36+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-10T23:18:36+00:00"
   },
   "CA": {
@@ -43,7 +43,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T01:18:06+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-11T01:18:06+00:00"
   },
   "AL": {
@@ -51,15 +51,15 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-09-03T13:44:36+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": null
   },
   "CO": {
-    "hash": "6e63234c11515c48",
+    "hash": "39115882509bdb4c",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-03T17:28:05+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_parsed": "2026-09-11T15:45:18+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": null
   },
   "AZ": {
@@ -75,7 +75,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-11T11:39:10+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-11T11:39:10+00:00"
   },
   "AK": {
@@ -91,11 +91,11 @@
       "end_date": null
     },
     "last_parsed": "2026-09-09T23:24:47+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-09T23:24:47+00:00"
   },
   "IA": {
-    "hash": "efafcaf22da53feb",
+    "hash": "1a613bf886324daa",
     "state_status": "half",
     "state_order": {
       "title": "Gov. Reynolds orders flags at half-staff for 25th anniversary of 9/11 attacks",
@@ -112,9 +112,9 @@
       "date": "2026-09-10",
       "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live"
     },
-    "last_parsed": "2026-09-11T01:18:06+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
-    "last_changed_at": "2026-09-11T01:18:06+00:00"
+    "last_parsed": "2026-09-11T15:45:18+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
+    "last_changed_at": "2026-09-11T15:45:18+00:00"
   },
   "HI": {
     "hash": "02812a0a37ffd3d9",
@@ -135,7 +135,7 @@
       "coverage_reason": "order dated 2026-09-10"
     },
     "last_parsed": "2026-09-10T21:20:36+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-10T21:20:36+00:00"
   },
   "GA": {
@@ -143,47 +143,47 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-10T15:43:54+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-10T15:43:54+00:00"
   },
   "DE": {
-    "hash": "7b9b13a712562dbb",
-    "state_status": "full",
+    "hash": "8849a67a0cb2967c",
+    "state_status": "half",
     "state_order": {
       "title": null,
       "url": "https://news.delaware.gov/flag-status/",
-      "status": "full",
+      "status": "half",
       "authority": "governor",
-      "evidence": "declaration: 'Flag Status - FULL STAFF'",
+      "evidence": "declaration: 'Flag Status - HALF STAFF'",
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-10T21:20:36+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
-    "last_changed_at": "2026-09-10T21:20:36+00:00"
+    "last_parsed": "2026-09-11T15:45:18+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
+    "last_changed_at": "2026-09-11T15:45:18+00:00"
   },
   "FL": {
-    "hash": "5e9a671ae154fd40",
-    "state_status": "full",
+    "hash": "f374db7da8948e76",
+    "state_status": "half",
     "state_order": {
       "title": null,
       "url": "https://www.flgov.com/eog/info/flag-information",
-      "status": "full",
+      "status": "half",
       "authority": "governor",
-      "evidence": "declaration: 'Flag Status: Full Staff'",
+      "evidence": "declaration: 'Flag Status: Half Staff'",
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-11T11:39:10+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
-    "last_changed_at": "2026-09-11T11:39:10+00:00"
+    "last_parsed": "2026-09-11T15:45:18+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
+    "last_changed_at": "2026-09-11T15:45:18+00:00"
   },
   "AR": {
     "hash": "88ef621102430368",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-02T16:47:36+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-02T16:47:36+00:00"
   },
   "LA": {
@@ -199,7 +199,7 @@
       "end_date": null
     },
     "last_parsed": "2026-08-31T14:46:06+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-08-31T14:46:06+00:00"
   },
   "MI": {
@@ -216,8 +216,8 @@
       "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live",
       "via": "official notification email"
     },
-    "last_parsed": "2026-09-11T11:39:10+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_parsed": "2026-09-11T15:45:19+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
     "last_changed_at": "2026-09-10T15:43:55+00:00"
   },
   "MD": {
@@ -225,23 +225,23 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T06:20:22+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-11T06:20:22+00:00"
   },
   "NC": {
-    "hash": "824fb1eff277e6ff",
+    "hash": "3c9c3b88b678614c",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-10T21:20:37+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
-    "last_changed_at": "2026-09-10T21:20:37+00:00"
+    "last_parsed": "2026-09-11T15:45:19+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
+    "last_changed_at": "2026-09-11T15:45:19+00:00"
   },
   "ME": {
-    "hash": "83cc114c57d7da95",
+    "hash": "d673675f33e577a3",
     "state_status": "half",
     "state_order": {
       "title": "Governor Mills Orders Flags Lowered in Honor of Victims and Survivors of September 11th",
-      "url": "https://www.maine.gov/governor/mills/news/governor-mills-orders-flags-lowered-honor-victims-and-survivors-september-11th-2026-09-10",
+      "url": "https://www.maine.gov/governor/mills/index.php/news/governor-mills-orders-flags-lowered-honor-victims-and-survivors-september-11th-2026-09-10",
       "status": "half",
       "authority": "governor",
       "start_date": "2026-09-10",
@@ -252,18 +252,18 @@
       "usable_as_state_order": true,
       "dates_from": "order body",
       "date": null,
-      "coverage_reason": "order dated 2026-09-10"
+      "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live"
     },
-    "last_parsed": "2026-09-10T23:18:36+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
-    "last_changed_at": "2026-09-10T23:18:36+00:00"
+    "last_parsed": "2026-09-11T15:45:19+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
+    "last_changed_at": "2026-09-11T15:45:19+00:00"
   },
   "NE": {
     "hash": "3e4b796f698a0979",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-04T19:45:55+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
     "last_changed_at": "2026-09-04T19:45:55+00:00"
   },
   "KY": {
@@ -271,7 +271,7 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:19+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-08-26T18:05:19+00:00"
   },
   "CT": {
@@ -279,7 +279,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-10T21:20:36+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-10T21:20:36+00:00"
   },
   "IN": {
@@ -287,24 +287,24 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T06:20:21+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-11T06:20:21+00:00"
   },
   "MS": {
-    "hash": "d42fefff13722531",
-    "state_status": "full",
+    "hash": "84d96a72d407e39a",
+    "state_status": "half",
     "state_order": {
       "title": null,
       "url": "https://governorreeves.ms.gov/flag-status/",
-      "status": "full",
+      "status": "half",
       "authority": "governor",
-      "evidence": "declaration: 'Flag Status: Full-Staff'",
+      "evidence": "declaration: 'Flag Status: Half-Staff'",
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-11T01:18:07+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
-    "last_changed_at": "2026-09-11T01:18:07+00:00"
+    "last_parsed": "2026-09-11T15:45:19+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
+    "last_changed_at": "2026-09-11T15:45:19+00:00"
   },
   "ID": {
     "hash": "ce747aeb691cb9dd",
@@ -319,16 +319,16 @@
       "end_date": null
     },
     "last_parsed": "2026-09-10T21:20:36+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:18+00:00",
     "last_changed_at": "2026-09-10T21:20:36+00:00"
   },
   "RI": {
-    "hash": "d0b0358bc6be445c",
+    "hash": "8b68c3013d53d36a",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-04T19:45:56+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
-    "last_changed_at": "2026-09-04T19:45:56+00:00"
+    "last_parsed": "2026-09-11T15:45:20+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
+    "last_changed_at": "2026-09-11T15:45:20+00:00"
   },
   "ND": {
     "hash": "8b1a1d693b57cb89",
@@ -349,31 +349,31 @@
       "coverage_reason": "order dated 2026-09-09"
     },
     "last_parsed": "2026-09-09T21:04:11+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
     "last_changed_at": "2026-09-09T21:04:11+00:00"
   },
   "NV": {
-    "hash": "415680a7a2166233",
-    "state_status": "full",
+    "hash": "430574215e75c4ff",
+    "state_status": "half",
     "state_order": {
       "title": null,
       "url": "https://www.gov.nv.gov/constituent-services/flag-status/",
-      "status": "full",
+      "status": "half",
       "authority": "governor",
-      "evidence": "declaration: 'Flags at Full-Staff'",
+      "evidence": "declaration: 'Flags at Half-Staff'",
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-11T11:39:11+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
-    "last_changed_at": "2026-09-11T11:39:11+00:00"
+    "last_parsed": "2026-09-11T15:45:19+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
+    "last_changed_at": "2026-09-11T15:45:19+00:00"
   },
   "TN": {
     "hash": "f24f48e09c8dcf4f",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-29T00:37:47+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-08-29T00:37:47+00:00"
   },
   "SC": {
@@ -381,7 +381,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:20+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-08-26T18:05:20+00:00"
   },
   "NJ": {
@@ -389,7 +389,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:19+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
     "last_changed_at": "2026-08-26T18:05:19+00:00"
   },
   "MO": {
@@ -397,7 +397,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T01:18:07+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
     "last_changed_at": "2026-09-11T01:18:07+00:00"
   },
   "OH": {
@@ -413,7 +413,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-11T11:39:11+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-09-11T11:39:11+00:00"
   },
   "VT": {
@@ -421,7 +421,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:20+00:00",
-    "last_checked": "2026-09-11T11:39:12+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-08-26T18:05:20+00:00"
   },
   "VA": {
@@ -437,7 +437,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-11T06:20:23+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-09-11T06:20:23+00:00"
   },
   "WA": {
@@ -445,7 +445,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T06:20:23+00:00",
-    "last_checked": "2026-09-11T11:39:12+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-09-11T06:20:23+00:00"
   },
   "WV": {
@@ -467,7 +467,7 @@
       "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live"
     },
     "last_parsed": "2026-09-11T01:18:08+00:00",
-    "last_checked": "2026-09-11T11:39:12+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-09-11T01:18:08+00:00"
   },
   "MN": {
@@ -475,7 +475,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T06:20:22+00:00",
-    "last_checked": "2026-09-11T11:39:10+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
     "last_changed_at": "2026-09-11T06:20:22+00:00"
   },
   "PA": {
@@ -491,7 +491,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-10T21:20:37+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-09-10T21:20:37+00:00"
   },
   "WI": {
@@ -499,7 +499,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:20+00:00",
-    "last_checked": "2026-09-11T11:39:12+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-08-26T18:05:20+00:00"
   },
   "OR": {
@@ -521,31 +521,31 @@
       "coverage_reason": "order dated 2026-09-09 (1d ago), no stated end - treated as live"
     },
     "last_parsed": "2026-09-10T21:20:37+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-09-10T21:20:37+00:00"
   },
   "UT": {
-    "hash": "99b8313ac6ae55e2",
-    "state_status": "full",
+    "hash": "499621d971952d9f",
+    "state_status": "half",
     "state_order": {
       "title": null,
       "url": "https://governor.utah.gov/flag-status",
-      "status": "full",
+      "status": "half",
       "authority": "governor",
-      "evidence": "declaration: 'are currently at Full Staff'",
+      "evidence": "declaration: 'are currently at Half Staff'",
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-10T15:43:56+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
-    "last_changed_at": "2026-09-10T15:43:56+00:00"
+    "last_parsed": "2026-09-11T15:45:20+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
+    "last_changed_at": "2026-09-11T15:45:20+00:00"
   },
   "SD": {
     "hash": "ccab90cc12387791",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-10T18:53:58+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
     "last_changed_at": "2026-09-10T18:53:58+00:00"
   },
   "NM": {
@@ -553,24 +553,24 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-09T23:24:48+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
+    "last_checked": "2026-09-11T15:45:19+00:00",
     "last_changed_at": "2026-09-09T23:24:48+00:00"
   },
   "TX": {
-    "hash": "94fb8c4265246e44",
-    "state_status": "full",
+    "hash": "df9f8466eb0c3a39",
+    "state_status": "half",
     "state_order": {
       "title": null,
       "url": "https://gov.texas.gov/flag-status",
-      "status": "full",
+      "status": "half",
       "authority": "governor",
-      "evidence": "declaration: 'Flag Status: Full-Staff'",
+      "evidence": "declaration: 'Flag Status: Half-Staff'",
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-04T17:23:28+00:00",
-    "last_checked": "2026-09-11T11:39:11+00:00",
-    "last_changed_at": "2026-09-04T17:23:28+00:00"
+    "last_parsed": "2026-09-11T15:45:20+00:00",
+    "last_checked": "2026-09-11T15:45:20+00:00",
+    "last_changed_at": "2026-09-11T15:45:20+00:00"
   },
   "_federal_announced": "Patriot Day"
 }
