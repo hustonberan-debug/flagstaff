@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T01:18:38+00:00",
+  "generated_at": "2026-09-11T06:20:25+00:00",
   "date": "2026-09-11",
   "federal": {
     "status": "half",
@@ -9,7 +9,7 @@
     "authority": "statute",
     "citation": "36 U.S.C. \u00a7 144(b)",
     "source_url": null,
-    "_changed": true
+    "_changed": false
   },
   "states": {
     "AK": {
@@ -29,7 +29,7 @@
         "end_date": null
       },
       "source_url": "https://gov.alaska.gov/services/status-of-the-flag/",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-09T23:24:47+00:00",
       "changed": false,
       "error": null,
@@ -45,7 +45,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "AL": {
@@ -57,7 +57,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governor.alabama.gov/flag-status/",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": null,
@@ -73,7 +73,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "AR": {
@@ -85,7 +85,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.arkansas.gov/newsroom/",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-02T16:47:36+00:00",
       "changed": false,
       "error": null,
@@ -101,7 +101,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "AZ": {
@@ -121,7 +121,7 @@
         "end_date": null
       },
       "source_url": "https://az.gov/half-staff-notices",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-10T21:20:36+00:00",
       "changed": false,
       "error": null,
@@ -137,7 +137,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "CA": {
@@ -149,11 +149,10 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.gov.ca.gov/feed/",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-11T01:18:06+00:00",
-      "changed": true,
+      "changed": false,
       "error": null,
-      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Patriot Day",
       "reason_source": "federal",
@@ -166,7 +165,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "CO": {
@@ -178,7 +177,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governorsoffice.colorado.gov/governor/flag-status",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": null,
@@ -194,7 +193,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "CT": {
@@ -206,7 +205,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://portal.ct.gov/governor/news/press-releases",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-10T21:20:36+00:00",
       "changed": false,
       "error": null,
@@ -222,7 +221,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "DC": {
@@ -242,7 +241,7 @@
         "end_date": null
       },
       "source_url": "https://os.dc.gov/service/flag-status",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-10T23:18:36+00:00",
       "changed": false,
       "error": null,
@@ -258,7 +257,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "DE": {
@@ -278,7 +277,7 @@
         "end_date": null
       },
       "source_url": "https://news.delaware.gov/flag-status/",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-10T21:20:36+00:00",
       "changed": false,
       "error": null,
@@ -294,7 +293,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "FL": {
@@ -314,7 +313,7 @@
         "end_date": null
       },
       "source_url": "https://www.flgov.com/eog/info/flag-information",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-10T06:17:18+00:00",
       "changed": false,
       "error": null,
@@ -330,7 +329,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "GA": {
@@ -342,7 +341,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://gov.ga.gov/rss.xml",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-10T15:43:54+00:00",
       "changed": false,
       "error": null,
@@ -358,7 +357,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "HI": {
@@ -384,7 +383,7 @@
         "coverage_reason": "order dated 2026-09-10"
       },
       "source_url": "https://governor.hawaii.gov/category/newsroom/feed/",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-10T21:20:36+00:00",
       "changed": false,
       "error": null,
@@ -400,7 +399,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "IA": {
@@ -426,9 +425,9 @@
         "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://governor.iowa.gov/news/all/all/all/rss.xml",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-11T01:18:06+00:00",
-      "changed": true,
+      "changed": false,
       "error": null,
       "effective_status": "half",
       "reason": "Patriot Day",
@@ -442,7 +441,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "ID": {
@@ -462,7 +461,7 @@
         "end_date": null
       },
       "source_url": "https://gov.idaho.gov/flag-status/",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-09-10T21:20:36+00:00",
       "changed": false,
       "error": null,
@@ -478,7 +477,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "IL": {
@@ -490,7 +489,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -506,7 +505,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "IN": {
@@ -518,10 +517,11 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://events.in.gov/group/gov",
-      "checked_at": "2026-09-11T01:18:06+00:00",
-      "last_changed_at": "2026-09-10T18:53:56+00:00",
-      "changed": false,
+      "checked_at": "2026-09-11T06:20:21+00:00",
+      "last_changed_at": "2026-09-11T06:20:21+00:00",
+      "changed": true,
       "error": null,
+      "last_expired_order": null,
       "effective_status": "half",
       "reason": "Patriot Day",
       "reason_source": "federal",
@@ -534,7 +534,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "KS": {
@@ -546,7 +546,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.governor.ks.gov/newsroom/kansas-flag-honors",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
@@ -562,7 +562,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "KY": {
@@ -574,7 +574,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governor.ky.gov/flag-status",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:21+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
@@ -590,7 +590,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "LA": {
@@ -610,7 +610,7 @@
         "end_date": null
       },
       "source_url": "https://gov.louisiana.gov/page/flag-status",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": "2026-08-31T14:46:06+00:00",
       "changed": false,
       "error": null,
@@ -626,7 +626,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "MA": {
@@ -638,7 +638,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.mass.gov/info-details/flag-status",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
@@ -654,7 +654,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "MD": {
@@ -666,8 +666,8 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.maryland.gov/news/press-releases",
-      "checked_at": "2026-09-11T01:18:06+00:00",
-      "last_changed_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
+      "last_changed_at": "2026-09-11T06:20:22+00:00",
       "changed": true,
       "error": null,
       "last_expired_order": null,
@@ -683,7 +683,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "ME": {
@@ -709,7 +709,7 @@
         "coverage_reason": "order dated 2026-09-10"
       },
       "source_url": "https://www.maine.gov/governor/mills/newsroom",
-      "checked_at": "2026-09-11T01:18:06+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": "2026-09-10T23:18:36+00:00",
       "changed": false,
       "error": null,
@@ -725,7 +725,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "MI": {
@@ -747,7 +747,7 @@
         "via": "official notification email"
       },
       "source_url": "https://public.govdelivery.com/accounts/MIEOG/subscriber/new",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": "2026-09-10T15:43:55+00:00",
       "changed": false,
       "error": null,
@@ -763,7 +763,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "MN": {
@@ -775,8 +775,37 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp",
-      "checked_at": "2026-09-11T01:18:07+00:00",
-      "last_changed_at": "2026-09-10T23:18:36+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
+      "last_changed_at": "2026-09-11T06:20:22+00:00",
+      "changed": true,
+      "error": null,
+      "last_expired_order": null,
+      "effective_status": "half",
+      "reason": "Patriot Day",
+      "reason_source": "federal",
+      "scope": "full-day",
+      "federal": {
+        "status": "half",
+        "scope": "full-day",
+        "reason": "Patriot Day",
+        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
+        "authority": "statute",
+        "citation": "36 U.S.C. \u00a7 144(b)",
+        "source_url": null,
+        "_changed": false
+      }
+    },
+    "MO": {
+      "state": "Missouri",
+      "state_code": "MO",
+      "coverage": "covered",
+      "ingest_mode": "archive",
+      "confidence": "high",
+      "state_status": "full",
+      "state_order": null,
+      "source_url": "https://oa.mo.gov/facilities/facilities-operations/flag-display/flag-notifications",
+      "checked_at": "2026-09-11T06:20:22+00:00",
+      "last_changed_at": "2026-09-11T01:18:07+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
@@ -791,40 +820,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
-      }
-    },
-    "MO": {
-      "state": "Missouri",
-      "state_code": "MO",
-      "coverage": "covered",
-      "ingest_mode": "archive",
-      "confidence": "high",
-      "state_status": "full",
-      "state_order": null,
-      "source_url": "https://oa.mo.gov/facilities/facilities-operations/flag-display/flag-notifications",
-      "checked_at": "2026-09-11T01:18:07+00:00",
-      "last_changed_at": "2026-09-11T01:18:07+00:00",
-      "changed": true,
-      "error": null,
-      "last_expired_order": {
-        "title": "August 25, 2026 President Trump ordered all U.S. flags to half-staff August 25, 2026 - September 1, 2026 to honor Dolly Parton. More information and President Trump's official Truth Social post are av",
-        "url": "https://flagsexpress.com/blog/flags-half-staff/united-states/august-25-2026/Dolly-Parton/",
-        "why": "started 2026-08-25, no end date, 17d old, presumed concluded"
-      },
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "MS": {
@@ -844,12 +840,10 @@
         "end_date": null
       },
       "source_url": "https://governorreeves.ms.gov/flag-status/",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": "2026-09-11T01:18:07+00:00",
-      "changed": true,
+      "changed": false,
       "error": null,
-      "source_last_modified": "2026-09-08",
-      "source_age_days": 3,
       "effective_status": "half",
       "reason": "Patriot Day",
       "reason_source": "federal",
@@ -862,7 +856,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "MT": {
@@ -874,7 +868,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -890,7 +884,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "NC": {
@@ -902,7 +896,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nc.gov/news/feed",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": "2026-09-10T21:20:37+00:00",
       "changed": false,
       "error": null,
@@ -918,7 +912,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "ND": {
@@ -944,7 +938,7 @@
         "coverage_reason": "order dated 2026-09-09"
       },
       "source_url": "https://www.governor.nd.gov/rss/news",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": "2026-09-09T21:04:11+00:00",
       "changed": false,
       "error": null,
@@ -960,7 +954,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "NE": {
@@ -972,7 +966,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nebraska.gov/press-releases",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": "2026-09-04T19:45:55+00:00",
       "changed": false,
       "error": null,
@@ -988,7 +982,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "NH": {
@@ -1000,7 +994,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -1016,7 +1010,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "NJ": {
@@ -1028,7 +1022,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://newjersey.gov/newsroom",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
@@ -1044,7 +1038,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "NM": {
@@ -1056,7 +1050,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nm.gov/newsroom",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:22+00:00",
       "last_changed_at": "2026-09-09T23:24:48+00:00",
       "changed": false,
       "error": null,
@@ -1072,7 +1066,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "NV": {
@@ -1092,8 +1086,8 @@
         "end_date": null
       },
       "source_url": "https://www.gov.nv.gov/constituent-services/flag-status/",
-      "checked_at": "2026-09-11T01:18:07+00:00",
-      "last_changed_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
+      "last_changed_at": "2026-09-11T06:20:23+00:00",
       "changed": true,
       "error": null,
       "source_last_modified": "2026-09-02",
@@ -1110,7 +1104,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "NY": {
@@ -1122,7 +1116,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.governor.ny.gov/news",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
@@ -1138,24 +1132,22 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "OH": {
       "state": "Ohio",
       "state_code": "OH",
-      "coverage": "stale",
+      "coverage": "covered",
       "ingest_mode": "diff",
       "confidence": "medium",
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governor.ohio.gov/flag-honors",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-09-10T23:18:37+00:00",
-      "changed": true,
-      "error": "source appears frozen: newest date on page is 2001-09-11 (9131d old) - not trusted",
-      "source_last_modified": "2001-09-11",
-      "source_age_days": 9131,
+      "changed": false,
+      "error": null,
       "effective_status": "half",
       "reason": "Patriot Day",
       "reason_source": "federal",
@@ -1168,7 +1160,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "OK": {
@@ -1180,7 +1172,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -1196,7 +1188,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "OR": {
@@ -1222,7 +1214,7 @@
         "coverage_reason": "order dated 2026-09-09 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-09-10T21:20:37+00:00",
       "changed": false,
       "error": null,
@@ -1238,7 +1230,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "PA": {
@@ -1258,7 +1250,7 @@
         "end_date": null
       },
       "source_url": "https://www.pa.gov/agencies/dgs/flag-notices.html",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-09-10T21:20:37+00:00",
       "changed": false,
       "error": null,
@@ -1274,7 +1266,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "RI": {
@@ -1286,7 +1278,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.ri.gov/press-releases.xml",
-      "checked_at": "2026-09-11T01:18:07+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-09-04T19:45:56+00:00",
       "changed": false,
       "error": null,
@@ -1302,7 +1294,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "SC": {
@@ -1314,7 +1306,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.sc.gov/taxonomy/term/3/feed",
-      "checked_at": "2026-09-11T01:18:08+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
@@ -1330,7 +1322,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "SD": {
@@ -1342,7 +1334,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.sd.gov/news/press-releases.aspx",
-      "checked_at": "2026-09-11T01:18:08+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-09-10T18:53:58+00:00",
       "changed": false,
       "error": null,
@@ -1358,7 +1350,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "TN": {
@@ -1370,7 +1362,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.tn.gov/governor/news.html",
-      "checked_at": "2026-09-11T01:18:08+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-08-29T00:37:47+00:00",
       "changed": false,
       "error": null,
@@ -1386,7 +1378,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "TX": {
@@ -1406,7 +1398,7 @@
         "end_date": null
       },
       "source_url": "https://gov.texas.gov/flag-status",
-      "checked_at": "2026-09-11T01:18:08+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-09-04T17:23:28+00:00",
       "changed": false,
       "error": null,
@@ -1422,7 +1414,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "UT": {
@@ -1442,7 +1434,7 @@
         "end_date": null
       },
       "source_url": "https://governor.utah.gov/flag-status",
-      "checked_at": "2026-09-11T01:18:08+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-09-10T15:43:56+00:00",
       "changed": false,
       "error": null,
@@ -1458,7 +1450,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "VA": {
@@ -1467,21 +1459,23 @@
       "coverage": "covered",
       "ingest_mode": "diff",
       "confidence": "medium",
-      "state_status": "full",
+      "state_status": "half",
       "state_order": {
         "title": null,
         "url": "https://www.governor.virginia.gov/constituent-services/flag-information/",
-        "status": "full",
+        "status": "half",
         "authority": "governor",
-        "evidence": "declaration: 'National Flag: Full Staff'",
+        "evidence": "declaration: 'National Flag: Half Staff'",
         "start_date": null,
         "end_date": null
       },
       "source_url": "https://www.governor.virginia.gov/constituent-services/flag-information/",
-      "checked_at": "2026-09-11T01:18:08+00:00",
-      "last_changed_at": "2026-09-10T06:17:20+00:00",
-      "changed": false,
+      "checked_at": "2026-09-11T06:20:23+00:00",
+      "last_changed_at": "2026-09-11T06:20:23+00:00",
+      "changed": true,
       "error": null,
+      "source_last_modified": "2026-09-11",
+      "source_age_days": 0,
       "effective_status": "half",
       "reason": "Patriot Day",
       "reason_source": "federal",
@@ -1494,7 +1488,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "VT": {
@@ -1506,7 +1500,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.vermont.gov/taxonomy/term/3/feed",
-      "checked_at": "2026-09-11T01:18:08+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
@@ -1522,7 +1516,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "WA": {
@@ -1534,8 +1528,37 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.wa.gov/rss.xml",
-      "checked_at": "2026-09-11T01:18:08+00:00",
-      "last_changed_at": "2026-09-10T15:43:56+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
+      "last_changed_at": "2026-09-11T06:20:23+00:00",
+      "changed": true,
+      "error": null,
+      "last_expired_order": null,
+      "effective_status": "half",
+      "reason": "Patriot Day",
+      "reason_source": "federal",
+      "scope": "full-day",
+      "federal": {
+        "status": "half",
+        "scope": "full-day",
+        "reason": "Patriot Day",
+        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
+        "authority": "statute",
+        "citation": "36 U.S.C. \u00a7 144(b)",
+        "source_url": null,
+        "_changed": false
+      }
+    },
+    "WI": {
+      "state": "Wisconsin",
+      "state_code": "WI",
+      "coverage": "covered",
+      "ingest_mode": "index",
+      "confidence": "medium",
+      "state_status": "full",
+      "state_order": null,
+      "source_url": "https://governor.wi.gov/newsroom",
+      "checked_at": "2026-09-11T06:20:23+00:00",
+      "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
@@ -1550,35 +1573,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
-      }
-    },
-    "WI": {
-      "state": "Wisconsin",
-      "state_code": "WI",
-      "coverage": "stale",
-      "ingest_mode": "index",
-      "confidence": "medium",
-      "state_status": "full",
-      "state_order": null,
-      "source_url": "https://governor.wi.gov/newsroom",
-      "checked_at": "2026-09-11T01:18:08+00:00",
-      "last_changed_at": "2026-08-26T18:05:20+00:00",
-      "changed": false,
-      "error": "timeout",
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "WV": {
@@ -1604,9 +1599,9 @@
         "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://governor.wv.gov/rss.xml",
-      "checked_at": "2026-09-11T01:18:08+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": "2026-09-11T01:18:08+00:00",
-      "changed": true,
+      "changed": false,
       "error": null,
       "effective_status": "half",
       "reason": "Patriot Day",
@@ -1620,7 +1615,7 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     },
     "WY": {
@@ -1632,7 +1627,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-09-11T01:18:08+00:00",
+      "checked_at": "2026-09-11T06:20:23+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
@@ -1648,15 +1643,15 @@
         "authority": "statute",
         "citation": "36 U.S.C. \u00a7 144(b)",
         "source_url": null,
-        "_changed": true
+        "_changed": false
       }
     }
   },
   "meta": {
-    "covered": 41,
+    "covered": 43,
     "not_covered": 8,
-    "stale": 2,
-    "errors": 10,
+    "stale": 0,
+    "errors": 8,
     "total": 51
   }
 }
