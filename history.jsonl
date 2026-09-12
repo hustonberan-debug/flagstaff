@@ -1454,3 +1454,5 @@
 {"at": "2026-09-12T20:05:06+00:00", "state": "HI", "status": "half", "reason": "Office of the Governor &#8211; Flag Order &#8211; Gov. Green Lowers Flags For Patriot Day"}
 {"at": "2026-09-12T20:05:06+00:00", "state": "NV", "status": "full", "reason": null}
 {"at": "2026-09-12T20:05:06+00:00", "state": "MN", "status": "full", "reason": null}
+{"at": "2026-09-12T22:26:41+00:00", "state": "FL", "status": "unknown", "reason": null}
+{"at": "2026-09-12T22:26:41+00:00", "state": "NV", "status": "full", "reason": null}
