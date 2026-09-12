@@ -1,19 +1,6 @@
 {
-  "generated_at": "2026-09-11T23:49:58+00:00",
+  "generated_at": "2026-09-12T02:49:31+00:00",
   "orders": {
-    "KY": {
-      "state_code": "KY",
-      "identified_by": "sender domain subscriptions.kentucky.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "Gov. Beshear Orders Flags to Half-Staff for Patriot Day",
-      "from": "Governor's Communications Office <governor@subscriptions.kentucky.gov>",
-      "sent_date": "2026-09-10",
-      "start_date": "2026-09-10",
-      "end_date": null,
-      "until_noon": false,
-      "evidence": "to Half-Staff"
-    },
     "MI": {
       "state_code": "MI",
       "identified_by": "sender domain govsubscriptions.michigan.gov",
@@ -39,6 +26,19 @@
       "end_date": null,
       "until_noon": false,
       "evidence": "at Half-Staff"
+    },
+    "KY": {
+      "state_code": "KY",
+      "identified_by": "sender domain subscriptions.kentucky.gov",
+      "status": "half",
+      "authority": "governor",
+      "subject": "Gov. Beshear Orders Flags to Half-Staff for Patriot Day",
+      "from": "Governor's Communications Office <governor@subscriptions.kentucky.gov>",
+      "sent_date": "2026-09-10",
+      "start_date": "2026-09-10",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "to Half-Staff"
     },
     "MO": {
       "state_code": "MO",

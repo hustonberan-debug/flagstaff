@@ -1,16 +1,7 @@
 {
-  "generated_at": "2026-09-11T23:50:30+00:00",
-  "date": "2026-09-11",
-  "federal": {
-    "status": "half",
-    "scope": "full-day",
-    "reason": "Patriot Day",
-    "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-    "authority": "statute",
-    "citation": "36 U.S.C. \u00a7 144(b)",
-    "source_url": null,
-    "_changed": false
-  },
+  "generated_at": "2026-09-12T02:49:36+00:00",
+  "date": "2026-09-12",
+  "federal": null,
   "states": {
     "AK": {
       "state": "Alaska",
@@ -29,24 +20,14 @@
         "end_date": null
       },
       "source_url": "https://gov.alaska.gov/services/status-of-the-flag/",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-09T23:24:47+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "AL": {
       "state": "Alabama",
@@ -57,24 +38,14 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governor.alabama.gov/flag-status/",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "AR": {
       "state": "Arkansas",
@@ -85,24 +56,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.arkansas.gov/newsroom/",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-02T16:47:36+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "AZ": {
       "state": "Arizona",
@@ -121,24 +82,14 @@
         "end_date": null
       },
       "source_url": "https://az.gov/half-staff-notices",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-11T11:39:10+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "State order",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "CA": {
       "state": "California",
@@ -149,24 +100,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.gov.ca.gov/feed/",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-11T21:32:20+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "CO": {
       "state": "Colorado",
@@ -177,24 +118,14 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governorsoffice.colorado.gov/governor/flag-status",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "CT": {
       "state": "Connecticut",
@@ -219,24 +150,14 @@
         "coverage_reason": "order dated 2026-09-11"
       },
       "source_url": "https://portal.ct.gov/governor/news/press-releases",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-11T23:49:58+00:00",
-      "changed": true,
+      "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "Governor Lamont Directs Flags To Half-Staff Friday in Observance of 9/11 Anniversary",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "DC": {
       "state": "District of Columbia",
@@ -255,24 +176,14 @@
         "end_date": null
       },
       "source_url": "https://os.dc.gov/service/flag-status",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-10T23:18:36+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "State order",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "DE": {
       "state": "Delaware",
@@ -291,24 +202,14 @@
         "end_date": null
       },
       "source_url": "https://news.delaware.gov/flag-status/",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-11T15:45:18+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "State order",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "FL": {
       "state": "Florida",
@@ -327,24 +228,16 @@
         "end_date": null
       },
       "source_url": "https://www.flgov.com/eog/info/flag-information",
-      "checked_at": "2026-09-11T23:49:58+00:00",
-      "last_changed_at": "2026-09-11T21:32:20+00:00",
-      "changed": false,
+      "checked_at": "2026-09-12T02:49:32+00:00",
+      "last_changed_at": "2026-09-12T02:49:32+00:00",
+      "changed": true,
       "error": null,
+      "source_last_modified": "2026-09-11",
+      "source_age_days": 1,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "State order",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "GA": {
       "state": "Georgia",
@@ -355,24 +248,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://gov.ga.gov/rss.xml",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-10T15:43:54+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "HI": {
       "state": "Hawaii",
@@ -394,27 +277,17 @@
         "usable_as_state_order": true,
         "dates_from": "order body",
         "date": "2026-09-10",
-        "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live"
+        "coverage_reason": "order dated 2026-09-10 (2d ago), no stated end - treated as live"
       },
       "source_url": "https://governor.hawaii.gov/category/newsroom/feed/",
-      "checked_at": "2026-09-11T23:49:58+00:00",
-      "last_changed_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
+      "last_changed_at": "2026-09-12T02:49:32+00:00",
       "changed": true,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "Office of the Governor &#8211; Flag Order &#8211; Gov. Green Lowers Flags For Patriot Day",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "IA": {
       "state": "Iowa",
@@ -439,24 +312,14 @@
         "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://governor.iowa.gov/news/all/all/all/rss.xml",
-      "checked_at": "2026-09-11T23:49:58+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-11T15:45:18+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "Gov. Reynolds orders flags at half-staff for 25th anniversary of 9/11 attacks",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "ID": {
       "state": "Idaho",
@@ -475,24 +338,14 @@
         "end_date": null
       },
       "source_url": "https://gov.idaho.gov/flag-status/",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-10T21:20:36+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "State order",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "IL": {
       "state": "Illinois",
@@ -503,24 +356,14 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "IN": {
       "state": "Indiana",
@@ -531,24 +374,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://events.in.gov/group/gov",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-11T18:56:07+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "KS": {
       "state": "Kansas",
@@ -559,24 +392,14 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.governor.ks.gov/newsroom/kansas-flag-honors",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "KY": {
       "state": "Kentucky",
@@ -587,24 +410,14 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governor.ky.gov/flag-status",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "LA": {
       "state": "Louisiana",
@@ -623,24 +436,14 @@
         "end_date": null
       },
       "source_url": "https://gov.louisiana.gov/page/flag-status",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-08-31T14:46:06+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "MA": {
       "state": "Massachusetts",
@@ -651,24 +454,14 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.mass.gov/info-details/flag-status",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "MD": {
       "state": "Maryland",
@@ -679,25 +472,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.maryland.gov/news/press-releases",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:32+00:00",
       "last_changed_at": "2026-09-11T23:49:59+00:00",
-      "changed": true,
+      "changed": false,
       "error": null,
-      "last_expired_order": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "ME": {
       "state": "Maine",
@@ -722,24 +504,14 @@
         "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://www.maine.gov/governor/mills/newsroom",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": "2026-09-11T15:45:19+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "Governor Mills Orders Flags Lowered in Honor of Victims and Survivors of September 11th",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "MI": {
       "state": "Michigan",
@@ -756,28 +528,18 @@
         "start_date": "2026-09-10",
         "end_date": null,
         "until_noon": false,
-        "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live",
+        "coverage_reason": "order dated 2026-09-10 (2d ago), no stated end - treated as live",
         "via": "official notification email"
       },
       "source_url": "https://public.govdelivery.com/accounts/MIEOG/subscriber/new",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": "2026-09-10T15:43:55+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "RELEASE: Gov. Whitmer Lowers Flags\u00a0to Honor Patriot Day",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "MN": {
       "state": "Minnesota",
@@ -788,24 +550,15 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp",
-      "checked_at": "2026-09-11T23:49:59+00:00",
-      "last_changed_at": "2026-09-11T18:56:08+00:00",
-      "changed": false,
+      "checked_at": "2026-09-12T02:49:33+00:00",
+      "last_changed_at": "2026-09-12T02:49:33+00:00",
+      "changed": true,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "last_expired_order": null,
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "MO": {
       "state": "Missouri",
@@ -816,24 +569,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://oa.mo.gov/facilities/facilities-operations/flag-display/flag-notifications",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": "2026-09-11T01:18:07+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "MS": {
       "state": "Mississippi",
@@ -841,35 +584,27 @@
       "coverage": "covered",
       "ingest_mode": "diff",
       "confidence": "high",
-      "state_status": "half",
+      "state_status": "full",
       "state_order": {
         "title": null,
         "url": "https://governorreeves.ms.gov/flag-status/",
-        "status": "half",
+        "status": "full",
         "authority": "governor",
-        "evidence": "declaration: 'Flag Status: Half-Staff'",
+        "evidence": "declaration: 'Flag Status: Full-Staff'",
         "start_date": null,
         "end_date": null
       },
       "source_url": "https://governorreeves.ms.gov/flag-status/",
-      "checked_at": "2026-09-11T23:49:59+00:00",
-      "last_changed_at": "2026-09-11T15:45:19+00:00",
-      "changed": false,
+      "checked_at": "2026-09-12T02:49:33+00:00",
+      "last_changed_at": "2026-09-12T02:49:33+00:00",
+      "changed": true,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "source_last_modified": "2026-09-11",
+      "source_age_days": 1,
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "MT": {
       "state": "Montana",
@@ -880,24 +615,14 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "NC": {
       "state": "North Carolina",
@@ -908,24 +633,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nc.gov/news/feed",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": "2026-09-11T15:45:19+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "ND": {
       "state": "North Dakota",
@@ -950,24 +665,14 @@
         "coverage_reason": "order dated 2026-09-09"
       },
       "source_url": "https://www.governor.nd.gov/rss/news",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": "2026-09-09T21:04:11+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "Armstrong directs flags flown at half-staff Friday in memory of 9/11 victims on 25th anniversary of attacks",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "NE": {
       "state": "Nebraska",
@@ -978,24 +683,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nebraska.gov/press-releases",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": "2026-09-11T18:56:08+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "NH": {
       "state": "New Hampshire",
@@ -1006,24 +701,14 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "NJ": {
       "state": "New Jersey",
@@ -1034,24 +719,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://newjersey.gov/newsroom",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": "2026-08-26T18:05:19+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "NM": {
       "state": "New Mexico",
@@ -1062,24 +737,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nm.gov/newsroom",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": "2026-09-11T21:32:21+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "NV": {
       "state": "Nevada",
@@ -1098,26 +763,16 @@
         "end_date": null
       },
       "source_url": "https://www.gov.nv.gov/constituent-services/flag-status/",
-      "checked_at": "2026-09-11T23:49:59+00:00",
-      "last_changed_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
+      "last_changed_at": "2026-09-12T02:49:33+00:00",
       "changed": true,
       "error": null,
       "source_last_modified": "2026-09-11",
-      "source_age_days": 0,
+      "source_age_days": 1,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "State order",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "NY": {
       "state": "New York",
@@ -1128,60 +783,34 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.governor.ny.gov/news",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "HTTP 403",
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "OH": {
       "state": "Ohio",
       "state_code": "OH",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "diff",
       "confidence": "medium",
-      "state_status": "half",
-      "state_order": {
-        "title": null,
-        "url": "https://governor.ohio.gov/flag-honors",
-        "status": "half",
-        "authority": "governor",
-        "evidence": "declaration: 'Flag Status Half-Staff'",
-        "start_date": null,
-        "end_date": null
-      },
+      "state_status": "unknown",
+      "state_order": null,
       "source_url": "https://governor.ohio.gov/flag-honors",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:33+00:00",
       "last_changed_at": "2026-09-11T11:39:11+00:00",
-      "changed": false,
-      "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "changed": true,
+      "error": "source appears frozen: newest date on page is 2001-09-11 (9132d old) - not trusted",
+      "source_last_modified": "2001-09-11",
+      "source_age_days": 9132,
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "OK": {
       "state": "Oklahoma",
@@ -1192,24 +821,14 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "OR": {
       "state": "Oregon",
@@ -1234,24 +853,14 @@
         "coverage_reason": "order dated 2026-09-09 (2d ago), no stated end - treated as live"
       },
       "source_url": "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts",
-      "checked_at": "2026-09-11T23:49:59+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-09-11T18:56:09+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "Flag at half staff",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "PA": {
       "state": "Pennsylvania",
@@ -1270,24 +879,14 @@
         "end_date": null
       },
       "source_url": "https://www.pa.gov/agencies/dgs/flag-notices.html",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-09-11T18:56:09+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "State order",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "RI": {
       "state": "Rhode Island",
@@ -1298,24 +897,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.ri.gov/press-releases.xml",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-09-11T15:45:20+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "SC": {
       "state": "South Carolina",
@@ -1326,24 +915,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.sc.gov/taxonomy/term/3/feed",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "SD": {
       "state": "South Dakota",
@@ -1354,24 +933,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.sd.gov/news/press-releases.aspx",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-09-11T18:56:09+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "TN": {
       "state": "Tennessee",
@@ -1382,29 +951,19 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.tn.gov/governor/news.html",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-08-29T00:37:47+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "TX": {
       "state": "Texas",
       "state_code": "TX",
-      "coverage": "stale",
+      "coverage": "covered",
       "ingest_mode": "diff",
       "confidence": "high",
       "state_status": "half",
@@ -1418,24 +977,14 @@
         "end_date": null
       },
       "source_url": "https://gov.texas.gov/flag-status",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-09-11T15:45:20+00:00",
       "changed": false,
-      "error": "ConnectionError",
+      "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "State order",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "UT": {
       "state": "Utah",
@@ -1454,24 +1003,14 @@
         "end_date": null
       },
       "source_url": "https://governor.utah.gov/flag-status",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-09-11T15:45:20+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "State order",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "VA": {
       "state": "Virginia",
@@ -1490,24 +1029,14 @@
         "end_date": null
       },
       "source_url": "https://www.governor.virginia.gov/constituent-services/flag-information/",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-09-11T06:20:23+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "State order",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "VT": {
       "state": "Vermont",
@@ -1518,24 +1047,14 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.vermont.gov/taxonomy/term/3/feed",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "WA": {
       "state": "Washington",
@@ -1546,52 +1065,32 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.wa.gov/rss.xml",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-09-11T06:20:23+00:00",
       "changed": false,
       "error": null,
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "WI": {
       "state": "Wisconsin",
       "state_code": "WI",
-      "coverage": "stale",
+      "coverage": "covered",
       "ingest_mode": "index",
       "confidence": "medium",
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.wi.gov/newsroom",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:34+00:00",
       "last_changed_at": "2026-08-26T18:05:20+00:00",
       "changed": false,
-      "error": "timeout",
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "error": null,
+      "effective_status": "full",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     },
     "WV": {
       "state": "West Virginia",
@@ -1616,24 +1115,14 @@
         "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live"
       },
       "source_url": "https://governor.wv.gov/rss.xml",
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:35+00:00",
       "last_changed_at": "2026-09-11T18:56:09+00:00",
       "changed": false,
       "error": null,
       "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "reason": "Governor Morrisey Orders Flags to Half-Staff in Honor of 25th Anniversary of September 11 Attacks",
+      "reason_source": "state",
+      "scope": "full-day"
     },
     "WY": {
       "state": "Wyoming",
@@ -1644,31 +1133,21 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": null,
-      "checked_at": "2026-09-11T23:50:00+00:00",
+      "checked_at": "2026-09-12T02:49:35+00:00",
       "last_changed_at": null,
       "changed": false,
       "error": "no verified source for this jurisdiction",
-      "effective_status": "half",
-      "reason": "Patriot Day",
-      "reason_source": "federal",
-      "scope": "full-day",
-      "federal": {
-        "status": "half",
-        "scope": "full-day",
-        "reason": "Patriot Day",
-        "detail": "Honoring the individuals who lost their lives in the terrorist attacks of September 11, 2001.",
-        "authority": "statute",
-        "citation": "36 U.S.C. \u00a7 144(b)",
-        "source_url": null,
-        "_changed": false
-      }
+      "effective_status": "unknown",
+      "reason": null,
+      "reason_source": null,
+      "scope": null
     }
   },
   "meta": {
-    "covered": 41,
+    "covered": 42,
     "not_covered": 8,
-    "stale": 2,
-    "errors": 10,
+    "stale": 1,
+    "errors": 9,
     "total": 51
   }
 }
