@@ -35,7 +35,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-10T23:18:36+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
     "last_changed_at": "2026-09-10T23:18:36+00:00"
   },
   "CA": {
@@ -43,7 +43,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
     "last_changed_at": "2026-09-14T17:30:18+00:00"
   },
   "AL": {
@@ -51,7 +51,7 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-09-03T13:44:36+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
     "last_changed_at": null
   },
   "CO": {
@@ -59,7 +59,7 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-09-11T15:45:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
     "last_changed_at": null
   },
   "AZ": {
@@ -75,7 +75,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-12T07:38:22+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
     "last_changed_at": "2026-09-12T07:38:22+00:00"
   },
   "AK": {
@@ -91,7 +91,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-09T23:24:47+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
     "last_changed_at": "2026-09-09T23:24:47+00:00"
   },
   "IA": {
@@ -99,41 +99,27 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-09-14T17:30:18+00:00"
   },
   "HI": {
-    "hash": "47fad800001178be",
-    "state_status": "half",
-    "state_order": {
-      "title": "Office of the Governor &#8211; Flag Order &#8211; Gov. Green Lowers Flags For Patriot Day",
-      "url": "https://governor.hawaii.gov/newsroom/office-of-the-governor-flag-order-gov-green-lowers-flags-for-patriot-day-3/",
-      "status": "half",
-      "authority": "governor",
-      "start_date": "2026-09-10",
-      "end_date": null,
-      "until_noon": false,
-      "status_evidence": "Lowers Flags",
-      "authority_evidence": "Gov. Green Lowers",
-      "usable_as_state_order": true,
-      "dates_from": "order body",
-      "date": "2026-09-10",
-      "coverage_reason": "order dated 2026-09-10 (2d ago), no stated end - treated as live"
-    },
-    "last_parsed": "2026-09-12T20:05:01+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
-    "last_changed_at": "2026-09-12T20:05:01+00:00"
+    "hash": "1599113c790526ff",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-09-14T21:20:45+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
+    "last_changed_at": "2026-09-14T21:20:45+00:00"
   },
   "GA": {
     "hash": "da9d8a0feb32653b",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-10T15:43:54+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
     "last_changed_at": "2026-09-10T15:43:54+00:00"
   },
   "DE": {
-    "hash": "60f3cf7eb5a0ff1a",
+    "hash": "ccf02199625c595d",
     "state_status": "half",
     "state_order": {
       "title": null,
@@ -144,12 +130,12 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
-    "last_changed_at": "2026-09-14T17:30:18+00:00"
+    "last_parsed": "2026-09-14T21:20:44+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
+    "last_changed_at": "2026-09-14T21:20:44+00:00"
   },
   "FL": {
-    "hash": "14dbfadfdca8e320",
+    "hash": "c11860dc154b01fb",
     "state_status": "half",
     "state_order": {
       "title": null,
@@ -160,16 +146,16 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
-    "last_changed_at": "2026-09-14T17:30:18+00:00"
+    "last_parsed": "2026-09-14T21:20:44+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
+    "last_changed_at": "2026-09-14T21:20:44+00:00"
   },
   "AR": {
     "hash": "b239c7dcfe134e5e",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-13T22:31:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
     "last_changed_at": "2026-09-13T22:31:18+00:00"
   },
   "LA": {
@@ -185,15 +171,15 @@
       "end_date": null
     },
     "last_parsed": "2026-08-31T14:46:06+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-08-31T14:46:06+00:00"
   },
   "MI": {
     "hash": "2450b7905a788128",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_parsed": "2026-09-14T21:20:45+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-09-10T15:43:55+00:00"
   },
   "MD": {
@@ -201,45 +187,31 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-09-14T17:30:18+00:00"
   },
   "NC": {
-    "hash": "e3480f85f2a2caa2",
+    "hash": "2ea9302e3691a6ec",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-14T17:30:19+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
-    "last_changed_at": "2026-09-14T17:30:19+00:00"
+    "last_parsed": "2026-09-14T21:20:45+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
+    "last_changed_at": "2026-09-14T21:20:45+00:00"
   },
   "ME": {
-    "hash": "d673675f33e577a3",
-    "state_status": "half",
-    "state_order": {
-      "title": "Governor Mills Orders Flags Lowered in Honor of Victims and Survivors of September 11th",
-      "url": "https://www.maine.gov/governor/mills/index.php/news/governor-mills-orders-flags-lowered-honor-victims-and-survivors-september-11th-2026-09-10",
-      "status": "half",
-      "authority": "governor",
-      "start_date": "2026-09-10",
-      "end_date": null,
-      "until_noon": false,
-      "status_evidence": "Flags Lowered",
-      "authority_evidence": "Governor Mills Orders Flags Lowered",
-      "usable_as_state_order": true,
-      "dates_from": "order body",
-      "date": null,
-      "coverage_reason": "order dated 2026-09-10 (1d ago), no stated end - treated as live"
-    },
-    "last_parsed": "2026-09-11T15:45:19+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
-    "last_changed_at": "2026-09-11T15:45:19+00:00"
+    "hash": "f1af8819675fe6d0",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-09-14T21:20:45+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
+    "last_changed_at": "2026-09-14T21:20:45+00:00"
   },
   "NE": {
     "hash": "655328365342408b",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T18:56:08+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-09-11T18:56:08+00:00"
   },
   "KY": {
@@ -247,7 +219,7 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:19+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-08-26T18:05:19+00:00"
   },
   "CT": {
@@ -269,7 +241,7 @@
       "coverage_reason": "order dated 2026-09-11"
     },
     "last_parsed": "2026-09-11T23:49:58+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:44+00:00",
     "last_changed_at": "2026-09-11T23:49:58+00:00"
   },
   "IN": {
@@ -277,7 +249,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-09-14T17:30:18+00:00"
   },
   "MS": {
@@ -293,7 +265,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-14T00:37:51+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-09-14T00:37:51+00:00"
   },
   "ID": {
@@ -309,7 +281,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-09-14T17:30:18+00:00"
   },
   "RI": {
@@ -317,7 +289,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T15:45:20+00:00",
-    "last_checked": "2026-09-14T17:30:20+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
     "last_changed_at": "2026-09-11T15:45:20+00:00"
   },
   "ND": {
@@ -339,11 +311,11 @@
       "coverage_reason": "order dated 2026-09-09"
     },
     "last_parsed": "2026-09-09T21:04:11+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-09-09T21:04:11+00:00"
   },
   "NV": {
-    "hash": "66c6637f0757e8f0",
+    "hash": "8994dd88dece6147",
     "state_status": "full",
     "state_order": {
       "title": null,
@@ -354,16 +326,16 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-14T17:30:19+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
-    "last_changed_at": "2026-09-14T17:30:19+00:00"
+    "last_parsed": "2026-09-14T21:20:46+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
+    "last_changed_at": "2026-09-14T21:20:46+00:00"
   },
   "TN": {
     "hash": "f24f48e09c8dcf4f",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-29T00:37:47+00:00",
-    "last_checked": "2026-09-14T17:30:20+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
     "last_changed_at": "2026-08-29T00:37:47+00:00"
   },
   "SC": {
@@ -371,7 +343,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:20+00:00",
-    "last_checked": "2026-09-14T17:30:20+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
     "last_changed_at": "2026-08-26T18:05:20+00:00"
   },
   "NJ": {
@@ -379,7 +351,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:19+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-08-26T18:05:19+00:00"
   },
   "MO": {
@@ -387,23 +359,31 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T01:18:07+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-09-11T01:18:07+00:00"
   },
   "OH": {
-    "hash": "6673bcbdbc9607a8",
-    "state_status": "unknown",
-    "state_order": null,
-    "last_parsed": "2026-09-12T02:49:33+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
-    "last_changed_at": "2026-09-11T11:39:11+00:00"
+    "hash": "d31c5d1be7b5d287",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://governor.ohio.gov/flag-honors",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status Full Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-09-14T21:20:46+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
+    "last_changed_at": "2026-09-14T21:20:46+00:00"
   },
   "VT": {
     "hash": "1e48f33811a65aa4",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:20+00:00",
-    "last_checked": "2026-09-14T17:30:20+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
     "last_changed_at": "2026-08-26T18:05:20+00:00"
   },
   "VA": {
@@ -419,31 +399,31 @@
       "end_date": null
     },
     "last_parsed": "2026-09-14T05:41:37+00:00",
-    "last_checked": "2026-09-14T17:30:20+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
     "last_changed_at": "2026-09-14T05:41:37+00:00"
   },
   "WA": {
-    "hash": "f4443f567d7fbf9b",
+    "hash": "4ef17f26d3f955ac",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-14T11:35:02+00:00",
-    "last_checked": "2026-09-14T17:30:20+00:00",
-    "last_changed_at": "2026-09-14T11:35:02+00:00"
+    "last_parsed": "2026-09-14T21:20:46+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
+    "last_changed_at": "2026-09-14T21:20:46+00:00"
   },
   "WV": {
-    "hash": "c2deb0320b04fa72",
+    "hash": "8aea8284d60cc937",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-14T00:37:52+00:00",
-    "last_checked": "2026-09-14T17:30:20+00:00",
-    "last_changed_at": "2026-09-14T00:37:52+00:00"
+    "last_parsed": "2026-09-14T21:20:46+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
+    "last_changed_at": "2026-09-14T21:20:46+00:00"
   },
   "MN": {
     "hash": "2ed25a8477421472",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-14T17:30:18+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
     "last_changed_at": "2026-09-14T17:30:18+00:00"
   },
   "PA": {
@@ -459,7 +439,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-14T17:30:19+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
     "last_changed_at": "2026-09-14T17:30:19+00:00"
   },
   "WI": {
@@ -467,7 +447,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:20+00:00",
-    "last_checked": "2026-09-14T11:35:02+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
     "last_changed_at": "2026-08-26T18:05:20+00:00"
   },
   "OR": {
@@ -489,7 +469,7 @@
       "coverage_reason": "order dated 2026-09-09 (2d ago), no stated end - treated as live"
     },
     "last_parsed": "2026-09-11T18:56:09+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
     "last_changed_at": "2026-09-11T18:56:09+00:00"
   },
   "UT": {
@@ -505,24 +485,24 @@
       "end_date": null
     },
     "last_parsed": "2026-09-12T07:38:24+00:00",
-    "last_checked": "2026-09-14T17:30:20+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
     "last_changed_at": "2026-09-12T07:38:24+00:00"
   },
   "SD": {
-    "hash": "7d64937652e4d393",
+    "hash": "de242c072eea0cdf",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-11T18:56:09+00:00",
-    "last_checked": "2026-09-14T17:30:20+00:00",
-    "last_changed_at": "2026-09-11T18:56:09+00:00"
+    "last_parsed": "2026-09-14T21:20:46+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
+    "last_changed_at": "2026-09-14T21:20:46+00:00"
   },
   "NM": {
-    "hash": "6e952218963b93cf",
+    "hash": "9b825a398e1194ba",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-11T21:32:21+00:00",
-    "last_checked": "2026-09-14T17:30:19+00:00",
-    "last_changed_at": "2026-09-11T21:32:21+00:00"
+    "last_parsed": "2026-09-14T21:20:45+00:00",
+    "last_checked": "2026-09-14T21:20:45+00:00",
+    "last_changed_at": "2026-09-14T21:20:45+00:00"
   },
   "TX": {
     "hash": "94fb8c4265246e44",
@@ -537,7 +517,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-14T17:30:20+00:00",
-    "last_checked": "2026-09-14T17:30:20+00:00",
+    "last_checked": "2026-09-14T21:20:46+00:00",
     "last_changed_at": "2026-09-14T17:30:20+00:00"
   },
   "_federal_announced": null
