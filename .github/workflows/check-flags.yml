@@ -18,6 +18,8 @@ on:
       - 'parsers.py'
       - 'run.py'
       - 'registry.json'
+      - 'read_email.py'
+      - 'test-parsers.py'
 
 permissions:
   contents: write             # needed to commit status.json back
@@ -42,10 +44,21 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      - name: Parser tests
+        # Offline and deterministic. If they fail, the parsers are broken and
+        # nothing they produce should be published. These were never run in
+        # CI, which is how the suite sat hung on one test without anyone
+        # noticing.
+        timeout-minutes: 2
+        run: python3 test-parsers.py
+
       - name: Read notification emails
         # Push ingest for states that cannot be scraped. Never fails the job:
-        # a mail outage should degrade those states to full-staff, not block
-        # the 40 that are working.
+        # a mail outage must not block the states that are working. Email
+        # states that stop hearing from their channel go stale on their own.
+        # A failure here is reported by "Warn about failing sources" below —
+        # continue-on-error alone shows it as a green check.
+        id: mail
         continue-on-error: true
         env:
           MAIL_USER: ${{ secrets.MAIL_USER }}
@@ -64,8 +77,9 @@ jobs:
           import json, sys
           s = json.load(open('status.json'))
           m = s['meta']
-          print(f"covered={m['covered']} not_covered={m['not_covered']} "
-                f"stale={m['stale']} errors={m['errors']}")
+          print(f"covered={m['covered']} answered={m.get('answered')} "
+                f"not_covered={m['not_covered']} stale={m['stale']} "
+                f"frozen={m.get('frozen')} errors={m['errors']}")
           if m['covered'] < 20:
               sys.exit(f"REFUSING TO PUBLISH: only {m['covered']} states covered "
                        f"(expected ~39). Keeping the previous status.json.")
@@ -119,6 +133,7 @@ jobs:
         # being published. But DO surface the error — this step silently
         # crashed on its first line for days, so every notification the
         # pipeline should have sent was simply never sent.
+        id: notify
         if: always()
         continue-on-error: true
         env:
@@ -131,7 +146,9 @@ jobs:
           url = os.environ.get("NOTIFY_URL")
           secret = os.environ.get("NOTIFY_SECRET")
           if not url or not secret:
-              print("NOTIFY_URL / NOTIFY_SECRET not set - skipping push")
+              # A warning, not a print: "not configured" and "nothing to
+              # send" otherwise look identical in a green run.
+              print("::warning::NOTIFY_URL / NOTIFY_SECRET not set - no push notifications are being sent")
               raise SystemExit(0)
 
           try:
@@ -147,11 +164,16 @@ jobs:
           # run.py decides whether a national order is NEW, because it
           # writes cache.json before the commit step and so its memory
           # actually persists between runs. This step just obeys.
+          # "changed" means the answer moved between half and full (run.py).
+          # A move to "unknown" is never pushed: the service worker would
+          # have rendered it as "back to full staff".
           fed = s.get("federal")
           if fed:
               changed = ["US"] if fed.get("_changed") else []
           else:
-              changed = [c for c, v in s["states"].items() if v.get("changed")]
+              changed = [c for c, v in s["states"].items()
+                         if v.get("changed")
+                         and v.get("effective_status") in ("half", "full")]
 
           if not changed:
               print("No changes this run - nothing to notify.")
@@ -194,18 +216,36 @@ jobs:
 
       - name: Warn about failing sources
         if: always()
+        env:
+          MAIL_OUTCOME: ${{ steps.mail.outcome }}
+          NOTIFY_OUTCOME: ${{ steps.notify.outcome }}
         run: |
           python3 - <<'PY'
-          import json
+          import json, os
+          # continue-on-error steps report success even when they fail.
+          # Their real outcome is only visible here.
+          for step, var in (("Read notification emails", "MAIL_OUTCOME"),
+                            ("Notify subscribers", "NOTIFY_OUTCOME")):
+              if os.environ.get(var) == "failure":
+                  print(f"::warning::'{step}' FAILED (hidden by continue-on-error) - see its log")
           try:
               s = json.load(open('status.json'))
           except Exception:
+              print("::warning::status.json unreadable")
               raise SystemExit(0)
-          bad = [c for c, v in s['states'].items()
-                 if v.get('error') and v.get('coverage') != 'not_covered']
+          if str(s.get('federal_check', '')).startswith('failed'):
+              print(f"::warning::Federal proclamation check {s['federal_check']}")
+          st = s['states']
+          # Only a registry "no verified source" is an expected error. A 403
+          # on a state we are supposed to read is a failure even though the
+          # state shows as not_covered — excluding not_covered hid KS, MA, NY.
+          bad = [c for c, v in st.items() if v.get('error')
+                 and 'no verified source' not in v['error']]
           if bad:
               print(f"::warning::Sources with errors: {' '.join(sorted(bad))}")
-          stale = [c for c, v in s['states'].items() if v.get('coverage') == 'stale']
-          if stale:
-              print(f"::warning::Serving stale data for: {' '.join(sorted(stale))}")
+          for label, cov in (("Serving stale data for", "stale"),
+                             ("Frozen sources (not trusted)", "frozen")):
+              hit = [c for c, v in st.items() if v.get('coverage') == cov]
+              if hit:
+                  print(f"::warning::{label}: {' '.join(sorted(hit))}")
           PY

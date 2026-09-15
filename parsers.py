@@ -102,6 +102,12 @@ DECLARATION_RE = [
     re.compile(r"united\s+states\s+flags?\s*:\s*(half|full)[-\s]?staff", re.I),
     # "Michigan Flag Honor status notification including text, Full Staff"
     re.compile(r"status\s+notification[^.]{0,40}?,\s*(half|full)[-\s]?staff", re.I),
+    # "USA Flag Status Flag at full staff" (Idaho), "USA Flag Status: Flag at
+    # Half Staff" (Colorado). Without this, Idaho's label was skipped and a
+    # protocol sentence further down ("...authority to order ... flags to be
+    # flown at half-staff...") answered instead: HALF on a page saying FULL.
+    re.compile(r"flags?\s+status\s*[:\-–]?\s*flags?\s+(?:is\s+|are\s+)?at\s+"
+               r"(half|full)[-\s]?(?:staff|mast)\b", re.I),
 
     # --- Tier 2: a present-tense sentence about right now -------------------
     # "...the flag of the state of Utah are currently at Half Staff"
@@ -131,13 +137,14 @@ DECLARATION_RE = [
     re.compile(r"\bflags?\s+at\s+(half|full)[-\s]?(?:staff|mast)\b", re.I),
 ]
 
-# Index of the first context-guarded (Tier 3) pattern.
-GUARDED_FROM = 11
+# Index of the first context-guarded pattern: the Alaska "to be flown at"
+# phrase and the bare "flags at" phrase.
+GUARDED_FROM = 12
 
-# If any of these appear just before a Tier 3 match, the sentence is
+# If any of these appear just before a guarded match, the sentence is
 # describing the rules rather than stating today's status.
 PROSE_BEFORE = re.compile(
-    r"\b(?:may|should|shall|when|whenever|if|authorized|proclaim|code|"
+    r"\b(?:may|should|shall|when|whenever|if|authorized|authority|proclaim|code|"
     r"event|death|order(?:s|ed)?\s+that|policy|protocol|means|lower(?:ed|ing)?|"
     r"raise[sd]?|display(?:ed|s)?|fly|flown|flying|honou?r|memory|respect|"
     r"newsroom|archive|notices?|history|past|previous)\b", re.I)
@@ -158,9 +165,13 @@ COUNTY_LINE_RE = re.compile(
     r"(?<![-\w])[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?\s+count(?:y|ies)\s+only"
     r"[^:]{0,60}:\s*(?:half|full)[-\s]?staff", re.I)
 
+# Same lookbehind as COUNTY_LINE_RE, and for a second reason: without it the
+# pattern can start at every position inside a long word, and [a-z]+ backtracks
+# across the whole run each time. 50,000 letters with no spaces took forever,
+# which hung test-parsers.py and could hang a real run on minified page text.
 COUNTY_SCOPED_RE = re.compile(
-    r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+count(?:y|ies)\s+only[^:]{0,60}:\s*"
-    r"(half|full)[-\s]?staff", re.I)
+    r"(?<![-\w])([A-Z][a-z]{1,30}(?:\s+[A-Z][a-z]{1,30})?)\s+count(?:y|ies)\s+only"
+    r"[^:]{0,60}:\s*(half|full)[-\s]?staff", re.I)
 
 # Alaska advertises an explicit window: "From: Sunrise Sunday, July 12, 2026
 # Until: Sunset Saturday, July 18, 2026". A status page can keep displaying an
@@ -172,6 +183,30 @@ FROM_RE = re.compile(r"\bfrom\s*:?\s*(?:sunrise|sunset|noon)?\s*"
 UNTIL_RE = re.compile(r"\b(?:until|through|thru)\s*:?\s*"
                       r"(?:sunset|sunrise|noon|\d{1,2}:\d{2}\s*[ap]\.?m\.?\s*on)?\s*"
                       r"(?:[A-Z][a-z]+day,?\s*)?([^\n]{0,34})", re.I)
+
+
+def listed_order_windows(html):
+    """[(start, end), ...] for every half-staff directive on a page that
+    states when it ends.
+
+    A status widget can lag the order it announces. Florida's page still read
+    "Flag Status: Half Staff" on Sept 15 2026 directly above the only order it
+    listed: "...at half-staff ... from sunrise to sunset on Friday, September
+    11, 2026". The widget and the order are two statements; when they
+    disagree, neither can be reported as the answer.
+    """
+    text = strip_html(html) if "<" in (html or "") else (html or "")
+    out = []
+    for sentence in re.split(r"(?<=[.!?])\s+", text):
+        if len(sentence) > 600 or not re.search(r"half[-\s]?(?:staff|mast)",
+                                                sentence, re.I):
+            continue
+        if BOILERPLATE_RE.search(sentence):
+            continue
+        s, e = date_range(sentence)
+        if e:
+            out.append((s, e))
+    return out
 
 
 def diff_page_dates(html):

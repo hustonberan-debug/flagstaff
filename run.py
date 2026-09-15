@@ -9,10 +9,11 @@ status.json.
 
 DESIGN NOTES
 
-Hash-diff first. Every source is fetched, but a source whose content hash is
-unchanged since the last run is NOT re-parsed and never touches an LLM. State
-sites change a few times a week; polling runs every 30 minutes. That ratio is
-why this costs nothing to operate.
+Every source is fetched and re-parsed every run, because every verdict depends
+on today's date as well as the page. What is cached is the expensive part:
+facts read from individual order pages, keyed by URL, so an order page is
+fetched once rather than every 30 minutes. The content hash is kept only to
+report whether the page's text moved (content_changed).
 
 Two independent half-staff authorities stack:
   - FEDERAL: statutory days + presidential proclamations. Apply to all states.
@@ -39,9 +40,10 @@ import requests
 
 import parsers as P
 
-# Bump whenever parsing logic changes. A cache keyed only on page content is
-# wrong when the CODE changes: identical pages produce stale verdicts computed
-# by the old parser. The key must be (content, code version).
+# Bump whenever parsing logic changes. Verdicts are no longer cached (they are
+# recomputed every run), but facts extracted from individual order pages are,
+# and those were produced by whatever parser was current at the time. A bump
+# discards them while keeping the memory of last known answers.
 PARSER_VERSION = "26"
 
 REGISTRY = "registry.json"
@@ -232,6 +234,10 @@ def federal_statutory(d):
                 "authority": "statute",
                 "citation": obs.get("citation"),
                 "source_url": None,
+                # An explicit one-day window, so a carried-forward copy of
+                # this order expires instead of living on undated.
+                "start_date": d.isoformat(),
+                "end_date": d.isoformat(),
             }
     return None
 
@@ -246,6 +252,16 @@ FEDERAL_SOURCES = [
     "https://www.whitehouse.gov/presidential-actions/",
 ]
 FEDERAL_LOOKBACK_DAYS = 21
+# Proclamation pages are ~3,000 characters of navigation, then the text, and
+# the flag sentence sits in the closing "NOW, THEREFORE" section. Bodies used
+# to be cut at 6,000 characters before the flag search, so any proclamation
+# longer than a short one was read as having no flag language at all — the
+# Patriot Day 2026 proclamation has its flag sentence at character 10,310.
+FEDERAL_BODY_LIMIT = 100_000
+# Bodies stored under the old key were truncated at 6,000 characters, so they
+# are discarded rather than trusted.
+FEDERAL_ARTICLE_CACHE = "_federal_articles_v2"
+ARTICLE_URL_RE = re.compile(r"/presidential-actions/20\d\d/\d{2}/")
 
 # Titles that carry a half-staff order almost always take one of these forms.
 # Used only to prioritise which articles to open first, never to reject one.
@@ -255,12 +271,20 @@ FEDERAL_TITLE_HINTS = re.compile(
 
 
 def federal_proclamation(session, cache):
-    """Active presidential half-staff proclamation, or None.
+    """Active presidential half-staff proclamation. Returns (order, error).
+
+    order is None both when there is no order and when we could not look, so
+    error is what tells them apart: None means "checked, nothing active",
+    a string means "could not determine". Treating an unreachable
+    whitehouse.gov as "no national order" would drop a live order for every
+    state and then re-announce it when the site came back.
 
     Opens recent proclamations and reads their bodies. Article text is cached
-    by URL, so each proclamation is fetched exactly once ever — the listing is
-    the only thing re-fetched each run.
+    by URL, so each proclamation is fetched once — the listing is the only
+    thing re-fetched each run. A failed fetch is NOT cached: storing it as
+    empty text made one timeout permanently hide that proclamation.
     """
+    cache.pop("_federal_articles", None)
     url = os.environ.get("FEDERAL_PROCLAMATION_URL") or FEDERAL_SOURCES[0]
     listing, err = fetch(url, session)
     if err or not listing:
@@ -272,18 +296,18 @@ def federal_proclamation(session, cache):
                 url = alt
                 break
     if not listing:
-        print(f"  federal: could not fetch proclamations listing ({err})")
-        return None
+        return None, f"could not fetch proclamations listing ({err})"
 
     items = P.parse_index(listing, url)
     cutoff = today() - timedelta(days=FEDERAL_LOOKBACK_DAYS)
 
-    # Only proclamation article URLs, newest first, recent ones only.
+    # Only proclamation article URLs, newest first, recent ones only. Nav
+    # links ("Skip to content", "Executive Orders") used to take up slots in
+    # the 12-article budget.
     cands = []
     for i in items:
         u = i.get("url") or ""
-        if "/presidential-actions/" not in u or u.rstrip("/").endswith(
-                ("presidential-actions", "proclamations")):
+        if not ARTICLE_URL_RE.search(u):
             continue
         d = None
         m = re.search(r"/(20\d\d)/(\d{2})/", u)
@@ -305,8 +329,8 @@ def federal_proclamation(session, cache):
     cands.sort(key=lambda x: (not FEDERAL_TITLE_HINTS.search(x[1]["title"] or ""),
                               -(x[0].toordinal() if x[0] else 0)))
 
-    art_cache = cache.setdefault("_federal_articles", {})
-    checked = 0
+    art_cache = cache.setdefault(FEDERAL_ARTICLE_CACHE, {})
+    checked, unread = 0, []
     for d, i in cands:
         if checked >= 12:
             break
@@ -314,12 +338,12 @@ def federal_proclamation(session, cache):
         body = art_cache.get(u)
         if body is None:
             text, ferr = fetch(u, session)
-            if ferr or not text:
-                art_cache[u] = ""
-                continue
-            body = P.strip_html(text)[:6000]
-            art_cache[u] = body
             checked += 1
+            if ferr or not text:
+                unread.append(ferr or "empty")
+                continue
+            body = P.strip_html(text)[:FEDERAL_BODY_LIMIT]
+            art_cache[u] = body
         if not body:
             continue
 
@@ -365,11 +389,23 @@ def federal_proclamation(session, cache):
             "start_date": start.isoformat() if start else None,
             "end_date": end.isoformat() if end else None,
             "coverage_reason": why,
-        }
-    return None
+        }, None
+    if unread:
+        # The one page we could not open may be the order.
+        return None, (f"{len(unread)} recent proclamation page(s) could not be "
+                      f"read ({', '.join(sorted(set(unread)))})")
+    return None, None
 
 
 def pick_url(rec):
+    url = _pick_url(rec)
+    # Some archives are per-year (New Jersey: /news/2026/approved/...). A
+    # hardcoded year keeps reading last year's archive after January 1 and
+    # reports "no current order" from a page that no longer gets updates.
+    return url.replace("{year}", str(today().year)) if url else url
+
+
+def _pick_url(rec):
     mode = rec.get("ingest_mode")
     if mode == "email":
         return None                 # nothing to fetch; the state emails us
@@ -382,6 +418,55 @@ def pick_url(rec):
     if mode in ("archive", "diff"):
         return rec.get("flag_page_url") or rec.get("press_url")
     return rec.get("press_url") or rec.get("flag_page_url")
+
+
+def revalidate(prev, d):
+    """Re-derive a carried-forward verdict for date d.
+
+    A verdict is a function of (page, date), not of the page alone. Serving a
+    cached HALF because the page had not changed kept North Dakota at
+    half-staff from Sept 9 to Sept 15 2026 for an order covering one Friday:
+    the RSS feed simply did not change, so the order was never re-checked
+    against the calendar. Returns (status, order, expired_order_or_None).
+    """
+    st, order = prev.get("state_status", P.UNKNOWN), prev.get("state_order")
+    if st != P.HALF or not order:
+        return st, order, None
+    start = order.get("start_date") or order.get("date")
+    end = order.get("end_date")
+    if not (start or end):
+        return st, order, None
+    v, why = covers_today(start, end, d)
+    if v:
+        return P.HALF, dict(order, coverage_reason=why), None
+    expired = {"title": order.get("title"), "url": order.get("url"), "why": why}
+    return (P.FULL if v is False else P.UNKNOWN), None, expired
+
+
+def article_facts(url, session, known, keep):
+    """What an individual order page says, fetched once per URL.
+
+    This is what the old whole-verdict cache was really saving: re-reading
+    order pages. Caching facts about each page instead lets the verdict be
+    recomputed against today's date on every run. A failed fetch returns None
+    and is not stored, so it is retried next run.
+    """
+    f = known.get(url)
+    if f is None:
+        art, _ = fetch(url, session)
+        if not art:
+            return None
+        text = P.strip_html(art)
+        opening = " ".join(re.split(r"(?<=[.!?])\s+", text)[:3])[:700]
+        st, sev = P.classify_status(opening)
+        au, aev = P.classify_authority(opening)
+        bs, be = P.date_range(text[:8000])
+        f = {"opening_status": st, "opening_evidence": sev,
+             "opening_authority": au, "opening_authority_evidence": aev,
+             "body_start": bs.isoformat() if bs else None,
+             "body_end": be.isoformat() if be else None}
+    keep[url] = f
+    return f
 
 
 def check_state(rec, cache, session, verbose=False):
@@ -397,15 +482,15 @@ def check_state(rec, cache, session, verbose=False):
         "state_status": P.UNKNOWN,
         "state_order": None,
         "source_url": None,
-        # checked_at means "we fetched this source on this run" — it always
-        # advances. last_changed_at means "the source's content last moved",
-        # which may be days ago and that is fine. Collapsing the two makes a
-        # healthy unchanged source look like a stale one, and a user who
-        # thinks the data is stale goes and checks the governor's site
-        # instead. Two facts, two fields.
+        # checked_at: we fetched this source on this run; always advances.
+        # last_changed_at: the ANSWER last moved (set in main from status
+        # transitions). content_changed: the page's text moved this run.
+        # The page and the answer are two facts. Keying notifications and
+        # "unchanged since" off page edits sent Nevada subscribers 479
+        # "back to full staff" pushes in a month while the flag never moved.
         "checked_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "last_changed_at": prev.get("last_changed_at"),
-        "changed": False,
+        "last_changed_at": None,
+        "content_changed": False,
         "error": None,
     }
 
@@ -433,7 +518,6 @@ def check_state(rec, cache, session, verbose=False):
                 out["coverage"] = "not_covered"
                 out["error"] = ("subscription pending - no bulletin received "
                                 "from this channel yet")
-            out["last_changed_at"] = prev.get("last_changed_at")
             return code, out, dict(prev, last_checked=out["checked_at"])
         v, why = covers_today(o.get("start_date"), o.get("end_date"), today())
         if v:
@@ -448,16 +532,11 @@ def check_state(rec, cache, session, verbose=False):
         else:
             out["state_status"] = P.FULL
         h = content_hash(json.dumps(o, sort_keys=True))
-        out["changed"] = bool(prev.get("hash")) and prev["hash"] != h
-        if out["changed"] or not prev.get("hash"):
-            out["last_changed_at"] = out["checked_at"]
-        else:
-            out["last_changed_at"] = prev.get("last_changed_at")
-        return code, out, {"hash": h, "state_status": out["state_status"],
-                           "state_order": out["state_order"],
-                           "last_parsed": out["checked_at"],
-                           "last_checked": out["checked_at"],
-                           "last_changed_at": out["last_changed_at"]}
+        out["content_changed"] = bool(prev.get("hash")) and prev["hash"] != h
+        return code, out, dict(prev, hash=h, state_status=out["state_status"],
+                               state_order=out["state_order"],
+                               last_parsed=out["checked_at"],
+                               last_checked=out["checked_at"])
 
     if not rec.get("buildable"):
         out.update(coverage="not_covered",
@@ -482,71 +561,75 @@ def check_state(rec, cache, session, verbose=False):
                 break
 
     if err:
-        # Keep serving the last known good value, but mark it stale so the UI
-        # can show its age. A fetch failure is not evidence of full-staff.
-        out.update(error=err,
-                   state_status=prev.get("state_status", P.UNKNOWN),
-                   state_order=prev.get("state_order"),
-                   last_changed_at=prev.get("last_changed_at"),
-                   coverage="stale" if prev else "not_covered")
+        # Keep serving the last known value, but mark it stale so the UI can
+        # show its age. A fetch failure is not evidence of full-staff — and a
+        # carried HALF still has to be checked against today's date.
+        st, order, expired = revalidate(prev, today())
+        out.update(error=err, state_status=st, state_order=order,
+                   coverage="stale" if prev.get("hash") else "not_covered")
+        if expired:
+            out["last_expired_order"] = expired
         return code, out, prev
 
     h = content_hash(text)
-    out["changed"] = bool(prev.get("hash")) and prev["hash"] != h
+    out["content_changed"] = bool(prev.get("hash")) and prev["hash"] != h
 
-    # --- Unchanged: reuse the cached verdict, skip all parsing -------------
-    if prev.get("hash") == h and "state_status" in prev:
-        out["state_status"] = prev["state_status"]
-        out["state_order"] = prev.get("state_order")
-        out["last_changed_at"] = prev.get("last_changed_at")
-        # checked_at already reflects this run; the cache keeps the older
-        # last_changed_at untouched.
-        new_cache = dict(prev, hash=h, last_checked=out["checked_at"])
-        return code, out, new_cache
+    # Always parse. There used to be a shortcut here that reused the cached
+    # verdict whenever the page hash was unchanged. Every verdict depends on
+    # today's date (order windows, grace periods, freshness age), so the
+    # shortcut served expired orders (ND), missed scheduled ones, and threw
+    # away the freshness alarm's reason after its first run (AL, CO). Parsing
+    # is local; the only costly part — opening order pages — is cached per
+    # URL in article_facts.
+    prev_articles = prev.get("articles") or {}
+    articles = {}
 
-    # --- Changed or first seen: parse ---------------------------------------
+    frozen = False
+    if mode == "diff":
+        # A status page unchanged for months is not reporting today's status,
+        # it is reporting the day it froze. Arizona's half-staff page once
+        # announced a January 2025 order for most of a year; trusting it would
+        # mean half-staff every day — a confident lie, worse than a gap.
+        lastmod = P.page_last_modified(text)
+        if lastmod:
+            age = (today() - lastmod).days
+            out["source_last_modified"] = lastmod.isoformat()
+            out["source_age_days"] = age
+            frozen = age > FROZEN_PAGE_DAYS
+        else:
+            # No date anywhere on the page means the freshness alarm cannot
+            # run. Say so rather than letting the state look guarded when it
+            # is not — an unverifiable source should be visibly unverifiable.
+            out["source_age_days"] = None
+            out["freshness_unknown"] = True
+
     if mode == "toggle":
         st, ev = P.parse_toggle(text, url)
         out["state_status"] = st
-        out["changed"] = bool(prev.get("hash")) and prev["hash"] != h
         if st != P.UNKNOWN:
             out["state_order"] = {"title": None, "url": url, "status": st,
                                   "authority": P.GOVERNOR, "evidence": ev,
                                   "start_date": None, "end_date": None}
         else:
             out["error"] = ev
+    elif mode == "diff" and frozen:
+        # "frozen", not "stale". Stale means "fetch failed, serving the last
+        # known value"; a frozen page has no value to serve. Sharing one word
+        # made the UI say "serving last known value" beside "Unclear".
+        out["state_status"] = P.UNKNOWN
+        out["coverage"] = "frozen"
+        out["error"] = (f"source appears frozen: newest date on page is "
+                        f"{lastmod} ({age}d old) - not trusted")
     elif mode == "diff":
-        # A status page unchanged for months is not reporting today's status,
-        # it is reporting the day it froze. Arizona's half-staff page still
-        # announces a January 2025 order; trusting it would mean half-staff
-        # every day forever — a confident lie, which is worse than a gap.
-        lastmod = P.page_last_modified(text)
-        if not lastmod:
-            # No date anywhere on the page means the freshness alarm cannot
-            # run. Say so rather than letting the state look guarded when it
-            # is not — an unverifiable source should be visibly unverifiable.
-            out["source_age_days"] = None
-            out["freshness_unknown"] = True
-        if lastmod:
-            age = (today() - lastmod).days
-            out["source_last_modified"] = lastmod.isoformat()
-            out["source_age_days"] = age
-            if age > FROZEN_PAGE_DAYS:
-                out["state_status"] = P.UNKNOWN
-                out["coverage"] = "stale"
-                out["error"] = (f"source appears frozen: newest date on page is "
-                                f"{lastmod} ({age}d old) - not trusted")
-                return code, out, {
-                    "hash": h, "state_status": P.UNKNOWN, "state_order": None,
-                    "last_parsed": out["checked_at"],
-                    "last_checked": out["checked_at"],
-                    "last_changed_at": prev.get("last_changed_at")}
-
         # No history exists on these pages. The page IS the status.
         d = P.parse_diff(text, previous_hash=prev.get("hash"),
                          selector_hint="flag")
         out["state_status"] = d["status"]
-        out["changed"] = d["changed"]
+        if d["status"] == P.UNKNOWN:
+            # Record why. With error left empty, "page read but states no
+            # status" was indistinguishable from a healthy state, and the CI
+            # warning step (which lists states with errors) never saw it.
+            out["error"] = d["evidence"] or "no status declaration found on page"
         if d.get("counties"):
             out["county_exceptions"] = d["counties"]
         # A status page can keep advertising an order that already ended.
@@ -558,6 +641,22 @@ def check_state(rec, cache, session, verbose=False):
                 d["status"] = P.FULL
                 out["state_status"] = P.FULL
                 out["last_expired_order"] = {"why": why, "url": url}
+        elif d["status"] == P.HALF:
+            # No advertised window, but the page may list the order itself.
+            # If every half-staff order on the page has ended, the widget has
+            # not been reset: "the page says half" and "an order is in
+            # effect" disagree, so we report that rather than either one.
+            wins = P.listed_order_windows(text)
+            live = [w for w in wins if covers_today(
+                w[0].isoformat() if w[0] else None, w[1].isoformat(), today())[0]]
+            if wins and not live:
+                latest = max(e for _, e in wins)
+                d["status"] = P.UNKNOWN
+                out["state_status"] = P.UNKNOWN
+                out["error"] = (f"page still declares half-staff, but the order "
+                                f"it lists ended {latest}")
+                out["last_expired_order"] = {"why": f"listed order ended {latest}",
+                                             "url": url}
         if d["status"] != P.UNKNOWN:
             out["state_order"] = {
                 "title": None,
@@ -626,20 +725,16 @@ def check_state(rec, cache, session, verbose=False):
             # a release routinely mentions returning to full staff, and the
             # classifier correctly refuses to choose when it sees both.
             if rec_o["status"] == P.UNKNOWN and i.get("url") and i["url"] != url:
-                art, _ = fetch(i["url"], session)
-                if art:
-                    opening = " ".join(
-                        re.split(r"(?<=[.!?])\s+", P.strip_html(art))[:3])[:700]
-                    st2, ev2 = P.classify_status(opening)
-                    if st2 != P.UNKNOWN:
-                        rec_o["status"] = st2
-                        rec_o["status_evidence"] = f"from order body: {ev2}"
-                        a2, aev2 = P.classify_authority(opening)
-                        if a2 != P.UNKNOWN:
-                            rec_o["authority"] = a2
-                            rec_o["authority_evidence"] = aev2
-                        rec_o["usable_as_state_order"] = (
-                            st2 == P.HALF and rec_o["authority"] == P.GOVERNOR)
+                f = article_facts(i["url"], session, prev_articles, articles)
+                if f and f["opening_status"] != P.UNKNOWN:
+                    st2 = f["opening_status"]
+                    rec_o["status"] = st2
+                    rec_o["status_evidence"] = f"from order body: {f['opening_evidence']}"
+                    if f["opening_authority"] != P.UNKNOWN:
+                        rec_o["authority"] = f["opening_authority"]
+                        rec_o["authority_evidence"] = f["opening_authority_evidence"]
+                    rec_o["usable_as_state_order"] = (
+                        st2 == P.HALF and rec_o["authority"] == P.GOVERNOR)
 
             if rec_o["status"] != P.HALF:
                 continue
@@ -656,13 +751,12 @@ def check_state(rec, cache, session, verbose=False):
                 continue
             # Now open the order for its dates only.
             if i.get("url") and i["url"] != url and not rec_o["end_date"]:
-                art, _ = fetch(i["url"], session)
-                if art:
-                    bstart, bend = P.date_range(P.strip_html(art)[:8000])
-                    if bstart and not rec_o["start_date"]:
-                        rec_o["start_date"] = bstart.isoformat()
-                    if bend:
-                        rec_o["end_date"] = bend.isoformat()
+                f = article_facts(i["url"], session, prev_articles, articles)
+                if f:
+                    if f["body_start"] and not rec_o["start_date"]:
+                        rec_o["start_date"] = f["body_start"]
+                    if f["body_end"]:
+                        rec_o["end_date"] = f["body_end"]
                     rec_o["dates_from"] = "order body"
 
             rec_o["date"] = d
@@ -698,21 +792,80 @@ def check_state(rec, cache, session, verbose=False):
             out["state_status"] = P.UNKNOWN
             out["error"] = "source readable but no items parsed"
 
-    # Content moved (or this is the first sighting), so the change stamp
-    # advances. On a first sighting we have no prior state to compare against,
-    # so we record now rather than claiming a change we did not observe.
-    out["last_changed_at"] = out["checked_at"]
-    new_cache = {
+        # What the parser actually found, so a page that only yielded site
+        # navigation is visible in status.json rather than hidden inside FULL.
+        dated = sorted(i["date"] for i in items if i.get("date"))
+        out["items_parsed"] = len(items)
+        out["flag_items"] = len(flags)
+        out["dated_items"] = len(dated)
+        # A feed whose newest item is years old is not reporting today.
+        # South Carolina's registered feed last published in January 2020 and
+        # was being read as "no current order" every 30 minutes.
+        if mode in ("feed", "archive") and dated:
+            newest = date.fromisoformat(dated[-1])
+            age = (today() - newest).days
+            out["source_last_modified"] = newest.isoformat()
+            out["source_age_days"] = age
+            if age > FROZEN_PAGE_DAYS:
+                out.update(state_status=P.UNKNOWN, state_order=None,
+                           coverage="frozen",
+                           error=(f"feed appears frozen: newest item is {newest} "
+                                  f"({age}d old) - not trusted"))
+
+    new_cache = dict(prev)
+    new_cache.update({
         "hash": h,
         "state_status": out["state_status"],
         "state_order": out["state_order"],
         "last_parsed": out["checked_at"],
         "last_checked": out["checked_at"],
-        "last_changed_at": out["checked_at"],
-    }
+        "articles": articles,
+    })
     if verbose:
         print(json.dumps(out, indent=2))
     return code, out, new_cache
+
+
+def last_national_day(d):
+    """The most recent statutory half-staff day before d, or None."""
+    cal = load_json(CALENDAR, {}).get("years", {})
+    days = [o["date"] for y in (d.year - 1, d.year) for o in cal.get(str(y), [])
+            if o.get("active") and o.get("date", "") < d.isoformat()]
+    return max(days) if days else None
+
+
+def track_changes(results, cache, new_cache, legacy_floor=None):
+    """Mark which states' ANSWER changed, not which pages changed.
+
+    `changed` drives push notifications and history. It used to mean "the
+    source page's text moved", which fired on every edit to a governor's site:
+    85% of history entries were not status changes at all. It now means a
+    known answer (half/full) differs from the last known answer. A move to or
+    from "unknown" is not announced — telling subscribers "back to full staff"
+    because a page broke would be a false claim.
+    """
+    for code, s in results.items():
+        prev = cache.get(code) or {}
+        last_known = prev.get("last_known_status")
+        if last_known is None and prev.get("state_status") in (P.HALF, P.FULL):
+            last_known = prev["state_status"]
+        eff = s["effective_status"]
+        s["changed"] = (eff in (P.HALF, P.FULL) and last_known is not None
+                        and eff != last_known)
+        # Entries written before answer-changes were tracked only have the
+        # page-edit stamp. Every state's answer moved on the last national
+        # half-staff day, so an older stamp would claim "unchanged since
+        # August" across a day the flag was down everywhere.
+        legacy = prev.get("last_changed_at")
+        if legacy and legacy_floor and legacy < legacy_floor:
+            legacy = legacy_floor
+        s["last_changed_at"] = (s["checked_at"] if s["changed"] else
+                                prev.get("last_status_change_at") or legacy)
+        s["authority"] = (s.get("state_order") or {}).get("authority")
+        entry = dict(new_cache.get(code) or {})
+        entry["last_known_status"] = eff if eff in (P.HALF, P.FULL) else last_known
+        entry["last_status_change_at"] = s["last_changed_at"]
+        new_cache[code] = entry
 
 
 # ---------------------------------------------------------------------------
@@ -734,11 +887,34 @@ def main():
         if cache:
             print(f"Parser version changed -> discarding cache "
                   f"({cache.get('_parser_version')} -> {PARSER_VERSION})")
-        cache = {}
+        # Parsed facts are discarded; memory of what was ANNOUNCED is not.
+        # Dropping it made every deploy forget the last known answers (so
+        # real changes could not be detected) and forget an announced
+        # national order (so it would be pushed again).
+        keep = {k: cache[k] for k in ("_federal_announced", "_federal_active")
+                if k in cache}
+        for code, e in cache.items():
+            if not code.startswith("_") and isinstance(e, dict):
+                keep[code] = {k: e[k] for k in ("last_known_status",
+                                                "last_status_change_at")
+                              if k in e}
+        cache = keep
     session = requests.Session()
 
     d = today()
-    fed = federal_statutory(d) or federal_proclamation(session, cache)
+    fed, fed_check = federal_statutory(d), "ok (statutory)"
+    if not fed:
+        fed, ferr = federal_proclamation(session, cache)
+        fed_check = f"failed: {ferr}" if ferr else "ok"
+        if ferr:
+            print(f"  federal: could not determine ({ferr})")
+            prev_fed = cache.get("_federal_active")
+            if prev_fed and revalidate({"state_status": P.HALF,
+                                        "state_order": prev_fed}, d)[0] == P.HALF:
+                # We could not look, but last run saw an order whose window
+                # still covers today. Keep it rather than un-lowering 51 flags
+                # because one website timed out.
+                fed = dict(prev_fed, carried_forward=True)
 
     targets = [r for r in registry
                if not args.state or r["state_code"] == args.state.upper()]
@@ -746,15 +922,29 @@ def main():
     results, new_cache = {}, dict(cache)
     new_cache["_parser_version"] = PARSER_VERSION
     with cf.ThreadPoolExecutor(max_workers=WORKERS) as ex:
-        futs = [ex.submit(check_state, r, cache, requests.Session(),
-                          bool(args.state))
-                for r in targets]
+        futs = {ex.submit(check_state, r, cache, requests.Session(),
+                          bool(args.state)): r
+                for r in targets}
         for f in cf.as_completed(futs):
             try:
                 code, out, cent = f.result()
             except Exception as e:
-                print(f"  ERROR {type(e).__name__}: {e}")
-                continue
+                # Never drop a state from the output: the page builds its
+                # dropdown from status.json, so a missing state also erased
+                # the saved choice of everyone who had picked it.
+                rec = futs[f]
+                print(f"  ERROR {rec['state_code']} {type(e).__name__}: {e}")
+                code = rec["state_code"]
+                out = {"state": rec["state"], "state_code": code,
+                       "coverage": "stale", "ingest_mode": rec.get("ingest_mode"),
+                       "confidence": rec.get("confidence"),
+                       "state_status": P.UNKNOWN, "state_order": None,
+                       "source_url": pick_url(rec),
+                       "checked_at": datetime.now(timezone.utc).isoformat(
+                           timespec="seconds"),
+                       "last_changed_at": None, "content_changed": False,
+                       "error": f"pipeline error: {type(e).__name__}"}
+                cent = None
             results[code] = out
             if cent:
                 new_cache[code] = cent
@@ -796,37 +986,59 @@ def main():
     fed_key = (fed or {}).get("reason")
     already = cache.get("_federal_announced")
     fed_is_new = bool(fed_key) and fed_key != already
-    new_cache["_federal_announced"] = fed_key      # None clears it when it ends
+    if fed or not fed_check.startswith("failed"):
+        new_cache["_federal_announced"] = fed_key  # None clears it when it ends
+    # else: we could not look. Forgetting the announcement here meant the
+    # next successful run re-announced a live order to every subscriber.
+    new_cache["_federal_active"] = (
+        {k: v for k, v in fed.items() if k != "carried_forward"} if fed else
+        (cache.get("_federal_active") if fed_check.startswith("failed") else None))
     if fed:
         fed["_changed"] = fed_is_new
 
+    nat = last_national_day(d)
+    track_changes(results, cache, new_cache, legacy_floor=(
+        (date.fromisoformat(nat) + timedelta(days=1)).isoformat() + "T00:00:00+00:00"
+        if nat else None))
+
+    vals = results.values()
     status = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "date": d.isoformat(),
         "federal": fed,
+        # "No national order" and "could not check for one" must not look the
+        # same. federal is null in both cases; this field says which.
+        "federal_check": fed_check,
         "states": dict(sorted(results.items())),
         "meta": {
-            "covered": sum(1 for s in results.values() if s["coverage"] == "covered"),
-            "not_covered": sum(1 for s in results.values()
-                               if s["coverage"] == "not_covered"),
-            "stale": sum(1 for s in results.values() if s["coverage"] == "stale"),
-            "errors": sum(1 for s in results.values() if s["error"]),
+            "covered": sum(1 for s in vals if s["coverage"] == "covered"),
+            # covered means "we have a source"; answered means "it told us
+            # half or full today". AL, CO and KY were counted as covered for
+            # weeks while answering nothing.
+            "answered": sum(1 for s in vals if s["state_status"] in (P.HALF, P.FULL)),
+            "not_covered": sum(1 for s in vals if s["coverage"] == "not_covered"),
+            "stale": sum(1 for s in vals if s["coverage"] == "stale"),
+            "frozen": sum(1 for s in vals if s["coverage"] == "frozen"),
+            "errors": sum(1 for s in vals if s["error"]),
             "total": len(results),
         },
     }
 
     changed = [c for c, s in results.items() if s["changed"]]
     half = [c for c, s in results.items() if s["effective_status"] == P.HALF]
+    m = status["meta"]
 
     print(f"\n{'='*54}")
-    print(f"  {status['date']}   {status['meta']['covered']}/"
-          f"{status['meta']['total']} covered")
+    print(f"  {status['date']}   {m['covered']}/{m['total']} covered, "
+          f"{m['answered']} answered")
+    print(f"  federal check: {fed_check}")
     if fed:
-        print(f"  FEDERAL: half-staff — {fed['reason']}")
+        print(f"  FEDERAL: half-staff — {fed['reason']}"
+              + (" (carried forward)" if fed.get("carried_forward") else ""))
     print(f"  half-staff: {' '.join(sorted(half)) or 'none'}")
     print(f"  CHANGED this run: {' '.join(sorted(changed)) or 'none'}")
-    print(f"  not covered: {status['meta']['not_covered']}   "
-          f"stale: {status['meta']['stale']}   errors: {status['meta']['errors']}")
+    print(f"  not covered: {m['not_covered']}   stale: {m['stale']}   "
+          f"frozen: {m['frozen']}   errors: {m['errors']}")
     # Break the error total out by cause. "16 errors" hides whether the
     # pipeline is blocked, broken, or simply pointed at nothing.
     causes = {}

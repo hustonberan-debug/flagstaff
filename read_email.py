@@ -46,23 +46,7 @@ OUTPUT = "email-orders.json"
 REGISTRY = "registry.json"
 IMAP_HOST = os.environ.get("MAIL_HOST", "imap.gmail.com")
 DEFAULT_DAYS = 14
-
-STATES = {
-    "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas",
-    "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware",
-    "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia",
-    "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana",
-    "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana",
-    "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan",
-    "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana",
-    "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey",
-    "NM": "New Mexico", "NY": "New York", "NC": "North Carolina",
-    "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon",
-    "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina",
-    "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah",
-    "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia",
-    "WI": "Wisconsin", "WY": "Wyoming",
-}
+MAX_BACKDATE_DAYS = 7   # an order date this far before the email is a citation, not a window
 
 # Sender domains that reliably belong to one state. Attribution by sender is
 # far safer than guessing from body text, because a Wyoming bulletin can
@@ -187,15 +171,12 @@ def state_from(sender, subject, body, allowed, headers=None):
                 (not allowed or code in allowed):
             return code, f"govdelivery account {slug.upper()}"
 
-    # Fall back to a state named in the SUBJECT only, and only if exactly one
-    # candidate matches. Ambiguity means we do not know.
-    subj = (subject or "").lower()
-    hits = [c for c, name in STATES.items()
-            if name.lower() in subj and (not allowed or c in allowed)]
-    if len(hits) == 1:
-        return hits[0], "state named in subject"
-    if len(hits) > 1:
-        return None, f"subject names {len(hits)} states - ambiguous"
+    # There used to be a fallback here: file the message under the one state
+    # named in its subject. A subject is text anyone can write, so any email
+    # reaching this inbox with "Illinois ... flags to half-staff" in the
+    # subject would have set Illinois to half-staff on the live site. Unknown
+    # senders now land in the unattributed report instead, where a human adds
+    # the real sender domain to registry.json once.
     return None, "no state identified"
 
 
@@ -238,6 +219,17 @@ def parse_message(msg, allowed):
         sent_date = sent.date().isoformat()
     except Exception:
         sent_date = None
+
+    # An order cannot start or end well before the email announcing it. A
+    # Missouri Patriot Day bulletin cites the law "signed December 18, 2001";
+    # that date was taken as the order's start. "The order's date" and "a date
+    # mentioned in the order" are different facts.
+    if sent_date:
+        floor = (sent.date() - timedelta(days=MAX_BACKDATE_DAYS))
+        if start and start < floor:
+            start = None
+        if end and end < floor:
+            end = None
 
     return {
         "state_code": code,

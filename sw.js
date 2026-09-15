@@ -13,13 +13,18 @@
  *            flag status is worse than a slow one. Cache is the offline
  *            fallback only, and the UI shows the age of what it displays.
  *
+ *   config.js -> NETWORK FIRST. It holds the push key and endpoint, and it
+ *            does change. Served cache-first, a returning visitor ran one
+ *            visit on the old endpoint after every edit to it.
+ *
  *   icons, manifest -> cache first. They genuinely never change, and when they
  *            do the filename changes with them.
  *
- * Bump VERSION on any release that changes cached assets.
+ * Bump VERSION on any release that changes cached assets or this file's
+ * caching rules. HTML does not need a bump: it is network-first.
  */
 
-const VERSION = 'flagstaff-v3';
+const VERSION = 'flagstaff-v4';
 const SHELL = ['./index.html', './manifest.json'];
 
 self.addEventListener('install', (e) => {
@@ -43,8 +48,12 @@ self.addEventListener('activate', (e) => {
 function networkFirst(request) {
   return fetch(request)
     .then((resp) => {
-      const copy = resp.clone();
-      caches.open(VERSION).then((c) => c.put(request, copy)).catch(() => {});
+      // Only a good response replaces the offline copy. Caching a 404 or
+      // 500 status.json would make it the thing served when offline.
+      if (resp.ok) {
+        const copy = resp.clone();
+        caches.open(VERSION).then((c) => c.put(request, copy)).catch(() => {});
+      }
       return resp;
     })
     .catch(() => caches.match(request).then((hit) => hit || Response.error()));
@@ -60,7 +69,8 @@ self.addEventListener('fetch', (e) => {
     || url.pathname.endsWith('/')
     || url.pathname.endsWith('.html');
 
-  if (isPage || url.pathname.endsWith('status.json')) {
+  if (isPage || url.pathname.endsWith('status.json')
+      || url.pathname.endsWith('config.js')) {
     e.respondWith(networkFirst(req));
     return;
   }
@@ -86,14 +96,19 @@ self.addEventListener('push', (e) => {
   let d = {};
   try { d = e.data ? e.data.json() : {}; } catch (_) { d = {}; }
 
+  // Three outcomes, not two. Anything that is not explicitly half or full
+  // used to fall through to "back to full staff" — a false all-clear.
+  const where = d.state && d.state !== 'US' ? ' in ' + d.state : '';
   const half = d.status === 'half';
-  const title = half
-    ? `Flags to half-staff${d.state ? ' in ' + d.state : ''}`
-    : `Flags back to full staff${d.state ? ' in ' + d.state : ''}`;
+  const full = d.status === 'full';
+  const title = half ? `Flags to half-staff${where}`
+    : full ? `Flags back to full staff${where}`
+    : `Flag status unclear${where}`;
 
   e.waitUntil(self.registration.showNotification(title, {
     body: d.reason || (half ? 'An order is now in effect.'
-                            : 'No order is in effect.'),
+                       : full ? 'No order is in effect.'
+                       : 'Check the official source before relying on this.'),
     icon: './icon-192.png',
     badge: './icon-192.png',
     tag: 'flag-' + (d.state || 'us'),   // replaces rather than stacks

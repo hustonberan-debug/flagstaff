@@ -157,12 +157,19 @@
     ],
     "buildable": true,
     "expected_status_text": "Flags are at half-staff today.",
-    "blocked_reason": "Source page has been frozen since January 2025 \u2014 it still announces the Jimmy Carter order. Would report half-staff every day. Needs a human check before enabling.",
+    "blocked_reason": null,
     "url_candidates": [
       "https://az.gov/half-staff-notices",
       "https://www.az.gov/half-staff-notices",
       "https://azgovernor.gov/office-arizona-governor/half-staff-notices"
-    ]
+    ],
+    "expected_sender_domain": "azdoa.gov",
+    "notification_channel": {
+      "type": "email",
+      "detail": "https://az.gov/half-staff-notices",
+      "note": "Bulletins observed from azdoa.gov (Patriot Day 2026). Secondary to the page."
+    },
+    "_mode_fixed_by": "audit 2026-09-15: page verified live - 'Flag Status: Flags are at full staff', newest notice dated 2026-09-11. The January 2025 freeze described in the old blocked_reason has ended."
   },
   {
     "state": "California",
@@ -594,7 +601,7 @@
       "type": "email_form",
       "detail": "https://www.illinois.gov/about/communications-opt-in.html -- per the flag-honors page, select 'Specific Subjects/Agencies' then 'Flag Honors'. NOT independently verified that the Flag Honors option is actually present in the form."
     },
-    "blocked_reason": "BLOCKED. illinois.gov/about/flag-honors.html exists, is official, is server-rendered, and explains the Flag Display Act -- but it carries NO current status and its 'Latest News' region renders the literal string 'No Data' on a plain fetch, "
+    "blocked_reason": "illinois.gov/about/flag-honors.html is official and server-rendered but carries no current status; its 'Latest News' region renders 'No Data' to a plain fetch. The flag-honors page points to an email opt-in form (notification_channel); no Illinois bulletin has reached the alerts inbox, and the Flag Honors option in that form is not verified."
   },
   {
     "state": "Indiana",
@@ -645,7 +652,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "diff",
+    "ingest_mode": "email",
     "cms": "WordPress",
     "js_blocked": false,
     "signature_check_required": false,
@@ -677,7 +684,9 @@
       "https://www.governor.ks.gov/newsroom/kansas-flag-honors",
       "https://governor.kansas.gov/newsroom/kansas-flag-honors/",
       "https://www.governor.ks.gov/newsroom/kansas-flag-honors/"
-    ]
+    ],
+    "blocked_reason": "The flag-honors page returns HTTP 403 to the pipeline on all three recorded URLs (verified 2026-09-15). Covered through the KSOG GovDelivery channel, which delivers from list.ks.gov.",
+    "_mode_fixed_by": "audit 2026-09-15: diff (403) -> email; channel already delivering"
   },
   {
     "state": "Kentucky",
@@ -694,7 +703,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "diff",
+    "ingest_mode": "email",
     "cms": null,
     "js_blocked": true,
     "signature_check_required": false,
@@ -722,7 +731,9 @@
       "detail": "https://public.govdelivery.com/accounts/KYGOV/subscriber/new",
       "account": "KYGOV"
     },
-    "expected_sender_domain": "subscriptions.kentucky.gov"
+    "expected_sender_domain": "subscriptions.kentucky.gov",
+    "blocked_reason": "governor.ky.gov/flag-status contains only flag-protocol text in its HTML; the current status is rendered client-side (verified 2026-09-15). Covered through the KYGOV bulletin from subscriptions.kentucky.gov, which has delivered.",
+    "_mode_fixed_by": "audit 2026-09-15: diff (never answered) -> email; channel already delivering"
   },
   {
     "state": "Louisiana",
@@ -809,7 +820,8 @@
       "type": "listserv",
       "detail": "Send a blank email (no body, no signature) to subscribe-bsb-halfstaffnotification@listserv.state.ma.us. Bulk requests: sh.events@state.ma.us, subject 'Subscribe to Half-Staff Notifications'. Both addresses read verbatim off the official page."
     },
-    "expected_status_text": "Please be advised that Massachusetts Governor Maura Healey has ordered that the United States of America flag and the Commonwealth of Massachusetts flag be lowered to half-staff at all state buildings from sunrise until sunset on Friday, August 14, 2026, the date of interment, in honor of Corporal N"
+    "expected_status_text": "Please be advised that Massachusetts Governor Maura Healey has ordered that the United States of America flag and the Commonwealth of Massachusetts flag be lowered to half-staff at all state buildings from sunrise until sunset on Friday, August 14, 2026, the date of interment, in honor of Corporal N",
+    "blocked_reason": "flag-status page returns HTTP 403 to the pipeline (verified 2026-09-15). The official channel is the half-staff listserv in notification_channel; no bulletin has reached the alerts inbox, so the subscription is unconfirmed. Left buildable so it recovers on its own if the 403 lifts."
   },
   {
     "state": "Maryland",
@@ -850,8 +862,8 @@
     "confidence_caps": [
       "last order 336d old"
     ],
-    "buildable": true,
-    "blocked_reason": "Press page is JavaScript-rendered; listings are absent from the HTML response. Needs a feed, an API, or a browser-based fetch."
+    "buildable": false,
+    "blocked_reason": "Press page is JavaScript-rendered; the HTML response carries only site navigation (73 links, none dated, none a release; verified 2026-09-15). It was being reported as full staff from that navigation. Needs a feed, an API, or a rendered fetch."
   },
   {
     "state": "Maine",
@@ -1110,7 +1122,7 @@
       "JS-blocked with no feed or push fallback"
     ],
     "buildable": false,
-    "blocked_reason": "BLOCKED, client-side rendering. news.mt.gov/Governors-Office returned an EMPTY BODY (headers only, zero text) to a browser-like UA. Prior research established that governor.mt.gov/flag-status is also a shell whose status is injected by an A"
+    "blocked_reason": "Client-side rendering: news.mt.gov/Governors-Office returns an empty body and governor.mt.gov/flag-status is a shell whose status is injected by script. No notification channel is recorded. Needs a rendered fetch or a channel."
   },
   {
     "state": "North Carolina",
@@ -1261,7 +1273,7 @@
       "no usable ingest path"
     ],
     "buildable": false,
-    "blocked_reason": "BLOCKED on every route tried. www.nh.gov/flag-status -- which DOES exist and is a genuine dedicated flag page per search results, and which the previous pass never found -- returned an EMPTY BODY. www.governor.nh.gov/news likewise returned ",
+    "blocked_reason": "www.nh.gov/flag-status and www.governor.nh.gov/news both return an empty body to a plain fetch. The state runs a mailing list (notification_channel); no New Hampshire bulletin has reached the alerts inbox, so the subscription is unconfirmed.",
     "notification_channel": {
       "type": "mailing_list",
       "detail": "https://maillist.nh.gov/list/nhgov/?p=subscribe&id=6"
@@ -1273,7 +1285,7 @@
     "sources_used": [
       "script"
     ],
-    "flag_page_url": null,
+    "flag_page_url": "https://www.nj.gov/governor/news/{year}/approved/news_archive.shtml",
     "press_url": "https://newjersey.gov/newsroom",
     "signup_url": null,
     "root_domain": "newjersey.gov",
@@ -1281,7 +1293,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "index",
+    "ingest_mode": "archive",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1290,7 +1302,7 @@
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": null,
+    "quirk": "Release archive is per-year; {year} in flag_page_url is filled in at run time. newjersey.gov/newsroom is the state portal's navigation, not the governor's releases.",
     "last_order_seen": {
       "date": null,
       "title": "NJ Flag Status >",
@@ -1303,7 +1315,9 @@
     "confidence_source": "script only (unresearched)",
     "confidence": "medium",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "blocked_reason": null,
+    "_mode_fixed_by": "audit 2026-09-15: index on newjersey.gov/newsroom (navigation only, read as full staff) -> archive on the governor's release archive"
   },
   {
     "state": "New Mexico",
@@ -1414,7 +1428,8 @@
     "confidence_source": "script only (unresearched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "blocked_reason": "governor.ny.gov/news returns HTTP 403 to the pipeline (verified 2026-09-15). No notification channel is recorded."
   },
   {
     "state": "Ohio",
@@ -1642,7 +1657,7 @@
     "rss_verified": true,
     "rss_item_count": 10,
     "rss_evidence": "script parsed live feed items",
-    "ingest_mode": "feed",
+    "ingest_mode": "index",
     "cms": "Drupal",
     "js_blocked": false,
     "signature_check_required": false,
@@ -1660,7 +1675,9 @@
     "confidence_source": "script only (unresearched)",
     "confidence": "medium",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "blocked_reason": null,
+    "_mode_fixed_by": "audit 2026-09-15: feed -> index. rss_url's newest item is 2020-01-06; governor.sc.gov/news is current"
   },
   {
     "state": "South Dakota",
@@ -1694,7 +1711,8 @@
     "confidence_source": "script only (unresearched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": false,
+    "blocked_reason": "press-releases.aspx returns only navigation in its HTML (14 links, no releases; verified 2026-09-15); the release list is rendered client-side, and governor.sd.gov/news/ returns 403. It was being reported as full staff from that navigation. Needs a rendered fetch or a notification channel."
   },
   {
     "state": "Tennessee",
@@ -1956,7 +1974,14 @@
     "confidence_source": "script only (unresearched)",
     "confidence": "medium",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": false,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "https://service.govdelivery.com/accounts/WIDMA/subscriber/new?topic_id=WIDMA_17",
+      "account": "WIDMA",
+      "status": "not subscribed"
+    },
+    "blocked_reason": "governor.wi.gov/newsroom returns only navigation in its HTML (28 links; no release list; verified 2026-09-15) and was being reported as full staff from it. The newsroom links a GovDelivery 'flag updates' topic (WIDMA_17). Subscribe the alerts inbox to it, then set ingest_mode to email."
   },
   {
     "state": "West Virginia",
@@ -2011,7 +2036,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "index",
+    "ingest_mode": "email",
     "cms": null,
     "js_blocked": true,
     "signature_check_required": false,
@@ -2029,12 +2054,13 @@
     "confidence_source": "script only (unresearched)",
     "confidence": "low",
     "confidence_caps": [],
-    "buildable": false,
+    "buildable": true,
     "notification_channel": {
       "type": "govdelivery",
       "detail": "https://public.govdelivery.com/accounts/WYGOV/subscriber/new",
       "account": "WYGOV"
     },
-    "blocked_reason": "BLOCKED, client-side rendering. governor.wyo.gov/flag-status and governor.wyo.gov/media/news-releases BOTH returned only <head> metadata and an empty body -- and both returned the identical generic title 'Wyoming Governor Mark Gordon' with "
+    "blocked_reason": "Website is client-side rendered: governor.wyo.gov/flag-status and /media/news-releases return only <head> metadata and an empty body to a plain fetch. Covered through the WYGOV GovDelivery bulletin instead, which has delivered to the alerts inbox since 2026-09-10 (verified 2026-09-15).",
+    "_mode_fixed_by": "audit 2026-09-15: index/unbuildable -> email; channel already delivering"
   }
 ]

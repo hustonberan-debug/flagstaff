@@ -497,6 +497,19 @@ function sinceChange(iso){
   return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
 }
 
+/* Every string in status.json that came from a government page or an email
+   subject is untrusted. The pipeline decodes entities after stripping tags, so
+   a page title containing "&lt;img onerror=...&gt;" arrives here as live
+   markup. Escape before any innerHTML, and only link http(s) URLs. */
+function esc(v){
+  return String(v==null?'':v).replace(/[&<>"']/g,
+    c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function sourceLink(url){
+  return /^https?:\/\//i.test(url||'')
+    ? ` <a href="${esc(url)}" target="_blank" rel="noopener">official source &nearr;</a>` : '';
+}
+
 function render(){
   const s=(DATA.states||{})[current];
   const nameEl=document.getElementById('stateName');
@@ -508,6 +521,7 @@ function render(){
     rEl.textContent=''; recEl.innerHTML=''; setFlag('unknown'); return; }
 
   nameEl.textContent=s.state||current;
+  const checked = `<span><span class="dot DOT"></span> checked ${timeAgo(s.checked_at||DATA.generated_at)}</span>`;
 
   // A presidential proclamation lowers flags in every state, including ones
   // whose own source we cannot read. Showing "not covered" during a national
@@ -517,34 +531,39 @@ function render(){
   if(fed && s.coverage!=='covered'){
     vEl.textContent = fed.scope==='until-noon' ? 'Half until noon' : 'Half-staff';
     vEl.className='verdict half';
-    rEl.innerHTML = `<strong>By presidential proclamation</strong><br>${fed.reason||''}`;
-    recEl.innerHTML = `<span><span class="dot live"></span> national order in effect</span>`
-      + (fed.source_url?` <a href="${fed.source_url}" target="_blank" rel="noopener">official source &nearr;</a>`:'');
+    rEl.innerHTML = `<strong>By presidential proclamation</strong><br>${esc(fed.reason)}`;
+    recEl.innerHTML = checked.replace('DOT','live')
+      + ` <span>&middot; national order in effect</span>` + sourceLink(fed.source_url);
     setFlag('half');
     return;
   }
 
   if(s.coverage==='not_covered'){
+    // Not always "no source": some states have one that blocks us, or a
+    // notification channel we have not heard from yet. Say only what is
+    // true of all of them.
     vEl.textContent='Not covered'; vEl.className='verdict unknown';
-    rEl.innerHTML=`<em>We don't have a verified official source for ${s.state} yet, so we won't guess. `
+    rEl.innerHTML=`<em>We can't read an official source for ${esc(s.state)} right now, so we won't guess. `
       +`Check the governor's office directly.</em>`;
-    recEl.innerHTML=''; setFlag('unknown'); return;
+    recEl.innerHTML=checked.replace('DOT','stale') + sourceLink(s.source_url);
+    setFlag('unknown'); return;
   }
   if(s.effective_status==='unknown'){
     vEl.textContent='Unclear'; vEl.className='verdict unknown';
-    rEl.innerHTML=`<em>${s.error||'The official page did not state a status we could read.'}</em>`;
+    rEl.innerHTML=`<em>${esc(s.error||'The official page did not state a status we could read.')}</em>`;
   } else if(s.effective_status==='half'){
     vEl.textContent = s.scope==='until-noon' ? 'Half until noon' : 'Half-staff';
     vEl.className='verdict half';
     // Say WHOSE order it is. Without this the page reads as a contradiction:
     // a big "HALF-STAFF" headline directly above "no national order in
-    // effect". Both are true — it is a governor's order — but the page has to
-    // say so or the user has to work it out.
-    const who = s.reason_source==='federal'
-      ? 'By presidential proclamation'
-      : `By order of the Governor of ${s.state}`;
+    // effect". But only name the governor when the pipeline proved it:
+    // "the governor ordered this" and "an official state page announced
+    // this" are different claims.
+    const who = s.reason_source==='federal' ? 'By presidential proclamation'
+      : s.authority==='governor' ? `By order of the Governor of ${esc(s.state)}`
+      : `Announced by an official ${esc(s.state)} source`;
     const detail = (s.reason && s.reason!=='State order') ? s.reason : null;
-    rEl.innerHTML = `<strong>${who}</strong>` + (detail?`<br>${detail}`:'');
+    rEl.innerHTML = `<strong>${who}</strong>` + (detail?`<br>${esc(detail)}`:'');
   } else {
     vEl.textContent='Full staff'; vEl.className='verdict full';
     rEl.innerHTML = '<em>No half-staff order is in effect today.</em>';
@@ -552,19 +571,20 @@ function render(){
 
   if(s.county_exceptions && s.county_exceptions.length){
     rEl.innerHTML += `<br><br>Except in `
-      + s.county_exceptions.map(c=>`<strong>${c.county} County</strong> (${c.status}-staff)`).join(', ')
+      + s.county_exceptions.map(c=>`<strong>${esc(c.county)} County</strong> (${esc(c.status)}-staff)`).join(', ')
       + '.';
   }
 
   // Two separate facts. "Checked" answers "is this app awake?" and always
-  // moves. "Unchanged since" answers "when did the flag last move?" and may
-  // be days old, which is normal and reassuring rather than alarming.
+  // moves. "Unchanged since" answers "when did the flag last move?" — which
+  // only means something when there is a known answer to have not moved.
   const stale = s.coverage==='stale';
-  const changed = sinceChange(s.last_changed_at);
+  const answered = s.effective_status==='half' || s.effective_status==='full';
+  const changed = answered ? sinceChange(s.last_changed_at) : null;
   recEl.innerHTML =
-    `<span><span class="dot ${stale?'stale':'live'}"></span> checked ${timeAgo(s.checked_at||DATA.generated_at)}</span>`
+    checked.replace('DOT', stale||s.coverage==='frozen' ? 'stale' : 'live')
     + (changed?` <span>&middot; unchanged since ${changed}</span>`:'')
-    + (s.source_url?` <a href="${s.source_url}" target="_blank" rel="noopener">official source &nearr;</a>`:'')
+    + sourceLink(s.source_url)
     + (stale?' <span>&middot; serving last known value</span>':'');
 
   setFlag(s.effective_status);
@@ -575,8 +595,16 @@ function renderFederal(){
   const f=DATA.federal;
   const s=(DATA.states||{})[current];
   if(f){
-    el.innerHTML = `<div class="row"><span class="when">now</span><span class="what">${f.reason}
-        <span class="note">Applies to all 50 states &middot; ${f.citation||f.authority||''}</span></span></div>`;
+    el.innerHTML = `<div class="row"><span class="when">now</span><span class="what">${esc(f.reason)}
+        <span class="note">Applies to all 50 states &middot; ${esc(f.citation||f.authority||'')}</span></span></div>`;
+    return;
+  }
+  // "No national order" and "could not check for one" are different facts.
+  if(String(DATA.federal_check||'').startsWith('failed')){
+    el.innerHTML = `<div class="row"><span class="when">?</span><span class="what">
+      <em style="color:var(--muted)">Could not check for a national order this run.</em>
+      <span class="note">The White House proclamations page did not load. Status above
+        is from the state's own source.</span></span></div>`;
     return;
   }
   // When a state order is live, saying only "no national order" invites the
@@ -586,8 +614,8 @@ function renderFederal(){
   el.innerHTML = `<div class="row"><span class="when">&mdash;</span><span class="what">
       <em style="color:var(--muted)">Nothing nationwide today.</em>` +
       (stateIsHalf
-        ? `<span class="note">${s.state}'s order above is the governor's,
-             and applies only within ${s.state}.</span>`
+        ? `<span class="note">${esc(s.state)}'s order above is a state order,
+             and applies only within ${esc(s.state)}.</span>`
         : `<span class="note">A presidential proclamation would lower flags
              in every state at once.</span>`)
     + `</span></div>`;
@@ -778,7 +806,14 @@ if('serviceWorker' in navigator){
   refreshNotifyUI();
 }
 
-function refreshNotifyUI(){
+const NO_CONFIG_MSG='Notifications are allowed, but this build has no push key or endpoint configured (config.js).';
+
+/* Browser permission and a working subscription are two different facts.
+   "Permission granted" used to be read as "subscribed": after "turn off all
+   alerts" (which unsubscribes but cannot revoke permission), or after a
+   subscribe call that failed, the next visit showed "Alerts are on" on a
+   disabled button \u2014 with no subscription and no way to make one. */
+async function refreshNotifyUI(){
   const btn=document.getElementById('notifyBtn');
   if(!('Notification' in window)||!('serviceWorker' in navigator)){
     btn.disabled=true;btn.textContent='Not supported in this browser';return;
@@ -788,49 +823,68 @@ function refreshNotifyUI(){
     notifyStatus('iPhone and iPad only allow alerts for apps on the home screen.');
     return;
   }
-  if(Notification.permission==='granted'){
-    btn.disabled=true;btn.textContent='Alerts are on';
-    notifyStatus(SUBSCRIBE_ENDPOINT?'':'Permission granted. Push delivery is not wired up yet.');
-  } else if(Notification.permission==='denied'){
+  if(Notification.permission==='denied'){
     btn.disabled=true;btn.textContent='Alerts blocked';
     notifyStatus('Your browser is blocking notifications for this site. Re-enable them in site settings.');
-  } else {
-    // Permission not yet decided, and the service worker is ready (this
-    // function only runs after registration resolves, or when service
-    // workers aren't supported at all). Safe to let the user click.
-    btn.disabled=false;btn.textContent='Turn on alerts';
+    return;
+  }
+  // This function runs only after the service worker has registered.
+  const sub = swReg ? await swReg.pushManager.getSubscription().catch(()=>null) : null;
+  if(Notification.permission==='granted' && sub){
+    btn.disabled=true;btn.textContent='Alerts are on';
+    notifyStatus('');
+    return;
+  }
+  btn.disabled=false;btn.textContent='Turn on alerts';
+  if(Notification.permission==='granted'){
+    notifyStatus(SUBSCRIBE_ENDPOINT ? 'Notifications are allowed, but this device is not subscribed. Turn alerts on to subscribe.'
+                                    : NO_CONFIG_MSG);
   }
 }
 
+async function postJSON(path, body){
+  const r=await fetch(workerBase()+path,{method:'POST',
+    headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  let data=null;
+  try{ data=await r.json(); }catch(_){}
+  if(!r.ok) throw new Error('server said HTTP '+r.status+(data&&data.error?' ('+data.error+')':''));
+  return data||{};
+}
+
 document.getElementById('notifyBtn').onclick=async function(){
-  this.disabled=true;this.textContent='Asking\u2026';
+  const btn=this;
+  btn.disabled=true;btn.textContent='Asking\u2026';
   let perm;
   try{ perm=await Notification.requestPermission(); }
   catch(_){ perm='denied'; }
   if(perm!=='granted'){
-    this.textContent='Alerts blocked';
+    btn.textContent='Alerts blocked';
     notifyStatus('You can change this in your browser site settings.');return;
   }
-  this.textContent='Alerts are on';
-  new Notification('Alerts are on',{body:"You'll hear from Flagstaff when the flag changes position \u2014 and not otherwise.",icon:'./icon-192.png'});
-  if(VAPID_PUBLIC_KEY&&SUBSCRIBE_ENDPOINT&&'serviceWorker' in navigator){
-    try{
-      // Wait for the actual registration instead of trusting the swReg
-      // variable, which is only assigned once register()'s promise resolves.
-      // A click that lands before that assignment used to skip straight to
-      // the "not wired up yet" branch below even though push is configured
-      // fine - the registration just hadn't finished yet.
-      const reg=await navigator.serviceWorker.ready;
-      swReg=reg;
-      const sub=await reg.pushManager.subscribe({userVisibleOnly:true,
-        applicationServerKey:b64ToU8(VAPID_PUBLIC_KEY)});
-      await fetch(SUBSCRIBE_ENDPOINT,{method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({subscription:sub,state:current})});
-      notifyStatus('Subscribed for '+current+'.'); refreshSubs();
-    }catch(e){ notifyStatus('Permission granted, but subscribing failed: '+e.message); }
-  } else {
-    notifyStatus('Permission granted, but this build has no push key or endpoint configured.');
+  if(!(VAPID_PUBLIC_KEY&&SUBSCRIBE_ENDPOINT)){
+    btn.disabled=false;btn.textContent='Turn on alerts';
+    notifyStatus(NO_CONFIG_MSG);return;
+  }
+  btn.textContent='Subscribing\u2026';
+  try{
+    // Wait for the actual registration rather than the swReg variable,
+    // which is only assigned once register()'s promise resolves.
+    const reg=await navigator.serviceWorker.ready;
+    swReg=reg;
+    const sub=await reg.pushManager.subscribe({userVisibleOnly:true,
+      applicationServerKey:b64ToU8(VAPID_PUBLIC_KEY)});
+    // Only claim success once the Worker has confirmed it stored the
+    // subscription. The response status used to be ignored, so a failed
+    // save still said "Subscribed" and showed an "Alerts are on" notice.
+    const data=await postJSON('/subscribe',{subscription:sub.toJSON(),state:current});
+    btn.textContent='Alerts are on';
+    new Notification('Alerts are on',{body:"You'll hear from Flagstaff when the flag changes position \u2014 and not otherwise.",icon:'./icon-192.png'});
+    notifyStatus('Subscribed for '+((DATA.states[current]||{}).state||current)+'.');
+    if(Array.isArray(data.states)){ mySubs=data.states; subsError=null; renderSubs(); }
+    else refreshSubs();
+  }catch(e){
+    btn.disabled=false;btn.textContent='Try again';
+    notifyStatus('Could not subscribe: '+e.message);
   }
 };
 
@@ -842,71 +896,82 @@ document.getElementById('notifyBtn').onclick=async function(){
    the app.
 ------------------------------------------------------------------------- */
 let mySubs=[];
+// "Your list is empty" and "your list could not be loaded" must not render
+// the same. A failed fetch used to set mySubs=[] and show "No states yet."
+let subsError=null;
 
 function workerBase(){
   return SUBSCRIBE_ENDPOINT ? SUBSCRIBE_ENDPOINT.replace(/\/subscribe$/,'') : '';
 }
-async function currentEndpoint(){
+async function currentSubscription(){
   if(!swReg) return null;
-  const s=await swReg.pushManager.getSubscription();
-  return s ? s.endpoint : null;
+  return await swReg.pushManager.getSubscription().catch(()=>null);
 }
 async function refreshSubs(){
   const box=document.getElementById('subList');
-  const base=workerBase(); const ep=await currentEndpoint();
-  if(!base || !ep){ box.hidden=true; return; }
+  const sub=await currentSubscription();
+  if(!workerBase() || !sub){ box.hidden=true; return; }
   try{
-    const r=await fetch(base+'/my-states',{method:'POST',
-      headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:ep})});
-    mySubs=(await r.json()).states||[];
-  }catch(_){ mySubs=[]; }
+    const data=await postJSON('/my-states',{endpoint:sub.endpoint});
+    mySubs=Array.isArray(data.states)?data.states:[]; subsError=null;
+  }catch(e){ subsError=e.message; }
   renderSubs();
 }
+function stateName(c){ return (DATA.states[c]||{}).state||c; }
 function renderSubs(){
   const box=document.getElementById('subList');
-  const base=workerBase();
-  if(!base){ box.hidden=true; return; }
+  if(!workerBase()){ box.hidden=true; return; }
   box.hidden=false;
+  if(subsError){
+    box.innerHTML=`<h4>Alerting you about</h4>
+      <span style="color:var(--muted);font-size:14px">Couldn't load your alert list (${esc(subsError)}).</span>
+      <button class="off" id="subsRetry">try again</button>`;
+    document.getElementById('subsRetry').onclick=refreshSubs;
+    return;
+  }
   const chips = mySubs.length
-    ? mySubs.map(c=>`<span class="chip">${(DATA.states[c]||{}).state||c}
-        <button data-drop="${c}" aria-label="Stop alerts for ${c}">&times;</button></span>`).join('')
+    ? mySubs.map(c=>`<span class="chip">${esc(stateName(c))}
+        <button data-drop="${esc(c)}" aria-label="Stop alerts for ${esc(stateName(c))}">&times;</button></span>`).join('')
     : '<span style="color:var(--muted);font-size:14px">No states yet.</span>';
-  const here=(DATA.states[current]||{}).state||current;
+  const here=stateName(current);
   const has=mySubs.includes(current);
   box.innerHTML=`<h4>Alerting you about</h4>${chips}
     <button class="add" id="addState" ${has?'disabled':''}>
-      ${has?`${here} is on`:`Add ${here}`}</button>
+      ${has?`${esc(here)} is on`:`Add ${esc(here)}`}</button>
     ${mySubs.length?'<button class="off" id="allOff">turn off all alerts</button>':''}`;
 
   box.querySelectorAll('[data-drop]').forEach(b=>{
-    b.onclick=()=>changeSub('drop-state',{state:b.dataset.drop});
+    b.onclick=()=>changeSub('/drop-state',{state:b.dataset.drop});
   });
   const add=document.getElementById('addState');
-  if(add && !has) add.onclick=()=>changeSub('subscribe',{state:current});
+  if(add && !has) add.onclick=()=>changeSub('/subscribe',{state:current});
   const off=document.getElementById('allOff');
   if(off) off.onclick=async()=>{
-    const ep=await currentEndpoint(); if(!ep) return;
-    await fetch(workerBase()+'/unsubscribe',{method:'POST',
-      headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:ep})});
-    const s=await swReg.pushManager.getSubscription(); if(s) await s.unsubscribe();
+    const sub=await currentSubscription();
+    if(!sub){ notifyStatus('This device is not subscribed.'); refreshNotifyUI(); return; }
+    try{
+      await postJSON('/unsubscribe',{endpoint:sub.endpoint});
+    }catch(e){
+      // Keep the browser subscription so the user can retry; dropping it
+      // here would leave the server still holding an endpoint we forgot.
+      notifyStatus('Could not turn alerts off: '+e.message); return;
+    }
+    await sub.unsubscribe().catch(()=>{});
     mySubs=[]; renderSubs(); notifyStatus('Alerts off.');
-    const btn=document.getElementById('notifyBtn');
-    btn.disabled=false; btn.textContent='Turn on alerts';
+    refreshNotifyUI();
   };
 }
 async function changeSub(path,extra){
-  const ep=await currentEndpoint(); if(!ep) return;
-  let body={endpoint:ep,...extra};
-  if(path==='subscribe'){
-    const s=await swReg.pushManager.getSubscription();
-    body={subscription:s.toJSON(),state:extra.state};
-  }
+  const sub=await currentSubscription();
+  if(!sub){ notifyStatus('This device is not subscribed. Use "Turn on alerts" first.'); refreshNotifyUI(); return; }
+  const body = path==='/subscribe'
+    ? {subscription:sub.toJSON(),state:extra.state}
+    : {endpoint:sub.endpoint,...extra};
   try{
-    const r=await fetch(workerBase()+'/'+path,{method:'POST',
-      headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    mySubs=(await r.json()).states||[];
-    renderSubs();
-  }catch(e){ notifyStatus('Could not update: '+e.message); }
+    const data=await postJSON(path,body);
+    if(Array.isArray(data.states)){ mySubs=data.states; subsError=null; renderSubs(); }
+    else await refreshSubs();
+  }catch(e){ notifyStatus('Could not update your alerts: '+e.message); }
 }
 
 // Build stamp in the footer, so which version is live is visible at a glance.

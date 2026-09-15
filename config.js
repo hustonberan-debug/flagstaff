@@ -24,5 +24,5 @@ window.FLAGSTAFF_CONFIG = {
   SUBSCRIBE_ENDPOINT: 'https://halfstaff-push.hustonberan.workers.dev/subscribe',
 
   // Shown in the footer so you can tell at a glance which build is live.
-  BUILD: '2026-08-26',
+  BUILD: '2026-09-15',
 };
