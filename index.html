@@ -348,7 +348,7 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
         <p id="notifyWhy">One notification when the flag goes to half-staff, one
           when it goes back up. Nothing on the days nothing happens. National
           proclamations always come through.</p>
-        <button class="btn" id="notifyBtn">Turn on alerts</button>
+        <button class="btn" id="notifyBtn" disabled>Turn on alerts</button>
         <div class="status-line" id="notifyStatus"></div>
         <div id="subList" class="subs" hidden></div>
       </div>
@@ -770,6 +770,7 @@ function notifyStatus(msg){document.getElementById('notifyStatus').textContent=m
 
 let swReg=null;
 if('serviceWorker' in navigator){
+  document.getElementById('notifyBtn').textContent='Preparing…';
   navigator.serviceWorker.register('sw.js')
     .then(r=>{swReg=r;refreshNotifyUI();refreshSubs()})
     .catch(()=>notifyStatus('Alerts need the page served over https (or localhost).'));
@@ -793,6 +794,11 @@ function refreshNotifyUI(){
   } else if(Notification.permission==='denied'){
     btn.disabled=true;btn.textContent='Alerts blocked';
     notifyStatus('Your browser is blocking notifications for this site. Re-enable them in site settings.');
+  } else {
+    // Permission not yet decided, and the service worker is ready (this
+    // function only runs after registration resolves, or when service
+    // workers aren't supported at all). Safe to let the user click.
+    btn.disabled=false;btn.textContent='Turn on alerts';
   }
 }
 
@@ -807,9 +813,16 @@ document.getElementById('notifyBtn').onclick=async function(){
   }
   this.textContent='Alerts are on';
   new Notification('Alerts are on',{body:"You'll hear from Flagstaff when the flag changes position \u2014 and not otherwise.",icon:'./icon-192.png'});
-  if(swReg&&VAPID_PUBLIC_KEY&&SUBSCRIBE_ENDPOINT){
+  if(VAPID_PUBLIC_KEY&&SUBSCRIBE_ENDPOINT&&'serviceWorker' in navigator){
     try{
-      const sub=await swReg.pushManager.subscribe({userVisibleOnly:true,
+      // Wait for the actual registration instead of trusting the swReg
+      // variable, which is only assigned once register()'s promise resolves.
+      // A click that lands before that assignment used to skip straight to
+      // the "not wired up yet" branch below even though push is configured
+      // fine - the registration just hadn't finished yet.
+      const reg=await navigator.serviceWorker.ready;
+      swReg=reg;
+      const sub=await reg.pushManager.subscribe({userVisibleOnly:true,
         applicationServerKey:b64ToU8(VAPID_PUBLIC_KEY)});
       await fetch(SUBSCRIBE_ENDPOINT,{method:'POST',
         headers:{'Content-Type':'application/json'},
@@ -817,7 +830,7 @@ document.getElementById('notifyBtn').onclick=async function(){
       notifyStatus('Subscribed for '+current+'.'); refreshSubs();
     }catch(e){ notifyStatus('Permission granted, but subscribing failed: '+e.message); }
   } else {
-    notifyStatus('Permission granted. Push delivery is not wired up yet.');
+    notifyStatus('Permission granted, but this build has no push key or endpoint configured.');
   }
 };
 
