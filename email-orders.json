@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-15T21:35:03+00:00",
+  "generated_at": "2026-09-15T22:21:45+00:00",
   "orders": {
     "MI": {
       "state_code": "MI",
-      "identified_by": "sender domain govsubscriptions.michigan.gov",
+      "identified_by": "sender domain govsubscriptions.michigan.gov, dkim=pass govsubscriptions.michigan.gov",
       "status": "half",
       "authority": "governor",
       "subject": "RELEASE: Gov. Whitmer Lowers Flags\u00a0to Honor Patriot Day",
@@ -16,7 +16,7 @@
     },
     "KS": {
       "state_code": "KS",
-      "identified_by": "sender domain ks.gov",
+      "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
       "status": "half",
       "authority": "governor",
       "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of the 25th Anniversary of 9/11",
@@ -29,33 +29,20 @@
     },
     "KY": {
       "state_code": "KY",
-      "identified_by": "sender domain subscriptions.kentucky.gov",
+      "identified_by": "sender domain subscriptions.kentucky.gov, dkim=pass subscriptions.kentucky.gov",
       "status": "half",
       "authority": "governor",
       "subject": "Gov. Beshear Orders Flags to Half-Staff for Patriot Day",
       "from": "Governor's Communications Office <governor@subscriptions.kentucky.gov>",
       "sent_date": "2026-09-10",
-      "start_date": "2026-09-10",
-      "end_date": null,
+      "start_date": "2026-09-11",
+      "end_date": "2026-09-11",
       "until_noon": false,
       "evidence": "to Half-Staff"
     },
-    "MO": {
-      "state_code": "MO",
-      "identified_by": "sender domain mooa.dmarc.public.govdelivery.com",
-      "status": "half",
-      "authority": "unknown",
-      "subject": "Flags to Fly at Half-Staff for Patriot Day",
-      "from": "Missouri OA \u2013 Facilities Management, Design & Construction <missourioa@mooa.dmarc.public.govdelivery.com>",
-      "sent_date": "2026-09-10",
-      "start_date": "2026-09-10",
-      "end_date": null,
-      "until_noon": false,
-      "evidence": "at Half-Staff"
-    },
     "AZ": {
       "state_code": "AZ",
-      "identified_by": "sender domain azdoa.gov",
+      "identified_by": "sender domain azdoa.gov, dkim=pass azdoa.gov",
       "status": "half",
       "authority": "governor",
       "subject": "Gov. Hobbs Orders Flags to Half-Staff in Honor of Patriot Day",
@@ -68,7 +55,7 @@
     },
     "WY": {
       "state_code": "WY",
-      "identified_by": "govdelivery account WYGOV",
+      "identified_by": "govdelivery account WYGOV, dkim=pass public.govdelivery.com",
       "status": "half",
       "authority": "governor",
       "subject": "Governor Orders Flags Lowered to Half-Staff in Observance of Patriot Day",
@@ -88,5 +75,14 @@
     "KS": "2026-09-10",
     "AZ": "2026-09-10"
   },
-  "unattributed_senders": {}
+  "channels_heard": {
+    "WY": "2026-09-10",
+    "MI": "2026-09-10",
+    "KS": "2026-09-10",
+    "KY": "2026-09-10",
+    "AZ": "2026-09-10",
+    "WI": "2026-09-15"
+  },
+  "unattributed_senders": {},
+  "unauthenticated_senders": {}
 }
