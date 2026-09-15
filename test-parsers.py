@@ -296,6 +296,15 @@ R.federal_proclamation(None, c2)
 t("a failed article fetch is not cached as empty forever",
   PROC in c2.get(R.FEDERAL_ARTICLE_CACHE, {}), False)
 del os.environ["FEDERAL_PROCLAMATION_URL"]
+thirty = {"reason": "Honoring the Memory of a President", "authority":
+          "presidential proclamation", "start_date": "2026-09-01",
+          "end_date": "2026-09-30"}
+t("30-day order that scrolled off the listing stays in force mid-window",
+  bool(R.carry_federal(thirty, date(2026, 9, 20))), True)
+t("...and ends when its window does", R.carry_federal(thirty, date(2026, 10, 1)), None)
+t("statutory days are never carried", R.carry_federal(
+    {"authority": "statute", "start_date": "2026-09-11", "end_date": "2026-09-11"},
+    date(2026, 9, 11)), None)
 
 print("\n--- change tracking: the ANSWER changed, not the page ---")
 res = {"NV": {"effective_status": P.FULL, "checked_at": "T2", "state_order": None},

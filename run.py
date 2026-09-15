@@ -397,6 +397,22 @@ def federal_proclamation(session, cache):
     return None, None
 
 
+def carry_federal(prev_fed, d):
+    """Keep a previously read proclamation while its stated window lasts.
+
+    This run may not return an order we already read: we could not look, or
+    it has scrolled off the first page of the listing. The Dolly Parton
+    proclamation was gone from page 1 within two weeks; a 30-day order would
+    have ended early for all 50 states. Statutory days are excluded — they
+    are recomputed from the calendar every run.
+    """
+    if not prev_fed or prev_fed.get("authority") == "statute":
+        return None
+    if revalidate({"state_status": P.HALF, "state_order": prev_fed}, d)[0] != P.HALF:
+        return None
+    return dict(prev_fed, carried_forward=True)
+
+
 def pick_url(rec):
     url = _pick_url(rec)
     # Some archives are per-year (New Jersey: /news/2026/approved/...). A
@@ -908,13 +924,8 @@ def main():
         fed_check = f"failed: {ferr}" if ferr else "ok"
         if ferr:
             print(f"  federal: could not determine ({ferr})")
-            prev_fed = cache.get("_federal_active")
-            if prev_fed and revalidate({"state_status": P.HALF,
-                                        "state_order": prev_fed}, d)[0] == P.HALF:
-                # We could not look, but last run saw an order whose window
-                # still covers today. Keep it rather than un-lowering 51 flags
-                # because one website timed out.
-                fed = dict(prev_fed, carried_forward=True)
+        if not fed:
+            fed = carry_federal(cache.get("_federal_active"), d)
 
     targets = [r for r in registry
                if not args.state or r["state_code"] == args.state.upper()]
