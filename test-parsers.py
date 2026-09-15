@@ -355,6 +355,10 @@ rec_e, _ = E.parse_message(mail(
     auth=[GMAIL.format(d="govdelivery.com")]), {"MO"})
 t("a law's 2001 signing date is not the order's start",
   (rec_e or {}).get("start_date"), "2026-09-10")
+t("Missouri's real From (unquoted comma in the name) still resolves",
+  E.sender_address("Missouri OA – Facilities Management, Design & Construction "
+                   "<missourioa@mooa.dmarc.public.govdelivery.com>"),
+  ("missourioa", "mooa.dmarc.public.govdelivery.com"))
 rec_e, _ = E.parse_message(mail(
     "Kansas Governor <govpress@list.ks.gov>",
     "Governor Kelly Directs Flags to Half-Staff Friday", "Flags to half-staff.",
@@ -407,10 +411,11 @@ print("\n--- email channels: silence is only 'no order' while the channel lives 
 import json as _json, tempfile
 _real_orders = R.EMAIL_ORDERS
 def email_state(heard, generated="2026-09-15T12:00:00+00:00", skipped=False,
-                orders=None, limit=None):
+                orders=None, limit=None, seen="2026-06-01"):
     f = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
     _json.dump({"generated_at": generated, "skipped": skipped, "orders": orders or {},
-                "channels_seen": {}, "channels_heard": {"TT": heard} if heard else {}}, f)
+                "channels_seen": {"TT": seen} if (heard and seen) else {},
+                "channels_heard": {"TT": heard} if heard else {}}, f)
     f.close()
     R.EMAIL_ORDERS = f.name
     r = {"state": "Testland", "state_code": "TT", "ingest_mode": "email",
@@ -427,6 +432,10 @@ t("channel silent 90 days -> not read as full", email_state("2026-06-17"),
 t("per-state limit can allow a quieter channel",
   email_state("2026-06-17", limit=120), (P.FULL, "covered"))
 t("never heard -> not covered", email_state(None), (P.UNKNOWN, "not_covered"))
+t("heard only a welcome message, never a flag bulletin -> still pending",
+  email_state("2026-09-15", seen=None), (P.UNKNOWN, "not_covered"))
+t("flag bulletin long ago, other mail recently -> channel alive, full",
+  email_state("2026-09-12", seen="2026-03-01"), (P.FULL, "covered"))
 t("inbox not read for 3 days -> stale, last value served",
   email_state("2026-09-05", generated="2026-09-12T12:00:00+00:00"), (P.FULL, "stale"))
 t("an order we did read still counts when the inbox is stale",

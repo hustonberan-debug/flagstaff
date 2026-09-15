@@ -1953,7 +1953,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "index",
+    "ingest_mode": "email",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1980,9 +1980,10 @@
       "type": "govdelivery",
       "detail": "https://service.govdelivery.com/accounts/WIDMA/subscriber/new?topic_id=WIDMA_17",
       "account": "WIDMA",
-      "status": "not subscribed"
+      "status": "receiving mail since 2026-09-15"
     },
-    "blocked_reason": "governor.wi.gov/newsroom returns only navigation in its HTML (28 links; no release list; verified 2026-09-15) and was being reported as full staff from it. The newsroom links a GovDelivery 'flag updates' topic (WIDMA_17). Subscribe the alerts inbox to it, then set ingest_mode to email."
+    "blocked_reason": "governor.wi.gov/newsroom returns only navigation in its HTML. Covered through the GovDelivery 'flag updates' topic (WIDMA_17): the alerts inbox began receiving authenticated WIDMA mail on 2026-09-15. It reports 'subscription pending' until the first flag bulletin arrives.",
+    "_mode_fixed_by": "2026-09-15: index (navigation only) -> email; WIDMA mail now arriving"
   },
   {
     "state": "West Virginia",

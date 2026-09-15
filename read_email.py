@@ -162,8 +162,14 @@ def load_govdelivery_accounts(reg):
 
 def sender_address(sender):
     """(local part, domain) of the From address, lowercased. The display name
-    is ignored: "mt.gov <anyone@example.com>" is not a Montana address."""
-    addr = email.utils.parseaddr(sender or "")[1].lower()
+    is ignored: "mt.gov <anyone@example.com>" is not a Montana address.
+
+    The bracketed address is taken first: parseaddr gives up on a display
+    name with an unquoted comma, and Missouri's is "Missouri OA - Facilities
+    Management, Design & Construction <missourioa@...>" — its bulletins
+    silently disappeared."""
+    m = re.search(r"<\s*([^<>\s@]+@[^<>\s@]+)\s*>\s*$", sender or "")
+    addr = (m.group(1) if m else email.utils.parseaddr(sender or "")[1]).lower()
     if "@" not in addr:
         return "", ""
     local, _, dom = addr.rpartition("@")
@@ -420,7 +426,7 @@ def main():
         if not rec:
             if why not in ("not flag-related",):
                 rejected.append(why)
-                if "no state identified" in why:
+                if "no state identified" in why or "no sender address" in why:
                     note(unattributed, sender_address(decoded(msg.get("From")))[1]
                          or decoded(msg.get("From")), msg)
                 elif why.startswith(UNAUTHENTICATED):

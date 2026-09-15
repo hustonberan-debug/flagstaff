@@ -532,8 +532,11 @@ def check_state(rec, cache, session, verbose=False):
         # Only the last is evidence of full staff. The third used to read as
         # FULL forever: one bulletin in 2026 would have kept a state "covered"
         # indefinitely after its list stopped reaching us.
-        heard = ((mail.get("channels_heard") or {}).get(code)
-                 or (mail.get("channels_seen") or {}).get(code))
+        # Two dates. seen: the channel has delivered a flag ORDER — proof the
+        # flag topic actually reaches us, which a signup confirmation is not.
+        # heard: it has sent anything at all — proof it is still alive.
+        seen = (mail.get("channels_seen") or {}).get(code)
+        heard = max((mail.get("channels_heard") or {}).get(code) or "", seen or "") or None
         out["channel_last_heard"] = heard
         limit = rec.get("channel_max_silence_days") or CHANNEL_MAX_SILENCE_DAYS
         silent_for = (today() - date.fromisoformat(heard)).days if heard else None
@@ -558,9 +561,9 @@ def check_state(rec, cache, session, verbose=False):
                 "via": "official notification email",
             }
             out["error"] = ingest_err
-        elif heard is None:
+        elif seen is None:
             out.update(state_status=P.UNKNOWN, coverage="not_covered",
-                       error=ingest_err or ("subscription pending - no bulletin "
+                       error=ingest_err or ("subscription pending - no flag bulletin "
                                             "received from this channel yet"))
         elif silent_for > limit:
             out.update(state_status=P.UNKNOWN, coverage="frozen",
