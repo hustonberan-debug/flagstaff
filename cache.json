@@ -23,35 +23,35 @@
   },
   "_parser_version": "26",
   "DC": {
-    "hash": "513d1d2f0b0add5e",
-    "state_status": "half",
+    "hash": "07d984e1ae14d105",
+    "state_status": "full",
     "state_order": {
       "title": null,
       "url": "https://os.dc.gov/service/flag-status",
-      "status": "half",
+      "status": "full",
       "authority": "governor",
-      "evidence": "declaration: 'Status: HALF-STAFF'",
+      "evidence": "declaration: 'Status: FULL STAFF'",
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-10T23:18:36+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
-    "last_changed_at": "2026-09-10T23:18:36+00:00"
+    "last_parsed": "2026-09-15T18:20:54+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
+    "last_changed_at": "2026-09-15T18:20:54+00:00"
   },
   "CA": {
-    "hash": "8f5db4889b17f5cc",
+    "hash": "f73e6c46eadb585e",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-15T03:17:04+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
-    "last_changed_at": "2026-09-15T03:17:04+00:00"
+    "last_parsed": "2026-09-15T18:20:54+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
+    "last_changed_at": "2026-09-15T18:20:54+00:00"
   },
   "AL": {
     "hash": "0fd0758cff2ed548",
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-09-03T13:44:36+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
     "last_changed_at": null
   },
   "CO": {
@@ -59,7 +59,7 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-09-11T15:45:18+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
     "last_changed_at": null
   },
   "AZ": {
@@ -75,7 +75,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-12T07:38:22+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
     "last_changed_at": "2026-09-12T07:38:22+00:00"
   },
   "AK": {
@@ -91,23 +91,23 @@
       "end_date": null
     },
     "last_parsed": "2026-09-09T23:24:47+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
     "last_changed_at": "2026-09-09T23:24:47+00:00"
   },
   "IA": {
-    "hash": "a2a56931677a05a2",
+    "hash": "f7f65767c24dc174",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-14T23:55:49+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
-    "last_changed_at": "2026-09-14T23:55:49+00:00"
+    "last_parsed": "2026-09-15T18:20:54+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
+    "last_changed_at": "2026-09-15T18:20:54+00:00"
   },
   "HI": {
     "hash": "e927a3a3be8684cd",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-15T03:17:04+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
     "last_changed_at": "2026-09-15T03:17:04+00:00"
   },
   "GA": {
@@ -115,27 +115,27 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-10T15:43:54+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
     "last_changed_at": "2026-09-10T15:43:54+00:00"
   },
   "DE": {
-    "hash": "830ea417baef8d2d",
-    "state_status": "half",
+    "hash": "233fc005de6b21bd",
+    "state_status": "full",
     "state_order": {
       "title": null,
       "url": "https://news.delaware.gov/flag-status/",
-      "status": "half",
+      "status": "full",
       "authority": "governor",
-      "evidence": "declaration: 'Flag Status - HALF STAFF'",
+      "evidence": "declaration: 'Flag Status - FULL STAFF'",
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-15T14:06:24+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
-    "last_changed_at": "2026-09-15T14:06:24+00:00"
+    "last_parsed": "2026-09-15T18:20:54+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
+    "last_changed_at": "2026-09-15T18:20:54+00:00"
   },
   "FL": {
-    "hash": "c11860dc154b01fb",
+    "hash": "8c90c10176bb8e04",
     "state_status": "half",
     "state_order": {
       "title": null,
@@ -146,16 +146,16 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-15T14:06:24+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
-    "last_changed_at": "2026-09-15T14:06:24+00:00"
+    "last_parsed": "2026-09-15T18:20:54+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
+    "last_changed_at": "2026-09-15T18:20:54+00:00"
   },
   "AR": {
     "hash": "24000b370ba467cb",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-15T14:06:24+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
     "last_changed_at": "2026-09-15T14:06:24+00:00"
   },
   "LA": {
@@ -171,47 +171,47 @@
       "end_date": null
     },
     "last_parsed": "2026-08-31T14:46:06+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
     "last_changed_at": "2026-08-31T14:46:06+00:00"
   },
   "MI": {
     "hash": "2450b7905a788128",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-15T14:06:24+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_parsed": "2026-09-15T18:20:55+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
     "last_changed_at": "2026-09-10T15:43:55+00:00"
   },
   "MD": {
-    "hash": "dcccc37e123a7b74",
+    "hash": "840d49ca4a6b722d",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
-    "last_changed_at": "2026-09-14T17:30:18+00:00"
+    "last_parsed": "2026-09-15T18:20:55+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
+    "last_changed_at": "2026-09-15T18:20:55+00:00"
   },
   "NC": {
     "hash": "8ff0434dc19c995c",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-14T23:55:49+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
     "last_changed_at": "2026-09-14T23:55:49+00:00"
   },
   "ME": {
-    "hash": "f1af8819675fe6d0",
+    "hash": "ee340fca32a9770f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-14T21:20:45+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
-    "last_changed_at": "2026-09-14T21:20:45+00:00"
+    "last_parsed": "2026-09-15T18:20:55+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
+    "last_changed_at": "2026-09-15T18:20:55+00:00"
   },
   "NE": {
     "hash": "655328365342408b",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T18:56:08+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
     "last_changed_at": "2026-09-11T18:56:08+00:00"
   },
   "KY": {
@@ -219,7 +219,7 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:19+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
     "last_changed_at": "2026-08-26T18:05:19+00:00"
   },
   "CT": {
@@ -227,16 +227,16 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-14T23:55:49+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
     "last_changed_at": "2026-09-14T23:55:49+00:00"
   },
   "IN": {
-    "hash": "5a1f1aeed64eb5ea",
+    "hash": "33f64a31d511af18",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-15T08:51:28+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
-    "last_changed_at": "2026-09-15T08:51:28+00:00"
+    "last_parsed": "2026-09-15T18:20:55+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
+    "last_changed_at": "2026-09-15T18:20:55+00:00"
   },
   "MS": {
     "hash": "16169855ebb4406f",
@@ -251,7 +251,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-15T03:17:05+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
     "last_changed_at": "2026-09-15T03:17:05+00:00"
   },
   "ID": {
@@ -267,7 +267,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:54+00:00",
     "last_changed_at": "2026-09-14T17:30:18+00:00"
   },
   "RI": {
@@ -275,33 +275,19 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T15:45:20+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-09-11T15:45:20+00:00"
   },
   "ND": {
-    "hash": "8b1a1d693b57cb89",
-    "state_status": "half",
-    "state_order": {
-      "title": "Armstrong directs flags flown at half-staff Friday in memory of 9/11 victims on 25th anniversary of attacks",
-      "url": "https://www.governor.nd.gov/news/armstrong-directs-flags-flown-half-staff-friday-memory-911-victims-25th-anniversary-attacks",
-      "status": "half",
-      "authority": "unknown",
-      "start_date": "2026-09-09",
-      "end_date": null,
-      "until_noon": false,
-      "status_evidence": "at half-staff",
-      "authority_evidence": null,
-      "usable_as_state_order": false,
-      "dates_from": "order body",
-      "date": "2026-09-09",
-      "coverage_reason": "order dated 2026-09-09"
-    },
-    "last_parsed": "2026-09-09T21:04:11+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
-    "last_changed_at": "2026-09-09T21:04:11+00:00"
+    "hash": "54df8fcd71f83cf1",
+    "state_status": "full",
+    "state_order": null,
+    "last_parsed": "2026-09-15T18:20:55+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
+    "last_changed_at": "2026-09-15T18:20:55+00:00"
   },
   "NV": {
-    "hash": "381b85c43cd36834",
+    "hash": "66c6637f0757e8f0",
     "state_status": "full",
     "state_order": {
       "title": null,
@@ -312,16 +298,16 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-15T14:06:25+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
-    "last_changed_at": "2026-09-15T14:06:25+00:00"
+    "last_parsed": "2026-09-15T18:20:56+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
+    "last_changed_at": "2026-09-15T18:20:56+00:00"
   },
   "TN": {
     "hash": "f24f48e09c8dcf4f",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-29T00:37:47+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-08-29T00:37:47+00:00"
   },
   "SC": {
@@ -329,7 +315,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:20+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-08-26T18:05:20+00:00"
   },
   "NJ": {
@@ -337,7 +323,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:19+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-08-26T18:05:19+00:00"
   },
   "MO": {
@@ -345,11 +331,11 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-11T01:18:07+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
     "last_changed_at": "2026-09-11T01:18:07+00:00"
   },
   "OH": {
-    "hash": "d31c5d1be7b5d287",
+    "hash": "e597983d30caa842",
     "state_status": "full",
     "state_order": {
       "title": null,
@@ -360,16 +346,16 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-14T21:20:46+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
-    "last_changed_at": "2026-09-14T21:20:46+00:00"
+    "last_parsed": "2026-09-15T18:20:56+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
+    "last_changed_at": "2026-09-15T18:20:56+00:00"
   },
   "VT": {
     "hash": "1e48f33811a65aa4",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:20+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-08-26T18:05:20+00:00"
   },
   "VA": {
@@ -385,7 +371,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-15T08:51:30+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-09-15T08:51:30+00:00"
   },
   "WA": {
@@ -393,24 +379,24 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-14T21:20:46+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:57+00:00",
     "last_changed_at": "2026-09-14T21:20:46+00:00"
   },
   "WV": {
-    "hash": "f8690a4aebe020e1",
+    "hash": "181a57b8c1b80f91",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-14T23:55:51+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
-    "last_changed_at": "2026-09-14T23:55:51+00:00"
+    "last_parsed": "2026-09-15T18:20:57+00:00",
+    "last_checked": "2026-09-15T18:20:57+00:00",
+    "last_changed_at": "2026-09-15T18:20:57+00:00"
   },
   "MN": {
-    "hash": "2ed25a8477421472",
+    "hash": "184dd18f208d581f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-14T17:30:18+00:00",
-    "last_checked": "2026-09-15T14:06:24+00:00",
-    "last_changed_at": "2026-09-14T17:30:18+00:00"
+    "last_parsed": "2026-09-15T18:20:55+00:00",
+    "last_checked": "2026-09-15T18:20:55+00:00",
+    "last_changed_at": "2026-09-15T18:20:55+00:00"
   },
   "PA": {
     "hash": "b72bf13928a8dd42",
@@ -425,7 +411,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-14T17:30:19+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-09-14T17:30:19+00:00"
   },
   "WI": {
@@ -433,16 +419,16 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-08-26T18:05:20+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:57+00:00",
     "last_changed_at": "2026-08-26T18:05:20+00:00"
   },
   "OR": {
-    "hash": "a8e759d5318ca2d2",
+    "hash": "d17bb7a7505870b2",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-14T23:55:50+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
-    "last_changed_at": "2026-09-14T23:55:50+00:00"
+    "last_parsed": "2026-09-15T18:20:56+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
+    "last_changed_at": "2026-09-15T18:20:56+00:00"
   },
   "UT": {
     "hash": "99b8313ac6ae55e2",
@@ -457,7 +443,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-12T07:38:24+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-09-12T07:38:24+00:00"
   },
   "SD": {
@@ -465,7 +451,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-14T21:20:46+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-09-14T21:20:46+00:00"
   },
   "NM": {
@@ -473,7 +459,7 @@
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-09-14T21:20:45+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-09-14T21:20:45+00:00"
   },
   "TX": {
@@ -489,7 +475,7 @@
       "end_date": null
     },
     "last_parsed": "2026-09-14T17:30:20+00:00",
-    "last_checked": "2026-09-15T14:06:25+00:00",
+    "last_checked": "2026-09-15T18:20:56+00:00",
     "last_changed_at": "2026-09-14T17:30:20+00:00"
   },
   "_federal_announced": null
