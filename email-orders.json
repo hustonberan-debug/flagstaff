@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T22:21:45+00:00",
+  "generated_at": "2026-09-15T22:24:53+00:00",
   "orders": {
     "MI": {
       "state_code": "MI",
@@ -39,6 +39,19 @@
       "end_date": "2026-09-11",
       "until_noon": false,
       "evidence": "to Half-Staff"
+    },
+    "MO": {
+      "state_code": "MO",
+      "identified_by": "sender domain mooa.dmarc.public.govdelivery.com, dkim=pass public.govdelivery.com",
+      "status": "half",
+      "authority": "unknown",
+      "subject": "Flags to Fly at Half-Staff for Patriot Day",
+      "from": "Missouri OA \u2013 Facilities Management, Design & Construction <missourioa@mooa.dmarc.public.govdelivery.com>",
+      "sent_date": "2026-09-10",
+      "start_date": "2026-09-10",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "at Half-Staff"
     },
     "AZ": {
       "state_code": "AZ",
@@ -81,7 +94,8 @@
     "KS": "2026-09-10",
     "KY": "2026-09-10",
     "AZ": "2026-09-10",
-    "WI": "2026-09-15"
+    "WI": "2026-09-15",
+    "MO": "2026-09-10"
   },
   "unattributed_senders": {},
   "unauthenticated_senders": {}
