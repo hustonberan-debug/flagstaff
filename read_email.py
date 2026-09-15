@@ -21,6 +21,15 @@ SETUP (one time)
   3. Subscribe that address to each state's flag notification channel.
   4. Add two GitHub secrets: MAIL_USER and MAIL_PASS (the app password).
 
+TRUST
+  A bulletin is used only if (a) its From ADDRESS maps to a state (registry
+  expected_sender_domain, SENDER_HINTS, or a GovDelivery account), and (b)
+  the receiving server's own Authentication-Results header — the topmost one,
+  written by mx.google.com — records dkim=pass for a domain aligned with that
+  address. A From line is free text; without (b), anyone could email this
+  inbox and set a state to half-staff. The inbox must therefore be Gmail, or
+  MAIL_AUTHSERV_ID must name the server that writes that header.
+
 USAGE
     python3 read_email.py            # read inbox, write email-orders.json
     python3 read_email.py --dry-run  # parse and print, write nothing
@@ -47,6 +56,9 @@ REGISTRY = "registry.json"
 IMAP_HOST = os.environ.get("MAIL_HOST", "imap.gmail.com")
 DEFAULT_DAYS = 14
 MAX_BACKDATE_DAYS = 7   # an order date this far before the email is a citation, not a window
+# The receiving server whose Authentication-Results verdict is trusted.
+AUTHSERV_ID = os.environ.get("MAIL_AUTHSERV_ID", "mx.google.com")
+UNAUTHENTICATED = "sender not authenticated"
 
 # Sender domains that reliably belong to one state. Attribution by sender is
 # far safer than guessing from body text, because a Wyoming bulletin can
@@ -73,10 +85,10 @@ SENDER_HINTS = {
 }
 
 
-def load_seen():
-    """States whose channel has ever delivered a parseable bulletin."""
+def load_previous():
+    """The last email-orders.json, so channel history survives between runs."""
     try:
-        return json.load(open(OUTPUT)).get("channels_seen", {}) or {}
+        return json.load(open(OUTPUT)) or {}
     except Exception:
         return {}
 
@@ -148,28 +160,90 @@ def load_govdelivery_accounts(reg):
     return GOVDELIVERY_ACCOUNTS
 
 
-def state_from(sender, subject, body, allowed, headers=None):
-    """(code, how) or (None, reason).
+def sender_address(sender):
+    """(local part, domain) of the From address, lowercased. The display name
+    is ignored: "mt.gov <anyone@example.com>" is not a Montana address."""
+    addr = email.utils.parseaddr(sender or "")[1].lower()
+    if "@" not in addr:
+        return "", ""
+    local, _, dom = addr.rpartition("@")
+    return local, dom.strip(".")
 
-    Sender domain first — it is an identity, not a mention. Falling back to
-    "which state name appears in the text" would let a bulletin that merely
-    references another state be filed under the wrong one.
+
+def org_domain(d):
+    """Organizational domain, for DMARC-style relaxed alignment.
+
+    Approximates the public suffix list for the suffixes state mail uses:
+    two labels (ks.gov, govdelivery.com), or three under a state .us suffix
+    (state.mn.us, state.ma.us)."""
+    labels = (d or "").lower().strip(".").split(".")
+    if len(labels) >= 3 and labels[-1] == "us" and len(labels[-2]) == 2:
+        return ".".join(labels[-3:])
+    return ".".join(labels[-2:])
+
+
+def dkim_pass_domains(msg):
+    """(domains, problem): domains with dkim=pass in the receiving server's
+    own verdict, or a reason there is no usable verdict.
+
+    Only the TOPMOST Authentication-Results header counts, and only if the
+    receiving server wrote it (authserv-id mx.google.com). Gmail prepends its
+    header on arrival; anything below it arrived with the message, and a
+    forger can write "dkim=pass" into a header as easily as into a From line.
     """
-    s = (sender or "").lower()
-    for domain, code in SENDER_HINTS.items():
-        if domain in s and (not allowed or code in allowed):
-            return code, f"sender domain {domain}"
+    hdrs = msg.get_all("Authentication-Results") or []
+    if not hdrs:
+        return set(), "no Authentication-Results header"
+    top = " ".join(str(hdrs[0]).split())
+    if not re.match(re.escape(AUTHSERV_ID) + r"\s*;", top, re.I):
+        return set(), f"top Authentication-Results is not from {AUTHSERV_ID}"
+    out = set()
+    for m in re.finditer(r"\bdkim\s*=\s*pass\b([^;]*)", top, re.I):
+        props = m.group(1)
+        d = (re.search(r"\bheader\.d\s*=\s*([a-z0-9.-]+)", props, re.I)
+             or re.search(r"\bheader\.i\s*=\s*[^@\s;]*@([a-z0-9.-]+)", props, re.I))
+        if d:
+            out.add(d.group(1).lower().strip("."))
+    return out, None if out else "no dkim=pass"
 
-    # GovDelivery account slug, from the sending subdomain or the List-*
-    # headers it always sets. This resolves the generic
-    # "public.govdelivery.com" senders that carry no state in the domain.
-    hay = s + " " + " ".join((headers or {}).values()).lower()
-    for slug, code in GOVDELIVERY_ACCOUNTS.items():
-        if not slug:
-            continue
-        if re.search(r"\b" + re.escape(slug) + r"\b", hay) and \
-                (not allowed or code in allowed):
-            return code, f"govdelivery account {slug.upper()}"
+
+def dkim_aligned(msg, from_domain):
+    """(True, domain) if a dkim=pass signature aligns with the From domain,
+    else (False, why). Relaxed alignment: same organizational domain, so a
+    list.ks.gov bulletin signed by ks.gov passes, and GovDelivery mail signed
+    by govdelivery.com passes for public.govdelivery.com senders — which
+    then leaves attribution to the GovDelivery account in the address,
+    something only that account can send as."""
+    passed, problem = dkim_pass_domains(msg)
+    want = org_domain(from_domain)
+    for d in passed:
+        if org_domain(d) == want:
+            return True, d
+    return False, problem or f"dkim=pass only for {', '.join(sorted(passed))}, not {from_domain}"
+
+
+def state_from(sender, allowed):
+    """(code, how) or (None, reason), from the From ADDRESS alone.
+
+    Matching used to search the whole From header plus List-*, Reply-To and
+    Return-Path, all of which the sender writes — a display name of
+    "wyo.gov" was enough. Only the address counts now, and only once
+    authenticated_state has checked DKIM for its domain.
+    """
+    local, dom = sender_address(sender)
+    if not dom:
+        return None, "no sender address"
+    for hint, code in SENDER_HINTS.items():
+        if (dom == hint or dom.endswith("." + hint)) and (not allowed or code in allowed):
+            return code, f"sender domain {hint}"
+
+    # GovDelivery account slug, as the local part (WYGOV@public.govdelivery
+    # .com) or the sending subdomain (mooa.dmarc.public.govdelivery.com).
+    if org_domain(dom) == "govdelivery.com":
+        for slug, code in GOVDELIVERY_ACCOUNTS.items():
+            if slug and (local == slug or dom.split(".")[0] == slug) and \
+                    (not allowed or code in allowed):
+                return code, f"govdelivery account {slug.upper()}"
 
     # There used to be a fallback here: file the message under the one state
     # named in its subject. A subject is text anyone can write, so any email
@@ -178,6 +252,27 @@ def state_from(sender, subject, body, allowed, headers=None):
     # senders now land in the unattributed report instead, where a human adds
     # the real sender domain to registry.json once.
     return None, "no state identified"
+
+
+def sent_day(msg):
+    try:
+        return email.utils.parsedate_to_datetime(msg.get("Date")).date()
+    except Exception:
+        return None
+
+
+def authenticated_state(msg, allowed):
+    """(code, how) for a message from a known state channel whose sender
+    domain passed DKIM, else (None, why). Flag-related or not: any message
+    that passes is proof the channel is still reaching this inbox."""
+    sender = decoded(msg.get("From"))
+    code, how = state_from(sender, allowed)
+    if not code:
+        return None, how
+    ok, detail = dkim_aligned(msg, sender_address(sender)[1])
+    if not ok:
+        return None, f"{UNAUTHENTICATED} for {code}: {detail}"
+    return code, f"{how}, dkim=pass {detail}"
 
 
 def parse_message(msg, allowed):
@@ -192,10 +287,7 @@ def parse_message(msg, allowed):
     if not P.FLAG_RE.search(blob):
         return None, "not flag-related"
 
-    hdrs = {k: str(msg.get(k) or "") for k in
-            ("List-Id", "List-Unsubscribe", "Return-Path", "Sender",
-             "X-Original-Sender", "Reply-To")}
-    code, how = state_from(sender, subject, body, allowed, hdrs)
+    code, how = authenticated_state(msg, allowed)
     if not code:
         return None, how
 
@@ -213,23 +305,26 @@ def parse_message(msg, allowed):
 
     authority, a_ev = P.classify_authority(blob)
     start, end = P.date_range(blob)
-
-    try:
-        sent = email.utils.parsedate_to_datetime(msg.get("Date"))
-        sent_date = sent.date().isoformat()
-    except Exception:
-        sent_date = None
+    sent = sent_day(msg)
+    sent_date = sent.isoformat() if sent else None
 
     # An order cannot start or end well before the email announcing it. A
     # Missouri Patriot Day bulletin cites the law "signed December 18, 2001";
     # that date was taken as the order's start. "The order's date" and "a date
     # mentioned in the order" are different facts.
-    if sent_date:
-        floor = (sent.date() - timedelta(days=MAX_BACKDATE_DAYS))
+    if sent:
+        floor = sent - timedelta(days=MAX_BACKDATE_DAYS)
         if start and start < floor:
             start = None
         if end and end < floor:
             end = None
+        # "Flags to half-staff Friday": resolve the weekday against the day
+        # the bulletin was sent, rather than treating the send date as the
+        # order's first day.
+        if not end:
+            ws, we = P.weekday_window(blob, sent)
+            if we:
+                start, end = ws, we
 
     return {
         "state_code": code,
@@ -252,12 +347,16 @@ def main():
     ap.add_argument("--days", type=int, default=DEFAULT_DAYS)
     args = ap.parse_args()
 
+    previous = load_previous()
     user = os.environ.get("MAIL_USER")
     password = os.environ.get("MAIL_PASS")
     if not user or not password:
         print("MAIL_USER / MAIL_PASS not set - skipping email ingest.")
         if not args.dry_run:
-            json.dump({"generated_at": None, "orders": {}, "skipped": True},
+            # Keep what we knew. Writing an empty file erased every channel's
+            # history, so fixing the credentials later restarted every email
+            # state at "subscription pending".
+            json.dump(dict(previous, generated_at=None, skipped=True),
                       open(OUTPUT, "w"), indent=2)
         return
 
@@ -291,33 +390,47 @@ def main():
     print(f"{len(ids)} message(s) since {since}\n")
 
     orders, rejected = {}, []
-    # Every channel we have actually heard from, ever. Silence from a channel
-    # that has spoken before means "no order". Silence from one that never has
-    # means "we do not know whether the subscription works". Those must not be
-    # the same value.
-    seen = load_seen()
-    unattributed = {}
+    # channels_seen: the last day each channel delivered a flag ORDER.
+    # channels_heard: the last day each channel delivered ANY authenticated
+    # message. A channel that has spoken before and is quiet today means "no
+    # order" — but only while it is still speaking at all. run.py stops
+    # reading silence as full staff once channels_heard goes stale.
+    seen = dict(previous.get("channels_seen") or {})
+    heard = dict(previous.get("channels_heard") or {})
+    unattributed, unauthenticated = {}, {}
+
+    def note(bucket, key, msg):
+        entry = bucket.setdefault(key, {"count": 0, "subjects": []})
+        entry["count"] += 1
+        subj = decoded(msg.get("Subject"))[:70]
+        if subj and subj not in entry["subjects"]:
+            entry["subjects"].append(subj)
+
     for mid in ids:
         try:
             typ, raw = M.fetch(mid, "(RFC822)")
             msg = email.message_from_bytes(raw[0][1])
         except Exception:
             continue
+        who, _ = authenticated_state(msg, allowed)
+        day = sent_day(msg)
+        if who and day:
+            heard[who] = max(heard.get(who) or "", day.isoformat())
         rec, why = parse_message(msg, allowed)
         if not rec:
             if why not in ("not flag-related",):
                 rejected.append(why)
                 if "no state identified" in why:
-                    frm = decoded(msg.get("From"))
-                    dom = frm.split("@")[-1].strip("> ").lower() if "@" in frm else frm
-                    entry = unattributed.setdefault(dom, {"count": 0, "subjects": []})
-                    entry["count"] += 1
-                    subj = decoded(msg.get("Subject"))[:70]
-                    if subj and subj not in entry["subjects"]:
-                        entry["subjects"].append(subj)
+                    note(unattributed, sender_address(decoded(msg.get("From")))[1]
+                         or decoded(msg.get("From")), msg)
+                elif why.startswith(UNAUTHENTICATED):
+                    # A flag bulletin from a known state sender that failed
+                    # DKIM: either a forgery, or a real channel we are now
+                    # dropping. Both need a human to look.
+                    note(unauthenticated, why.split(":")[0].split()[-1], msg)
             continue
-        seen[rec["state_code"]] = rec.get("sent_date") or seen.get(rec["state_code"])
         code = rec["state_code"]
+        seen[code] = max(seen.get(code) or "", rec.get("sent_date") or "") or None
         # Keep the most recent order per state.
         if code not in orders or (rec.get("sent_date") or "") > (orders[code].get("sent_date") or ""):
             orders[code] = rec
@@ -343,6 +456,13 @@ def main():
                 print(f"         \"{sj}\"")
         print("  -> add these to expected_sender_domain in registry.json")
 
+    if unauthenticated:
+        print("\n  Flag mail from a known state sender that FAILED DKIM (dropped):")
+        for code, e in sorted(unauthenticated.items()):
+            print(f"    {e['count']:3d}  {code}  \"{(e['subjects'] or [''])[0]}\"")
+        print("  -> a forgery, or a real channel whose signing domain does not "
+              "align with its From domain")
+
     if args.dry_run:
         print("\n(dry run - nothing written)")
         return
@@ -351,9 +471,12 @@ def main():
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "orders": orders,
         "channels_seen": seen,
+        "channels_heard": heard,
         "unattributed_senders": unattributed,
+        "unauthenticated_senders": unauthenticated,
     }, open(OUTPUT, "w"), indent=2)
-    print(f"\nWrote {OUTPUT}  ({len(seen)} channel(s) have ever delivered)")
+    print(f"\nWrote {OUTPUT}  ({len(seen)} channel(s) have ever delivered an "
+          f"order, {len(heard)} heard from)")
 
 
 if __name__ == "__main__":

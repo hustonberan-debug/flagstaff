@@ -30,7 +30,8 @@ TWO RULES THAT OVERRIDE EVERYTHING:
 
 import hashlib
 import re
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
+from urllib.parse import urlparse
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -258,6 +259,8 @@ LASTMOD_PATTERNS = [
 ]
 
 
+FUTURE_DATE_HORIZON_DAYS = 60
+
 # "Aug. 15" / "July 29" — month and day with no year. Built on first use
 # because MONTH_RE is defined further down the module.
 _YEARLESS = None
@@ -273,16 +276,27 @@ def yearless_re():
 
 def page_last_modified(html, headers=None):
     """Best available freshness signal for a page, or None."""
+    today = date.today()
+    # Future dates, two kinds. "Dolly Parton Day on September 25, 2026" in a
+    # news item ten days ahead of it is evidence the page was written about
+    # now (Ohio's flag page). "The fiscal year ends September 30, 2027", or
+    # 2099, is not: a page frozen for years would look current until then.
+    # Near-future dates count as "today"; far-future ones are ignored.
+    horizon = today + timedelta(days=FUTURE_DATE_HORIZON_DAYS)
+
+    def usable(d):
+        return min(d, today) if d and d <= horizon else None
+
     if headers:
         for k in ("Last-Modified", "last-modified"):
             if headers.get(k):
-                d = parse_any_date(headers[k])
+                d = usable(parse_any_date(headers[k]))
                 if d:
                     return d
     for pat in LASTMOD_PATTERNS:
         m = pat.search(html or "")
         if m:
-            d = parse_any_date(m.group(1))
+            d = usable(parse_any_date(m.group(1)))
             if d:
                 return d
     # Fall back to the newest date mentioned anywhere in the visible text.
@@ -290,7 +304,7 @@ def page_last_modified(html, headers=None):
     best = None
     for pat in DATE_PATTERNS:
         for m in pat.finditer(text):
-            d = parse_any_date(m.group(0))
+            d = usable(parse_any_date(m.group(0)))
             if d and (best is None or d > best):
                 best = d
     if best:
@@ -301,7 +315,6 @@ def page_last_modified(html, headers=None):
     # an order's end date could keep a state at half-staff for twelve months.
     # Here the worst case is a page looking fresher or staler than it is, and
     # having no signal at all is worse than an inferred one.
-    today = date.today()
     for m in yearless_re().finditer(text):
         try:
             mo = _month_num(m.group(1))
@@ -749,6 +762,84 @@ def date_range(text):
             return parse_any_date(t), e
     single = parse_any_date(t)
     return single, None
+
+
+WEEKDAYS = ("monday", "tuesday", "wednesday", "thursday", "friday",
+            "saturday", "sunday")
+WEEKDAY_RE = re.compile(r"\b(" + "|".join(WEEKDAYS) + r")\b", re.I)
+WEEKDAY_MAX_LEAD_DAYS = 5
+UNTIL_BEFORE_RE = re.compile(
+    r"\b(?:until|through|thru)\s+(?:(?:sunset|sunrise|noon)\s+)?(?:on\s+)?$", re.I)
+
+
+def weekday_window(text, ref):
+    """(start, end) for an order that names only weekdays, or (None, None).
+
+    "Armstrong directs flags flown at half-staff Friday" carries no date, so
+    the order was dated by its publication (Wednesday) and North Dakota showed
+    half-staff two days before the order began. A weekday is resolved to its
+    next occurrence on or after ref, the date the order was published.
+
+    Only weekdays AFTER the half-staff phrase count: "On Monday, the governor
+    ordered flags to half-staff on Friday" is an order for Friday, and the
+    Monday is when it was announced. "...half-staff until sunset Sunday"
+    starts at publication and ends Sunday.
+    """
+    if not ref:
+        return None, None
+    t = strip_html(text) if "<" in (text or "") else (text or "")
+    hits = [m for p in HALF_SIGNALS for m in [re.search(p, t, re.I)] if m]
+    if not hits:
+        return None, None
+    at = min(m.start() for m in hits)
+    tail = t[at:at + 300]
+    found = list(WEEKDAY_RE.finditer(tail))[:2]
+    if not found:
+        return None, None
+    days, cur = [], ref
+    for m in found:
+        wd = WEEKDAYS.index(m.group(1).lower())
+        cur = cur + timedelta(days=(wd - cur.weekday()) % 7)
+        days.append(cur)
+    # Orders are announced a few days ahead at most. A weekday 6 days out is
+    # far more likely one that already passed ("...were flown at half-staff
+    # Friday", published Saturday), and resolving it forward would invent an
+    # order a week away.
+    if (days[0] - ref).days > WEEKDAY_MAX_LEAD_DAYS:
+        return None, None
+    if len(days) == 1 and UNTIL_BEFORE_RE.search(tail[:found[0].start()]):
+        return ref, days[0]
+    return days[0], days[-1]
+
+
+# An index page is evidence of "no current order" only if it actually lists
+# press releases. parse_index returns every link-ish headline, so a page that
+# renders its list with JavaScript still yields items — the site's own
+# navigation — and "items found, none about flags" read as full staff. On
+# Sept 15 2026, real listings had 8 to 475 headline-length links to their own
+# site; navigation-only pages (MD's old reading, SD, WI, NJ's portal) had 0-4.
+MIN_LISTING_HEADLINES = 5
+HEADLINE_MIN_WORDS = 7
+
+
+def listing_evidence(items, base_url):
+    """(is_a_listing, evidence) for an index page's parsed items."""
+    def host(u):
+        return (u or "").lower().removeprefix("www.")
+    base = urlparse(base_url or "")
+    paths = set()
+    for i in items:
+        if len((i.get("title") or "").split()) < HEADLINE_MIN_WORDS:
+            continue
+        u = urlparse(i.get("url") or "")
+        if u.netloc and base.netloc and host(u.netloc) != host(base.netloc):
+            continue                    # links to other agencies are navigation
+        path = u.path.rstrip("/")
+        if not path or path == base.path.rstrip("/"):
+            continue
+        paths.add(path)
+    n = len(paths)
+    return n >= MIN_LISTING_HEADLINES, f"{n} headline-length links to this site"
 
 
 def until_noon(text):

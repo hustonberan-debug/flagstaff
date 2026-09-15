@@ -228,6 +228,17 @@ jobs:
                             ("Notify subscribers", "NOTIFY_OUTCOME")):
               if os.environ.get(var) == "failure":
                   print(f"::warning::'{step}' FAILED (hidden by continue-on-error) - see its log")
+          # A state bulletin dropped for failing DKIM is either a forgery or a
+          # real channel we have stopped reading. Either way a human must look.
+          try:
+              mail = json.load(open('email-orders.json'))
+              if mail.get('skipped'):
+                  print("::warning::Email ingest skipped (MAIL_USER/MAIL_PASS not set)")
+              for code, e in (mail.get('unauthenticated_senders') or {}).items():
+                  print(f"::warning::{e['count']} flag bulletin(s) for {code} FAILED DKIM and were dropped: "
+                        f"{(e.get('subjects') or [''])[0]}")
+          except Exception:
+              pass
           try:
               s = json.load(open('status.json'))
           except Exception:

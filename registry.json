@@ -862,8 +862,9 @@
     "confidence_caps": [
       "last order 336d old"
     ],
-    "buildable": false,
-    "blocked_reason": "Press page is JavaScript-rendered; the HTML response carries only site navigation (73 links, none dated, none a release; verified 2026-09-15). It was being reported as full staff from that navigation. Needs a feed, an API, or a rendered fetch."
+    "buildable": true,
+    "blocked_reason": null,
+    "_mode_fixed_by": "2026-09-15: the audit wrongly marked this unbuildable. The HTML does carry the 12 most recent releases under /news/press-releases (newest dated 2026-09-15); the first links on the page are agency navigation, which is what the audit sampled. parsers.listing_evidence now checks this structurally on every run."
   },
   {
     "state": "Maine",

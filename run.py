@@ -59,6 +59,12 @@ MAX_ORDER_AGE_DAYS = 21      # how far back to look for candidate orders
 AMBIGUOUS_WINDOW_DAYS = 2    # undated order this recent -> unknown, not full
 RECENT_ORDER_GRACE_DAYS = 2  # an order this fresh with no end date is treated as live
 FROZEN_PAGE_DAYS = 180       # a status page unchanged this long is not trusted
+# An email channel that has sent nothing at all (any message, not just flag
+# orders) for this long is no longer evidence of "no order". The email states
+# use governors' press lists, which send weekly; a flag-only list with long
+# quiet stretches can raise it per state with channel_max_silence_days.
+CHANNEL_MAX_SILENCE_DAYS = 60
+EMAIL_INGEST_MAX_AGE_DAYS = 1    # email-orders.json older than this is not today's inbox
 
 
 def covers_today(start, end, d):
@@ -480,7 +486,8 @@ def article_facts(url, session, known, keep):
         f = {"opening_status": st, "opening_evidence": sev,
              "opening_authority": au, "opening_authority_evidence": aev,
              "body_start": bs.isoformat() if bs else None,
-             "body_end": be.isoformat() if be else None}
+             "body_end": be.isoformat() if be else None,
+             "opening": opening}
     keep[url] = f
     return f
 
@@ -513,30 +520,35 @@ def check_state(rec, cache, session, verbose=False):
     # --- email mode: read what the state sent us, not what its site serves --
     if rec.get("ingest_mode") == "email":
         mail = load_json(EMAIL_ORDERS, {})
-        inbox = mail.get("orders", {})
-        seen = mail.get("channels_seen", {})
-        o = inbox.get(code)
+        o = (mail.get("orders") or {}).get(code)
         out["source_url"] = (rec.get("notification_channel") or {}).get("detail")
 
-        if not o:
-            # Silence means two very different things, and they must not share
-            # a value. A channel that has delivered before and is quiet today
-            # is telling us there is no order. A channel we have never heard
-            # from might simply not be working — an unconfirmed signup, a
-            # spam-foldered bulletin, a sender domain we cannot attribute.
-            # Reporting FULL on that is claiming knowledge we do not have.
-            if code in seen:
-                out["state_status"] = P.FULL
-                out["coverage"] = "covered"
-                out["channel_last_heard"] = seen.get(code)
-            else:
-                out["state_status"] = P.UNKNOWN
-                out["coverage"] = "not_covered"
-                out["error"] = ("subscription pending - no bulletin received "
-                                "from this channel yet")
-            return code, out, dict(prev, last_checked=out["checked_at"])
-        v, why = covers_today(o.get("start_date"), o.get("end_date"), today())
+        # Silence means different things, and they must not share a value:
+        #   - we did not read the inbox (credentials missing, IMAP down)
+        #   - the channel has never delivered (signup unconfirmed, spam folder)
+        #   - it delivered once but has gone quiet for months (subscription
+        #     lapsed, sender changed domain, list retired)
+        #   - it is alive and simply has no order today
+        # Only the last is evidence of full staff. The third used to read as
+        # FULL forever: one bulletin in 2026 would have kept a state "covered"
+        # indefinitely after its list stopped reaching us.
+        heard = ((mail.get("channels_heard") or {}).get(code)
+                 or (mail.get("channels_seen") or {}).get(code))
+        out["channel_last_heard"] = heard
+        limit = rec.get("channel_max_silence_days") or CHANNEL_MAX_SILENCE_DAYS
+        silent_for = (today() - date.fromisoformat(heard)).days if heard else None
+        gen = mail.get("generated_at")
+        if mail.get("skipped") or not gen:
+            ingest_err = "email ingest did not run (no mail credentials)"
+        elif (today() - datetime.fromisoformat(gen).date()).days > EMAIL_INGEST_MAX_AGE_DAYS:
+            ingest_err = f"email ingest has not run since {gen[:10]}"
+        else:
+            ingest_err = None
+
+        v, why = (covers_today(o.get("start_date"), o.get("end_date"), today())
+                  if o else (None, None))
         if v:
+            # A bulletin we did read that covers today stands on its own.
             out["state_status"] = P.HALF
             out["state_order"] = {
                 "title": o.get("subject"), "url": out["source_url"],
@@ -545,6 +557,23 @@ def check_state(rec, cache, session, verbose=False):
                 "until_noon": o.get("until_noon"), "coverage_reason": why,
                 "via": "official notification email",
             }
+            out["error"] = ingest_err
+        elif heard is None:
+            out.update(state_status=P.UNKNOWN, coverage="not_covered",
+                       error=ingest_err or ("subscription pending - no bulletin "
+                                            "received from this channel yet"))
+        elif silent_for > limit:
+            out.update(state_status=P.UNKNOWN, coverage="frozen",
+                       error=(f"notification channel silent since {heard} "
+                              f"({silent_for}d, limit {limit}d) - silence is no "
+                              f"longer read as full staff"))
+        elif ingest_err:
+            # Like a failed fetch: serve the last known value, marked stale.
+            st, order, expired = revalidate(prev, today())
+            out.update(state_status=st, state_order=order, coverage="stale",
+                       error=ingest_err)
+            if expired:
+                out["last_expired_order"] = expired
         else:
             out["state_status"] = P.FULL
         h = content_hash(json.dumps(o, sort_keys=True))
@@ -704,6 +733,9 @@ def check_state(rec, cache, session, verbose=False):
         if rec.get("dedupe_translations"):
             items = P.dedupe_orders(items)
         flags = [i for i in items if i.get("is_flag")]
+        listing_ok, listing_ev = P.listing_evidence(items, url)
+        if mode == "index":
+            out["listing_evidence"] = listing_ev
 
         order, verdict, why = None, None, None
         cutoff = today() - timedelta(days=MAX_ORDER_AGE_DAYS)
@@ -730,6 +762,7 @@ def check_state(rec, cache, session, verbose=False):
             # classifier correctly refuses to guess when it sees both. That
             # turned real orders into UNKNOWN and dropped them.
             rec_o = P.extract_order(i["title"], i["url"], i["title"])
+            f = None                    # facts from this item's own order page
 
             # A flag headline that does not state its status is common:
             # "Gov. Whitmer Lowers Flags to Honor Detroit Fire Fighter
@@ -775,6 +808,20 @@ def check_state(rec, cache, session, verbose=False):
                         rec_o["end_date"] = f["body_end"]
                     rec_o["dates_from"] = "order body"
 
+            # "Half-staff Friday": a weekday with no date. Resolve it against
+            # when the order was published, from the headline first, then the
+            # order's opening. A weekday beats a start-only date here, because
+            # that date is usually the press release's own dateline.
+            if not rec_o["end_date"]:
+                ref = item_date or (date.fromisoformat(f["body_start"])
+                                    if f and f.get("body_start") else None)
+                ws, we = P.weekday_window(i["title"], ref)
+                if not we and f:
+                    ws, we = P.weekday_window(f.get("opening") or "", ref)
+                if we:
+                    rec_o["start_date"], rec_o["end_date"] = ws.isoformat(), we.isoformat()
+                    rec_o["dates_from"] = f"weekday resolved against {ref}"
+
             rec_o["date"] = d
             # Fall back to the item's publication date as the start when
             # neither the headline nor the body carries one.
@@ -798,6 +845,12 @@ def check_state(rec, cache, session, verbose=False):
             out["state_status"] = P.UNKNOWN
             out["state_order"] = dict(order, coverage_reason=why)
             out["error"] = "recent order found but dates unparseable"
+        elif items and mode == "index" and not listing_ok:
+            # "No flag headline among these links" is only evidence of full
+            # staff if the links are press releases. These are not.
+            out["state_status"] = P.UNKNOWN
+            out["error"] = (f"page read, but it has no press listing ({listing_ev}) "
+                            f"- likely navigation only; not read as full staff")
         elif items:
             # Source read cleanly; no order proves it covers today.
             out["state_status"] = P.FULL

@@ -203,9 +203,15 @@ rec = {"state": "Testland", "state_code": "TT", "ingest_mode": "feed",
        "buildable": True, "rss_url": FEED}
 on(date(2026, 9, 9))
 _, o1, c1 = R.check_state(rec, {}, None)
-t("feed: half on the order date", o1["state_status"], P.HALF)
+t("feed: published Wednesday for 'Friday' -> not yet in effect Wednesday",
+  o1["state_status"], P.FULL)
+on(date(2026, 9, 11))
+_, o3, c3 = R.check_state(rec, {"TT": c1}, None)
+t("...half on Friday, from the SAME unchanged feed", o3["state_status"], P.HALF)
+t("...and it was dated from the weekday, not the dateline",
+  (o3["state_order"] or {}).get("end_date"), "2026-09-11")
 on(date(2026, 9, 15))
-_, o2, c2 = R.check_state(rec, {"TT": c1}, None)
+_, o2, c2 = R.check_state(rec, {"TT": c3}, None)
 t("SAME unchanged feed six days later: full, not the cached half",
   o2["state_status"], P.FULL)
 t("page text did not move", o2["content_changed"], False)
@@ -330,24 +336,156 @@ t("old page-edit stamp cannot claim 'unchanged' across Patriot Day",
   res["NJ"]["last_changed_at"], "2026-09-12T00:00:00+00:00")
 
 print("\n--- email: dates and attribution ---")
-def mail(frm, subj, body, sent="Thu, 10 Sep 2026 14:00:00 -0500"):
+GMAIL = "mx.google.com; dkim=pass header.i=@{d} header.s=s1 header.b=abc; spf=pass"
+def mail(frm, subj, body, sent="Thu, 10 Sep 2026 14:00:00 -0500", auth=()):
     m = email.message.EmailMessage()
+    for a in auth:                          # topmost first, as Gmail prepends
+        m["Authentication-Results"] = a
     m["From"], m["Subject"], m["Date"] = frm, subj, sent
     m.set_content(body)
     return m
 E.SENDER_HINTS["mooa.dmarc.public.govdelivery.com"] = "MO"
+E.SENDER_HINTS["list.ks.gov"] = "KS"
+E.GOVDELIVERY_ACCOUNTS["wygov"] = "WY"
+MO_FROM = "Missouri OA <missourioa@mooa.dmarc.public.govdelivery.com>"
 rec_e, _ = E.parse_message(mail(
-    "Missouri OA <missourioa@mooa.dmarc.public.govdelivery.com>",
-    "Flags to Fly at Half-Staff for Patriot Day",
+    MO_FROM, "Flags to Fly at Half-Staff for Patriot Day",
     "Patriot Day was designated by Public Law 107-89, signed December 18, 2001. "
-    "Flags should be flown at half-staff on Friday."), {"MO"})
+    "Flags should be flown at half-staff until sunset on September 11, 2026.",
+    auth=[GMAIL.format(d="govdelivery.com")]), {"MO"})
 t("a law's 2001 signing date is not the order's start",
   (rec_e or {}).get("start_date"), "2026-09-10")
+rec_e, _ = E.parse_message(mail(
+    "Kansas Governor <govpress@list.ks.gov>",
+    "Governor Kelly Directs Flags to Half-Staff Friday", "Flags to half-staff.",
+    auth=[GMAIL.format(d="ks.gov")]), {"KS"})
+t("email 'half-staff Friday' sent Thursday -> Friday only",
+  ((rec_e or {}).get("start_date"), (rec_e or {}).get("end_date")),
+  ("2026-09-11", "2026-09-11"))
 rec_e, why = E.parse_message(mail(
     "Anyone <x@example.com>", "Illinois Governor Orders Flags to Half-Staff",
-    "Flags to half-staff statewide."), {"IL"})
+    "Flags to half-staff statewide.", auth=[GMAIL.format(d="example.com")]), {"IL"})
 t("a state named only in the subject is not attribution", (rec_e, why),
   (None, "no state identified"))
+
+print("\n--- email: DKIM, or it did not come from the state ---")
+KS = ("Kansas Governor <govpress@list.ks.gov>",
+      "Governor Kelly Directs Flags to Half-Staff", "Flags to half-staff statewide.")
+def ks(auth):
+    return E.parse_message(mail(*KS, auth=auth), {"KS"})
+t("aligned dkim=pass (list.ks.gov signed by ks.gov) accepted",
+  (ks([GMAIL.format(d="ks.gov")])[0] or {}).get("state_code"), "KS")
+t("no Authentication-Results at all -> rejected",
+  ks([])[1].startswith(E.UNAUTHENTICATED), True)
+t("forged From, dkim=pass only for the forger's own domain -> rejected",
+  ks([GMAIL.format(d="evil.example")])[1].startswith(E.UNAUTHENTICATED), True)
+t("dkim=fail -> rejected", ks(["mx.google.com; dkim=fail header.i=@ks.gov"])[1]
+  .startswith(E.UNAUTHENTICATED), True)
+t("forger's own 'dkim=pass' header BELOW Gmail's verdict is ignored",
+  ks(["mx.google.com; dkim=none", GMAIL.format(d="ks.gov")])[1]
+  .startswith(E.UNAUTHENTICATED), True)
+t("a verdict from any server other than Gmail is ignored",
+  ks([GMAIL.format(d="ks.gov").replace("mx.google.com", "mail.evil.example")])[1]
+  .startswith(E.UNAUTHENTICATED), True)
+t("sound-alike domain (notks.gov) is not Kansas", E.parse_message(mail(
+    "Gov <a@notks.gov>", KS[1], KS[2], auth=[GMAIL.format(d="notks.gov")]),
+    {"KS"})[1], "no state identified")
+t("display name 'list.ks.gov' on someone else's address is not Kansas",
+  E.parse_message(mail("list.ks.gov <a@evil.example>", KS[1], KS[2],
+                       auth=[GMAIL.format(d="evil.example")]), {"KS"})[1],
+  "no state identified")
+t("GovDelivery account in the address, signed by govdelivery.com -> WY",
+  (E.parse_message(mail("Office of Governor <WYGOV@public.govdelivery.com>",
+                        "Governor Orders Flags Lowered to Half-Staff", "Half-staff.",
+                        auth=[GMAIL.format(d="govdelivery.com")]), {"WY"})[0]
+   or {}).get("state_code"), "WY")
+t("state .us suffix keeps its own org domain",
+  (E.org_domain("listserv.state.ma.us"), E.org_domain("public.govdelivery.com")),
+  ("state.ma.us", "govdelivery.com"))
+
+print("\n--- email channels: silence is only 'no order' while the channel lives ---")
+import json as _json, tempfile
+_real_orders = R.EMAIL_ORDERS
+def email_state(heard, generated="2026-09-15T12:00:00+00:00", skipped=False,
+                orders=None, limit=None):
+    f = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
+    _json.dump({"generated_at": generated, "skipped": skipped, "orders": orders or {},
+                "channels_seen": {}, "channels_heard": {"TT": heard} if heard else {}}, f)
+    f.close()
+    R.EMAIL_ORDERS = f.name
+    r = {"state": "Testland", "state_code": "TT", "ingest_mode": "email",
+         "channel_max_silence_days": limit}
+    _, o, _ = R.check_state(r, {"TT": {"hash": "x", "state_status": P.FULL}}, None)
+    R.EMAIL_ORDERS = _real_orders
+    os.unlink(f.name)
+    return o["state_status"], o["coverage"]
+on(date(2026, 9, 15))
+t("channel heard 10 days ago, no order -> full", email_state("2026-09-05"),
+  (P.FULL, "covered"))
+t("channel silent 90 days -> not read as full", email_state("2026-06-17"),
+  (P.UNKNOWN, "frozen"))
+t("per-state limit can allow a quieter channel",
+  email_state("2026-06-17", limit=120), (P.FULL, "covered"))
+t("never heard -> not covered", email_state(None), (P.UNKNOWN, "not_covered"))
+t("inbox not read for 3 days -> stale, last value served",
+  email_state("2026-09-05", generated="2026-09-12T12:00:00+00:00"), (P.FULL, "stale"))
+t("an order we did read still counts when the inbox is stale",
+  email_state("2026-09-14", generated="2026-09-12T12:00:00+00:00", orders={"TT": {
+      "subject": "Flags to half-staff", "start_date": "2026-09-14",
+      "end_date": "2026-09-16"}})[0], P.HALF)
+t("no mail credentials -> last value served, marked stale (never a fresh full)",
+  email_state("2026-09-05", skipped=True), (P.FULL, "stale"))
+
+print("\n--- weekday-only dates ---")
+wed, mon, thu = date(2026, 9, 9), date(2026, 9, 7), date(2026, 9, 10)
+t("'half-staff Friday' published Wednesday",
+  P.weekday_window("Armstrong directs flags flown at half-staff Friday in memory", wed),
+  (date(2026, 9, 11), date(2026, 9, 11)))
+t("the announcement's own weekday is ignored",
+  P.weekday_window("On Monday, the governor ordered flags to half-staff on Friday", mon),
+  (date(2026, 9, 11), date(2026, 9, 11)))
+t("'until sunset Sunday' starts at publication",
+  P.weekday_window("Flags will fly at half-staff until sunset Sunday", thu),
+  (thu, date(2026, 9, 13)))
+t("'from sunrise Friday until sunset Sunday'",
+  P.weekday_window("Flags at half-staff from sunrise Friday until sunset Sunday", wed),
+  (date(2026, 9, 11), date(2026, 9, 13)))
+t("a weekday 6 days out is probably past, not future", P.weekday_window(
+    "Flags were flown at half-staff Friday", date(2026, 9, 12)), (None, None))
+t("no half-staff phrase -> nothing", P.weekday_window("Governor visits Friday", wed),
+  (None, None))
+
+print("\n--- navigation-only index pages are not 'no order' ---")
+nav = "".join(f'<a href="/{p}">{t_}</a>' for p, t_ in [
+    ("services", "Online Services for Residents"), ("agencies", "Agency Directory"),
+    ("skip", "Skip to main content"), ("x", "Governor's Office of Community Initiatives"),
+    ("y", "Official Site of the State of Testland")])
+news = "".join(f'<h3><a href="/news/{n}">Governor Smith Announces New Program Number {n} '
+               f'for Rural Families</a></h3>' for n in range(8))
+ok_nav, _ = P.listing_evidence(P.parse_index(nav, "https://gov.test/news"), "https://gov.test/news")
+ok_news, _ = P.listing_evidence(P.parse_index(news, "https://gov.test/news"), "https://gov.test/news")
+t("navigation links are not a listing", ok_nav, False)
+t("eight release headlines are", ok_news, True)
+t("links to other agencies' sites do not count", P.listing_evidence(
+    [{"title": "Governor's Office of Crime Prevention Youth and Victim Services",
+      "url": f"https://agency{n}.test/"} for n in range(9)], "https://gov.test/news")[0],
+  False)
+R.fetch = stub({"https://sd.test/news": "<html>" + nav + "</html>"})
+_, o, _ = R.check_state({"state": "Testland", "state_code": "TT", "ingest_mode": "index",
+                         "buildable": True, "press_url": "https://sd.test/news"}, {}, None)
+t("index page of navigation -> unknown with reason, not full",
+  (o["state_status"], "no press listing" in (o["error"] or "")), (P.UNKNOWN, True))
+
+print("\n--- freshness and future dates ---")
+from datetime import timedelta as _td
+_today = date.today()
+_d = lambda n: (_today + _td(days=n)).strftime("%B %d, %Y").replace(" 0", " ")
+t("a far-future date (fiscal year ends in 2099) is not an update date",
+  P.page_last_modified(f"<p>Posted {_d(-45)}. The fiscal year ends September 30, 2099.</p>"),
+  _today - _td(days=45))
+t("an upcoming date 10 days out means the page was written about now (Ohio)",
+  P.page_last_modified(f"<p>Proclamation declaring a day of service on {_d(10)}. "
+                       f"Policy adopted September 11, 2001.</p>"), _today)
 
 R.fetch, R.today = _real_fetch, _real_today
 
