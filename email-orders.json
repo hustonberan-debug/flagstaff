@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T18:20:54+00:00",
+  "generated_at": "2026-09-15T21:26:27+00:00",
   "orders": {
     "MI": {
       "state_code": "MI",
@@ -48,10 +48,23 @@
       "subject": "Flags to Fly at Half-Staff for Patriot Day",
       "from": "Missouri OA \u2013 Facilities Management, Design & Construction <missourioa@mooa.dmarc.public.govdelivery.com>",
       "sent_date": "2026-09-10",
-      "start_date": "2001-12-18",
+      "start_date": "2026-09-10",
       "end_date": null,
       "until_noon": false,
       "evidence": "at Half-Staff"
+    },
+    "AZ": {
+      "state_code": "AZ",
+      "identified_by": "sender domain azdoa.gov",
+      "status": "half",
+      "authority": "governor",
+      "subject": "Gov. Hobbs Orders Flags to Half-Staff in Honor of Patriot Day",
+      "from": "Half-Staff Notification <communications@azdoa.gov>",
+      "sent_date": "2026-09-10",
+      "start_date": "2026-09-10",
+      "end_date": null,
+      "until_noon": false,
+      "evidence": "to Half-Staff"
     },
     "WY": {
       "state_code": "WY",
@@ -72,14 +85,8 @@
     "KY": "2026-09-10",
     "MO": "2026-09-10",
     "WY": "2026-09-10",
-    "KS": "2026-09-10"
+    "KS": "2026-09-10",
+    "AZ": "2026-09-10"
   },
-  "unattributed_senders": {
-    "azdoa.gov": {
-      "count": 1,
-      "subjects": [
-        "Gov. Hobbs Orders Flags to Half-Staff in Honor of Patriot Day"
-      ]
-    }
-  }
+  "unattributed_senders": {}
 }
