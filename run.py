@@ -1209,10 +1209,19 @@ def main():
     if changed:
         with open(HISTORY, "a") as f:
             for c in changed:
+                r = results[c]
+                # The window is recorded so test-history.py can check "never
+                # shown half past the order's stated window" exactly, instead
+                # of re-deriving it from the title.
+                o = (r.get("federal") if r.get("reason_source") == "federal"
+                     else r.get("state_order")) or {}
                 f.write(json.dumps({
                     "at": status["generated_at"], "state": c,
-                    "status": results[c]["effective_status"],
-                    "reason": results[c]["reason"],
+                    "status": r["effective_status"],
+                    "reason": r["reason"],
+                    "reason_source": r.get("reason_source"),
+                    "start_date": o.get("start_date"),
+                    "end_date": o.get("end_date"),
                 }) + "\n")
     print(f"\nWrote {OUTPUT} and {CACHE}")
 

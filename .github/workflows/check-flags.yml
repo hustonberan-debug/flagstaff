@@ -20,6 +20,7 @@ on:
       - 'registry.json'
       - 'read_email.py'
       - 'test-parsers.py'
+      - 'test-history.py'
 
 permissions:
   contents: write             # needed to commit status.json back
@@ -213,6 +214,15 @@ jobs:
               except Exception as e:
                   print(f"::warning::notify failed for {code}: {e}")
           PY
+
+      - name: History invariants
+        # Replays history.jsonl: no state shown half-staff outside its order's
+        # stated window, no state changing more than twice a day. Runs AFTER
+        # publishing and fails the job (red, emailed) rather than blocking
+        # it — a violation means something already reached users, and holding
+        # back status.json would not undo that.
+        if: always()
+        run: python3 test-history.py
 
       - name: Warn about failing sources
         if: always()
