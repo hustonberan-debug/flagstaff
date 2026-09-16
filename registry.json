@@ -1426,17 +1426,19 @@
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": "Every release is duplicated in Spanish; de-duplicate.",
+    "quirk": "Flag orders are identifiable from the URL slug alone (governor-hochul-directs-flags-half-staff-...), so no article fetch is needed to classify one. Roughly half the listing is the Spanish edition, slugged 'la-gobernadora-hochul-'; those are dropped as translations or every order counts twice.",
     "last_order_seen": null,
     "last_order_date": null,
     "staleness_days": null,
     "stale": false,
     "methods_disagree": false,
     "confidence_source": "script only (unresearched)",
-    "confidence": "high",
+    "confidence": "medium",
     "confidence_caps": [],
     "buildable": true,
-    "blocked_reason": "governor.ny.gov/news returns HTTP 403 to the pipeline (verified 2026-09-15). No notification channel is recorded."
+    "blocked_reason": "Readable in principle - server-rendered Drupal, and flag orders are classifiable from the slug - but the site sits behind a Cloudflare bot challenge and returns HTTP 403 intermittently to datacenter IPs, which is what GitHub Actions runs on. It served two plain requests, then blocked everything including bare /news, and was still blocked after a 45s cooldown (verified 2026-09-15; robots.txt allows the path, so this is a WAF, not policy). EXPECT NY TO BE INTERMITTENTLY STALE BY DESIGN. We do not try to defeat the challenge: at most 3 listing pages per run, no retries, and on 403 the last known value is served marked stale for up to 3 days, after which NY reports unknown rather than a confident answer.",
+    "listing_pages": 3,
+    "_mode_fixed_by": "2026-09-16: index on governor.ny.gov/news, slug-classified"
   },
   {
     "state": "Ohio",

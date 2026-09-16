@@ -64,6 +64,10 @@ FROZEN_PAGE_DAYS = 180       # a status page unchanged this long is not trusted
 # use governors' press lists, which send weekly; a flag-only list with long
 # quiet stretches can raise it per state with channel_max_silence_days.
 CHANNEL_MAX_SILENCE_DAYS = 60
+# How long a source that will not load keeps answering from its last read.
+# Past this it reports unknown: an unreadable source is a gap, not a verdict.
+STALE_MAX_DAYS = 3
+MAX_LISTING_PAGES = 3        # hard cap on listing requests per state per run
 EMAIL_INGEST_MAX_AGE_DAYS = 1    # email-orders.json older than this is not today's inbox
 
 
@@ -626,15 +630,45 @@ def check_state(rec, cache, session, verbose=False):
                 break
 
     if err:
-        # Keep serving the last known value, but mark it stale so the UI can
-        # show its age. A fetch failure is not evidence of full-staff — and a
-        # carried HALF still has to be checked against today's date.
+        # A fetch failure is not evidence of full-staff. Serve the last known
+        # value, marked stale — but only for a few days. A source we have not
+        # read all week is a gap, and saying "full staff, last read Tuesday"
+        # about a flag that may have come down since is the confident-wrong
+        # answer this whole project exists to avoid.
         st, order, expired = revalidate(prev, today())
-        out.update(error=err, state_status=st, state_order=order,
-                   coverage="stale" if prev.get("hash") else "not_covered")
-        if expired:
-            out["last_expired_order"] = expired
-        return code, out, prev
+        last_ok = (prev.get("last_parsed") or "")[:10]
+        dark = (today() - date.fromisoformat(last_ok)).days if last_ok else None
+        fails = (prev.get("consecutive_errors") or 0) + 1
+        out["consecutive_errors"] = fails
+        if not prev.get("hash"):
+            out.update(state_status=P.UNKNOWN, coverage="not_covered", error=err)
+        elif dark is not None and dark > STALE_MAX_DAYS:
+            out.update(state_status=P.UNKNOWN, state_order=None,
+                       coverage="not_covered",
+                       error=(f"{err}; unreadable since {last_ok} ({dark}d, "
+                              f"{fails} consecutive failures)"))
+        else:
+            out.update(state_status=st, state_order=order, coverage="stale",
+                       error=f"{err}; last read {last_ok or 'never'}")
+            if expired:
+                out["last_expired_order"] = expired
+        return code, out, dict(prev, last_checked=out["checked_at"],
+                               consecutive_errors=fails)
+
+    # Extra listing pages, for sites whose first page covers only a day or
+    # two. Hard-capped: New York sits behind a Cloudflare challenge, so every
+    # request is a chance to be blocked for the rest of the run. Best effort —
+    # a failure on page 2 keeps page 1 rather than failing the state.
+    if rec.get("listing_pages") and mode in ("index", "archive", "feed"):
+        extra = []
+        for n in range(1, min(int(rec["listing_pages"]), MAX_LISTING_PAGES)):
+            more, perr = fetch(f"{url}{'&' if '?' in url else '?'}page={n}", session)
+            if perr or not more:
+                break
+            extra.append(more)
+        out["listing_pages_read"] = 1 + len(extra)
+        if extra:
+            text = text + "\n" + "\n".join(extra)
 
     h = content_hash(text)
     out["content_changed"] = bool(prev.get("hash")) and prev["hash"] != h
@@ -784,6 +818,14 @@ def check_state(rec, cache, session, verbose=False):
             rec_o = P.extract_order(i["title"], i["url"], i["title"])
             f = None                    # facts from this item's own order page
 
+            # New York states the fact in the URL: "governor-hochul-directs-
+            # flags-half-staff-honor-...". Taking the slug as the status is
+            # what makes the listing classifiable without opening anything,
+            # which matters on a site that blocks us intermittently.
+            if rec_o["status"] == P.UNKNOWN and P.is_flag_slug(i.get("url")):
+                rec_o["status"] = P.HALF
+                rec_o["status_evidence"] = "half-staff stated in the URL slug"
+
             # A flag headline that does not state its status is common:
             # "Gov. Whitmer Lowers Flags to Honor Detroit Fire Fighter
             # Patrick Trout" never says half-staff. When that happens, read
@@ -827,6 +869,13 @@ def check_state(rec, cache, session, verbose=False):
                     if f["body_end"]:
                         rec_o["end_date"] = f["body_end"]
                     rec_o["dates_from"] = "order body"
+                elif not rec_o["start_date"] and not d:
+                    # We have a flag headline and no date anywhere, because
+                    # its page would not load. New York's articles sit behind
+                    # the same Cloudflare challenge as its listing; calling
+                    # that full staff would be a confident answer about an
+                    # order we can see but cannot read.
+                    rec_o["dates_unavailable"] = True
 
             # "Half-staff Friday": a weekday with no date. Resolve it against
             # when the order was published, from the headline first, then the
@@ -850,7 +899,10 @@ def check_state(rec, cache, session, verbose=False):
             if v:                       # provably active — take it and stop
                 order, verdict, why = rec_o, True, w
                 break
-            if v is None and item_date and \
+            if v is None and rec_o.get("dates_unavailable"):
+                order, verdict, why = (rec_o, None,
+                                       "order page could not be read to date it")
+            elif v is None and item_date and \
                     (today() - item_date).days <= AMBIGUOUS_WINDOW_DAYS:
                 # Recent but undated: we genuinely cannot tell. Remember it,
                 # but keep looking for something provable.
@@ -864,7 +916,9 @@ def check_state(rec, cache, session, verbose=False):
         elif verdict is None and order is not None:
             out["state_status"] = P.UNKNOWN
             out["state_order"] = dict(order, coverage_reason=why)
-            out["error"] = "recent order found but dates unparseable"
+            out["error"] = ("flag order found, but its page could not be read "
+                            "to date it" if order.get("dates_unavailable")
+                            else "recent order found but dates unparseable")
         elif items and mode == "index" and not listing_ok:
             # "No flag headline among these links" is only evidence of full
             # staff if the links are press releases. These are not.
@@ -909,6 +963,7 @@ def check_state(rec, cache, session, verbose=False):
         "last_parsed": out["checked_at"],
         "last_checked": out["checked_at"],
         "articles": articles,
+        "consecutive_errors": 0,
     })
     if verbose:
         print(json.dumps(out, indent=2))

@@ -564,6 +564,34 @@ TRANSLATION_PREFIX = re.compile(
     re.I,
 )
 
+# New York puts the fact in the URL: a listing can be classified without
+# opening a single article, which matters because the site sits behind a
+# Cloudflare challenge and every extra request is a chance to be blocked.
+# Verified against /news/governor-hochul-directs-flags-half-staff-honor-
+# retired-sergeant-michael-l-piro (Jan 10 2026).
+FLAG_SLUG_RE = re.compile(
+    r"half[-_](?:staff|mast)|flags?[-_](?:lowered|to[-_]half)", re.I)
+
+# Roughly half of New York's listing is the Spanish edition of the same
+# release, slugged "la-gobernadora-hochul-...". The English and Spanish copies
+# have different titles AND different URLs, so nothing else would collapse
+# them and every New York order would be counted twice.
+TRANSLATED_SLUG_RE = re.compile(
+    r"/(?:es|espanol)/|(?:^|/|-)(?:la[-_])?gobernador(?:a)?[-_]"
+    r"|media[-_]asta|banderas[-_]", re.I)
+
+
+def slug_of(url):
+    try:
+        return urlparse(url or "").path
+    except ValueError:
+        return url or ""
+
+
+def is_flag_slug(url):
+    """Does the URL itself say this release is a flag order?"""
+    return bool(FLAG_SLUG_RE.search(slug_of(url)))
+
 MONTHS = ("january february march april may june july august september "
           "october november december").split()
 MONTH_RE = "|".join(MONTHS) + "|" + "|".join(m[:3] for m in MONTHS)
@@ -655,16 +683,19 @@ def _month_num(name):
     raise ValueError(name)
 
 
-def is_translation(title):
-    return bool(TRANSLATION_PREFIX.match(title or ""))
+def is_translation(title, url=None):
+    """A translated copy of another release, by title prefix (Rhode Island)
+    or by slug (New York's Spanish edition)."""
+    return bool(TRANSLATION_PREFIX.match(title or "")
+                or (url and TRANSLATED_SLUG_RE.search(slug_of(url))))
 
 
 def dedupe_orders(orders):
     """Drop translated duplicates and repeats of the same URL/title.
-    Rhode Island doubles every order without this."""
+    Rhode Island and New York double every order without this."""
     seen_urls, seen_titles, out = set(), set(), []
     for o in orders:
-        if is_translation(o.get("title")):
+        if is_translation(o.get("title"), o.get("url")):
             continue
         u, t = o.get("url"), (o.get("title") or "").lower()
         if u and u in seen_urls:
@@ -869,7 +900,7 @@ def parse_feed(xml, base_url=None):
             "title": title,
             "url": url or base_url,
             "date": d.isoformat() if d else None,
-            "is_flag": bool(FLAG_RE.search(title)),
+            "is_flag": bool(FLAG_RE.search(title)) or is_flag_slug(url),
         })
     return out
 
@@ -927,11 +958,13 @@ def parse_index(html, base_url=None):
             continue
         href = HREF_RE.search(block)
         d = parse_any_date(text)
+        url = _abs(href.group(1), base_url) if href else base_url
         cands.append({
             "title": text[:200],
-            "url": _abs(href.group(1), base_url) if href else base_url,
+            "url": url,
             "date": d.isoformat() if d else None,
-            "is_flag": bool(FLAG_RE.search(text)),
+            # New York's headlines are classifiable from the slug alone.
+            "is_flag": bool(FLAG_RE.search(text)) or is_flag_slug(url),
         })
     return dedupe_orders(cands)
 

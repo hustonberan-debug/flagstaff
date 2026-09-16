@@ -496,6 +496,86 @@ _, o, _ = R.check_state({"state": "Testland", "state_code": "TT", "ingest_mode":
 t("index page of navigation -> unknown with reason, not full",
   (o["state_status"], "no press listing" in (o["error"] or "")), (P.UNKNOWN, True))
 
+print("\n--- New York: classified from the URL slug, behind Cloudflare ---")
+PIRO = ("/news/governor-hochul-directs-flags-half-staff-honor-retired-sergeant-"
+        "michael-l-piro")
+NY_LIST = f"""<div class="view-content">
+<h3><a href="{PIRO}">Governor Hochul Honors Retired Sergeant Michael L. Piro</a></h3>
+<h3><a href="/news/la-gobernadora-hochul-ordena-que-las-banderas-ondeen-a-media-asta-en-honor-al-sargento-piro">
+La Gobernadora Hochul Rinde Homenaje al Sargento Retirado Michael L. Piro</a></h3>
+<h3><a href="/news/governor-hochul-announces-50-million-clean-water-infrastructure-upstate">
+Governor Hochul Announces $50 Million for Clean Water Infrastructure Upstate</a></h3>
+</div>"""
+ny = P.parse_index(NY_LIST, "https://www.governor.ny.gov/news")
+t("flag order recognised from the slug, with no flag word in the headline",
+  [i["is_flag"] for i in ny if "piro" in (i["url"] or "").lower()
+   and "gobernadora" not in (i["url"] or "")], [True])
+t("the Spanish copy of that order is dropped",
+  any("gobernadora" in (i["url"] or "") for i in ny), False)
+t("an unrelated release is not a flag order",
+  [i["is_flag"] for i in ny if "clean-water" in (i["url"] or "")], [False])
+t("so the listing yields one order, not two",
+  sum(1 for i in ny if i["is_flag"]), 1)
+t("is_flag_slug: the verified Piro release", P.is_flag_slug(PIRO), True)
+t("is_flag_slug: an announcement is not an order",
+  P.is_flag_slug("/news/governor-hochul-announces-broadband-expansion"), False)
+t("Spanish slug detected as a translation",
+  P.is_translation("La Gobernadora Hochul Ordena...",
+                   "/news/la-gobernadora-hochul-ordena-banderas-media-asta"), True)
+t("English slug is not a translation",
+  P.is_translation("Governor Hochul Directs Flags", PIRO), False)
+
+NY_URL = "https://ny.test/news"
+NYREC = {"state": "Testland", "state_code": "TT", "ingest_mode": "index",
+         "buildable": True, "press_url": NY_URL, "listing_pages": 3}
+def ny_page(n, extra=""):
+    """A page of the real listing's shape: many long release headlines."""
+    return extra + "".join(
+        f'<h3><a href="/news/governor-hochul-announces-initiative-number-{n}{k}-'
+        f'for-new-yorkers">Governor Hochul Announces Statewide Initiative '
+        f'Number {n}{k} for New Yorkers</a></h3>' for k in range(6))
+page2 = ny_page(2, f'<h3><a href="{PIRO}">Governor Hochul Honors Retired '
+                    f'Sergeant Michael L. Piro</a></h3>')
+calls.clear()
+on(date(2026, 9, 16))
+R.fetch = stub({NY_URL: ny_page(1),
+                f"{NY_URL}?page=1": page2,
+                f"{NY_URL}?page=2": ny_page(3),
+                "https://ny.test" + PIRO: "<p>Governor Hochul today directed that "
+                "flags be flown at half-staff from sunrise to sunset on Friday, "
+                "September 18, 2026.</p>"})
+_, o, c_ny = R.check_state(NYREC, {}, None)
+t("listing pages are capped at 3", o.get("listing_pages_read"), 3)
+t("no page beyond the cap is requested", f"{NY_URL}?page=3" in calls, False)
+t("an order found on page 2 is used", o["state_status"], P.HALF)
+on(date(2026, 9, 19))
+_, o, _ = R.check_state(NYREC, {"TT": c_ny}, None)
+t("...and expires on its own date", o["state_status"], P.FULL)
+
+R.fetch = stub({NY_URL: page2})     # listing loads, the article 403s
+on(date(2026, 9, 16))
+_, o, _ = R.check_state(NYREC, {}, None)
+t("order we can see but cannot open -> unknown, never full staff",
+  (o["state_status"], "could not be read" in (o["error"] or "")), (P.UNKNOWN, True))
+
+print("\n--- Cloudflare 403: stale for a few days, then an honest gap ---")
+R.fetch = stub({})                  # everything 403s
+_, o, _ = R.check_state(NYREC, {}, None)
+t("403 with nothing cached -> not covered, no answer",
+  (o["state_status"], o["coverage"]), (P.UNKNOWN, "not_covered"))
+cached = {"hash": "h", "state_status": P.FULL, "state_order": None,
+          "last_parsed": "2026-09-15T12:00:00+00:00"}
+_, o, c2 = R.check_state(NYREC, {"TT": cached}, None)
+t("403 one day after a good read -> stale, last value served",
+  (o["state_status"], o["coverage"]), (P.FULL, "stale"))
+t("failures are counted", c2["consecutive_errors"], 1)
+on(date(2026, 9, 22))
+_, o, _ = R.check_state(NYREC, {"TT": dict(cached, consecutive_errors=40)}, None)
+t("a week of 403s is a coverage gap, not 'full staff'",
+  (o["state_status"], o["coverage"]), (P.UNKNOWN, "not_covered"))
+t("...and says how long it has been dark",
+  "unreadable since 2026-09-15" in (o["error"] or ""), True)
+
 print("\n--- freshness and future dates ---")
 from datetime import timedelta as _td
 _today = date.today()
