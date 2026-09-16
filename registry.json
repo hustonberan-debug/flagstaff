@@ -576,7 +576,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "unknown",
+    "ingest_mode": "email",
     "cms": null,
     "js_blocked": true,
     "signature_check_required": false,
@@ -599,9 +599,11 @@
     "buildable": false,
     "notification_channel": {
       "type": "email_form",
-      "detail": "https://www.illinois.gov/about/communications-opt-in.html -- per the flag-honors page, select 'Specific Subjects/Agencies' then 'Flag Honors'. NOT independently verified that the Flag Honors option is actually present in the form."
+      "detail": "https://www.illinois.gov/about/communications-opt-in.html -- per the flag-honors page, select 'Specific Subjects/Agencies' then 'Flag Honors'. NOT independently verified that the Flag Honors option is actually present in the form.",
+      "status": "subscribed 2026-09-15 (confirmed by the site owner)"
     },
-    "blocked_reason": "illinois.gov/about/flag-honors.html is official and server-rendered but carries no current status; its 'Latest News' region renders 'No Data' to a plain fetch. The flag-honors page points to an email opt-in form (notification_channel); no Illinois bulletin has reached the alerts inbox, and the Flag Honors option in that form is not verified."
+    "blocked_reason": "Waiting on its notification channel, not failing. The alerts inbox is subscribed 2026-09-15 (confirmed by the site owner) to the Illinois communications opt-in (Specific Subjects/Agencies -> Flag Honors); no bulletin has arrived yet, so this reports 'subscription pending' until one does. illinois.gov/about/flag-honors.html is official and server-rendered but carries no current status \u2014 its 'Latest News' region renders 'No Data' to a plain fetch. Expect mail from illinois.gov.",
+    "_mode_fixed_by": "2026-09-15: unknown/unbuildable -> email; subscription is live"
   },
   {
     "state": "Indiana",
@@ -793,7 +795,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "diff",
+    "ingest_mode": "email",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -818,10 +820,12 @@
     "buildable": true,
     "notification_channel": {
       "type": "listserv",
-      "detail": "Send a blank email (no body, no signature) to subscribe-bsb-halfstaffnotification@listserv.state.ma.us. Bulk requests: sh.events@state.ma.us, subject 'Subscribe to Half-Staff Notifications'. Both addresses read verbatim off the official page."
+      "detail": "Send a blank email (no body, no signature) to subscribe-bsb-halfstaffnotification@listserv.state.ma.us. Bulk requests: sh.events@state.ma.us, subject 'Subscribe to Half-Staff Notifications'. Both addresses read verbatim off the official page.",
+      "status": "subscribed 2026-09-15 (confirmed by the site owner)"
     },
     "expected_status_text": "Please be advised that Massachusetts Governor Maura Healey has ordered that the United States of America flag and the Commonwealth of Massachusetts flag be lowered to half-staff at all state buildings from sunrise until sunset on Friday, August 14, 2026, the date of interment, in honor of Corporal N",
-    "blocked_reason": "flag-status page returns HTTP 403 to the pipeline (verified 2026-09-15). The official channel is the half-staff listserv in notification_channel; no bulletin has reached the alerts inbox, so the subscription is unconfirmed. Left buildable so it recovers on its own if the 403 lifts."
+    "blocked_reason": "Waiting on its notification channel, not failing. The alerts inbox is subscribed 2026-09-15 (confirmed by the site owner) to the state's half-staff listserv (subscribe-bsb-halfstaffnotification@listserv.state.ma.us); no bulletin has arrived yet, so this reports 'subscription pending' until one does. The mass.gov flag-status page is kept in flag_page_url but returns HTTP 403 to the pipeline (verified 2026-09-15); if that lifts it could go back to diff mode. Expect mail from listserv.state.ma.us \u2014 the first bulletin will be listed in email-orders.json's unattributed or unauthenticated report if it arrives from somewhere else or fails DKIM.",
+    "_mode_fixed_by": "2026-09-15: diff (403) -> email; subscription is live"
   },
   {
     "state": "Maryland",
@@ -1252,7 +1256,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "unknown",
+    "ingest_mode": "email",
     "cms": null,
     "js_blocked": true,
     "signature_check_required": false,
@@ -1274,11 +1278,13 @@
       "no usable ingest path"
     ],
     "buildable": false,
-    "blocked_reason": "www.nh.gov/flag-status and www.governor.nh.gov/news both return an empty body to a plain fetch. The state runs a mailing list (notification_channel); no New Hampshire bulletin has reached the alerts inbox, so the subscription is unconfirmed.",
+    "blocked_reason": "Waiting on its notification channel, not failing. The alerts inbox is subscribed 2026-09-15 (confirmed by the site owner) to the state mailing list (maillist.nh.gov list id 6); no bulletin has arrived yet, so this reports 'subscription pending' until one does. Both www.nh.gov/flag-status and www.governor.nh.gov/news return an empty body to a plain fetch, so there is nothing to scrape in the meantime. Expect mail from nh.gov.",
     "notification_channel": {
       "type": "mailing_list",
-      "detail": "https://maillist.nh.gov/list/nhgov/?p=subscribe&id=6"
-    }
+      "detail": "https://maillist.nh.gov/list/nhgov/?p=subscribe&id=6",
+      "status": "subscribed 2026-09-15 (confirmed by the site owner)"
+    },
+    "_mode_fixed_by": "2026-09-15: unknown/unbuildable -> email; subscription is live"
   },
   {
     "state": "New Jersey",
@@ -1980,7 +1986,7 @@
       "type": "govdelivery",
       "detail": "https://service.govdelivery.com/accounts/WIDMA/subscriber/new?topic_id=WIDMA_17",
       "account": "WIDMA",
-      "status": "receiving mail since 2026-09-15"
+      "status": "subscribed 2026-09-15 to topic WIDMA_17; WIDMA mail is arriving"
     },
     "blocked_reason": "governor.wi.gov/newsroom returns only navigation in its HTML. Covered through the GovDelivery 'flag updates' topic (WIDMA_17): the alerts inbox began receiving authenticated WIDMA mail on 2026-09-15. It reports 'subscription pending' until the first flag bulletin arrives.",
     "_mode_fixed_by": "2026-09-15: index (navigation only) -> email; WIDMA mail now arriving"

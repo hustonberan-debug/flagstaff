@@ -403,6 +403,23 @@ def federal_proclamation(session, cache):
     return None, None
 
 
+def channel_url(rec):
+    """A link a reader can actually open for an email-ingested state.
+
+    notification_channel.detail is prose for some states ("Send a blank email
+    to subscribe-...@listserv.state.ma.us") and a URL with a note appended for
+    others, so take the first real URL from the channel, then the signup or
+    flag page.
+    """
+    nc = rec.get("notification_channel") or {}
+    for cand in (nc.get("url"), nc.get("detail"), rec.get("signup_url"),
+                 rec.get("flag_page_url")):
+        m = re.search(r"https?://\S+", cand or "")
+        if m:
+            return m.group(0).rstrip(".,;")
+    return None
+
+
 def carry_federal(prev_fed, d):
     """Keep a previously read proclamation while its stated window lasts.
 
@@ -521,7 +538,7 @@ def check_state(rec, cache, session, verbose=False):
     if rec.get("ingest_mode") == "email":
         mail = load_json(EMAIL_ORDERS, {})
         o = (mail.get("orders") or {}).get(code)
-        out["source_url"] = (rec.get("notification_channel") or {}).get("detail")
+        out["source_url"] = channel_url(rec)
 
         # Silence means different things, and they must not share a value:
         #   - we did not read the inbox (credentials missing, IMAP down)

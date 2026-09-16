@@ -445,6 +445,17 @@ t("an order we did read still counts when the inbox is stale",
 t("no mail credentials -> last value served, marked stale (never a fresh full)",
   email_state("2026-09-05", skipped=True), (P.FULL, "stale"))
 
+t("channel link: URL pulled out of a detail note (Illinois)", R.channel_url(
+    {"notification_channel": {"detail": "https://il.test/opt-in.html -- select "
+                              "'Specific Subjects/Agencies' then 'Flag Honors'."}}),
+  "https://il.test/opt-in.html")
+t("channel link: listserv instructions fall back to the signup page (MA)",
+  R.channel_url({"notification_channel": {"detail": "Send a blank email to "
+                 "subscribe-bsb@listserv.state.ma.us."},
+                 "signup_url": "https://ma.test/flag-status"}),
+  "https://ma.test/flag-status")
+t("channel link: nothing to link to", R.channel_url({}), None)
+
 print("\n--- weekday-only dates ---")
 wed, mon, thu = date(2026, 9, 9), date(2026, 9, 7), date(2026, 9, 10)
 t("'half-staff Friday' published Wednesday",
