@@ -67,6 +67,9 @@ CHANNEL_MAX_SILENCE_DAYS = 60
 # How long a source that will not load keeps answering from its last read.
 # Past this it reports unknown: an unreadable source is a gap, not a verdict.
 STALE_MAX_DAYS = 3
+# A status page saying half-staff must show an order dated within this many
+# days, or the claim is stale.
+STALE_HALF_ORDER_DAYS = 30
 MAX_LISTING_PAGES = 3        # hard cap on listing requests per state per run
 RENDER_DIR = "rendered"      # snapshots written by render_fetch.py
 # A rendered snapshot older than this is not today's page. render_fetch.py
@@ -827,6 +830,26 @@ def check_state(rec, cache, session, verbose=False):
                                 f"it lists ended {latest}")
                 out["last_expired_order"] = {"why": f"listed order ended {latest}",
                                              "url": url}
+        if d["status"] == P.HALF:
+            # A half-staff claim needs a recent order behind it. A page whose
+            # widget says half-staff with no order dated in the last month is
+            # reporting the day it was last touched. Delaware, Texas and
+            # Pennsylvania did this for days after Patriot Day, and every
+            # reader of those pages - including any independent site - would
+            # repeat it, so no cross-check can catch it. This one can.
+            dates = P.order_dates(text)
+            recent = [x for x in dates if (today() - x).days <= STALE_HALF_ORDER_DAYS]
+            if not recent:
+                newest = dates[-1] if dates else None
+                d["status"] = out["state_status"] = P.UNKNOWN
+                out["stale_half_claim"] = {
+                    "newest_order_date": newest.isoformat() if newest else None,
+                    "limit_days": STALE_HALF_ORDER_DAYS}
+                out["error"] = (
+                    f"page declares half-staff but shows no order dated in the last "
+                    f"{STALE_HALF_ORDER_DAYS} days "
+                    + (f"(newest: {newest})" if newest else "(no dated order on the page)")
+                    + " - treated as stale, not current")
         if d["status"] != P.UNKNOWN:
             out["state_order"] = {
                 "title": None,

@@ -17,6 +17,14 @@ on:
     # scheduler congestion.
     - cron: '17 16 * * *'
   workflow_dispatch:
+    inputs:
+      drill_state:
+        description: >-
+          DRILL: two-letter state code whose answer is flipped IN MEMORY to prove
+          an issue gets filed. status.json and the live site are not changed.
+          Leave empty for a normal run.
+        required: false
+        default: ''
   push:
     branches: [main]
     paths:
@@ -51,4 +59,7 @@ jobs:
         # file. "Could not check" must never look like "all agree".
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python3 cross_check.py
+          DRILL_STATE: ${{ inputs.drill_state }}
+        # The input is passed through an environment variable, never pasted
+        # into the shell command, so it cannot inject commands.
+        run: python3 cross_check.py ${DRILL_STATE:+--drill "$DRILL_STATE"}

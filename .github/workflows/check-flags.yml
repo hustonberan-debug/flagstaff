@@ -313,6 +313,9 @@ jobs:
                  and 'no verified source' not in v['error']]
           if bad:
               print(f"::warning::Sources with errors: {' '.join(sorted(bad))}")
+          stale_half = [c for c, v in st.items() if v.get('stale_half_claim')]
+          if stale_half:
+              print(f"::warning::Page says half-staff with no recent order (withheld): {' '.join(sorted(stale_half))}")
           for label, cov in (("Serving stale data for", "stale"),
                              ("Frozen sources (not trusted)", "frozen")):
               hit = [c for c, v in st.items() if v.get('coverage') == cov]

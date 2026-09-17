@@ -770,6 +770,67 @@ t("the cross-check source never writes the site's data",
   any(w in open("cross_check.py", encoding="utf-8").read()
       for w in ('open(args.status, "w"', "open(STATUS, \"w\"", "json.dump(")), False)
 
+print("\n--- stale half-staff pages: no recent order behind the claim ---")
+t("dates next to half-staff wording are order dates",
+  P.order_dates("<p>Flags at Half-Staff in Honor of City Commissioner Chris Jones "
+                "May 28, 2026</p>"), [date(2026, 5, 28)])
+t("a page-chrome date beside the widget is not an order date",
+  P.order_dates("Last updated: September 15, 2026 | Flag Status: Half-Staff"), [])
+t("protocol boilerplate dates do not count",
+  P.order_dates("The flag may be flown at half-staff upon the death of a president, "
+                "per the law of June 22, 1942."), [])
+t("Delaware/Texas/Pennsylvania-style widget: no dated order at all",
+  P.order_dates("Flag Status - HALF STAFF  About the Governor  Contact"), [])
+
+DE_URL = "https://de.test/flag-status"
+derec = {"state": "Testland", "state_code": "TT", "ingest_mode": "diff",
+         "buildable": True, "flag_page_url": DE_URL}
+fresh = f"Page reviewed {_today:%B %d, %Y}."   # keeps the freshness alarm quiet
+on(_today)
+R.fetch = stub({DE_URL: f"<p>Flag Status - HALF STAFF</p><p>{fresh}</p>"})
+_, o, _ = R.check_state(derec, {}, None)
+t("widget says half, page shows no order -> withheld as stale, not half",
+  (o["state_status"], bool(o.get("stale_half_claim")),
+   "no dated order on the page" in (o["error"] or "")), (P.UNKNOWN, True, True))
+old_order = (_today - _td(days=60)).strftime("%B %d, %Y").replace(" 0", " ")
+R.fetch = stub({DE_URL: f"<p>Flag Status - HALF STAFF</p><p>Flags at half-staff in honor "
+                        f"of a trooper, ordered {old_order}.</p><p>{fresh}</p>"})
+_, o, _ = R.check_state(derec, {}, None)
+t("...and when the newest order on the page is 60 days old",
+  (o["state_status"], (o.get("stale_half_claim") or {}).get("newest_order_date")),
+  (P.UNKNOWN, (_today - _td(days=60)).isoformat()))
+new_order = (_today - _td(days=2)).strftime("%B %d, %Y").replace(" 0", " ")
+R.fetch = stub({DE_URL: f"<p>Flag Status - HALF STAFF</p><p>Governor directs flags to "
+                        f"half-staff in honor of a trooper, {new_order}.</p><p>{fresh}</p>"})
+_, o, _ = R.check_state(derec, {}, None)
+t("an order dated 2 days ago backs the claim -> half",
+  (o["state_status"], o.get("stale_half_claim")), (P.HALF, None))
+R.fetch = stub({DE_URL: f"<p>Flag Status - FULL STAFF</p><p>{fresh}</p>"})
+_, o, _ = R.check_state(derec, {}, None)
+t("a full-staff widget needs no order behind it", o["state_status"], P.FULL)
+
+sc = X.stale_claim({"stale_half_claim": {"newest_order_date": None, "limit_days": 30}})
+t("cross-check files stale half-staff pages even though no other source can disagree",
+  sc["kind"], "stale page")
+t("stale-page issue title", X.issue_title("DE", "Delaware", sc),
+  "Cross-check: Delaware (DE) - page says half-staff with no recent order")
+sbody = X.issue_body("DE", {"state": "Delaware", "source_url": DE_URL,
+                            "error": "page declares half-staff but shows no order"},
+                     {"generated_at": "x"}, {}, sc, "https://www.mast.today/de")
+t("stale-page issue names both URLs", DE_URL in sbody and "mast.today/de" in sbody, True)
+
+st_mem = {"states": {"ND": {"state": "North Dakota", "effective_status": P.FULL}}}
+X.drill(st_mem, "nd")
+t("drill flips the answer in memory", st_mem["states"]["ND"]["effective_status"], P.HALF)
+dd = X.compare(st_mem["states"]["ND"], {"status": P.FULL})
+dtitle = X.issue_title("ND", "North Dakota", dd, is_drill=True)
+t("drill issue is marked in the title", dtitle.startswith("[DRILL] Cross-check: "), True)
+t("a drill issue can never be mistaken for a real thread (dedupe ignores it)",
+  X.existing_by_state([{"number": 1, "title": dtitle}]), {})
+t("drill body says the live site was not changed",
+  "were not changed" in X.issue_body("ND", st_mem["states"]["ND"], {"generated_at": "x"},
+                                     {"status": P.FULL, "checked": _now}, dd, "u"), True)
+
 print("\n--- freshness and future dates ---")
 from datetime import timedelta as _td
 _today = date.today()

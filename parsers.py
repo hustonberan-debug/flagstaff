@@ -210,6 +210,42 @@ def listed_order_windows(html):
     return out
 
 
+ORDER_MENTION_RE = re.compile(
+    r"half[-\s]?(?:staff|mast)|flags?\s+(?:lowered|to\s+be\s+lowered)", re.I)
+# A date right after one of these belongs to the page, not to an order.
+CHROME_DATE_BEFORE_RE = re.compile(
+    r"(?:updated|modified|posted|published|reviewed|copyright|©)\W{0,4}$", re.I)
+ORDER_DATE_REACH = 160
+
+
+def order_dates(html):
+    """Dates written next to half-staff language on a page.
+
+    A status page that says half-staff should show the order behind it.
+    Delaware, Texas and Pennsylvania said half-staff for days after Patriot
+    Day ended - and none of their pages carries a single dated order, so
+    nothing on them could ever show the claim was stale. These are the dates
+    of the orders a page shows. Protocol boilerplate is skipped, and so are
+    page-chrome dates ("Last updated ..."), which would make a frozen widget
+    look fresh.
+    """
+    text = strip_html(html) if "<" in (html or "") else (html or "")
+    out = set()
+    for m in ORDER_MENTION_RE.finditer(text):
+        lo = max(0, m.start() - ORDER_DATE_REACH)
+        seg = text[lo:m.end() + ORDER_DATE_REACH]
+        if BOILERPLATE_RE.search(seg):
+            continue
+        for pat in DATE_PATTERNS:
+            for dm in pat.finditer(seg):
+                if CHROME_DATE_BEFORE_RE.search(seg[:dm.start()]):
+                    continue
+                d = parse_any_date(dm.group(0))
+                if d:
+                    out.add(d)
+    return sorted(out)
+
+
 def diff_page_dates(html):
     """(start, end) advertised on a current-status page, or (None, None)."""
     text = strip_html(html) if "<" in (html or "") else (html or "")

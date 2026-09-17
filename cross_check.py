@@ -100,33 +100,84 @@ def compare(ours, theirs):
     return {"kind": kind, "ours": o, "theirs": t}
 
 
+def stale_claim(state):
+    """A disagreement-shaped record for a state whose OWN page says half-staff
+    with no recent order behind it. The pipeline already withholds that answer;
+    this makes sure a human hears about it, because a page like that fools
+    every reader of it, independent sources included."""
+    s = state.get("stale_half_claim")
+    if not s:
+        return None
+    return {"kind": "stale page", "ours": "withheld (page says half)",
+            "theirs": None, "newest": s.get("newest_order_date"),
+            "limit": s.get("limit_days")}
+
+
+def drill(status, code):
+    """Flip one state's answer IN MEMORY, to prove the job files a real issue.
+    status.json on disk is never touched; main() verifies that."""
+    code = (code or "").upper()
+    if code not in status["states"]:
+        raise SystemExit(f"--drill: unknown state {code!r}")
+    s = status["states"][code]
+    flipped = P.FULL if s.get("effective_status") == P.HALF else P.HALF
+    s.update(effective_status=flipped, reason_source="state",
+             reason=f"[DRILL] answer flipped in memory to {flipped}; the real "
+                    f"status.json still says {s.get('effective_status')}")
+    s["_drill"] = True
+    return code
+
+
 def our_source(state, status):
     if state.get("reason_source") == "federal":
         return (status.get("federal") or {}).get("source_url") or "statutory calendar"
     return state.get("source_url") or "(no source)"
 
 
-def issue_title(code, name, d):
-    return (f"{TITLE_PREFIX}{name} ({code}) - we say {d['ours']}, "
-            f"{SOURCE_NAME} says {d['theirs']}")
+DRILL_PREFIX = "[DRILL] "
+
+
+def issue_title(code, name, d, is_drill=False):
+    if d.get("kind") == "stale page":
+        tail = "page says half-staff with no recent order"
+    else:
+        tail = f"we say {d['ours']}, {SOURCE_NAME} says {d['theirs']}"
+    return f"{DRILL_PREFIX if is_drill else ''}{TITLE_PREFIX}{name} ({code}) - {tail}"
 
 
 def issue_body(code, state, status, theirs, d, their_url):
+    theirs = theirs or {}
     ours_detail = (state.get("reason") or state.get("error")
                    or ("no order in effect" if d["ours"] == P.FULL else ""))
-    lines = [
-        f"**{state.get('state', code)} ({code})** - the daily cross-check found a "
-        f"{'conflict' if d['kind'] == 'conflict' else 'possible missed order'}.",
+    what = {"conflict": "a conflict", "missed order": "a possible missed order",
+            "stale page": "a stale half-staff page"}[d["kind"]]
+    lines = []
+    if state.get("_drill"):
+        lines += ["> **DRILL.** This issue was filed on purpose to prove the "
+                  "cross-check can file one. Our answer below was flipped in the "
+                  "job's memory only; status.json and the live site were not "
+                  "changed. Close this issue.", ""]
+    if d["kind"] == "stale page":
+        lines += [f"**{state.get('state', code)} ({code})** - its own status page "
+                  f"declares half-staff but shows no order dated in the last "
+                  f"{d['limit']} days (newest dated order: {d['newest'] or 'none on the page'}). "
+                  "The pipeline is withholding that answer as stale. Every reader of "
+                  "the page would repeat it, so the other source is not proof either "
+                  "way - check with the governor's office.", ""]
+    lines += [
+        f"**{state.get('state', code)} ({code})** - the daily cross-check found {what}.",
         "",
         "| | Answer | Detail | Source |",
         "|---|---|---|---|",
         f"| **halfstaffnow.com** | **{d['ours']}** | {ours_detail} | {our_source(state, status)} |",
-        f"| **{SOURCE_NAME}** | **{d['theirs']}** | {theirs.get('detail') or ''} | {their_url} |",
+        f"| **{SOURCE_NAME}** | **{theirs.get('status') or 'unreadable'}** | "
+        f"{theirs.get('detail') or ''} | {their_url} |",
         "",
         f"- Our status.json generated: {status.get('generated_at')}",
         f"- Our state last checked: {state.get('checked_at')}"
         + (f" (coverage: {state.get('coverage')})" if state.get("coverage") != "covered" else ""),
-        f"- {SOURCE_NAME} last checked: {theirs.get('checked'):%Y-%m-%d %H:%M} UTC",
+        f"- {SOURCE_NAME} last checked: "
+        + (f"{theirs['checked']:%Y-%m-%d %H:%M} UTC" if theirs.get("checked") else "n/a"),
         "",
         f"{SOURCE_NAME} is an alarm, not a source of truth, and never feeds the site. "
         "Check the official source above, then fix the pipeline or close this issue.",
@@ -210,11 +261,16 @@ def main():
     ap.add_argument("--dry-run", action="store_true",
                     help="compare and print; open no issues")
     ap.add_argument("--status", default=STATUS)
+    ap.add_argument("--drill", metavar="STATE",
+                    help="flip this state's answer in memory to prove an issue gets filed")
     args = ap.parse_args()
 
     before = file_hash(args.status)
     with open(args.status, encoding="utf-8") as f:
         status = json.load(f)
+    drilled = drill(status, args.drill) if args.drill else None
+    if drilled:
+        print(f"DRILL: {drilled} flipped in memory only; {args.status} on disk is untouched")
     now = datetime.now(timezone.utc)
     failures = []
 
@@ -251,43 +307,55 @@ def main():
         d = compare(status["states"][code], t)
         if d:
             found[code] = d
+    stale = {}
+    for code, s in status["states"].items():
+        d = stale_claim(s)
+        if d and code not in found:
+            stale[code] = d
+    if drilled and drilled not in found:
+        failures.append(f"drill: flipping {drilled} did not produce a disagreement "
+                        f"({SOURCE_NAME} answer: {(theirs.get(drilled) or {}).get('status') or unreadable.get(drilled)})")
 
     agree = sum(1 for c, t in theirs.items()
                 if status["states"][c].get("effective_status") == t["status"])
     print(f"compared {len(theirs)} states: {agree} agree, {len(found)} disagree, "
           f"{len(theirs) - agree - len(found)} where we have no answer and they "
-          f"report full, {len(unreadable)} unreadable")
+          f"report full, {len(unreadable)} unreadable; {len(stale)} stale half-staff page(s)")
     for code, why in sorted(unreadable.items()):
         print(f"  unreadable {code}: {why}")
 
-    report = [f"## Daily cross-check against {SOURCE_NAME}",
+    report = [f"## Daily cross-check against {SOURCE_NAME}" + (" (DRILL)" if drilled else ""),
               f"- compared: {len(theirs)}, agree: {agree}, disagree: {len(found)}, "
-              f"unreadable: {len(unreadable)}"]
-    gh = None
-    if found and not args.dry_run:
+              f"unreadable: {len(unreadable)}, stale half-staff pages: {len(stale)}"]
+    gh = existing = None
+    if (found or stale) and not args.dry_run:
         gh = GitHub(os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_TOKEN"])
         gh.ensure_label()
         existing = existing_by_state(gh.open_issues())
-    for code, d in sorted(found.items()):
-        s, t = status["states"][code], theirs[code]
-        title = issue_title(code, s.get("state", code), d)
-        body = issue_body(code, s, status, t, d, t["url"])
-        print(f"  DISAGREE {code}: we say {d['ours']}, {SOURCE_NAME} says {d['theirs']} "
+    for code, d in sorted(list(found.items()) + list(stale.items())):
+        s, t = status["states"][code], theirs.get(code) or {}
+        their_url = t.get("url") or SOURCE_URL.format(code=code.lower())
+        title = issue_title(code, s.get("state", code), d, is_drill=bool(s.get("_drill")))
+        body = issue_body(code, s, status, t, d, their_url)
+        print(f"  {'STALE PAGE' if d['kind'] == 'stale page' else 'DISAGREE'} {code}: "
+              f"we say {d['ours']}, {SOURCE_NAME} says {d['theirs'] or t.get('status')} "
               f"({d['kind']})")
-        report.append(f"- **{code}**: we say {d['ours']}, {SOURCE_NAME} says {d['theirs']}")
+        report.append(f"- **{code}** ({d['kind']}): we say {d['ours']}, "
+                      f"{SOURCE_NAME} says {d['theirs'] or t.get('status')}")
         if args.dry_run:
             continue
         key = issue_key(title)
         try:
             if key in existing:
                 gh.comment(existing[key]["number"],
-                           f"Still disagreeing on {now:%Y-%m-%d}.\n\n{body}")
+                           f"Still flagged on {now:%Y-%m-%d}.\n\n{body}")
                 print(f"    commented on #{existing[key]['number']}")
             else:
                 i = gh.create(title, body)
-                print(f"    opened #{i['number']}")
+                print(f"    opened #{i['number']}: {i['html_url']}")
+                report.append(f"  - opened [#{i['number']}]({i['html_url']})")
         except Exception as e:
-            failures.append(f"could not file the {code} disagreement: {e}")
+            failures.append(f"could not file the {code} issue: {e}")
 
     summary(report + [f"- **FAILED:** {f}" for f in failures])
 
