@@ -547,6 +547,10 @@ R.fetch = stub({NY_URL: ny_page(1),
 _, o, c_ny = R.check_state(NYREC, {}, None)
 t("listing pages are capped at 3", o.get("listing_pages_read"), 3)
 t("no page beyond the cap is requested", f"{NY_URL}?page=3" in calls, False)
+calls.clear()
+_, o1p, _ = R.check_state(dict(NYREC, listing_pages=1), {}, None)
+t("listing_pages=1 asks for exactly one page (NY's setting)",
+  (o1p.get("listing_pages_read"), f"{NY_URL}?page=1" in calls), (1, False))
 t("an order for Friday is not in effect on Wednesday", o["state_status"], P.FULL)
 on(date(2026, 9, 18))
 _, o, c_ny = R.check_state(NYREC, {"TT": c_ny}, None)
