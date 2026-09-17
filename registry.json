@@ -1496,7 +1496,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "diff",
+    "ingest_mode": "none",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1518,16 +1518,15 @@
     "confidence_source": "cowork (researched)",
     "confidence": "low",
     "confidence_caps": [],
-    "buildable": true,
+    "buildable": false,
     "toggle_hub_url": "https://oklahoma.gov/governor.html",
     "url_candidates": [
       "https://oklahoma.gov/governor.html",
       "https://oklahoma.gov/governor/newsroom.html"
     ],
-    "blocked_reason": "Needs a browser: static HTML contains both status variants, which gave a confidently wrong answer. Read from a Playwright snapshot's visible text only ('Flag Status: Full-Staff' visible, half widget hidden; verified 2026-09-16).",
-    "render": true,
-    "render_text": "visible",
-    "_mode_fixed_by": "2026-09-16: rendered visible text"
+    "blocked_reason": "No reliable readable source, and no notification channel on record. Static HTML carries both a half-staff and a full-staff label. Rendering does NOT resolve it (tested 2026-09-16): at a desktop viewport, headless Chromium shows BOTH visibly - a 'Flag Status : Half Staff' badge (div.text.flag-status) and a 'Flag Status: Full-Staff' link - and they disagree. The half label only disappears at tiny viewports, because it sits in a navigation menu that responsive CSS hides; that is layout, not a status signal. Earlier notes in this registry disagree about which label is live. Reports not covered rather than choose. Needs an official notification channel.",
+    "render": false,
+    "_mode_fixed_by": "2026-09-16: rendered attempt reverted - both labels visible and contradictory"
   },
   {
     "state": "Oregon",

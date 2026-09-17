@@ -1,0 +1,54 @@
+name: Daily cross-check
+
+# An alarm, separate from check-flags. Once a day it asks an independent
+# source the same question status.json answers, and opens an issue for any
+# state where they disagree. It exists because every serious bug in this
+# project ran green: North Dakota showed half-staff for six days and nothing
+# flagged it.
+#
+# It must never feed the product. contents: read means this job cannot push
+# anything - status.json included - and cross_check.py verifies status.json
+# is byte-identical when it finishes.
+
+on:
+  schedule:
+    # 16:17 UTC: late morning across US time zones, when the day's orders are
+    # in effect and the UTC and US calendar dates agree. Off the hour to avoid
+    # scheduler congestion.
+    - cron: '17 16 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'cross_check.py'
+      - '.github/workflows/cross-check.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: cross-check
+  cancel-in-progress: false
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Compare status.json with an independent source
+        # Fails (red, emailed) if it could not actually check: the independent
+        # source unreadable, our status.json stale, or an issue it could not
+        # file. "Could not check" must never look like "all agree".
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 cross_check.py

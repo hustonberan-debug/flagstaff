@@ -713,6 +713,49 @@ t("render cache: URL change forces a render", RF.due(mtrec), "URL changed")
 R.RENDER_DIR = _real_rdir
 shutil.rmtree(_rdir, ignore_errors=True)
 
+print("\n--- daily cross-check (an alarm, never an input) ---")
+import cross_check as X
+from datetime import datetime as _dtm, timezone as _tzn
+_now = _dtm(2026, 9, 16, 22, 0, tzinfo=_tzn.utc)
+MAST_FULL = ("<h1>Should my flag be at half-staff?</h1><p>Full-staff</p><p>No active "
+             "half-staff order applies to Texas.</p><p>Last checked Sep 16, 2026, 9:18 PM "
+             "UTC.</p><a>Why?</a>")
+MAST_HALF = ("Should my flag be at half-staff? Half-staff Governor orders flags lowered "
+             "in honor of a fallen officer. Last checked Sep 16, 2026, 9:40 PM UTC.")
+t("their page: full", X.read_theirs(MAST_FULL, _now)[0], P.FULL)
+t("their page: half, with the reason", X.read_theirs(MAST_HALF, _now)[:2],
+  (P.HALF, "Governor orders flags lowered in honor of a fallen officer."))
+t("their page without an answer is unreadable, not 'full'",
+  X.read_theirs("<p>Site maintenance</p>", _now)[0], None)
+t("their stale data is unreadable, not compared",
+  X.read_theirs(MAST_FULL, _now + _td(days=2))[3].startswith("their data is stale"), True)
+
+nd_ours = {"state": "North Dakota", "effective_status": P.HALF, "reason_source": "state",
+           "reason": "Armstrong directs flags flown at half-staff Friday",
+           "source_url": "https://www.governor.nd.gov/rss/news",
+           "checked_at": "2026-09-15T12:00:00+00:00", "coverage": "covered"}
+mast_full = {"status": P.FULL, "detail": "No active half-staff order applies to North Dakota.",
+             "checked": _now, "url": "https://www.mast.today/nd"}
+d = X.compare(nd_ours, mast_full)
+t("North Dakota, Sept 15: we say half, they say full -> flagged", d,
+  {"kind": "conflict", "ours": P.HALF, "theirs": P.FULL})
+body = X.issue_body("ND", nd_ours, {"generated_at": "2026-09-15T12:00:00+00:00"},
+                    mast_full, d, mast_full["url"])
+t("issue names both answers and both source URLs",
+  all(s in body for s in ("**half**", "**full**", "https://www.governor.nd.gov/rss/news",
+                          "https://www.mast.today/nd")), True)
+t("issue title names the state and both answers",
+  X.issue_title("ND", "North Dakota", d),
+  "Cross-check: North Dakota (ND) - we say half, Mast says full")
+t("we have no answer, they say half -> flagged as a missed order",
+  X.compare({"effective_status": P.UNKNOWN}, {"status": P.HALF})["kind"], "missed order")
+t("we have no answer, they say full -> not flagged (claims nothing wrong)",
+  X.compare({"effective_status": P.UNKNOWN}, {"status": P.FULL}), None)
+t("agreement -> nothing", X.compare({"effective_status": P.FULL}, {"status": P.FULL}), None)
+t("the cross-check source never writes the site's data",
+  any(w in open("cross_check.py", encoding="utf-8").read()
+      for w in ('open(args.status, "w"', "open(STATUS, \"w\"", "json.dump(")), False)
+
 print("\n--- freshness and future dates ---")
 from datetime import timedelta as _td
 _today = date.today()
