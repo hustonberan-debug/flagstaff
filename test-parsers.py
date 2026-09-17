@@ -717,6 +717,29 @@ t("render cache: URL change forces a render", RF.due(mtrec), "URL changed")
 R.RENDER_DIR = _real_rdir
 shutil.rmtree(_rdir, ignore_errors=True)
 
+print("\n--- registry stays consistent with the code ---")
+_reg = _json.load(open("registry.json", encoding="utf-8"))
+_by = {r["state_code"]: r for r in _reg}
+t("every buildable state has a URL to read",
+  [r["state_code"] for r in _reg
+   if r.get("buildable") and r.get("ingest_mode") != "email" and not R.pick_url(r)], [])
+t("every state we do not build has a reason on record",
+  [r["state_code"] for r in _reg
+   if not r.get("buildable") and r.get("ingest_mode") != "email"
+   and not r.get("blocked_reason")], [])
+t("rendered states use a mode that reads a rendered page",
+  sorted(r["state_code"] for r in _reg if r.get("render")), ["MT", "SD"])
+t("email states have a channel to name as their source",
+  [r["state_code"] for r in _reg
+   if r.get("ingest_mode") == "email" and not R.channel_url(r)], [])
+# Oklahoma: its header badge said HALF on 2026-09-17 while the only recent
+# order (Joe Flake) ran Sept 9-11 and had ended, and its footer link's title
+# attribute contradicts its own text. Reading either would publish a wrong
+# answer, so it stays off until there is a notification channel.
+t("Oklahoma is not built from its contradictory page",
+  (_by["OK"].get("buildable"), _by["OK"].get("render"),
+   "badge is stale" in (_by["OK"].get("blocked_reason") or "")), (False, False, True))
+
 print("\n--- daily cross-check (an alarm, never an input) ---")
 import cross_check as X
 from datetime import datetime as _dtm, timezone as _tzn

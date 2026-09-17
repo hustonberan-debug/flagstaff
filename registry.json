@@ -1524,9 +1524,9 @@
       "https://oklahoma.gov/governor.html",
       "https://oklahoma.gov/governor/newsroom.html"
     ],
-    "blocked_reason": "No reliable readable source, and no notification channel on record. Static HTML carries both a half-staff and a full-staff label. Rendering does NOT resolve it (tested 2026-09-16): at a desktop viewport, headless Chromium shows BOTH visibly - a 'Flag Status : Half Staff' badge (div.text.flag-status) and a 'Flag Status: Full-Staff' link - and they disagree. The half label only disappears at tiny viewports, because it sits in a navigation menu that responsive CSS hides; that is layout, not a status signal. Earlier notes in this registry disagree about which label is live. Reports not covered rather than choose. Needs an official notification channel.",
+    "blocked_reason": "No readable source, and no notification channel on record. Rendering does NOT fix this - tested twice. At a real desktop viewport (1280x800) both labels render and NOTHING is hidden: a 'Flag Status : Half Staff' badge in the header (div.text.flag-status) and a 'Flag Status: Full-Staff' link in the footer links. They can be told apart by scope, but neither can be trusted: on 2026-09-17 the header badge said HALF while the only recent order (Stitt, fallen Wellston firefighter Joe Flake) ran Sept 9-11 and had ended, so the badge is stale; and the footer link's own title attribute says 'Flag Status: Half-Staff' while its text says 'Full-Staff'. Reading the badge would have published half-staff for Oklahoma on a full-staff day. Reports not covered until there is an official notification channel.",
     "render": false,
-    "_mode_fixed_by": "2026-09-16: rendered attempt reverted - both labels visible and contradictory"
+    "_mode_fixed_by": "2026-09-17: rendered DOM inspected at desktop size - both labels visible, badge stale, footer link self-contradictory"
   },
   {
     "state": "Oregon",
