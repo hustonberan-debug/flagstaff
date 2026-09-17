@@ -1101,7 +1101,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "index",
+    "ingest_mode": "cards",
     "cms": null,
     "js_blocked": true,
     "signature_check_required": false,
@@ -1126,8 +1126,10 @@
       "last order 1953d old",
       "JS-blocked with no feed or push fallback"
     ],
-    "buildable": false,
-    "blocked_reason": "Client-side rendering: news.mt.gov/Governors-Office returns an empty body and governor.mt.gov/flag-status is a shell whose status is injected by script. No notification channel is recorded. Needs a rendered fetch or a channel."
+    "buildable": true,
+    "blocked_reason": "Needs a browser: news.mt.gov/Governors-Office fills in its release list with JavaScript (a plain fetch has no releases). Read from a Playwright snapshot (render_fetch.py) as heading/date/summary cards. governor.mt.gov/flag-status now returns 403 'Access is denied' even to a real browser, so it is not used (verified 2026-09-16). If the browser step fails, MT goes stale and then unknown like any unreadable source.",
+    "render": true,
+    "_mode_fixed_by": "2026-09-16: rendered cards on news.mt.gov"
   },
   {
     "state": "North Carolina",
@@ -1486,7 +1488,7 @@
       "cowork",
       "script"
     ],
-    "flag_page_url": "https://oklahoma.gov/governor/flag-status-half.html",
+    "flag_page_url": "https://oklahoma.gov/governor.html",
     "press_url": "https://oklahoma.gov/governor/newsroom.html",
     "signup_url": null,
     "root_domain": "oklahoma.gov",
@@ -1494,7 +1496,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "none",
+    "ingest_mode": "diff",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1503,7 +1505,7 @@
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": "Two static pages (flag-status-half.html / flag-status-full.html). Which one the header badge links to IS the status signal.",
+    "quirk": "The page ships BOTH a half-staff and a full-staff widget and hides one with JavaScript; flag-status-half.html and flag-status-full.html are constants that always name themselves. Only the rendered page's VISIBLE text is read. If both labels are visible, it reports unknown.",
     "last_order_seen": {
       "date": "2026-05-20",
       "title": "Governor Stitt Orders Flags to Half-Staff to Honor Osage County Commissioner Charlie Cartwright",
@@ -1516,13 +1518,16 @@
     "confidence_source": "cowork (researched)",
     "confidence": "low",
     "confidence_caps": [],
-    "buildable": false,
+    "buildable": true,
     "toggle_hub_url": "https://oklahoma.gov/governor.html",
     "url_candidates": [
       "https://oklahoma.gov/governor.html",
       "https://oklahoma.gov/governor/newsroom.html"
     ],
-    "blocked_reason": "Homepage contains BOTH half-staff and full-staff indicators; which one is shown is decided client-side. Static HTML gave a confidently wrong answer. Needs a rendered fetch or an official notification channel."
+    "blocked_reason": "Needs a browser: static HTML contains both status variants, which gave a confidently wrong answer. Read from a Playwright snapshot's visible text only ('Flag Status: Full-Staff' visible, half widget hidden; verified 2026-09-16).",
+    "render": true,
+    "render_text": "visible",
+    "_mode_fixed_by": "2026-09-16: rendered visible text"
   },
   {
     "state": "Oregon",
@@ -1702,7 +1707,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "index",
+    "ingest_mode": "cards",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1720,8 +1725,10 @@
     "confidence_source": "script only (unresearched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": false,
-    "blocked_reason": "press-releases.aspx returns only navigation in its HTML (14 links, no releases; verified 2026-09-15); the release list is rendered client-side, and governor.sd.gov/news/ returns 403. It was being reported as full staff from that navigation. Needs a rendered fetch or a notification channel."
+    "buildable": true,
+    "blocked_reason": "Needs a browser: press-releases.aspx renders its list client-side. Read from a Playwright snapshot as cards; each card's summary states the order's window, so no article is opened (the 'Read more' links go to news.sd.gov, also script-rendered; verified 2026-09-16). Capitol-only orders ('...at State Capitol...') are excluded by order_scope.",
+    "render": true,
+    "_mode_fixed_by": "2026-09-16: rendered cards"
   },
   {
     "state": "Tennessee",

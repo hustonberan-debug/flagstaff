@@ -547,7 +547,10 @@ R.fetch = stub({NY_URL: ny_page(1),
 _, o, c_ny = R.check_state(NYREC, {}, None)
 t("listing pages are capped at 3", o.get("listing_pages_read"), 3)
 t("no page beyond the cap is requested", f"{NY_URL}?page=3" in calls, False)
-t("an order found on page 2 is used", o["state_status"], P.HALF)
+t("an order for Friday is not in effect on Wednesday", o["state_status"], P.FULL)
+on(date(2026, 9, 18))
+_, o, c_ny = R.check_state(NYREC, {"TT": c_ny}, None)
+t("an order found on page 2 is used on its day", o["state_status"], P.HALF)
 on(date(2026, 9, 19))
 _, o, _ = R.check_state(NYREC, {"TT": c_ny}, None)
 t("...and expires on its own date", o["state_status"], P.FULL)
@@ -564,7 +567,8 @@ _, o, _ = R.check_state(NYREC, {}, None)
 t("403 with nothing cached -> not covered, no answer",
   (o["state_status"], o["coverage"]), (P.UNKNOWN, "not_covered"))
 cached = {"hash": "h", "state_status": P.FULL, "state_order": None,
-          "last_parsed": "2026-09-15T12:00:00+00:00"}
+          "last_parsed": "2026-09-15T12:00:00+00:00",
+          "source": R.source_sig(NYREC, NY_URL)}
 _, o, c2 = R.check_state(NYREC, {"TT": cached}, None)
 t("403 one day after a good read -> stale, last value served",
   (o["state_status"], o["coverage"]), (P.FULL, "stale"))
@@ -575,6 +579,139 @@ t("a week of 403s is a coverage gap, not 'full staff'",
   (o["state_status"], o["coverage"]), (P.UNKNOWN, "not_covered"))
 t("...and says how long it has been dark",
   "unreadable since 2026-09-15" in (o["error"] or ""), True)
+
+print("\n--- 'from sunrise until sunset on <date>' is one day ---")
+t("single-day window", P.date_range(
+    "ordered that flags be flown at half-staff at the State Capitol from sunrise "
+    "until sunset on Sunday, October 4, 2026."), (date(2026, 10, 4), date(2026, 10, 4)))
+t("a real range is unchanged", P.date_range(
+    "Flags at half-staff from August 3, 2026 through August 7, 2026."),
+  (date(2026, 8, 3), date(2026, 8, 7)))
+
+print("\n--- rendered pages: Montana and South Dakota cards, Oklahoma visible text ---")
+MT_CARDS = """<div class="articles-wrapper">
+<div class="p-3 article rounded"><div class="category"><a href="https://news.mt.gov/Governors-Office/index">Governor's Office</a></div>
+<div class="articleBody"><h2 class="title"><a class="stretched-link" href="https://news.mt.gov/Governors-Office/Governor-Gianforte-Joins-Montanans-to-Remember-911">Governor Gianforte Joins Montanans to Remember 9/11</a></h2>
+<span class="date small text-muted">9/11/2026</span><p class="summary">BOZEMAN, Mont. - Governor Greg Gianforte today joined veterans to remember September 11, 2001.</p></div></div><hr>
+<div class="p-3 article rounded"><div class="articleBody"><h2 class="title"><a href="https://news.mt.gov/Governors-Office/Governor-Gianforte-Honors-Montana-Veterans">Governor Gianforte Honors Montana Veterans</a></h2>
+<span class="date">9/10/2026</span><p class="summary">BELGRADE, Mont. - Governor Greg Gianforte recognized eleven veterans.</p></div></div></div>"""
+mt = P.parse_cards(MT_CARDS, "https://news.mt.gov/Governors-Office")
+t("Montana: one card per release", [c["title"] for c in mt],
+  ["Governor Gianforte Joins Montanans to Remember 9/11",
+   "Governor Gianforte Honors Montana Veterans"])
+t("Montana: date read from the card, not from '2001' in the summary",
+  mt[0]["date"], "2026-09-11")
+t("Montana: link is the headline's", mt[0]["url"],
+  "https://news.mt.gov/Governors-Office/Governor-Gianforte-Joins-Montanans-to-Remember-911")
+
+def sd_card(title, day, summary, n):
+    return (f'<div class="newsitem"><h2>{title}</h2><div class="newsdate"><span '
+            f'id="rptGovNews_lblDate_{n}">{day}</span></div><div class="newsarticle">'
+            f'{summary} <a class="nobreak" href="https://news.sd.gov/news?id=kb&amp;'
+            f'sys_id={n}">Read more . . . </a></div></div>')
+SD_CARDS = "".join([
+    sd_card("Flags at Half-Staff at State Capitol in Honor of Lars Herseth", "09/14/2026",
+            "Today, Governor Larry Rhoden ordered that flags be flown at half-staff at "
+            "the State Capitol from sunrise until sunset on Sunday, October 4, 2026.", 0),
+    sd_card("Patriots and Unity", "09/11/2026", "25 years ago, the United States...", 1),
+    sd_card("Flags at Half-Staff Statewide in Honor of Patriot Day", "09/10/2026",
+            "Today, Governor Larry Rhoden ordered that flags be flown at half-staff "
+            "statewide from sunrise until sunset on Friday, September 11, 2026.", 2),
+    sd_card("Fairing Well", "09/04/2026", "Summer is winding down.", 3),
+    sd_card("Gov. Rhoden Receives Disaster Declaration", "09/02/2026",
+            "Gov. Larry Rhoden announced a declaration.", 4),
+])
+sd = P.parse_cards(SD_CARDS, "https://governor.sd.gov/news/press-releases.aspx")
+t("South Dakota: title is not a link, 'Read more' is, entities unescaped",
+  sd[2]["url"], "https://news.sd.gov/news?id=kb&sys_id=2")
+t("South Dakota: flag cards found", [c["title"] for c in sd if c["is_flag"]],
+  ["Flags at Half-Staff at State Capitol in Honor of Lars Herseth",
+   "Flags at Half-Staff Statewide in Honor of Patriot Day"])
+
+import shutil
+from datetime import timedelta as _td
+_today = date.today()
+_rdir, _real_rdir = tempfile.mkdtemp(), R.RENDER_DIR
+R.RENDER_DIR = _rdir
+def snapshot(code, url, html=None, text=None, age_h=0.5, error=None, good=True):
+    from datetime import datetime as _dt, timezone as _tz
+    at = (_dt.now(_tz.utc) - _td(hours=age_h)).isoformat(timespec="seconds")
+    snap = {"url": url, "attempted_at": at, "error": error}
+    if good:
+        snap.update(rendered_at=at, html=html, text=text)
+    with open(os.path.join(_rdir, f"{code}.json"), "w") as f:
+        _json.dump(snap, f)
+
+SD_URL = "https://governor.sd.gov/news/press-releases.aspx"
+sdrec = {"state": "Testland", "state_code": "TT", "ingest_mode": "cards", "render": True,
+         "buildable": True, "press_url": SD_URL}
+R.fetch = stub({})                  # nothing may be fetched: summaries carry the dates
+snapshot("TT", SD_URL, html=SD_CARDS)
+on(date(2026, 9, 11))
+_, o, _ = R.check_state(sdrec, {}, None)
+t("SD statewide Patriot Day order: half on Sept 11", o["state_status"], P.HALF)
+t("...dated from the card summary, no article opened", calls.get(
+    "https://news.sd.gov/news?id=kb&sys_id=2"), None)
+on(date(2026, 9, 20))
+_, o, _ = R.check_state(sdrec, {}, None)
+t("SD Sept 20: full, and the Oct 4 Capitol-only order does not count",
+  o["state_status"], P.FULL)
+on(date(2026, 10, 4))
+_, o, _ = R.check_state(sdrec, {}, None)
+t("SD Oct 4: Capitol-only order is not a statewide half-staff day",
+  (o["state_status"], len(o.get("limited_orders") or [])), (P.FULL, 1))
+t("'checked' is when the browser read the page", o["checked_at"] == o["rendered_at"], True)
+
+OK_URL = "https://oklahoma.gov/governor.html"
+okrec = {"state": "Testland", "state_code": "TT", "ingest_mode": "diff", "render": True,
+         "render_text": "visible", "buildable": True, "flag_page_url": OK_URL}
+recent = _today.strftime("%m/%d/%Y")
+on(_today)
+snapshot("TT", OK_URL, html="<div class='flag-status'>Flag Status : Half Staff</div>"
+         "<a href='/governor/flag-status-full.html'>Flag Status: Full-Staff</a>",
+         text=f"Governor J. Kevin Stitt\nFlag Status: Full-Staff\nNews {recent}")
+_, o, _ = R.check_state(okrec, {}, None)
+t("Oklahoma: only the VISIBLE label is read (hidden half widget ignored)",
+  o["state_status"], P.FULL)
+snapshot("TT", OK_URL, text=f"Flag Status : Half Staff\nFlag Status: Full-Staff\nNews {recent}")
+_, o, _ = R.check_state(okrec, {}, None)
+t("Oklahoma: both labels visible (script did not run) -> unknown",
+  (o["state_status"], "both" in (o["error"] or "")), (P.UNKNOWN, True))
+
+snapshot("TT", SD_URL, html=SD_CARDS, age_h=1)
+os.unlink(os.path.join(_rdir, "TT.json"))
+_, o, _ = R.check_state(sdrec, {}, None)
+t("browser step never ran -> not covered, says why",
+  (o["coverage"], "no rendered snapshot" in o["error"]), ("not_covered", True))
+snapshot("TT", SD_URL, html=SD_CARDS, age_h=13)
+same_source = {"hash": "h", "state_status": P.FULL, "last_parsed": _today.isoformat(),
+               "source": R.source_sig(sdrec, SD_URL)}
+_, o, _ = R.check_state(sdrec, {"TT": same_source}, None)
+t("snapshot 13h old -> stale, not a fresh answer",
+  (o["coverage"], "13h old" in o["error"]), ("stale", True))
+old_source = dict(same_source, source="index|" + SD_URL + "|fetch")
+_, o, _ = R.check_state(sdrec, {"TT": old_source}, None)
+t("an answer cached from a DIFFERENT source is never carried (SD's nav-page read)",
+  (o["state_status"], o["coverage"]), (P.UNKNOWN, "not_covered"))
+snapshot("TT", SD_URL, age_h=0.2, error="TimeoutError: page.goto", good=False)
+_, o, _ = R.check_state(sdrec, {}, None)
+t("failed render with no good snapshot -> error names the failure",
+  "TimeoutError" in (o["error"] or ""), True)
+
+import render_fetch as RF
+RF.OUT_DIR = _rdir
+mtrec = {"state_code": "TT", "ingest_mode": "cards", "render": True,
+         "press_url": "https://news.mt.gov/Governors-Office"}
+snapshot("TT", mtrec["press_url"], html=MT_CARDS, age_h=1)
+t("render cache: a 1h-old snapshot is reused, no browser", RF.due(mtrec), None)
+snapshot("TT", mtrec["press_url"], html=MT_CARDS, age_h=4)
+t("render cache: a 4h-old snapshot is re-rendered", bool(RF.due(mtrec)), True)
+t("render cache: per-state max age respected",
+  RF.due(dict(mtrec, render_max_age_hours=6)), None)
+snapshot("TT", "https://other.test/", html=MT_CARDS, age_h=0.1)
+t("render cache: URL change forces a render", RF.due(mtrec), "URL changed")
+R.RENDER_DIR = _real_rdir
+shutil.rmtree(_rdir, ignore_errors=True)
 
 print("\n--- freshness and future dates ---")
 from datetime import timedelta as _td

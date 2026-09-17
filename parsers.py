@@ -776,6 +776,10 @@ def classify_authority(text):
     return UNKNOWN, None
 
 
+TIME_OF_DAY_RE = re.compile(
+    r"(?:sunrise|sunset|dawn|dusk|daybreak|noon|\d{1,2}(?::\d{2})?\s*[ap]\.?m\.?)", re.I)
+
+
 def date_range(text):
     """Best-effort (start, end) for an order. Either may be None."""
     t = strip_html(text) if "<" in (text or "") else (text or "")
@@ -784,6 +788,12 @@ def date_range(text):
         rf"(.{{0,60}}?)(?:[.;]|$)", t, re.I)
     if m:
         s, e = parse_any_date(m.group(1)), parse_any_date(m.group(2))
+        # "From sunrise until sunset on Sunday, October 4, 2026" is ONE day.
+        # Returned as (None, Oct 4), the start was filled in by callers with
+        # the publication date: South Dakota announced that order on Sept 14,
+        # which would have read as three weeks of half-staff.
+        if e and not s and TIME_OF_DAY_RE.fullmatch(m.group(1).strip()):
+            s = e
         if s or e:
             return s, e
     m = re.search(r"(?:until|through)\s+(?:sunset\s+(?:on\s+)?)?(.{0,40})", t, re.I)
@@ -967,6 +977,67 @@ def parse_index(html, base_url=None):
             "is_flag": bool(FLAG_RE.search(text)) or is_flag_slug(url),
         })
     return dedupe_orders(cands)
+
+
+# ---------------------------------------------------------------------------
+# Parser 3b: cards — rendered listings of heading + date + summary
+# ---------------------------------------------------------------------------
+
+CARD_HEADING_RE = re.compile(r"<(h[1-4])\b[^>]*>(.*?)</\1>", re.S | re.I)
+CARD_BODY_LIMIT = 4000
+
+
+def parse_cards(html, base_url=None):
+    """A listing where each release is a heading followed by its date and a
+    summary: Montana's news.mt.gov and South Dakota's press releases, both
+    rendered client-side. Returns parse_index-shaped items plus 'summary'.
+
+    The summary usually carries the order's window ("...at half-staff from
+    sunrise until sunset on Friday, September 11, 2026"), so an order can be
+    dated without opening its page — which on these sites is rendered by
+    JavaScript too. The date is read only from the start of the card, so a
+    date inside the summary is never mistaken for the publication date.
+    """
+    import html as _html
+    doc = SCRIPT_RE.sub(" ", html or "")
+    heads = list(CARD_HEADING_RE.finditer(doc))
+    out = []
+    for n, m in enumerate(heads):
+        title = strip_html(m.group(2))
+        if not title or len(title) < 8 or len(title) > 300:
+            continue
+        stop = heads[n + 1].start() if n + 1 < len(heads) else len(doc)
+        body_html = doc[m.end():min(stop, m.end() + CARD_BODY_LIMIT)]
+        body = strip_html(body_html)
+        href = HREF_RE.search(m.group(0)) or HREF_RE.search(body_html)
+        url = _abs(_html.unescape(href.group(1)), base_url) if href else base_url
+        d = parse_any_date(body[:40])
+        out.append({
+            "title": title[:200],
+            "url": url,
+            "date": d.isoformat() if d else None,
+            "summary": body[:1000],
+            "is_flag": bool(FLAG_RE.search(title)) or is_flag_slug(url),
+        })
+    return dedupe_orders(out)
+
+
+# Labelled status declarations only ("Flag Status: Full-Staff"): the first
+# TIER1_END patterns of DECLARATION_RE.
+TIER1_END = 8
+
+
+def declared_values(text):
+    """Every value ('half'/'full') a page's labelled status fields state.
+
+    Oklahoma ships a half-staff AND a full-staff widget and hides one with
+    JavaScript. Rendered, only the visible one is in the text — but if the
+    script did not run, both are, and more than one value means the page
+    cannot be read."""
+    t = strip_html(text) if "<" in (text or "") else (text or "")
+    t = COUNTY_LINE_RE.sub(" ", t)
+    return {m.group(1).lower() for pat in DECLARATION_RE[:TIER1_END]
+            for m in pat.finditer(t)}
 
 
 # ---------------------------------------------------------------------------

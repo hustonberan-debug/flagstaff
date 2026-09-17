@@ -68,6 +68,10 @@ CHANNEL_MAX_SILENCE_DAYS = 60
 # Past this it reports unknown: an unreadable source is a gap, not a verdict.
 STALE_MAX_DAYS = 3
 MAX_LISTING_PAGES = 3        # hard cap on listing requests per state per run
+RENDER_DIR = "rendered"      # snapshots written by render_fetch.py
+# A rendered snapshot older than this is not today's page. render_fetch.py
+# re-renders every 3 hours, so this allows for three missed renders.
+RENDER_STALE_HOURS = 12
 EMAIL_INGEST_MAX_AGE_DAYS = 1    # email-orders.json older than this is not today's inbox
 
 
@@ -407,6 +411,14 @@ def federal_proclamation(session, cache):
     return None, None
 
 
+def source_sig(rec, url=None):
+    """What a cached answer was read from: mode, configured URL, and whether
+    rendered. The configured URL, not the one that answered, so a state read
+    through one of its url_candidates still matches itself next run."""
+    return (f"{rec.get('ingest_mode')}|{pick_url(rec)}|"
+            f"{'render' if rec.get('render') else 'fetch'}")
+
+
 def channel_url(rec):
     """A link a reader can actually open for an email-ingested state.
 
@@ -499,18 +511,57 @@ def article_facts(url, session, known, keep):
         art, _ = fetch(url, session)
         if not art:
             return None
-        text = P.strip_html(art)
-        opening = " ".join(re.split(r"(?<=[.!?])\s+", text)[:3])[:700]
-        st, sev = P.classify_status(opening)
-        au, aev = P.classify_authority(opening)
-        bs, be = P.date_range(text[:8000])
-        f = {"opening_status": st, "opening_evidence": sev,
-             "opening_authority": au, "opening_authority_evidence": aev,
-             "body_start": bs.isoformat() if bs else None,
-             "body_end": be.isoformat() if be else None,
-             "opening": opening}
+        f = facts_from_text(P.strip_html(art))
     keep[url] = f
     return f
+
+
+def facts_from_text(text):
+    """Status, authority and dates from an order's text: its page, or the
+    summary a card listing shows for it."""
+    opening = " ".join(re.split(r"(?<=[.!?])\s+", text)[:3])[:700]
+    st, sev = P.classify_status(opening)
+    au, aev = P.classify_authority(opening)
+    bs, be = P.date_range(text[:8000])
+    return {"opening_status": st, "opening_evidence": sev,
+            "opening_authority": au, "opening_authority_evidence": aev,
+            "body_start": bs.isoformat() if bs else None,
+            "body_end": be.isoformat() if be else None,
+            "opening": opening}
+
+
+def order_facts(item, page_url, session, known, keep):
+    """Facts for one listed order, or None. A card listing's own summary is
+    used as-is; otherwise the order's page is opened (once, cached)."""
+    if item.get("summary"):
+        return facts_from_text(item["summary"])
+    if item.get("url") and item["url"] != page_url:
+        return article_facts(item["url"], session, known, keep)
+    return None
+
+
+def load_rendered(rec, url):
+    """(content, error, rendered_at) from the snapshot render_fetch.py saved.
+
+    The browser runs in its own workflow step, so a browser failure never
+    reaches this process — it shows up here as a missing, failed or old
+    snapshot, and is handled exactly like a page that would not load.
+    """
+    snap = load_json(os.path.join(RENDER_DIR, f"{rec['state_code']}.json"), None)
+    if not snap:
+        return None, "no rendered snapshot (browser step did not run)", None
+    if snap.get("url") != url:
+        return None, "rendered snapshot is for a different URL", None
+    ok_at, err = snap.get("rendered_at"), snap.get("error")
+    if not ok_at or not (snap.get("html") or snap.get("text")):
+        return None, f"render failed: {err or 'no content'}", None
+    age_h = (datetime.now(timezone.utc) - datetime.fromisoformat(ok_at)
+             ).total_seconds() / 3600
+    if age_h > RENDER_STALE_HOURS:
+        return None, (f"rendered snapshot is {age_h:.0f}h old"
+                      + (f"; last render failed: {err}" if err else "")), None
+    content = snap.get("text") if rec.get("render_text") == "visible" else snap.get("html")
+    return content, None, ok_at
 
 
 def check_state(rec, cache, session, verbose=False):
@@ -614,11 +665,19 @@ def check_state(rec, cache, session, verbose=False):
 
     url = pick_url(rec)
     out["source_url"] = url
-    text, err = fetch(url, session)
+    if rec.get("render"):
+        # Pages that serve nothing without JavaScript are read from the
+        # snapshot a browser saved in an earlier workflow step. "Checked" is
+        # when that browser read the page, not when this process ran.
+        text, err, rendered_at = load_rendered(rec, url)
+        if rendered_at:
+            out["checked_at"] = out["rendered_at"] = rendered_at
+    else:
+        text, err = fetch(url, session)
 
     # Some states 403 one hostname and serve another perfectly well. Try the
     # recorded alternates rather than writing the state off on one failure.
-    if err and rec.get("url_candidates"):
+    if err and rec.get("url_candidates") and not rec.get("render"):
         for alt in rec["url_candidates"]:
             if alt == url:
                 continue
@@ -640,7 +699,11 @@ def check_state(rec, cache, session, verbose=False):
         dark = (today() - date.fromisoformat(last_ok)).days if last_ok else None
         fails = (prev.get("consecutive_errors") or 0) + 1
         out["consecutive_errors"] = fails
-        if not prev.get("hash"):
+        # Only carry an answer read from THIS source. South Dakota's cache
+        # still held a "full staff" read from its navigation-only page, from
+        # before it was switched off; when its new rendered source failed,
+        # that discredited answer came back as "stale".
+        if not prev.get("hash") or prev.get("source") != source_sig(rec, url):
             out.update(state_status=P.UNKNOWN, coverage="not_covered", error=err)
         elif dark is not None and dark > STALE_MAX_DAYS:
             out.update(state_status=P.UNKNOWN, state_order=None,
@@ -724,6 +787,12 @@ def check_state(rec, cache, session, verbose=False):
         d = P.parse_diff(text, previous_hash=prev.get("hash"),
                          selector_hint="flag")
         out["state_status"] = d["status"]
+        if rec.get("render") and len(P.declared_values(text)) > 1:
+            # Rendered, Oklahoma's hidden widget is gone from the visible
+            # text. If both labels are still visible, the script that picks
+            # one did not run, and the page cannot be read.
+            d["status"] = out["state_status"] = P.UNKNOWN
+            d["evidence"] = "page shows both a half-staff and a full-staff status label"
         if d["status"] == P.UNKNOWN:
             # Record why. With error left empty, "page read but states no
             # status" was indistinguishable from a healthy state, and the CI
@@ -748,7 +817,9 @@ def check_state(rec, cache, session, verbose=False):
             wins = P.listed_order_windows(text)
             live = [w for w in wins if covers_today(
                 w[0].isoformat() if w[0] else None, w[1].isoformat(), today())[0]]
-            if wins and not live:
+            # Only when every listed order is over. An order that has not
+            # started yet means the widget went up early, not that it lags.
+            if wins and not live and all(e < today() for _, e in wins):
                 latest = max(e for _, e in wins)
                 d["status"] = P.UNKNOWN
                 out["state_status"] = P.UNKNOWN
@@ -783,12 +854,20 @@ def check_state(rec, cache, session, verbose=False):
     else:
         items = (P.parse_feed(text, url) if mode == "feed"
                  else P.parse_archive(text, url) if mode == "archive"
+                 else P.parse_cards(text, url) if mode == "cards"
                  else P.parse_index(text, url))
         if rec.get("dedupe_translations"):
             items = P.dedupe_orders(items)
         flags = [i for i in items if i.get("is_flag")]
         listing_ok, listing_ev = P.listing_evidence(items, url)
-        if mode == "index":
+        if mode == "cards":
+            # Card titles are often not links (South Dakota links only "Read
+            # more", on another host), so the evidence of a real listing is
+            # dated cards rather than headline links.
+            n_dated = sum(1 for i in items if i.get("date"))
+            listing_ok = n_dated >= P.MIN_LISTING_HEADLINES
+            listing_ev = f"{n_dated} dated cards"
+        if mode in ("index", "cards"):
             out["listing_evidence"] = listing_ev
 
         order, verdict, why = None, None, None
@@ -835,8 +914,8 @@ def check_state(rec, cache, session, verbose=False):
             # Only the first few sentences, not the whole body: further down,
             # a release routinely mentions returning to full staff, and the
             # classifier correctly refuses to choose when it sees both.
-            if rec_o["status"] == P.UNKNOWN and i.get("url") and i["url"] != url:
-                f = article_facts(i["url"], session, prev_articles, articles)
+            if rec_o["status"] == P.UNKNOWN:
+                f = order_facts(i, url, session, prev_articles, articles)
                 if f and f["opening_status"] != P.UNKNOWN:
                     st2 = f["opening_status"]
                     rec_o["status"] = st2
@@ -861,8 +940,9 @@ def check_state(rec, cache, session, verbose=False):
                     rec_o["authority"] != P.GOVERNOR:
                 continue
             # Now open the order for its dates only.
-            if i.get("url") and i["url"] != url and not rec_o["end_date"]:
-                f = article_facts(i["url"], session, prev_articles, articles)
+            if (i.get("summary") or (i.get("url") and i["url"] != url)) \
+                    and not rec_o["end_date"]:
+                f = order_facts(i, url, session, prev_articles, articles)
                 if f:
                     if f["body_start"] and not rec_o["start_date"]:
                         rec_o["start_date"] = f["body_start"]
@@ -919,7 +999,7 @@ def check_state(rec, cache, session, verbose=False):
             out["error"] = ("flag order found, but its page could not be read "
                             "to date it" if order.get("dates_unavailable")
                             else "recent order found but dates unparseable")
-        elif items and mode == "index" and not listing_ok:
+        elif items and mode in ("index", "cards") and not listing_ok:
             # "No flag headline among these links" is only evidence of full
             # staff if the links are press releases. These are not.
             out["state_status"] = P.UNKNOWN
@@ -964,6 +1044,7 @@ def check_state(rec, cache, session, verbose=False):
         "last_checked": out["checked_at"],
         "articles": articles,
         "consecutive_errors": 0,
+        "source": source_sig(rec, url),
     })
     if verbose:
         print(json.dumps(out, indent=2))

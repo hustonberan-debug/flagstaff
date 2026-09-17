@@ -21,6 +21,7 @@ on:
       - 'read_email.py'
       - 'test-parsers.py'
       - 'test-history.py'
+      - 'render_fetch.py'
 
 permissions:
   contents: write             # needed to commit status.json back
@@ -65,6 +66,52 @@ jobs:
           MAIL_USER: ${{ secrets.MAIL_USER }}
           MAIL_PASS: ${{ secrets.MAIL_PASS }}
         run: python3 read_email.py
+
+      # --- Rendered pages: MT, OK, SD -----------------------------------------
+      # Three states serve nothing without JavaScript. A browser is slow and
+      # fragile, so it is fenced off: every step here is continue-on-error, and
+      # run.py treats a missing, failed or old snapshot exactly like a page
+      # that would not load. The other states never depend on it. Snapshots
+      # are cached between runs and re-rendered only when over 3 hours old,
+      # so most runs install nothing and start no browser.
+      - name: Rendered pages - restore snapshots
+        uses: actions/cache/restore@v4
+        continue-on-error: true
+        with:
+          path: rendered
+          key: rendered-none
+          restore-keys: rendered-
+
+      - name: Rendered pages - check which are due
+        id: render-check
+        continue-on-error: true
+        run: python3 render_fetch.py --check
+
+      - name: Rendered pages - restore browser
+        if: steps.render-check.outputs.needed == 'true'
+        uses: actions/cache@v4
+        continue-on-error: true
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.63.0-chromium-headless-shell
+
+      - name: Rendered pages - render
+        id: render
+        if: steps.render-check.outputs.needed == 'true'
+        continue-on-error: true
+        timeout-minutes: 5
+        run: |
+          pip install playwright==1.63.0
+          python3 -m playwright install --only-shell chromium
+          python3 render_fetch.py
+
+      - name: Rendered pages - save snapshots
+        if: always() && steps.render-check.outputs.needed == 'true'
+        uses: actions/cache/save@v4
+        continue-on-error: true
+        with:
+          path: rendered
+          key: rendered-${{ github.run_id }}
 
       - name: Check all sources
         run: python3 run.py
@@ -229,13 +276,15 @@ jobs:
         env:
           MAIL_OUTCOME: ${{ steps.mail.outcome }}
           NOTIFY_OUTCOME: ${{ steps.notify.outcome }}
+          RENDER_OUTCOME: ${{ steps.render.outcome }}
         run: |
           python3 - <<'PY'
           import json, os
           # continue-on-error steps report success even when they fail.
           # Their real outcome is only visible here.
           for step, var in (("Read notification emails", "MAIL_OUTCOME"),
-                            ("Notify subscribers", "NOTIFY_OUTCOME")):
+                            ("Notify subscribers", "NOTIFY_OUTCOME"),
+                            ("Rendered pages - render", "RENDER_OUTCOME")):
               if os.environ.get(var) == "failure":
                   print(f"::warning::'{step}' FAILED (hidden by continue-on-error) - see its log")
           # A state bulletin dropped for failing DKIM is either a forgery or a
