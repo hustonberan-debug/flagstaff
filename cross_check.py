@@ -149,18 +149,44 @@ class GitHub:
         return r.json()
 
     def open_issues(self):
+        """Every open issue (not just labelled ones - see existing_by_state)."""
         out, page = [], 1
         while True:
             batch = self._ok(self.s.get(f"{self.base}/issues", params={
-                "labels": LABEL, "state": "open", "per_page": 100, "page": page}))
+                "state": "open", "per_page": 100, "page": page}))
             out += [i for i in batch if "pull_request" not in i]
             if len(batch) < 100:
                 return out
             page += 1
 
+    def ensure_label(self):
+        r = self.s.post(f"{self.base}/labels", json={
+            "name": LABEL, "color": "b60205",
+            "description": "Daily cross-check disagreement"})
+        if r.status_code not in (201, 422):      # 422: already exists
+            print(f"    note: could not create label ({r.status_code}); "
+                  f"issues are matched by title, so this is cosmetic")
+
     def create(self, title, body):
         return self._ok(self.s.post(f"{self.base}/issues", json={
             "title": title, "body": body, "labels": [LABEL]}))
+
+
+def issue_key(title):
+    """'Cross-check: North Dakota (ND)' - stable while the answers change."""
+    return title.split(" - ")[0]
+
+
+def existing_by_state(issues):
+    """Open cross-check issues by key, matched on TITLE, not label.
+
+    GitHub silently drops labels on issue creation when the caller lacks push
+    access, and this job deliberately has none. Finding issues by label would
+    then find nothing, and a disagreement that lasted a week would open seven
+    issues instead of one with daily comments.
+    """
+    return {issue_key(i["title"]): i for i in issues
+            if (i.get("title") or "").startswith(TITLE_PREFIX)}
 
     def comment(self, number, body):
         return self._ok(self.s.post(f"{self.base}/issues/{number}/comments",
@@ -240,7 +266,8 @@ def main():
     gh = None
     if found and not args.dry_run:
         gh = GitHub(os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_TOKEN"])
-        existing = {i["title"].split(" - ")[0]: i for i in gh.open_issues()}
+        gh.ensure_label()
+        existing = existing_by_state(gh.open_issues())
     for code, d in sorted(found.items()):
         s, t = status["states"][code], theirs[code]
         title = issue_title(code, s.get("state", code), d)
@@ -250,7 +277,7 @@ def main():
         report.append(f"- **{code}**: we say {d['ours']}, {SOURCE_NAME} says {d['theirs']}")
         if args.dry_run:
             continue
-        key = title.split(" - ")[0]
+        key = issue_key(title)
         try:
             if key in existing:
                 gh.comment(existing[key]["number"],

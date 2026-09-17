@@ -752,6 +752,20 @@ t("we have no answer, they say half -> flagged as a missed order",
 t("we have no answer, they say full -> not flagged (claims nothing wrong)",
   X.compare({"effective_status": P.UNKNOWN}, {"status": P.FULL}), None)
 t("agreement -> nothing", X.compare({"effective_status": P.FULL}, {"status": P.FULL}), None)
+issues = [
+    {"number": 7, "title": "Cross-check: North Dakota (ND) - we say half, Mast says full",
+     "labels": []},                                     # label silently dropped
+    {"number": 8, "title": "Improve the footer", "labels": []},
+]
+t("an open issue is found by title even when GitHub dropped its label",
+  {k: v["number"] for k, v in X.existing_by_state(issues).items()},
+  {"Cross-check: North Dakota (ND)": 7})
+t("so tomorrow's run comments on #7 instead of opening a duplicate",
+  X.issue_key(X.issue_title("ND", "North Dakota", {"ours": P.HALF, "theirs": P.FULL}))
+  in X.existing_by_state(issues), True)
+t("...even if the answers have changed since the issue was opened",
+  X.issue_key(X.issue_title("ND", "North Dakota", {"ours": P.UNKNOWN, "theirs": P.HALF}))
+  in X.existing_by_state(issues), True)
 t("the cross-check source never writes the site's data",
   any(w in open("cross_check.py", encoding="utf-8").read()
       for w in ('open(args.status, "w"', "open(STATUS, \"w\"", "json.dump(")), False)
