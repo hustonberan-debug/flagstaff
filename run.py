@@ -1061,6 +1061,11 @@ def check_state(rec, cache, session, verbose=False):
     new_cache = dict(prev)
     new_cache.update({
         "hash": h,
+        # When this page's text last moved. A source that stops updating looks
+        # exactly like a state with no orders, so drift_check.py watches this:
+        # Arizona sat frozen from January 2025 and was found by hand.
+        "hash_changed_at": (out["checked_at"] if prev.get("hash") != h
+                            else prev.get("hash_changed_at") or out["checked_at"]),
         "state_status": out["state_status"],
         "state_order": out["state_order"],
         "last_parsed": out["checked_at"],

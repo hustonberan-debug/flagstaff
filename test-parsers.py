@@ -858,6 +858,59 @@ t("drill body says the live site was not changed",
   "were not changed" in X.issue_body("ND", st_mem["states"]["ND"], {"generated_at": "x"},
                                      {"status": P.FULL, "checked": _now}, dd, "u"), True)
 
+print("\n--- weekly drift: sources that go quiet look like states with no orders ---")
+import drift_check as D
+TODAY = date(2026, 9, 17)
+def drift(reg, cache=None, states=None, mail=None):
+    return D.find_drift(reg, cache or {}, {"states": states or {}}, mail or {}, TODAY)
+
+az = {"state_code": "AZ", "state": "Arizona", "ingest_mode": "diff", "buildable": True,
+      "flag_page_url": "https://az.gov/half-staff-notices"}
+t("Arizona: page frozen since January 2025 (dates on the source)",
+  [(d["kind"], d["days"]) for d in drift([az], states={"AZ": {"source_age_days": 620}})],
+  [("DATES", 620)])
+t("Arizona: and we watched its text not change",
+  [(d["kind"], d["days"]) for d in drift(
+      [az], cache={"AZ": {"hash_changed_at": "2025-01-09T00:00:00+00:00"}})],
+  [("PAGE", 616)])
+sc = {"state_code": "SC", "state": "South Carolina", "ingest_mode": "feed",
+      "buildable": True, "rss_url": "https://governor.sc.gov/taxonomy/term/3/feed"}
+t("South Carolina: feed last published in 2020",
+  [d["kind"] for d in drift([sc], states={"SC": {"source_age_days": 2444}})], ["DATES"])
+t("a page that changed last week is not drift",
+  drift([az], cache={"AZ": {"hash_changed_at": "2026-09-10T00:00:00+00:00"}},
+        states={"AZ": {"source_age_days": 4}}), [])
+# Florida lists six memos a year: months-old dates on a page we watched change
+# today is a quiet state, not a dead source.
+t("old dates on a page we saw change are not drift",
+  drift([az], cache={"AZ": {"hash_changed_at": "2026-09-17T00:00:00+00:00"}},
+        states={"AZ": {"source_age_days": 112}}), [])
+t("a page with no fingerprint history yet is not accused",
+  drift([az], cache={"AZ": {}}, states={"AZ": {}}), [])
+wy = {"state_code": "WY", "state": "Wyoming", "ingest_mode": "email",
+      "notification_channel": {"detail": "https://public.govdelivery.com/x"}}
+t("an email channel quiet for 100 days is drift",
+  [(d["kind"], d["days"]) for d in drift([wy], mail={"channels_heard":
+                                                     {"WY": "2026-06-09"}})],
+  [("CHANNEL", 100)])
+t("...but one that delivered last week is not",
+  drift([wy], mail={"channels_heard": {"WY": "2026-09-14"}}), [])
+t("a channel we have never heard from is not drift (it is a declared gap)",
+  drift([wy], mail={}), [])
+t("states we do not build are not accused of drifting",
+  drift([dict(az, buildable=False)], states={"AZ": {"source_age_days": 900}}), [])
+dd = drift([az], states={"AZ": {"source_age_days": 620, "effective_status": "full",
+                                "coverage": "covered"}})[0]
+t("drift issue title names the state and what went quiet", D.issue_title(dd),
+  "Drift: Arizona (AZ) - source dates are old")
+dbody = D.issue_body(dd, {"states": {"AZ": {"effective_status": "full",
+                                            "coverage": "covered"}},
+                          "generated_at": "2026-09-17T12:00:00+00:00"})
+t("drift issue names the source URL and what the site says now",
+  ("https://az.gov/half-staff-notices" in dbody and "**full**" in dbody), True)
+t("drift issues are their own thread, never merged with cross-check issues",
+  X.existing_by_state([{"number": 3, "title": D.issue_title(dd)}]), {})
+
 print("\n--- freshness and future dates ---")
 from datetime import timedelta as _td
 _today = date.today()

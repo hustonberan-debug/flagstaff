@@ -1,0 +1,51 @@
+name: Weekly drift check
+
+# Sources that have gone quiet. A source that stops updating looks exactly
+# like a state with no orders, and nothing caught Arizona (frozen from January
+# 2025) or South Carolina (a feed last published in 2020) - both were found by
+# hand, months later.
+#
+# Like the daily cross-check, this is an alarm: contents: read means it cannot
+# push anything, status.json included.
+
+on:
+  schedule:
+    # Mondays, 16:40 UTC - after the daily cross-check, so the two alarms do
+    # not file at the same minute.
+    - cron: '40 16 * * 1'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'drift_check.py'
+      - 'gh_issues.py'
+      - '.github/workflows/drift-check.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: drift-check
+  cancel-in-progress: false
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Report sources that have gone quiet
+        # Fails red if it could not read what it needs to check. "Could not
+        # check" must never look like "nothing has drifted".
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 drift_check.py

@@ -19,7 +19,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:54+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://os.dc.gov/service/flag-status|fetch"
+    "source": "diff|https://os.dc.gov/service/flag-status|fetch",
+    "hash_changed_at": "2026-09-15T18:20:59Z"
   },
   "CA": {
     "hash": "2cca025b876e35aa",
@@ -32,7 +33,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:54+00:00",
     "consecutive_errors": 0,
-    "source": "feed|https://www.gov.ca.gov/feed/|fetch"
+    "source": "feed|https://www.gov.ca.gov/feed/|fetch",
+    "hash_changed_at": "2026-09-17T18:25:20Z"
   },
   "AL": {
     "hash": "0fd0758cff2ed548",
@@ -45,7 +47,8 @@
     "last_known_status": null,
     "last_status_change_at": null,
     "consecutive_errors": 0,
-    "source": "diff|https://governor.alabama.gov/flag-status/|fetch"
+    "source": "diff|https://governor.alabama.gov/flag-status/|fetch",
+    "hash_changed_at": "2026-09-03T13:44:41Z"
   },
   "CO": {
     "hash": "39115882509bdb4c",
@@ -58,7 +61,8 @@
     "last_known_status": null,
     "last_status_change_at": null,
     "consecutive_errors": 0,
-    "source": "diff|https://governorsoffice.colorado.gov/governor/flag-status|fetch"
+    "source": "diff|https://governorsoffice.colorado.gov/governor/flag-status|fetch",
+    "hash_changed_at": "2026-09-11T15:45:22Z"
   },
   "AZ": {
     "hash": "1ccc62219b19cb72",
@@ -79,7 +83,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T07:38:22+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://az.gov/half-staff-notices|fetch"
+    "source": "diff|https://az.gov/half-staff-notices|fetch",
+    "hash_changed_at": "2026-09-12T07:38:54Z"
   },
   "AK": {
     "hash": "03f2ab94f64de2a5",
@@ -100,7 +105,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T00:00:00+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://gov.alaska.gov/services/status-of-the-flag/|fetch"
+    "source": "diff|https://gov.alaska.gov/services/status-of-the-flag/|fetch",
+    "hash_changed_at": "2026-09-09T23:24:57Z"
   },
   "IA": {
     "hash": "3aeddfc4abf74cdf",
@@ -137,7 +143,8 @@
     "last_known_status": "half",
     "last_status_change_at": "2026-09-17T18:25:00+00:00",
     "consecutive_errors": 0,
-    "source": "feed|https://governor.iowa.gov/news/all/all/all/rss.xml|fetch"
+    "source": "feed|https://governor.iowa.gov/news/all/all/all/rss.xml|fetch",
+    "hash_changed_at": "2026-09-17T18:25:20Z"
   },
   "HI": {
     "hash": "ef19e963ed6a92ee",
@@ -150,7 +157,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T03:17:04+00:00",
     "consecutive_errors": 6,
-    "source": "feed|https://governor.hawaii.gov/category/newsroom/feed/|fetch"
+    "source": "feed|https://governor.hawaii.gov/category/newsroom/feed/|fetch",
+    "hash_changed_at": "2026-09-17T03:04:29Z"
   },
   "GA": {
     "hash": "da9d8a0feb32653b",
@@ -163,7 +171,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T00:00:00+00:00",
     "consecutive_errors": 0,
-    "source": "feed|https://gov.ga.gov/rss.xml|fetch"
+    "source": "feed|https://gov.ga.gov/rss.xml|fetch",
+    "hash_changed_at": "2026-09-10T15:43:58Z"
   },
   "DE": {
     "hash": "1d8b64098dc85863",
@@ -184,7 +193,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:54+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://news.delaware.gov/flag-status/|fetch"
+    "source": "diff|https://news.delaware.gov/flag-status/|fetch",
+    "hash_changed_at": "2026-09-17T18:25:20Z"
   },
   "FL": {
     "hash": "4e40f70e98a49756",
@@ -205,7 +215,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-17T18:24:59+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://www.flgov.com/eog/info/flag-information|fetch"
+    "source": "diff|https://www.flgov.com/eog/info/flag-information|fetch",
+    "hash_changed_at": "2026-09-17T18:25:20Z"
   },
   "AR": {
     "hash": "b27259d80891b17c",
@@ -218,7 +229,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T14:06:24+00:00",
     "consecutive_errors": 0,
-    "source": "index|https://governor.arkansas.gov/newsroom/|fetch"
+    "source": "index|https://governor.arkansas.gov/newsroom/|fetch",
+    "hash_changed_at": "2026-09-16T18:02:28Z"
   },
   "LA": {
     "hash": "6b67064a98e53ba3",
@@ -239,7 +251,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T00:00:00+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://gov.louisiana.gov/page/flag-status|fetch"
+    "source": "diff|https://gov.louisiana.gov/page/flag-status|fetch",
+    "hash_changed_at": "2026-09-16T18:02:28Z"
   },
   "MI": {
     "hash": "9dc699cbfb12656b",
@@ -249,7 +262,8 @@
     "last_checked": "2026-09-17T22:06:04+00:00",
     "last_changed_at": "2026-09-10T15:43:55+00:00",
     "last_known_status": "full",
-    "last_status_change_at": "2026-09-12T00:00:00+00:00"
+    "last_status_change_at": "2026-09-12T00:00:00+00:00",
+    "hash_changed_at": "2026-09-15T22:21:49Z"
   },
   "MD": {
     "hash": "a48bfb97fd4c9b9b",
@@ -262,7 +276,8 @@
     "last_status_change_at": "2026-09-15T18:20:55+00:00",
     "articles": {},
     "consecutive_errors": 0,
-    "source": "index|https://governor.maryland.gov/news/press-releases|fetch"
+    "source": "index|https://governor.maryland.gov/news/press-releases|fetch",
+    "hash_changed_at": "2026-09-17T22:03:04Z"
   },
   "NC": {
     "hash": "435410b2f8ba7387",
@@ -275,7 +290,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-14T23:55:49+00:00",
     "consecutive_errors": 0,
-    "source": "feed|https://governor.nc.gov/news/feed|fetch"
+    "source": "feed|https://governor.nc.gov/news/feed|fetch",
+    "hash_changed_at": "2026-09-17T21:35:22Z"
   },
   "ME": {
     "hash": "f621b4621bd65074",
@@ -305,7 +321,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:55+00:00",
     "consecutive_errors": 0,
-    "source": "index|https://www.maine.gov/governor/mills/newsroom|fetch"
+    "source": "index|https://www.maine.gov/governor/mills/newsroom|fetch",
+    "hash_changed_at": "2026-09-17T21:35:22Z"
   },
   "NE": {
     "hash": "f154f32ac538f3d7",
@@ -327,7 +344,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T00:00:00+00:00",
     "consecutive_errors": 0,
-    "source": "index|https://governor.nebraska.gov/press-releases|fetch"
+    "source": "index|https://governor.nebraska.gov/press-releases|fetch",
+    "hash_changed_at": "2026-09-16T18:02:28Z"
   },
   "KY": {
     "hash": "0d32cc773d23fcf2",
@@ -337,7 +355,8 @@
     "last_checked": "2026-09-17T22:06:04+00:00",
     "last_changed_at": "2026-08-26T18:05:19+00:00",
     "last_known_status": "full",
-    "last_status_change_at": "2026-09-12T00:00:00+00:00"
+    "last_status_change_at": "2026-09-12T00:00:00+00:00",
+    "hash_changed_at": "2026-09-15T22:21:49Z"
   },
   "CT": {
     "hash": "596ca3436e4c5927",
@@ -359,7 +378,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-14T23:55:49+00:00",
     "consecutive_errors": 0,
-    "source": "index|https://portal.ct.gov/governor/news/press-releases|fetch"
+    "source": "index|https://portal.ct.gov/governor/news/press-releases|fetch",
+    "hash_changed_at": "2026-09-16T23:46:22Z"
   },
   "IN": {
     "hash": "8b0f3d552f2b599c",
@@ -372,7 +392,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:55+00:00",
     "consecutive_errors": 0,
-    "source": "index|https://events.in.gov/group/gov|fetch"
+    "source": "index|https://events.in.gov/group/gov|fetch",
+    "hash_changed_at": "2026-09-17T21:35:22Z"
   },
   "MS": {
     "hash": "0cd8cb4f53629994",
@@ -393,7 +414,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T03:17:05+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://governorreeves.ms.gov/flag-status/|fetch"
+    "source": "diff|https://governorreeves.ms.gov/flag-status/|fetch",
+    "hash_changed_at": "2026-09-17T18:25:20Z"
   },
   "ID": {
     "hash": "dd78bf0352589b9b",
@@ -414,7 +436,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T21:26:28+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://gov.idaho.gov/flag-status/|fetch"
+    "source": "diff|https://gov.idaho.gov/flag-status/|fetch",
+    "hash_changed_at": "2026-09-14T17:30:50Z"
   },
   "RI": {
     "hash": "8b68c3013d53d36a",
@@ -427,7 +450,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T00:00:00+00:00",
     "consecutive_errors": 0,
-    "source": "feed|https://governor.ri.gov/press-releases.xml|fetch"
+    "source": "feed|https://governor.ri.gov/press-releases.xml|fetch",
+    "hash_changed_at": "2026-09-11T15:45:22Z"
   },
   "ND": {
     "hash": "54df8fcd71f83cf1",
@@ -449,7 +473,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:55+00:00",
     "consecutive_errors": 0,
-    "source": "feed|https://www.governor.nd.gov/rss/news|fetch"
+    "source": "feed|https://www.governor.nd.gov/rss/news|fetch",
+    "hash_changed_at": "2026-09-15T18:20:59Z"
   },
   "NV": {
     "hash": "8994dd88dece6147",
@@ -470,7 +495,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:56+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://www.gov.nv.gov/constituent-services/flag-status/|fetch"
+    "source": "diff|https://www.gov.nv.gov/constituent-services/flag-status/|fetch",
+    "hash_changed_at": "2026-09-17T22:06:08Z"
   },
   "TN": {
     "hash": "3cb078f0d9e9ea2e",
@@ -483,7 +509,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T00:00:00+00:00",
     "consecutive_errors": 0,
-    "source": "index|https://www.tn.gov/governor/news.html|fetch"
+    "source": "index|https://www.tn.gov/governor/news.html|fetch",
+    "hash_changed_at": "2026-09-15T21:26:31Z"
   },
   "SC": {
     "hash": "6a926d7b51ab2efc",
@@ -496,7 +523,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T00:00:00+00:00",
     "consecutive_errors": 0,
-    "source": "index|https://governor.sc.gov/news|fetch"
+    "source": "index|https://governor.sc.gov/news|fetch",
+    "hash_changed_at": "2026-09-15T21:26:31Z"
   },
   "NJ": {
     "hash": "1b56b83fbc48100e",
@@ -509,7 +537,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T00:00:00+00:00",
     "consecutive_errors": 0,
-    "source": "archive|https://www.nj.gov/governor/news/2026/approved/news_archive.shtml|fetch"
+    "source": "archive|https://www.nj.gov/governor/news/2026/approved/news_archive.shtml|fetch",
+    "hash_changed_at": "2026-09-15T21:26:31Z"
   },
   "MO": {
     "hash": "fe13f355e48eead9",
@@ -531,7 +560,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T00:00:00+00:00",
     "consecutive_errors": 0,
-    "source": "archive|https://oa.mo.gov/facilities/facilities-operations/flag-display/flag-notifications|fetch"
+    "source": "archive|https://oa.mo.gov/facilities/facilities-operations/flag-display/flag-notifications|fetch",
+    "hash_changed_at": "2026-09-17T21:35:22Z"
   },
   "OH": {
     "hash": "e597983d30caa842",
@@ -552,7 +582,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:56+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://governor.ohio.gov/flag-honors|fetch"
+    "source": "diff|https://governor.ohio.gov/flag-honors|fetch",
+    "hash_changed_at": "2026-09-16T03:01:05Z"
   },
   "VT": {
     "hash": "1e48f33811a65aa4",
@@ -565,7 +596,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T00:00:00+00:00",
     "consecutive_errors": 0,
-    "source": "feed|https://governor.vermont.gov/taxonomy/term/3/feed|fetch"
+    "source": "feed|https://governor.vermont.gov/taxonomy/term/3/feed|fetch",
+    "hash_changed_at": "2026-08-13T14:30:51-05:00"
   },
   "VA": {
     "hash": "56ac16323ed07ece",
@@ -586,7 +618,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T08:51:30+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://www.governor.virginia.gov/constituent-services/flag-information/|fetch"
+    "source": "diff|https://www.governor.virginia.gov/constituent-services/flag-information/|fetch",
+    "hash_changed_at": "2026-09-17T08:49:21Z"
   },
   "WA": {
     "hash": "4ef17f26d3f955ac",
@@ -599,7 +632,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-14T21:20:46+00:00",
     "consecutive_errors": 0,
-    "source": "feed|https://governor.wa.gov/rss.xml|fetch"
+    "source": "feed|https://governor.wa.gov/rss.xml|fetch",
+    "hash_changed_at": "2026-09-17T14:03:53Z"
   },
   "WV": {
     "hash": "01e366127990dd71",
@@ -621,7 +655,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:57+00:00",
     "consecutive_errors": 0,
-    "source": "feed|https://governor.wv.gov/rss.xml|fetch"
+    "source": "feed|https://governor.wv.gov/rss.xml|fetch",
+    "hash_changed_at": "2026-09-17T18:25:20Z"
   },
   "MN": {
     "hash": "2ed25a8477421472",
@@ -634,7 +669,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:55+00:00",
     "consecutive_errors": 0,
-    "source": "feed|https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp|fetch"
+    "source": "feed|https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp|fetch",
+    "hash_changed_at": "2026-09-17T14:03:53Z"
   },
   "PA": {
     "hash": "b72bf13928a8dd42",
@@ -655,7 +691,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-14T17:30:19+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://www.pa.gov/agencies/dgs/flag-notices.html|fetch"
+    "source": "diff|https://www.pa.gov/agencies/dgs/flag-notices.html|fetch",
+    "hash_changed_at": "2026-09-14T17:30:50Z"
   },
   "WI": {
     "hash": "74234e98afe7498f",
@@ -665,7 +702,8 @@
     "last_checked": "2026-09-17T22:06:06+00:00",
     "last_changed_at": "2026-08-26T18:05:20+00:00",
     "last_known_status": "full",
-    "last_status_change_at": "2026-09-12T00:00:00+00:00"
+    "last_status_change_at": "2026-09-12T00:00:00+00:00",
+    "hash_changed_at": "2026-09-15T22:24:58Z"
   },
   "OR": {
     "hash": "f47cc6181335cebd",
@@ -711,7 +749,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:56+00:00",
     "consecutive_errors": 0,
-    "source": "index|https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts|fetch"
+    "source": "index|https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts|fetch",
+    "hash_changed_at": "2026-09-16T21:30:12Z"
   },
   "UT": {
     "hash": "99b8313ac6ae55e2",
@@ -732,7 +771,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-12T07:38:24+00:00",
     "consecutive_errors": 0,
-    "source": "diff|https://governor.utah.gov/flag-status|fetch"
+    "source": "diff|https://governor.utah.gov/flag-status|fetch",
+    "hash_changed_at": "2026-09-12T07:38:54Z"
   },
   "SD": {
     "hash": "5644f9335093d7fe",
@@ -745,7 +785,8 @@
     "last_status_change_at": "2026-09-14T21:20:46+00:00",
     "articles": {},
     "consecutive_errors": 0,
-    "source": "cards|https://governor.sd.gov/news/press-releases.aspx|render"
+    "source": "cards|https://governor.sd.gov/news/press-releases.aspx|render",
+    "hash_changed_at": "2026-09-17T00:06:36Z"
   },
   "NM": {
     "hash": "9b825a398e1194ba",
@@ -791,7 +832,8 @@
     "last_known_status": "full",
     "last_status_change_at": "2026-09-14T21:20:45+00:00",
     "consecutive_errors": 0,
-    "source": "index|https://governor.nm.gov/newsroom|fetch"
+    "source": "index|https://governor.nm.gov/newsroom|fetch",
+    "hash_changed_at": "2026-09-14T21:20:48Z"
   },
   "TX": {
     "hash": "94fb8c4265246e44",
@@ -812,7 +854,8 @@
     "last_status_change_at": "2026-09-14T17:30:20+00:00",
     "articles": {},
     "consecutive_errors": 0,
-    "source": "diff|https://gov.texas.gov/flag-status|fetch"
+    "source": "diff|https://gov.texas.gov/flag-status|fetch",
+    "hash_changed_at": "2026-09-14T17:30:50Z"
   },
   "_federal_announced": null,
   "_federal_articles_v2": {
@@ -836,7 +879,8 @@
     "last_parsed": "2026-09-17T22:06:04+00:00",
     "last_checked": "2026-09-17T22:06:04+00:00",
     "last_known_status": "full",
-    "last_status_change_at": null
+    "last_status_change_at": null,
+    "hash_changed_at": "2026-09-15T22:21:49Z"
   },
   "WY": {
     "hash": "fd5eb9b28c02d9e7",
@@ -845,7 +889,8 @@
     "last_parsed": "2026-09-17T22:06:06+00:00",
     "last_checked": "2026-09-17T22:06:06+00:00",
     "last_known_status": "full",
-    "last_status_change_at": null
+    "last_status_change_at": null,
+    "hash_changed_at": "2026-09-15T22:21:49Z"
   },
   "_federal_active": null,
   "IL": {
@@ -855,7 +900,8 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-09-17T22:06:04+00:00",
-    "last_checked": "2026-09-17T22:06:04+00:00"
+    "last_checked": "2026-09-17T22:06:04+00:00",
+    "hash_changed_at": "2026-09-16T04:26:46Z"
   },
   "MA": {
     "last_known_status": null,
@@ -864,7 +910,8 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-09-17T22:06:04+00:00",
-    "last_checked": "2026-09-17T22:06:04+00:00"
+    "last_checked": "2026-09-17T22:06:04+00:00",
+    "hash_changed_at": "2026-09-16T04:26:46Z"
   },
   "MT": {
     "last_known_status": "full",
@@ -876,7 +923,8 @@
     "last_checked": "2026-09-17T21:35:10+00:00",
     "articles": {},
     "consecutive_errors": 0,
-    "source": "cards|https://news.mt.gov/Governors-Office|render"
+    "source": "cards|https://news.mt.gov/Governors-Office|render",
+    "hash_changed_at": "2026-09-17T21:35:22Z"
   },
   "NH": {
     "last_known_status": null,
@@ -885,7 +933,8 @@
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-09-17T22:06:05+00:00",
-    "last_checked": "2026-09-17T22:06:05+00:00"
+    "last_checked": "2026-09-17T22:06:05+00:00",
+    "hash_changed_at": "2026-09-16T04:26:46Z"
   },
   "OK": {
     "last_known_status": null,
@@ -897,7 +946,8 @@
     "last_checked": "2026-09-17T00:06:28+00:00",
     "articles": {},
     "consecutive_errors": 0,
-    "source": "diff|https://oklahoma.gov/governor.html|render"
+    "source": "diff|https://oklahoma.gov/governor.html|render",
+    "hash_changed_at": "2026-09-17T00:06:36Z"
   },
   "NY": {
     "last_known_status": null,

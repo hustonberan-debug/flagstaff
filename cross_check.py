@@ -50,6 +50,8 @@ import requests
 
 import parsers as P
 import run as R
+from gh_issues import (GitHub, LABEL, existing_by_state as _existing_by_state,
+                       issue_key, summary)
 
 STATUS = "status.json"
 SOURCE_NAME = "Mast"
@@ -58,7 +60,6 @@ REQUEST_DELAY_S = 1.0
 THEIR_MAX_AGE = timedelta(hours=12)
 OUR_MAX_AGE = timedelta(hours=3)
 MAX_UNREADABLE = 10
-LABEL = "cross-check"
 TITLE_PREFIX = "Cross-check: "
 
 ANSWER_RE = re.compile(r"Should my flag be at half-staff\?\s*(half|full)[-\s]?staff\b"
@@ -185,63 +186,9 @@ def issue_body(code, state, status, theirs, d, their_url):
     return "\n".join(lines)
 
 
-class GitHub:
-    def __init__(self, repo, token):
-        self.base = f"https://api.github.com/repos/{repo}"
-        self.s = requests.Session()
-        self.s.headers.update({"Authorization": f"Bearer {token}",
-                               "Accept": "application/vnd.github+json",
-                               "X-GitHub-Api-Version": "2022-11-28"})
-
-    def _ok(self, r):
-        if r.status_code >= 300:
-            raise RuntimeError(f"GitHub API {r.request.method} {r.url}: "
-                               f"HTTP {r.status_code} {r.text[:200]}")
-        return r.json()
-
-    def open_issues(self):
-        """Every open issue (not just labelled ones - see existing_by_state)."""
-        out, page = [], 1
-        while True:
-            batch = self._ok(self.s.get(f"{self.base}/issues", params={
-                "state": "open", "per_page": 100, "page": page}))
-            out += [i for i in batch if "pull_request" not in i]
-            if len(batch) < 100:
-                return out
-            page += 1
-
-    def ensure_label(self):
-        r = self.s.post(f"{self.base}/labels", json={
-            "name": LABEL, "color": "b60205",
-            "description": "Daily cross-check disagreement"})
-        if r.status_code not in (201, 422):      # 422: already exists
-            print(f"    note: could not create label ({r.status_code}); "
-                  f"issues are matched by title, so this is cosmetic")
-
-    def create(self, title, body):
-        return self._ok(self.s.post(f"{self.base}/issues", json={
-            "title": title, "body": body, "labels": [LABEL]}))
-
-
-def issue_key(title):
-    """'Cross-check: North Dakota (ND)' - stable while the answers change."""
-    return title.split(" - ")[0]
-
-
-def existing_by_state(issues):
-    """Open cross-check issues by key, matched on TITLE, not label.
-
-    GitHub silently drops labels on issue creation when the caller lacks push
-    access, and this job deliberately has none. Finding issues by label would
-    then find nothing, and a disagreement that lasted a week would open seven
-    issues instead of one with daily comments.
-    """
-    return {issue_key(i["title"]): i for i in issues
-            if (i.get("title") or "").startswith(TITLE_PREFIX)}
-
-    def comment(self, number, body):
-        return self._ok(self.s.post(f"{self.base}/issues/{number}/comments",
-                                    json={"body": body}))
+def existing_by_state(issues, prefix=TITLE_PREFIX):
+    """Open cross-check issues by key, matched on title. See gh_issues."""
+    return _existing_by_state(issues, prefix)
 
 
 def file_hash(path):
