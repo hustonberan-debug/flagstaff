@@ -1546,3 +1546,4 @@
 {"at": "2026-09-17T18:25:19+00:00", "state": "IA", "status": "half", "reason": "Gov. Reynolds orders flags at half-staff in honor and remembrance of national ag leader, exceptional Iowan Ray Gaesser", "reason_source": "state", "start_date": "2026-09-17", "end_date": "2026-09-20"}
 {"at": "2026-09-19T12:14:19+00:00", "state": "MS", "status": "half", "reason": "State order", "reason_source": "state", "start_date": null, "end_date": null}
 {"at": "2026-09-20T01:21:39+00:00", "state": "MS", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
+{"at": "2026-09-21T01:20:14+00:00", "state": "IA", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
