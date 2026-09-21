@@ -8,6 +8,8 @@ lasts, and no duplicates.
 """
 
 import os
+import re
+from datetime import datetime
 
 import requests
 
@@ -54,6 +56,24 @@ class GitHub:
     def comment(self, number, body):
         return self._ok(self.s.post(f"{self.base}/issues/{number}/comments",
                                     json={"body": body}))
+
+    def close(self, number, body):
+        """Say what changed, then close. An alarm that cannot stand itself
+        down leaves a wall of stale issues nobody reads."""
+        self.comment(number, body)
+        return self._ok(self.s.patch(f"{self.base}/issues/{number}",
+                                     json={"state": "closed"}))
+
+
+def state_code(title):
+    """'Cross-check: Iowa (IA) - ...' -> 'IA'."""
+    m = re.search(r"\(([A-Z]{2})\)", title or "")
+    return m.group(1) if m else None
+
+
+def days_open(issue, now):
+    created = datetime.fromisoformat(issue["created_at"].replace("Z", "+00:00"))
+    return (now - created).days
 
 
 def issue_key(title):

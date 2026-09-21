@@ -50,8 +50,8 @@ import requests
 
 import parsers as P
 import run as R
-from gh_issues import (GitHub, LABEL, existing_by_state as _existing_by_state,
-                       issue_key, summary)
+from gh_issues import (GitHub, LABEL, days_open, existing_by_state as _existing_by_state,
+                       issue_key, state_code, summary)
 
 STATUS = "status.json"
 SOURCE_NAME = "Mast"
@@ -61,6 +61,9 @@ THEIR_MAX_AGE = timedelta(hours=12)
 OUR_MAX_AGE = timedelta(hours=3)
 MAX_UNREADABLE = 10
 TITLE_PREFIX = "Cross-check: "
+# A disagreement still open after this long is either our bug or a source we
+# cannot read. Either way it needs a person, so the daily comment says so.
+ESCALATE_AFTER_DAYS = 3
 
 ANSWER_RE = re.compile(r"Should my flag be at half-staff\?\s*(half|full)[-\s]?staff\b"
                        r"(.{0,240})", re.I)
@@ -146,34 +149,64 @@ def issue_title(code, name, d, is_drill=False):
     return f"{DRILL_PREFIX if is_drill else ''}{TITLE_PREFIX}{name} ({code}) - {tail}"
 
 
-def issue_body(code, state, status, theirs, d, their_url):
+def order_line(state):
+    """The order behind our answer: title, window, and where it came from.
+    This is the fact that decides who is right, so it goes first."""
+    o = state.get("state_order") or {}
+    title = o.get("title") or o.get("evidence") or state.get("reason")
+    start, end = o.get("start_date"), o.get("end_date") or o.get("date")
+    if start or end:
+        window = f"{start or '?'} to {end or 'no stated end'}"
+    else:
+        window = "no dated window"
+    return title, window, o.get("coverage_reason")
+
+
+def issue_body(code, state, status, theirs, d, their_url, issue=None, now=None):
     theirs = theirs or {}
     ours_detail = (state.get("reason") or state.get("error")
                    or ("no order in effect" if d["ours"] == P.FULL else ""))
     what = {"conflict": "a conflict", "missed order": "a possible missed order",
             "stale page": "a stale half-staff page"}[d["kind"]]
+    title, window, why = order_line(state)
     lines = []
     if state.get("_drill"):
         lines += ["> **DRILL.** This issue was filed on purpose to prove the "
                   "cross-check can file one. Our answer below was flipped in the "
                   "job's memory only; status.json and the live site were not "
                   "changed. Close this issue.", ""]
-    if d["kind"] == "stale page":
-        lines += [f"**{state.get('state', code)} ({code})** - its own status page "
-                  f"declares half-staff but shows no order dated in the last "
-                  f"{d['limit']} days (newest dated order: {d['newest'] or 'none on the page'}). "
-                  "The pipeline is withholding that answer as stale. Every reader of "
-                  "the page would repeat it, so the other source is not proof either "
-                  "way - check with the governor's office.", ""]
+    if issue is not None and now is not None:
+        age = days_open(issue, now)
+        if age >= ESCALATE_AFTER_DAYS:
+            lines += [f"> **Open {age} days.** A disagreement that lasts this long "
+                      f"is one of two things: our pipeline is wrong about "
+                      f"{state.get('state', code)}, or its source has become "
+                      f"unreadable and we are serving an answer nobody can verify. "
+                      f"Both need a person - decide from the evidence below and "
+                      f"either fix the pipeline or record the gap in registry.json.",
+                      ""]
+    # Evidence first: everything needed to decide who is right.
     lines += [
-        f"**{state.get('state', code)} ({code})** - the daily cross-check found {what}.",
+        f"**{state.get('state', code)} ({code})** - {what}, "
+        f"{'today' if not now else f'{now:%Y-%m-%d}'}.",
         "",
-        "| | Answer | Detail | Source |",
-        "|---|---|---|---|",
-        f"| **halfstaffnow.com** | **{d['ours']}** | {ours_detail} | {our_source(state, status)} |",
-        f"| **{SOURCE_NAME}** | **{theirs.get('status') or 'unreadable'}** | "
-        f"{theirs.get('detail') or ''} | {their_url} |",
+        f"- **We say {d['ours']}** - {ours_detail or 'no detail'}",
+        f"  - order: {title or 'none'}",
+        f"  - window: **{window}**" + (f" ({why})" if why else ""),
+        f"  - read from: {our_source(state, status)}",
+        f"- **{SOURCE_NAME} says {theirs.get('status') or 'unreadable'}** - "
+        f"{theirs.get('detail') or 'no detail'}",
+        f"  - read from: {their_url}",
         "",
+    ]
+    if d["kind"] == "stale page":
+        lines += [f"Its own status page declares half-staff but shows no order dated "
+                  f"in the last {d['limit']} days (newest: "
+                  f"{d['newest'] or 'none on the page'}). The pipeline is withholding "
+                  "that answer. Every reader of the page would repeat it, so the "
+                  "other source is not proof either way - ask the governor's office.",
+                  ""]
+    lines += [
         f"- Our status.json generated: {status.get('generated_at')}",
         f"- Our state last checked: {state.get('checked_at')}"
         + (f" (coverage: {state.get('coverage')})" if state.get("coverage") != "covered" else ""),
@@ -181,8 +214,33 @@ def issue_body(code, state, status, theirs, d, their_url):
         + (f"{theirs['checked']:%Y-%m-%d %H:%M} UTC" if theirs.get("checked") else "n/a"),
         "",
         f"{SOURCE_NAME} is an alarm, not a source of truth, and never feeds the site. "
-        "Check the official source above, then fix the pipeline or close this issue.",
+        "Check the official source above, then fix the pipeline or close this issue. "
+        "This issue closes itself when the two agree again.",
     ]
+    return "\n".join(lines)
+
+
+def resolved_body(code, state, status, theirs, now):
+    """What changed, for the comment that closes an issue."""
+    title, window, _ = order_line(state)
+    t = (theirs or {}).get("status")
+    ours = state.get("effective_status")
+    lines = [
+        f"**Resolved {now:%Y-%m-%d}** - we and {SOURCE_NAME} no longer disagree about "
+        f"{state.get('state', code)}.",
+        "",
+        f"- **We say {ours}** - {state.get('reason') or state.get('error') or 'no order in effect'}",
+        f"- **{SOURCE_NAME} says {t or 'no answer'}**",
+        "",
+    ]
+    if ours == P.FULL and (title or window != "no dated window"):
+        lines += [f"Our last order was {title or 'unnamed'}, window **{window}** - "
+                  f"it has ended, so the state is back to full staff.", ""]
+    elif ours not in (P.HALF, P.FULL):
+        lines += [f"We now report no answer for this state "
+                  f"(coverage: {state.get('coverage')}), so there is nothing to "
+                  f"disagree about: {state.get('error') or ''}", ""]
+    lines.append("Closing. It reopens as a new issue if they disagree again.")
     return "\n".join(lines)
 
 
@@ -274,8 +332,10 @@ def main():
     report = [f"## Daily cross-check against {SOURCE_NAME}" + (" (DRILL)" if drilled else ""),
               f"- compared: {len(theirs)}, agree: {agree}, disagree: {len(found)}, "
               f"unreadable: {len(unreadable)}, stale half-staff pages: {len(stale)}"]
-    gh = existing = None
-    if (found or stale) and not args.dry_run:
+    gh, existing = None, {}
+    if not args.dry_run:
+        # Always read the open issues, even with nothing to report: that is
+        # how the ones that have resolved get closed.
         gh = GitHub(os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_TOKEN"])
         gh.ensure_label()
         existing = existing_by_state(gh.open_issues())
@@ -283,7 +343,8 @@ def main():
         s, t = status["states"][code], theirs.get(code) or {}
         their_url = t.get("url") or SOURCE_URL.format(code=code.lower())
         title = issue_title(code, s.get("state", code), d, is_drill=bool(s.get("_drill")))
-        body = issue_body(code, s, status, t, d, their_url)
+        body = issue_body(code, s, status, t, d, their_url,
+                          issue=existing.get(issue_key(title)), now=now)
         print(f"  {'STALE PAGE' if d['kind'] == 'stale page' else 'DISAGREE'} {code}: "
               f"we say {d['ours']}, {SOURCE_NAME} says {d['theirs'] or t.get('status')} "
               f"({d['kind']})")
@@ -303,6 +364,23 @@ def main():
                 report.append(f"  - opened [#{i['number']}]({i['html_url']})")
         except Exception as e:
             failures.append(f"could not file the {code} issue: {e}")
+
+    # Close what has resolved. Only for states we actually compared this run:
+    # if the other source was unreadable, we do not know that it agrees.
+    flagged = set(found) | set(stale)
+    for key, issue in sorted(existing.items()):
+        code = state_code(issue["title"])
+        if not code or code in flagged or code not in theirs:
+            continue
+        s = status["states"].get(code)
+        if not s:
+            continue
+        try:
+            gh.close(issue["number"], resolved_body(code, s, status, theirs[code], now))
+            print(f"  RESOLVED {code}: closed #{issue['number']}")
+            report.append(f"- **{code}**: resolved, closed #{issue['number']}")
+        except Exception as e:
+            failures.append(f"could not close the {code} issue: {e}")
 
     summary(report + [f"- **FAILED:** {f}" for f in failures])
 

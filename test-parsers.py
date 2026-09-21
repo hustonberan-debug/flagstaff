@@ -728,7 +728,7 @@ t("every state we do not build has a reason on record",
    if not r.get("buildable") and r.get("ingest_mode") != "email"
    and not r.get("blocked_reason")], [])
 t("rendered states use a mode that reads a rendered page",
-  sorted(r["state_code"] for r in _reg if r.get("render")), ["MT", "SD"])
+  sorted(r["state_code"] for r in _reg if r.get("render")), ["MA", "MT", "SD"])
 t("email states have a channel to name as their source",
   [r["state_code"] for r in _reg
    if r.get("ingest_mode") == "email" and not R.channel_url(r)], [])
@@ -769,7 +769,8 @@ t("North Dakota, Sept 15: we say half, they say full -> flagged", d,
 body = X.issue_body("ND", nd_ours, {"generated_at": "2026-09-15T12:00:00+00:00"},
                     mast_full, d, mast_full["url"])
 t("issue names both answers and both source URLs",
-  all(s in body for s in ("**half**", "**full**", "https://www.governor.nd.gov/rss/news",
+  all(s in body for s in ("We say half", "Mast says full",
+                          "https://www.governor.nd.gov/rss/news",
                           "https://www.mast.today/nd")), True)
 t("issue title names the state and both answers",
   X.issue_title("ND", "North Dakota", d),
@@ -857,6 +858,49 @@ t("a drill issue can never be mistaken for a real thread (dedupe ignores it)",
 t("drill body says the live site was not changed",
   "were not changed" in X.issue_body("ND", st_mem["states"]["ND"], {"generated_at": "x"},
                                      {"status": P.FULL, "checked": _now}, dd, "u"), True)
+
+print("\n--- cross-check issues: evidence first, escalate, close themselves ---")
+import gh_issues as G
+ia_ours = {"state": "Iowa", "effective_status": P.HALF, "coverage": "covered",
+           "reason": "Gov. Reynolds orders flags at half-staff ... Ray Gaesser",
+           "checked_at": "2026-09-17T18:25:00+00:00",
+           "source_url": "https://governor.iowa.gov/news/all/all/all/rss.xml",
+           "state_order": {"title": "Gov. Reynolds orders flags at half-staff ... Ray Gaesser",
+                           "start_date": "2026-09-17", "end_date": "2026-09-20",
+                           "coverage_reason": "window 2026-09-17..2026-09-20"}}
+ia_theirs = {"status": P.FULL, "detail": "No active half-staff order applies to Iowa.",
+             "checked": _dtm(2026, 9, 17, 17, 3, tzinfo=_tzn.utc),
+             "url": "https://www.mast.today/ia"}
+dconf = X.compare(ia_ours, ia_theirs)
+fresh_issue = {"number": 2, "title": "Cross-check: Iowa (IA) - we say half, Mast says full",
+               "created_at": "2026-09-17T18:30:00Z"}
+b = X.issue_body("IA", ia_ours, {"generated_at": "2026-09-17T18:25:19+00:00"},
+                 ia_theirs, dconf, ia_theirs["url"], issue=fresh_issue,
+                 now=_dtm(2026, 9, 17, 19, 0, tzinfo=_tzn.utc))
+head = b.split("- Our status.json")[0]
+t("the order, its window and both sources are all above the fold",
+  all(s in head for s in ("Ray Gaesser", "2026-09-17 to 2026-09-20",
+                          "governor.iowa.gov", "mast.today/ia")), True)
+t("a fresh disagreement is not escalated", "Open 0 days" in b or "**Open" in b, False)
+old = X.issue_body("IA", ia_ours, {"generated_at": "x"}, ia_theirs, dconf,
+                   ia_theirs["url"], issue=fresh_issue,
+                   now=_dtm(2026, 9, 21, 19, 0, tzinfo=_tzn.utc))
+t("after 3 days it escalates, naming both possibilities",
+  ("**Open 4 days.**" in old and "our pipeline is wrong" in old
+   and "unreadable" in old), True)
+ia_now = dict(ia_ours, effective_status=P.FULL, reason=None)
+rb = X.resolved_body("IA", ia_now, {}, {"status": P.FULL},
+                     _dtm(2026, 9, 21, 19, 0, tzinfo=_tzn.utc))
+t("the closing comment says what changed",
+  ("Resolved 2026-09-21" in rb and "2026-09-17 to 2026-09-20" in rb
+   and "it has ended" in rb), True)
+t("issue title -> state code", G.state_code(fresh_issue["title"]), "IA")
+t("issue age in days", G.days_open(fresh_issue, _dtm(2026, 9, 21, 19, 0, tzinfo=_tzn.utc)), 4)
+t("a gap we report honestly closes with that as the reason",
+  "nothing to disagree about" in X.resolved_body(
+      "MA", {"state": "Massachusetts", "effective_status": P.UNKNOWN,
+             "coverage": "not_covered", "error": "403"}, {}, {"status": P.FULL},
+      _dtm(2026, 9, 21, tzinfo=_tzn.utc)), True)
 
 print("\n--- weekly drift: sources that go quiet look like states with no orders ---")
 import drift_check as D
