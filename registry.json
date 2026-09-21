@@ -795,7 +795,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "diff",
+    "ingest_mode": "email",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -804,7 +804,7 @@
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": "subscribe-bsb-halfstaffnotification@listserv.state.ma.us",
-    "quirk": "The page is a bare declaration ('Flags are flying at full staff') with no dated orders on it, so a half-staff reading from it is withheld by the no-recent-order rule. Full staff it can answer; half-staff waits on the listserv. Switch to email mode once that channel delivers.",
+    "quirk": null,
     "last_order_seen": {
       "date": "2026-01-07",
       "title": "Governor Healey Orders Flags at Half-Staff in Honor of Uxbridge Police Officer Stephen LaPorta",
@@ -817,16 +817,15 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true,
+    "buildable": false,
     "notification_channel": {
       "type": "listserv",
       "detail": "Send a blank email (no body, no signature) to subscribe-bsb-halfstaffnotification@listserv.state.ma.us. Bulk requests: sh.events@state.ma.us, subject 'Subscribe to Half-Staff Notifications'. Both addresses read verbatim off the official page.",
       "status": "subscribed 2026-09-15 (confirmed by the site owner); no bulletin yet"
     },
     "expected_status_text": "Please be advised that Massachusetts Governor Maura Healey has ordered that the United States of America flag and the Commonwealth of Massachusetts flag be lowered to half-staff at all state buildings from sunrise until sunset on Friday, August 14, 2026, the date of interment, in honor of Corporal N",
-    "blocked_reason": "Readable only with a browser: mass.gov returns HTTP 403 to the pipeline's plain fetch but serves the page normally to a real one (verified 2026-09-21, 'Flags are flying at full staff'). Read from a Playwright snapshot like MT and SD. This is the source Mast appears to use - it was reporting Massachusetts while we had no answer at all. The half-staff listserv is still subscribed and silent; when it delivers, email mode is the better source because the page carries no dates.",
-    "_mode_fixed_by": "2026-09-21: email (pending) -> rendered mass.gov flag status",
-    "render": true
+    "blocked_reason": "Waiting on its notification channel, and the page cannot be read at all. mass.gov/info-details/flag-status is a real, server-rendered status page ('Flags are flying at full staff') and it is almost certainly where other trackers get Massachusetts - but it returns HTTP 403 both to the pipeline's plain fetch AND to Playwright's headless Chromium (tested 2026-09-21). Only a full desktop browser gets through, and getting past that would mean faking a browser fingerprint, which this project does not do. So: the alerts inbox is subscribed to the half-staff listserv (subscribe-bsb-halfstaffnotification@listserv.state.ma.us) and has not received a bulletin yet; until it does, Massachusetts is an honest gap.",
+    "_mode_fixed_by": "2026-09-21: rendered fetch attempted and reverted - mass.gov 403s headless Chromium too"
   },
   {
     "state": "Maryland",

@@ -223,6 +223,12 @@ def issue_body(code, state, status, theirs, d, their_url, issue=None, now=None):
 def resolved_body(code, state, status, theirs, now):
     """What changed, for the comment that closes an issue."""
     title, window, _ = order_line(state)
+    if not title:
+        # Once an order expires it leaves state_order, so the order that just
+        # ended - the thing that changed - is recorded separately.
+        expired = state.get("last_expired_order") or {}
+        title = expired.get("title")
+        window = expired.get("why") or window
     t = (theirs or {}).get("status")
     ours = state.get("effective_status")
     lines = [

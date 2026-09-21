@@ -728,7 +728,7 @@ t("every state we do not build has a reason on record",
    if not r.get("buildable") and r.get("ingest_mode") != "email"
    and not r.get("blocked_reason")], [])
 t("rendered states use a mode that reads a rendered page",
-  sorted(r["state_code"] for r in _reg if r.get("render")), ["MA", "MT", "SD"])
+  sorted(r["state_code"] for r in _reg if r.get("render")), ["MT", "SD"])
 t("email states have a channel to name as their source",
   [r["state_code"] for r in _reg
    if r.get("ingest_mode") == "email" and not R.channel_url(r)], [])
@@ -894,6 +894,16 @@ rb = X.resolved_body("IA", ia_now, {}, {"status": P.FULL},
 t("the closing comment says what changed",
   ("Resolved 2026-09-21" in rb and "2026-09-17 to 2026-09-20" in rb
    and "it has ended" in rb), True)
+# Once an order expires it leaves state_order, so the closing comment has to
+# name it from the expired record or it says nothing useful (Iowa, #2).
+expired_only = {"state": "Iowa", "effective_status": P.FULL, "coverage": "covered",
+                "last_expired_order": {
+                    "title": "Gov. Reynolds orders flags at half-staff ... Ray Gaesser",
+                    "why": "window 2026-09-17..2026-09-20"}}
+rb2 = X.resolved_body("IA", expired_only, {}, {"status": P.FULL},
+                      _dtm(2026, 9, 21, tzinfo=_tzn.utc))
+t("...naming the order that expired, not just 'no order in effect'",
+  ("Ray Gaesser" in rb2 and "2026-09-17..2026-09-20" in rb2), True)
 t("issue title -> state code", G.state_code(fresh_issue["title"]), "IA")
 t("issue age in days", G.days_open(fresh_issue, _dtm(2026, 9, 21, 19, 0, tzinfo=_tzn.utc)), 4)
 t("a gap we report honestly closes with that as the reason",
