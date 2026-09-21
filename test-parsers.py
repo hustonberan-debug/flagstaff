@@ -912,6 +912,50 @@ t("a gap we report honestly closes with that as the reason",
              "coverage": "not_covered", "error": "403"}, {}, {"status": P.FULL},
       _dtm(2026, 9, 21, tzinfo=_tzn.utc)), True)
 
+print("\n--- grace period: the other source lags us, so one direction waits ---")
+_t0 = _dtm(2026, 9, 21, 12, 0, tzinfo=_tzn.utc)
+lag_shape = {"kind": "conflict", "ours": P.HALF, "theirs": P.FULL}
+missed = {"kind": "conflict", "ours": P.FULL, "theirs": P.HALF}
+gap_missed = {"kind": "missed order", "ours": P.UNKNOWN, "theirs": P.HALF}
+t("we say half, they say full -> wait (this is how their lag looks)",
+  X.needs_grace(lag_shape), True)
+t("they say half, we say full -> never wait", X.needs_grace(missed), False)
+t("they say half, we have no answer -> never wait", X.needs_grace(gap_missed), False)
+t("a stale page of ours -> never wait",
+  X.needs_grace({"kind": "stale page", "ours": "withheld", "theirs": None}), False)
+
+fn, df, pend = X.plan_filings({"NE": lag_shape}, {}, _t0)
+t("first sighting is held, not filed", (list(fn), list(df)), ([], ["NE"]))
+t("...and remembered for the next run", pend["NE"]["first_seen"][:16], "2026-09-21T12:00")
+fn, df, pend2 = X.plan_filings({"NE": lag_shape}, pend, _t0 + _td(hours=13))
+t("still there a day later -> filed", (list(fn), list(df)), (["NE"], []))
+fn, df, _ = X.plan_filings({"NE": lag_shape}, pend, _t0 + _td(minutes=5))
+t("a push-triggered rerun minutes later does not rush it through",
+  (list(fn), list(df)), ([], ["NE"]))
+fn, df, _ = X.plan_filings({"IA": missed, "MA": gap_missed}, {}, _t0)
+t("a missed order files immediately, both shapes", sorted(fn), ["IA", "MA"])
+fn, df, _ = X.plan_filings({"ND": lag_shape}, {}, _t0, force={"ND"})
+t("a drill files immediately even though it is lag-shaped", list(fn), ["ND"])
+
+ev, pend3 = X.record_cleared(pend, {}, {"NE": {"status": P.FULL}},
+                             _t0 + _td(hours=20))
+t("when they catch up, the lag is recorded",
+  (ev[0]["code"], ev[0]["hours"], ev[0]["filed"], pend3), ("NE", 20.0, False, {}))
+t("a state we could not read this run stays pending, not cleared",
+  X.record_cleared(pend, {}, {}, _t0 + _td(hours=20))[1], pend)
+
+log = {"pending": {"NE": {"first_seen": "2026-09-21T12:00:00+00:00", "ours": "half",
+                          "theirs": "full", "filed": False}},
+       "events": [dict(ev[0]), dict(ev[0], code="IA", hours=79.2)], "runs": 12}
+body = X.render_log(log, _t0)
+t("the log says how far behind they run",
+  ("was behind us 2 time(s)" in body and "worst 79.2h" in body), True)
+t("the log shows what is waiting now", "NE: since 2026-09-21T12:00:00+00:00" in body, True)
+t("the log round-trips so the next run remembers",
+  (X.parse_log(body)["pending"], X.parse_log(body)["runs"]), (log["pending"], 12))
+t("a log issue is never treated as a state alarm",
+  X.existing_by_state([{"number": 9, "title": X.LAG_LOG_TITLE}]), {})
+
 print("\n--- weekly drift: sources that go quiet look like states with no orders ---")
 import drift_check as D
 TODAY = date(2026, 9, 17)

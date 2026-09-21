@@ -64,6 +64,13 @@ TITLE_PREFIX = "Cross-check: "
 # A disagreement still open after this long is either our bug or a source we
 # cannot read. Either way it needs a person, so the daily comment says so.
 ESCALATE_AFTER_DAYS = 3
+# A disagreement in the lag-shaped direction must survive a second run AND be
+# this old before it becomes an issue. The age matters because pushes trigger
+# extra runs, which would otherwise wave one through minutes later.
+GRACE_MIN_AGE = timedelta(hours=12)
+LAG_LOG_TITLE = "Cross-check log: source lag"
+LAG_LOG_PREFIX = "Cross-check log:"
+MAX_LAG_EVENTS = 50
 
 ANSWER_RE = re.compile(r"Should my flag be at half-staff\?\s*(half|full)[-\s]?staff\b"
                        r"(.{0,240})", re.I)
@@ -102,6 +109,117 @@ def compare(ours, theirs):
     else:
         return None
     return {"kind": kind, "ours": o, "theirs": t}
+
+
+def needs_grace(d):
+    """Is this the shape Mast's lag takes?
+
+    Four disagreements in a row (IA, MS, NE, and MA before we covered it) were
+    all the same: we saw a new order from a governor's own page, Mast had not
+    caught up yet, and it agreed within about a day. So that direction waits
+    for a second run before it becomes an issue.
+
+    The other direction never waits. If Mast reports half-staff and we do not,
+    we may be missing a real order - flags down while the site says otherwise -
+    and that is the failure worth being noisy about.
+    """
+    return d["kind"] == "conflict" and d["ours"] == P.HALF and d["theirs"] == P.FULL
+
+
+def plan_filings(found, pending, now, force=()):
+    """(file_now, deferred, pending): which disagreements to file this run.
+
+    A lag-shaped disagreement files only once it has survived a previous run
+    AND is at least GRACE_MIN_AGE old, so extra runs triggered by a push
+    cannot rush it through in a minute. `force` skips the wait - a drill is
+    meant to file immediately, and it is lag-shaped by construction.
+    """
+    file_now, deferred, pending = {}, {}, dict(pending)
+    for code, d in found.items():
+        if code in force or not needs_grace(d):
+            file_now[code] = d
+            continue
+        p = pending.get(code)
+        first = datetime.fromisoformat(p["first_seen"]) if p else now
+        if p and now - first >= GRACE_MIN_AGE:
+            file_now[code] = d
+            pending[code] = dict(p, filed=True)
+        else:
+            deferred[code] = dict(d, first_seen=first.isoformat(timespec="seconds"),
+                                  waited=str(now - first).split(".")[0])
+            pending[code] = p or {"first_seen": now.isoformat(timespec="seconds"),
+                                  "ours": d["ours"], "theirs": d["theirs"],
+                                  "filed": False}
+    return file_now, deferred, pending
+
+
+def record_cleared(pending, found, theirs, now):
+    """(events, pending) for disagreements that have gone away: how long the
+    other source took to agree with us, which is the number worth watching."""
+    events, pending = [], dict(pending)
+    for code, p in list(pending.items()):
+        if code in found or code not in theirs:
+            continue
+        first = datetime.fromisoformat(p["first_seen"])
+        events.append({"code": code, "first_seen": p["first_seen"],
+                       "cleared": now.isoformat(timespec="seconds"),
+                       "hours": round((now - first).total_seconds() / 3600, 1),
+                       "ours": p.get("ours"), "theirs_then": p.get("theirs"),
+                       "theirs_now": theirs[code].get("status"),
+                       "filed": bool(p.get("filed"))})
+        del pending[code]
+    return events, pending
+
+
+STATE_BLOCK_RE = re.compile(r"<!--\s*cross-check-state\s*(\{.*?\})\s*-->", re.S)
+
+
+def parse_log(body):
+    m = STATE_BLOCK_RE.search(body or "")
+    data = {}
+    if m:
+        try:
+            data = json.loads(m.group(1))
+        except ValueError:
+            data = {}
+    return {"pending": data.get("pending", {}),
+            "events": data.get("events", [])[-MAX_LAG_EVENTS:],
+            "runs": data.get("runs", 0)}
+
+
+def render_log(data, now):
+    """The lag log: how often the other source is behind, and by how long."""
+    events = data["events"][-MAX_LAG_EVENTS:]
+    behind = [e for e in events if e["ours"] == P.HALF and e["theirs_then"] == P.FULL]
+    lines = [f"# {SOURCE_NAME} lag log", "",
+             f"Updated {now:%Y-%m-%d %H:%M} UTC after {data['runs']} run(s). This issue "
+             f"is the cross-check's memory: it is how a disagreement is known to have "
+             f"survived a second run, and it is not an alarm. Leave it open.", ""]
+    if behind:
+        hrs = sorted(e["hours"] for e in behind)
+        med = hrs[len(hrs) // 2]
+        lines += [f"**{SOURCE_NAME} was behind us {len(behind)} time(s), median "
+                  f"{med:.1f}h, worst {max(hrs):.1f}h.** Each one was a new order we "
+                  f"read from the state's own source before they had it. That is why "
+                  f"this direction waits a run before filing.", ""]
+    if data["pending"]:
+        lines += ["**Waiting out the grace period now:**", ""]
+        for code, p in sorted(data["pending"].items()):
+            lines.append(f"- {code}: since {p['first_seen']}"
+                         + (" (filed)" if p.get("filed") else " (not filed yet)"))
+        lines.append("")
+    if events:
+        lines += ["| state | we said | they said | first seen | cleared | they took | filed |",
+                  "|---|---|---|---|---|---|---|"]
+        for e in reversed(events):
+            lines.append(f"| {e['code']} | {e['ours']} | {e['theirs_then']} | "
+                         f"{e['first_seen'][:16]} | {e['cleared'][:16]} | "
+                         f"{e['hours']}h | {'yes' if e['filed'] else 'no'} |")
+        lines.append("")
+    payload = json.dumps({"pending": data["pending"], "events": events,
+                          "runs": data["runs"]}, separators=(",", ":"))
+    lines.append(f"<!-- cross-check-state {payload} -->")
+    return "\n".join(lines)
 
 
 def stale_claim(state):
@@ -338,13 +456,37 @@ def main():
     report = [f"## Daily cross-check against {SOURCE_NAME}" + (" (DRILL)" if drilled else ""),
               f"- compared: {len(theirs)}, agree: {agree}, disagree: {len(found)}, "
               f"unreadable: {len(unreadable)}, stale half-staff pages: {len(stale)}"]
-    gh, existing = None, {}
+    gh, existing, open_issues = None, {}, []
+    log_issue, log = None, {"pending": {}, "events": [], "runs": 0}
     if not args.dry_run:
         # Always read the open issues, even with nothing to report: that is
         # how the ones that have resolved get closed.
         gh = GitHub(os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_TOKEN"])
         gh.ensure_label()
-        existing = existing_by_state(gh.open_issues())
+        open_issues = gh.open_issues()
+        existing = existing_by_state(open_issues)
+        log_issue = next((i for i in open_issues
+                          if (i.get("title") or "").startswith(LAG_LOG_PREFIX)), None)
+        if log_issue:
+            log = parse_log(log_issue.get("body"))
+    log["runs"] = log.get("runs", 0) + 1
+
+    # A disagreement that clears tells us how long the other source was behind.
+    events, pending = record_cleared(log["pending"], found, theirs, now)
+    log["events"] = (log.get("events", []) + events)[-MAX_LAG_EVENTS:]
+    for e in events:
+        print(f"  CLEARED {e['code']}: {SOURCE_NAME} agreed after {e['hours']}h "
+              f"(we said {e['ours']}, they said {e['theirs_then']})")
+    # Lag-shaped disagreements wait a run; missed orders never do.
+    found, deferred, log["pending"] = plan_filings(found, pending, now,
+                                                   force={drilled} if drilled else ())
+    for code, d in sorted(deferred.items()):
+        print(f"  WAITING {code}: we say {d['ours']}, {SOURCE_NAME} says {d['theirs']} "
+              f"- first seen {d['first_seen']}, waited {d['waited']}; files if it "
+              f"survives another run")
+        report.append(f"- **{code}**: holding ({d['waited']}) - {SOURCE_NAME} usually "
+                      f"catches up within a day")
+
     for code, d in sorted(list(found.items()) + list(stale.items())):
         s, t = status["states"][code], theirs.get(code) or {}
         their_url = t.get("url") or SOURCE_URL.format(code=code.lower())
@@ -373,7 +515,10 @@ def main():
 
     # Close what has resolved. Only for states we actually compared this run:
     # if the other source was unreadable, we do not know that it agrees.
-    flagged = set(found) | set(stale)
+    # Deferred counts as still disagreeing: waiting out the grace period is
+    # not the same as resolved, and closing an open issue for one would throw
+    # the alarm away.
+    flagged = set(found) | set(stale) | set(deferred)
     for key, issue in sorted(existing.items()):
         code = state_code(issue["title"])
         if not code or code in flagged or code not in theirs:
@@ -387,6 +532,19 @@ def main():
             report.append(f"- **{code}**: resolved, closed #{issue['number']}")
         except Exception as e:
             failures.append(f"could not close the {code} issue: {e}")
+
+    # The log is this job's memory. If it cannot be written, a deferred
+    # disagreement would be forgotten and never filed, so that is a failure.
+    if gh:
+        body = render_log(log, now)
+        try:
+            if log_issue:
+                gh.update_body(log_issue["number"], body)
+            elif log["pending"] or log["events"]:
+                gh.create(LAG_LOG_TITLE, body)
+        except Exception as e:
+            failures.append(f"could not update the {LAG_LOG_TITLE!r} issue, so a "
+                            f"deferred disagreement would be forgotten: {e}")
 
     summary(report + [f"- **FAILED:** {f}" for f in failures])
 

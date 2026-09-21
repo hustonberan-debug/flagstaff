@@ -57,6 +57,10 @@ class GitHub:
         return self._ok(self.s.post(f"{self.base}/issues/{number}/comments",
                                     json={"body": body}))
 
+    def update_body(self, number, body):
+        return self._ok(self.s.patch(f"{self.base}/issues/{number}",
+                                     json={"body": body}))
+
     def close(self, number, body):
         """Say what changed, then close. An alarm that cannot stand itself
         down leaves a wall of stale issues nobody reads."""
