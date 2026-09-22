@@ -1549,3 +1549,4 @@
 {"at": "2026-09-21T01:20:14+00:00", "state": "IA", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
 {"at": "2026-09-21T13:34:03+00:00", "state": "NE", "status": "half", "reason": "Gov. Pillen Orders Flags Flown at Half-Staff in Honor of Yutan Firefighter", "reason_source": "state", "start_date": "2026-09-21", "end_date": null}
 {"at": "2026-09-22T01:23:53+00:00", "state": "AK", "status": "half", "reason": "State order", "reason_source": "state", "start_date": null, "end_date": null}
+{"at": "2026-09-22T22:40:46+00:00", "state": "NE", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
