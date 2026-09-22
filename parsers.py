@@ -273,11 +273,95 @@ LIMITED_SCOPE_RE = re.compile(
 )
 
 
-def order_scope(text):
-    """'statewide' or 'limited', plus the phrase that decided it."""
+# An order is statewide only if it SAYS so. The old default was the other way
+# round - statewide unless a known limiting phrase appeared - and Nebraska
+# showed what that costs: "Governor Pillen ... has delegated authority to the
+# mayor ... the Mayor of Yutan may direct that flags within the City of Yutan
+# be lowered to half-staff" was published as Nebraska at half-staff. With 51
+# governors writing however they please, a default of statewide guarantees
+# over-reporting; the unrecognised phrasing is the common case, not the rare
+# one.
+STATEWIDE_SCOPE_RE = re.compile(
+    r"\bstate[-\s]?wide\b"
+    r"|\b(?:throughout|across|within)\s+the\s+(?:entire\s+)?(?:state|commonwealth)\b"
+    r"|\bin\s+the\s+(?:entire\s+)?(?:state|commonwealth)\b"
+    r"|\ball\s+(?:state[-\s]\w+\s+|state\s+|government\s+|public\s+)?"
+    r"(?:buildings|facilities|offices|grounds|properties|institutions|agencies"
+    r"|departments)\b"
+    r"|\bat\s+(?:all\s+)?state\s+(?:facilities|buildings|offices|properties)\b"
+    r"|\bevery\s+state\s+(?:building|facility|office)\b",
+    re.I)
+# "the Mayor of Yutan may direct that flags within the City of Yutan..."
+LIMITED_SCOPE_EXTRA_RE = re.compile(
+    r"\b(?:in|within|throughout)\s+the\s+(?:city|town|village|borough|county|"
+    r"township)\s+of\s+[A-Z]"
+    r"|\bdelegated\s+authority\s+to\s+the\s+(?:mayor|chair|board)\b"
+    r"|\b(?:city|town|village|county)\s+of\s+[A-Z][a-z]+\s+(?:only|alone)\b",
+    re.I)
+# How close a scope marker must sit to the flag phrase to be about the flags.
+SCOPE_NEAR_CHARS = 80
+FLAG_SENTENCE_RE = re.compile(
+    r"half[-\s]?(?:staff|mast)|flags?\s+(?:be\s+)?(?:lowered|flown|displayed)"
+    r"|lower(?:s|ed|ing)?\s+(?:the\s+)?flags?", re.I)
+
+
+def _letters(s):
+    return re.sub(r"[^a-z]", "", (s or "").lower())
+
+
+def state_name_scope_re(name):
+    """The state's own name where it is used as the reach of the order:
+    "flags in Connecticut", "Hawai'i state flags", "the State of Hawai'i".
+    Letters are matched with punctuation between them so Hawai'i matches.
+    Proximity to the flag phrase is what keeps a page header out - every one
+    of these sites carries its state's name in the chrome."""
+    letters = _letters(name)
+    if len(letters) < 4:
+        return None
+    n = r"[^A-Za-z]{0,2}".join(letters)
+    return re.compile(
+        rf"(?:state|commonwealth)\s+of\s+{n}"
+        rf"|{n}\s+(?:state\s+)?flags?\b"
+        rf"|flags?\s+(?:in|throughout|across)\s+{n}\b"
+        rf"|(?:in|throughout|across)\s+{n}\b",
+        re.I)
+
+
+def order_scope(text, state_name=None):
+    """('statewide' | 'limited' | 'unknown', evidence).
+
+    Only sentences that are ABOUT the flags count. Iowa's Gaesser order calls
+    the man "a respected leader statewide" while the flag sentence says "on
+    all public buildings, grounds, and facilities throughout the state" - the
+    first is biography, the second is scope, and a bare keyword search cannot
+    tell them apart.
+
+    A statewide marker beats a limiting one, because a statewide order often
+    names the Capitol too ("on the State Capitol Building ... and on all
+    public buildings throughout the state"). Nothing either way is UNKNOWN,
+    and callers must not report half-staff on unknown.
+    """
     t = strip_html(text) if "<" in (text or "") else (text or "")
-    m = LIMITED_SCOPE_RE.search(t)
-    return ("limited", m.group(0).strip()) if m else ("statewide", None)
+    sentences = [s for s in re.split(r"(?<=[.!?])\s+", t) if FLAG_SENTENCE_RE.search(s)]
+    if not sentences:
+        return "unknown", "no sentence about the flags"
+    name_re = state_name_scope_re(state_name) if state_name else None
+    for s in sentences:
+        # The marker has to sit next to the flag phrase. Iowa's order calls
+        # Ray Gaesser "a respected leader statewide" in the same sentence as
+        # "flags flown at half-staff": same sentence, 120 characters apart,
+        # and not a statement about the flags at all.
+        spans = [m.span() for m in FLAG_SENTENCE_RE.finditer(s)]
+        for pat in (p for p in (STATEWIDE_SCOPE_RE, name_re) if p):
+            for m in pat.finditer(s):
+                if any(min(abs(m.start() - b), abs(a - m.end())) <= SCOPE_NEAR_CHARS
+                       for a, b in spans):
+                    return "statewide", m.group(0).strip()[:90]
+    for s in sentences:
+        m = LIMITED_SCOPE_RE.search(s) or LIMITED_SCOPE_EXTRA_RE.search(s)
+        if m:
+            return "limited", m.group(0).strip()
+    return "unknown", f"no scope stated in: {sentences[0].strip()[:90]}"
 
 
 # --- Freshness --------------------------------------------------------------

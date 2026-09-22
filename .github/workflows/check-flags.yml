@@ -44,7 +44,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests anthropic
 
       - name: Parser tests
         # Offline and deterministic. If they fail, the parsers are broken and
@@ -114,6 +114,12 @@ jobs:
           key: rendered-${{ github.run_id }}
 
       - name: Check all sources
+        # ANTHROPIC_API_KEY is optional: with it, a NEW order we cannot scope
+        # by regex gets a second reading (extract.py). Without it the run is
+        # regex-only and says so. Either way the model never decides half or
+        # full - it extracts, our rules decide.
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 run.py
 
       - name: Sanity-check before publishing

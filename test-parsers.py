@@ -198,7 +198,8 @@ nd_feed = f"""<rss><channel><item>
 <link>{ART}</link><pubDate>Wed, 09 Sep 2026 15:00:00 GMT</pubDate></item>
 <item><title>Governor announces broadband grants</title><link>https://nd.test/n/2</link>
 <pubDate>Tue, 08 Sep 2026 15:00:00 GMT</pubDate></item></channel></rss>"""
-R.fetch = stub({FEED: nd_feed, ART: "<p>Flags will be flown at half-staff.</p>"})
+R.fetch = stub({FEED: nd_feed, ART: "<p>The governor has directed all government "
+                "agencies to fly the flags at half-staff.</p>"})
 rec = {"state": "Testland", "state_code": "TT", "ingest_mode": "feed",
        "buildable": True, "rss_url": FEED}
 on(date(2026, 9, 9))
@@ -542,8 +543,8 @@ R.fetch = stub({NY_URL: ny_page(1),
                 f"{NY_URL}?page=1": page2,
                 f"{NY_URL}?page=2": ny_page(3),
                 "https://ny.test" + PIRO: "<p>Governor Hochul today directed that "
-                "flags be flown at half-staff from sunrise to sunset on Friday, "
-                "September 18, 2026.</p>"})
+                "flags on all state buildings be flown at half-staff from sunrise "
+                "to sunset on Friday, September 18, 2026.</p>"})
 _, o, c_ny = R.check_state(NYREC, {}, None)
 t("listing pages are capped at 3", o.get("listing_pages_read"), 3)
 t("no page beyond the cap is requested", f"{NY_URL}?page=3" in calls, False)
@@ -911,6 +912,166 @@ t("a gap we report honestly closes with that as the reason",
       "MA", {"state": "Massachusetts", "effective_status": P.UNKNOWN,
              "coverage": "not_covered", "error": "403"}, {}, {"status": P.FULL},
       _dtm(2026, 9, 21, tzinfo=_tzn.utc)), True)
+
+print("\n--- scope: an order is statewide only if it SAYS so ---")
+YUTAN = ("Gov. Pillen Orders Flags Flown at Half-Staff in Honor of Yutan Firefighter. "
+         "LINCOLN, NE - Governor Jim Pillen, in coordination with Mayor Matt Thompson "
+         "of Yutan, has delegated authority to the mayor to order flags at half-staff "
+         "in honor of the life and service of Yutan Volunteer Fire Department "
+         "Firefighter/EMT Wendell D. Pascarelli. Under this delegation, the Mayor of "
+         "Yutan may direct that flags within the City of Yutan be lowered to "
+         "half-staff starting immediately through the day of service.")
+t("the Yutan order is a city order, not Nebraska",
+  P.order_scope(YUTAN, "Nebraska")[0], "limited")
+IOWA = ("Governor Kim Reynolds has ordered flags flown at half-staff from sunrise on "
+        "Friday, September 18, 2026, until sunset on Sunday, September 20, 2026, in "
+        "honor of Ray Gaesser, a respected agriculture leader statewide and across "
+        "the country. Flags will be flown at half-staff on the State Capitol Building "
+        "and on flag displays in the Capitol Complex. Flags will also be at half-staff "
+        "on all public buildings, grounds, and facilities throughout the state.")
+sc, ev = P.order_scope(IOWA, "Iowa")
+t("Iowa's Gaesser order is statewide, and for the right reason",
+  (sc, "all public buildings" in ev), ("statewide", True))
+t("a statewide order that also names the Capitol is still statewide",
+  P.order_scope("Flags at half-staff at the State Capitol and on all state buildings "
+                "throughout the state.", "Iowa")[0], "statewide")
+t("South Dakota's Capitol-only order stays limited",
+  P.order_scope("Governor Rhoden ordered that flags be flown at half-staff at the "
+                "State Capitol from sunrise until sunset on Sunday.", "South Dakota")[0],
+  "limited")
+t("Connecticut names its own state beside the flags",
+  P.order_scope("Governor Lamont has directed that U.S. and state flags in "
+                "Connecticut be lowered to half-staff on Friday.", "Connecticut")[0],
+  "statewide")
+t("Hawai'i, okina and all", P.order_scope(
+    "Governor Green ordered the flags of the United States and the State of Hawaiʻi "
+    "to be flown at half-staff.", "Hawaii")[0], "statewide")
+t("North Dakota's 'all government agencies'", P.order_scope(
+    "Armstrong has directed all government agencies to fly the United States and "
+    "North Dakota flags at half-staff on Friday.", "North Dakota")[0], "statewide")
+t("the state's name in the page header is NOT a scope statement",
+  P.order_scope("Governor orders flags to half-staff for a fallen firefighter. | "
+                "North Dakota Office of the Governor", "North Dakota")[0], "unknown")
+t("an order that says nothing about scope is unknown, not statewide",
+  P.order_scope("The governor ordered flags lowered to half-staff on Friday in honor "
+                "of a fallen officer.", "Oregon")[0], "unknown")
+t("no flag sentence at all -> unknown",
+  P.order_scope("The governor announced a broadband grant.", "Oregon")[0], "unknown")
+
+NE_URL = "https://ne.test/press"
+nerec = {"state": "Nebraska", "state_code": "TT", "ingest_mode": "index",
+         "buildable": True, "press_url": NE_URL}
+listing = "".join(f'<h3><a href="/news/item-{n}">Gov. Pillen Announces Statewide '
+                  f'Initiative Number {n} for Nebraskans</a></h3>' for n in range(6))
+on(date(2026, 9, 21))
+R.fetch = stub({NE_URL: listing + '<h3><a href="/news/yutan">Gov. Pillen Orders Flags '
+                'Flown at Half-Staff in Honor of Yutan Firefighter</a></h3>',
+                "https://ne.test/news/yutan": f"<p>{YUTAN}</p>"})
+_, o, _ = R.check_state(nerec, {}, None)
+t("end to end: the Yutan order does not put Nebraska at half-staff",
+  (o["state_status"], len(o.get("limited_orders") or [])), (P.FULL, 1))
+R.fetch = stub({NE_URL: listing + '<h3><a href="/news/x">Gov. Pillen Orders Flags to '
+                'Half-Staff for a Fallen Trooper</a></h3>',
+                "https://ne.test/news/x": "<p>Governor Pillen ordered flags lowered to "
+                "half-staff from sunrise to sunset on Monday, September 21, 2026, in "
+                "honor of a fallen trooper.</p>"})
+_, o, _ = R.check_state(nerec, {}, None)
+t("an order with no scope stated -> unknown, never full and never half",
+  (o["state_status"], "does not say whether it is statewide" in (o["error"] or "")),
+  (P.UNKNOWN, True))
+R.fetch = stub({NE_URL: listing + '<h3><a href="/news/y">Gov. Pillen Orders Flags to '
+                'Half-Staff for a Fallen Trooper</a></h3>',
+                "https://ne.test/news/y": "<p>Governor Pillen ordered flags at all "
+                "state buildings lowered to half-staff from sunrise to sunset on "
+                "Monday, September 21, 2026.</p>"})
+_, o, _ = R.check_state(nerec, {}, None)
+t("...and a real statewide order still reports half", o["state_status"], P.HALF)
+
+t("an order page on another company's site is not read",
+  R.own_source("https://flagsexpress.com/blog/x", "https://oa.mo.gov/flag"), False)
+t("...but the state's own and other government sites are",
+  (R.own_source("https://governor.mo.gov/p/1", "https://oa.mo.gov/flag"),
+   R.own_source("https://www.whitehouse.gov/x", "https://oa.mo.gov/flag"),
+   R.own_source("/news/1", "https://oa.mo.gov/flag")), (True, True, True))
+
+print("\n--- optional model extraction: it extracts, our rules decide ---")
+import extract as X2
+_real_call, _real_enabled = X2.call_model, X2.enabled
+X2.enabled = lambda: True
+def model_says(**fields):
+    def fake(body, state_name):
+        return dict({"scope": "unknown", "scope_quote": "", "start_date": None,
+                     "end_date": None, "date_quote": "", "authority": "unknown",
+                     "honoree": None}, **fields)
+    X2.call_model = fake
+
+STATEWIDE_ORDER = ("Governor Kim Reynolds has ordered flags flown at half-staff from "
+                   "sunrise on Friday, September 18, 2026, until sunset on Sunday, "
+                   "September 20, 2026. Flags will be at half-staff on all public "
+                   "buildings, grounds, and facilities throughout the state.")
+regex_yutan = P.order_scope(YUTAN, "Nebraska")
+model_says(scope="limited",
+           scope_quote="the Mayor of Yutan may direct that flags within the City of "
+                       "Yutan be lowered to half-staff",
+           authority="governor", honoree="Firefighter/EMT Wendell D. Pascarelli")
+y = X2.extract(YUTAN, "Nebraska")
+t("Yutan: the model reads it as limited too", y["scope"], "limited")
+t("...and both methods agree, so it stays limited",
+  X2.merge({"scope": regex_yutan[0], "body_start": None, "body_end": None}, y)["scope"],
+  "limited")
+model_says(scope="statewide",
+           scope_quote="Flags will be at half-staff on all public buildings, grounds, "
+                       "and facilities throughout the state",
+           start_date="2026-09-18", end_date="2026-09-20",
+           date_quote="from sunrise on Friday, September 18, 2026, until sunset on "
+                      "Sunday, September 20, 2026",
+           authority="governor", honoree="Ray Gaesser")
+s = X2.extract(STATEWIDE_ORDER, "Iowa")
+merged = X2.merge({"scope": "statewide", "body_start": "2026-09-18",
+                   "body_end": "2026-09-20"}, s)
+t("a genuine statewide order: both agree, dates intact",
+  (merged["scope"], merged["body_start"], merged["body_end"]),
+  ("statewide", "2026-09-18", "2026-09-20"))
+t("the long tail: regex found no scope, the model quotes one",
+  X2.merge({"scope": "unknown", "body_start": None, "body_end": None}, s)["scope"],
+  "statewide")
+
+model_says(scope="statewide",
+           scope_quote="the Mayor of Yutan may direct that flags within the City of "
+                       "Yutan be lowered to half-staff")
+dis = X2.merge({"scope": "limited", "body_start": None, "body_end": None},
+               X2.extract(YUTAN, "Nebraska"))
+t("DISAGREEMENT on scope -> unknown, not a pick", dis["scope"], "unknown")
+t("...and it says which two readings disagreed",
+  ("regex says limited" in dis["scope_evidence"]
+   and "model says statewide" in dis["scope_evidence"]), True)
+model_says(scope="statewide", scope_quote="throughout the state",
+           start_date="2026-09-18", end_date="2026-09-30",
+           date_quote="until sunset on Sunday, September 20, 2026")
+dd = X2.merge({"scope": "statewide", "body_start": "2026-09-18",
+               "body_end": "2026-09-20"}, X2.extract(STATEWIDE_ORDER, "Iowa"))
+t("DISAGREEMENT on dates -> no dates, so the order cannot prove it covers today",
+  (dd["body_start"], dd["body_end"]), (None, None))
+
+model_says(scope="statewide",
+           scope_quote="flags shall fly at half-staff across all ninety-nine counties",
+           authority="governor")
+h = X2.extract(STATEWIDE_ORDER, "Iowa")
+t("a quote that is not in the order is discarded (no invented half-staff)",
+  (h["scope"], h.get("scope_dropped")), ("unknown", True))
+t("quote check is whitespace-insensitive but otherwise exact",
+  (X2.quoted("throughout   the state", STATEWIDE_ORDER),
+   X2.quoted("throughout the county", STATEWIDE_ORDER)), (True, False))
+
+def boom(body, state_name):
+    raise RuntimeError("API down")
+X2.call_model = boom
+t("an API failure falls back to regex and never raises",
+  X2.merge({"scope": "statewide", "body_start": None, "body_end": None},
+           X2.extract(STATEWIDE_ORDER, "Iowa"))["scope"], "statewide")
+X2.enabled = lambda: False
+t("with no API key it does nothing at all", X2.extract(STATEWIDE_ORDER, "Iowa"), None)
+X2.call_model, X2.enabled = _real_call, _real_enabled
 
 print("\n--- grace period: the other source lags us, so one direction waits ---")
 _t0 = _dtm(2026, 9, 21, 12, 0, tzinfo=_tzn.utc)

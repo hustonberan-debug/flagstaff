@@ -38,13 +38,14 @@ from datetime import date, datetime, timedelta, timezone
 
 import requests
 
+import extract as X
 import parsers as P
 
 # Bump whenever parsing logic changes. Verdicts are no longer cached (they are
 # recomputed every run), but facts extracted from individual order pages are,
 # and those were produced by whatever parser was current at the time. A bump
 # discards them while keeping the memory of last known answers.
-PARSER_VERSION = "26"
+PARSER_VERSION = "27"       # 27: scope is stated or unknown; order facts re-read
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"
@@ -501,7 +502,24 @@ def revalidate(prev, d):
     return (P.FULL if v is False else P.UNKNOWN), None, expired
 
 
-def article_facts(url, session, known, keep):
+def own_source(order_url, page_url):
+    """Is this order page the source's own, or at least a government site?
+
+    Missouri's official flag page links one of its entries to a flag
+    retailer's blog. We followed that link and read a shop's summary of a
+    presidential proclamation as if it were the order. Other flag sites are
+    not inputs to this product, wherever the link came from.
+    """
+    from urllib.parse import urlparse
+    a, b = urlparse(order_url or ""), urlparse(page_url or "")
+    host = (a.netloc or "").lower().removeprefix("www.")
+    if not host:
+        return True                      # relative link: same site
+    return (host == (b.netloc or "").lower().removeprefix("www.")
+            or host.endswith((".gov", ".mil")) or host.endswith(".us"))
+
+
+def article_facts(url, session, known, keep, state_name=None):
     """What an individual order page says, fetched once per URL.
 
     This is what the old whole-verdict cache was really saving: re-reading
@@ -514,32 +532,40 @@ def article_facts(url, session, known, keep):
         art, _ = fetch(url, session)
         if not art:
             return None
-        f = facts_from_text(P.strip_html(art))
+        body = P.strip_html(art)
+        f = facts_from_text(body, state_name)
+        # A second reading of an order we have never parsed before. Cached
+        # with the rest of this URL's facts, so it happens once per order.
+        f = X.merge(f, X.extract(body, state_name))
     keep[url] = f
     return f
 
 
-def facts_from_text(text):
-    """Status, authority and dates from an order's text: its page, or the
-    summary a card listing shows for it."""
+def facts_from_text(text, state_name=None):
+    """Status, authority, dates and SCOPE from an order's text: its page, or
+    the summary a card listing shows for it."""
     opening = " ".join(re.split(r"(?<=[.!?])\s+", text)[:3])[:700]
     st, sev = P.classify_status(opening)
     au, aev = P.classify_authority(opening)
     bs, be = P.date_range(text[:8000])
+    scope, scope_ev = P.order_scope(text[:12000], state_name)
     return {"opening_status": st, "opening_evidence": sev,
             "opening_authority": au, "opening_authority_evidence": aev,
             "body_start": bs.isoformat() if bs else None,
             "body_end": be.isoformat() if be else None,
-            "opening": opening}
+            "opening": opening, "scope": scope, "scope_evidence": scope_ev}
 
 
-def order_facts(item, page_url, session, known, keep):
+def order_facts(item, page_url, session, known, keep, state_name=None):
     """Facts for one listed order, or None. A card listing's own summary is
     used as-is; otherwise the order's page is opened (once, cached)."""
     if item.get("summary"):
-        return facts_from_text(item["summary"])
-    if item.get("url") and item["url"] != page_url:
-        return article_facts(item["url"], session, known, keep)
+        return facts_from_text(item["summary"], state_name)
+    url = item.get("url")
+    if url and url != page_url:
+        if not own_source(url, page_url):
+            return None
+        return article_facts(url, session, known, keep, state_name)
     return None
 
 
@@ -938,7 +964,8 @@ def check_state(rec, cache, session, verbose=False):
             # a release routinely mentions returning to full staff, and the
             # classifier correctly refuses to choose when it sees both.
             if rec_o["status"] == P.UNKNOWN:
-                f = order_facts(i, url, session, prev_articles, articles)
+                f = order_facts(i, url, session, prev_articles, articles,
+                                rec.get("state"))
                 if f and f["opening_status"] != P.UNKNOWN:
                     st2 = f["opening_status"]
                     rec_o["status"] = st2
@@ -951,21 +978,15 @@ def check_state(rec, cache, session, verbose=False):
 
             if rec_o["status"] != P.HALF:
                 continue
-            # A capitol-only or single-county order is not a statewide
-            # half-staff day. South Dakota issues both kinds and titles them
-            # differently; counting them the same over-reports the state.
-            scope, scope_ev = P.order_scope(i["title"])
-            if scope == "limited":
-                out.setdefault("limited_orders", []).append(
-                    {"title": i["title"], "url": i["url"], "scope": scope_ev})
-                continue
             if rec.get("signature_check_required") and \
                     rec_o["authority"] != P.GOVERNOR:
                 continue
-            # Now open the order for its dates only.
+            # Now open the order: for its dates, and for what it says about
+            # how far it reaches.
             if (i.get("summary") or (i.get("url") and i["url"] != url)) \
-                    and not rec_o["end_date"]:
-                f = order_facts(i, url, session, prev_articles, articles)
+                    and (not rec_o["end_date"] or not f):
+                f = order_facts(i, url, session, prev_articles, articles,
+                                rec.get("state"))
                 if f:
                     if f["body_start"] and not rec_o["start_date"]:
                         rec_o["start_date"] = f["body_start"]
@@ -994,6 +1015,22 @@ def check_state(rec, cache, session, verbose=False):
                     rec_o["start_date"], rec_o["end_date"] = ws.isoformat(), we.isoformat()
                     rec_o["dates_from"] = f"weekday resolved against {ref}"
 
+            # Scope, from the order itself rather than its headline. An
+            # order is statewide only if it says so: Nebraska's Yutan order
+            # reads "the Mayor of Yutan may direct that flags within the City
+            # of Yutan be lowered", and under the old statewide-by-default
+            # rule that became Nebraska at half-staff. A scope we cannot
+            # establish is not a licence to claim the whole state.
+            # Default to unknown, never None: facts cached by an older parser
+            # have no scope key, and a missing scope must not read as "fine".
+            scope, scope_ev = (f.get("scope") or "unknown", f.get("scope_evidence")) \
+                if f else P.order_scope(i["title"], rec.get("state"))
+            rec_o["scope"], rec_o["scope_evidence"] = scope, scope_ev
+            if scope == "limited":
+                out.setdefault("limited_orders", []).append(
+                    {"title": i["title"], "url": i["url"], "scope": scope_ev})
+                continue
+
             rec_o["date"] = d
             # Fall back to the item's publication date as the start when
             # neither the headline nor the body carries one.
@@ -1013,7 +1050,15 @@ def check_state(rec, cache, session, verbose=False):
             elif order is None:
                 order, verdict, why = rec_o, False, w
 
-        if verdict is True:
+        if verdict is True and order.get("scope") == "unknown":
+            # An order that covers today, but nothing in it says how far it
+            # reaches. "There is an order we cannot scope" is not "there is
+            # no order", so this is a gap, not full staff.
+            out["state_status"] = P.UNKNOWN
+            out["state_order"] = dict(order, coverage_reason=why)
+            out["error"] = (f"order found and current, but it does not say whether "
+                            f"it is statewide ({order.get('scope_evidence')})")
+        elif verdict is True:
             out["state_status"] = P.HALF
             out["state_order"] = dict(order, coverage_reason=why)
         elif verdict is None and order is not None:
