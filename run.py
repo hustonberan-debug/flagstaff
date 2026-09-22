@@ -415,6 +415,46 @@ def federal_proclamation(session, cache):
     return None, None
 
 
+# Hosts that are official state sources without a government domain. Each one
+# is here because a person checked it, and nothing else gets in: Missouri's
+# own flag page links an entry to a flag retailer's blog, and we read it.
+OFFICIAL_NON_GOV = {
+    "flgov.com": "Florida's Executive Office of the Governor publishes at "
+                 "flgov.com rather than a .gov domain (verified 2026-09-22)",
+}
+GOV_SUFFIXES = (".gov", ".mil", ".us")
+
+
+def official_host(host):
+    h = (host or "").lower().removeprefix("www.")
+    return (not h or h.endswith(GOV_SUFFIXES) or h == "govdelivery.com"
+            or h.endswith(".govdelivery.com") or h in OFFICIAL_NON_GOV)
+
+
+def assert_official_sources(registry):
+    """Every source must be a government host or a recorded exception.
+
+    Fails the run rather than warning. A third-party page entering the
+    registry is not a cosmetic problem: for a fortnight Missouri's dates came
+    from a retailer's blog because the state's own page linked to it.
+    """
+    from urllib.parse import urlparse
+    bad = []
+    for rec in registry:
+        urls = [rec.get(f) for f in ("press_url", "flag_page_url", "rss_url",
+                                     "toggle_hub_url", "signup_url")]
+        urls += list(rec.get("url_candidates") or [])
+        for u in filter(None, urls):
+            host = urlparse(str(u).replace("{year}", "2026")).netloc
+            if not official_host(host):
+                bad.append(f"{rec['state_code']}: {host}")
+    if bad:
+        raise SystemExit("REFUSING TO RUN: non-government source(s) in registry.json: "
+                         + ", ".join(sorted(bad))
+                         + ". Add the host to OFFICIAL_NON_GOV with a reason if it is "
+                           "genuinely an official state source, or remove it.")
+
+
 def source_sig(rec, url=None):
     """What a cached answer was read from: mode, configured URL, and whether
     rendered. The configured URL, not the one that answered, so a state read
@@ -516,7 +556,7 @@ def own_source(order_url, page_url):
     if not host:
         return True                      # relative link: same site
     return (host == (b.netloc or "").lower().removeprefix("www.")
-            or host.endswith((".gov", ".mil")) or host.endswith(".us"))
+            or official_host(host))
 
 
 def article_facts(url, session, known, keep, state_name=None):
@@ -651,7 +691,14 @@ def check_state(rec, cache, session, verbose=False):
 
         v, why = (covers_today(o.get("start_date"), o.get("end_date"), today())
                   if o else (None, None))
-        if v:
+        if v and (o.get("scope") or "unknown") != "statewide":
+            # The bulletin covers today, but nothing in it says the order
+            # reaches the whole state. Same rule as a press release.
+            out.update(state_status=P.UNKNOWN, state_order=dict(o, coverage_reason=why),
+                       error=(f"bulletin received and current, but it does not say "
+                              f"whether it is statewide "
+                              f"({o.get('scope_evidence') or 'no scope recorded'})"))
+        elif v:
             # A bulletin we did read that covers today stands on its own.
             out["state_status"] = P.HALF
             out["state_order"] = {
@@ -1180,6 +1227,7 @@ def main():
     if not registry:
         print("registry.json missing or empty — run merge.py first.")
         sys.exit(1)
+    assert_official_sources(registry)
     cache = load_json(CACHE, {})
     if cache.get("_parser_version") != PARSER_VERSION:
         if cache:

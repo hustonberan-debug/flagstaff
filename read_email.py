@@ -56,6 +56,9 @@ REGISTRY = "registry.json"
 IMAP_HOST = os.environ.get("MAIL_HOST", "imap.gmail.com")
 DEFAULT_DAYS = 14
 MAX_BACKDATE_DAYS = 7   # an order date this far before the email is a citation, not a window
+# Code -> name, for scope phrases like "flags in Kansas". Filled from the
+# registry at startup; the fallback keeps parse_message usable in tests.
+STATE_NAMES = {}
 # The receiving server whose Authentication-Results verdict is trusted.
 AUTHSERV_ID = os.environ.get("MAIL_AUTHSERV_ID", "mx.google.com")
 UNAUTHENTICATED = "sender not authenticated"
@@ -305,7 +308,11 @@ def parse_message(msg, allowed):
     if status != P.HALF:
         return None, f"no half-staff order detected ({status})"
 
-    scope, scope_ev = P.order_scope(blob)
+    # Same rule as an order document: statewide only if the bulletin says so.
+    # A GovDelivery bulletin can carry a city order as easily as a press page
+    # can - Nebraska's Yutan order went out as a press release, and the next
+    # one may arrive by email.
+    scope, scope_ev = P.order_scope(blob, STATE_NAMES.get(code))
     if scope == "limited":
         return None, f"limited scope: {scope_ev}"
 
@@ -344,6 +351,8 @@ def parse_message(msg, allowed):
         "end_date": end.isoformat() if end else None,
         "until_noon": P.until_noon(blob),
         "evidence": ev,
+        "scope": scope,
+        "scope_evidence": scope_ev,
     }, None
 
 
@@ -378,6 +387,7 @@ def main():
             if d:
                 SENDER_HINTS[d] = r["state_code"]
         load_govdelivery_accounts(reg)
+        STATE_NAMES.update({r["state_code"]: r.get("state") for r in reg})
     except Exception:
         allowed = set()
 

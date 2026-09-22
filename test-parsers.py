@@ -442,7 +442,8 @@ t("inbox not read for 3 days -> stale, last value served",
 t("an order we did read still counts when the inbox is stale",
   email_state("2026-09-14", generated="2026-09-12T12:00:00+00:00", orders={"TT": {
       "subject": "Flags to half-staff", "start_date": "2026-09-14",
-      "end_date": "2026-09-16"}})[0], P.HALF)
+      "end_date": "2026-09-16", "scope": "statewide",
+      "scope_evidence": "all state buildings"}})[0], P.HALF)
 t("no mail credentials -> last value served, marked stale (never a fresh full)",
   email_state("2026-09-05", skipped=True), (P.FULL, "stale"))
 
@@ -994,6 +995,61 @@ t("...but the state's own and other government sites are",
    R.own_source("https://www.whitehouse.gov/x", "https://oa.mo.gov/flag"),
    R.own_source("/news/1", "https://oa.mo.gov/flag")), (True, True, True))
 
+print("\n--- scope applies to email bulletins too, and sources must be official ---")
+E.STATE_NAMES.update({"KS": "Kansas", "NE": "Nebraska"})
+E.SENDER_HINTS["list.ks.gov"] = "KS"
+GMAIL_KS = "mx.google.com; dkim=pass header.i=@ks.gov header.s=s1; spf=pass"
+def bulletin(subject, body):
+    return E.parse_message(mail("Kansas Governor <govpress@list.ks.gov>", subject, body,
+                                auth=[GMAIL_KS]), {"KS"})
+rec_b, _ = bulletin("Governor Kelly Directs Flags to Half-Staff",
+                    "Governor Kelly has directed that flags at all state buildings be "
+                    "flown at half-staff on Friday, September 25, 2026.")
+t("a statewide bulletin is scoped statewide", (rec_b or {}).get("scope"), "statewide")
+rec_b, why_b = bulletin("Flags to Half-Staff in Wichita",
+                        "The governor has delegated authority to the mayor; flags "
+                        "within the City of Wichita will be lowered to half-staff.")
+t("a city bulletin is rejected outright, never setting the state",
+  (rec_b, "limited scope" in (why_b or "")), (None, True))
+rec_b, _ = bulletin("Governor Kelly Directs Flags to Half-Staff",
+                    "Governor Kelly has directed that flags be flown at half-staff "
+                    "on Friday, September 25, 2026, in honor of a fallen officer.")
+t("a bulletin that never says how far it reaches is scope-unknown",
+  (rec_b or {}).get("scope"), "unknown")
+_mail_file = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
+_json.dump({"generated_at": _dtm.now(_tzn.utc).isoformat(timespec="seconds"),
+            "orders": {"TT": {"subject": "Flags to half-staff", "start_date": "2026-09-21",
+                              "end_date": "2026-09-30", "scope": "unknown",
+                              "scope_evidence": "no scope stated"}},
+            "channels_seen": {"TT": "2026-09-21"},
+            "channels_heard": {"TT": "2026-09-21"}}, _mail_file)
+_mail_file.close()
+_saved_eo, R.EMAIL_ORDERS = R.EMAIL_ORDERS, _mail_file.name
+on(date(2026, 9, 22))
+_, o, _ = R.check_state({"state": "Testland", "state_code": "TT", "ingest_mode": "email",
+                         "notification_channel": {"detail": "https://x.gov/sub"}}, {}, None)
+t("an unscoped bulletin covering today -> unknown, not half",
+  (o["state_status"], "does not say whether it is statewide" in (o["error"] or "")),
+  (P.UNKNOWN, True))
+R.EMAIL_ORDERS = _saved_eo
+os.unlink(_mail_file.name)
+
+t("a retailer's blog is not an official source", R.official_host("flagsexpress.com"), False)
+t("government hosts are", [R.official_host(h) for h in
+  ("governor.nebraska.gov", "www.nh.gov", "listserv.state.ma.us",
+   "public.govdelivery.com")], [True, True, True, True])
+t("flgov.com is allowed, by name, with a recorded reason",
+  (R.official_host("www.flgov.com"), "flgov.com" in R.OFFICIAL_NON_GOV), (True, True))
+t("the real registry passes the official-source assertion",
+  R.assert_official_sources(_reg), None)
+try:
+    R.assert_official_sources([{"state_code": "XX", "press_url": "https://flagsexpress.com/x"}])
+    _bad = "no error"
+except SystemExit as e:
+    _bad = "refused"
+t("a non-government source in the registry REFUSES to run, it does not warn",
+  _bad, "refused")
+
 print("\n--- optional model extraction: it extracts, our rules decide ---")
 import extract as X2
 _real_call, _real_enabled = X2.call_model, X2.enabled
@@ -1078,24 +1134,43 @@ _t0 = _dtm(2026, 9, 21, 12, 0, tzinfo=_tzn.utc)
 lag_shape = {"kind": "conflict", "ours": P.HALF, "theirs": P.FULL}
 missed = {"kind": "conflict", "ours": P.FULL, "theirs": P.HALF}
 gap_missed = {"kind": "missed order", "ours": P.UNKNOWN, "theirs": P.HALF}
-t("we say half, they say full -> wait (this is how their lag looks)",
-  X.needs_grace(lag_shape), True)
-t("they say half, we say full -> never wait", X.needs_grace(missed), False)
-t("they say half, we have no answer -> never wait", X.needs_grace(gap_missed), False)
+STRONG = {"state_order": {"title": "Gov orders flags to half-staff statewide",
+                          "scope": "statewide", "start_date": "2026-09-21",
+                          "end_date": "2026-09-23"}}
+YUTAN_STATE = {"state_order": {"title": "Gov. Pillen Orders Flags Flown at Half-Staff "
+                               "in Honor of Yutan Firefighter", "scope": "unknown",
+                               "start_date": "2026-09-21", "end_date": None}}
+t("we say half on a scoped, dated order, they say full -> wait (their lag)",
+  X.needs_grace(lag_shape, STRONG), True)
+t("Yutan shape - unscoped, no end date - files IMMEDIATELY, never deferred",
+  X.needs_grace(lag_shape, YUTAN_STATE), False)
+t("...and says why it is weak",
+  X.weak_half_claim(YUTAN_STATE), "order scope is unknown, not stated statewide")
+t("half-staff with no order recorded at all is weak",
+  bool(X.weak_half_claim({})), True)
+t("an order with no stated end date is weak",
+  bool(X.weak_half_claim({"state_order": {"title": "x", "scope": "statewide",
+                                          "start_date": "2026-09-21"}})), True)
+t("a scoped, dated order is strong", X.weak_half_claim(STRONG), None)
+t("they say half, we say full -> never wait", X.needs_grace(missed, STRONG), False)
+t("they say half, we have no answer -> never wait", X.needs_grace(gap_missed, {}), False)
 t("a stale page of ours -> never wait",
-  X.needs_grace({"kind": "stale page", "ours": "withheld", "theirs": None}), False)
+  X.needs_grace({"kind": "stale page", "ours": "withheld", "theirs": None}, {}), False)
 
-fn, df, pend = X.plan_filings({"NE": lag_shape}, {}, _t0)
+fn, df, pend = X.plan_filings({"NE": lag_shape}, {}, _t0, states={"NE": STRONG})
 t("first sighting is held, not filed", (list(fn), list(df)), ([], ["NE"]))
 t("...and remembered for the next run", pend["NE"]["first_seen"][:16], "2026-09-21T12:00")
-fn, df, pend2 = X.plan_filings({"NE": lag_shape}, pend, _t0 + _td(hours=13))
+fn, df, pend2 = X.plan_filings({"NE": lag_shape}, pend, _t0 + _td(hours=13),
+                               states={"NE": STRONG})
 t("still there a day later -> filed", (list(fn), list(df)), (["NE"], []))
-fn, df, _ = X.plan_filings({"NE": lag_shape}, pend, _t0 + _td(minutes=5))
+fn, df, _ = X.plan_filings({"NE": lag_shape}, pend, _t0 + _td(minutes=5),
+                           states={"NE": STRONG})
 t("a push-triggered rerun minutes later does not rush it through",
   (list(fn), list(df)), ([], ["NE"]))
 fn, df, _ = X.plan_filings({"IA": missed, "MA": gap_missed}, {}, _t0)
 t("a missed order files immediately, both shapes", sorted(fn), ["IA", "MA"])
-fn, df, _ = X.plan_filings({"ND": lag_shape}, {}, _t0, force={"ND"})
+fn, df, _ = X.plan_filings({"ND": lag_shape}, {}, _t0, force={"ND"},
+                           states={"ND": STRONG})
 t("a drill files immediately even though it is lag-shaped", list(fn), ["ND"])
 
 ev, pend3 = X.record_cleared(pend, {}, {"NE": {"status": P.FULL}},

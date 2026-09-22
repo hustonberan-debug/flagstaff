@@ -111,22 +111,46 @@ def compare(ours, theirs):
     return {"kind": kind, "ours": o, "theirs": t}
 
 
-def needs_grace(d):
-    """Is this the shape Mast's lag takes?
+def weak_half_claim(state):
+    """Is our half-staff answer resting on something thin? (reason, or None)
 
-    Four disagreements in a row (IA, MS, NE, and MA before we covered it) were
-    all the same: we saw a new order from a governor's own page, Mast had not
-    caught up yet, and it agreed within about a day. So that direction waits
-    for a second run before it becomes an issue.
+    Nebraska's Yutan order had exactly the shape the grace period defers - we
+    said half, Mast said full - and we were the ones who were wrong, because a
+    city order was published as a statewide one. A claim that cannot show a
+    scoped, dated order is not strong enough to sit on for a day.
+    """
+    o = state.get("state_order") or {}
+    if not o:
+        return "half-staff with no order recorded at all"
+    if o.get("title") and o.get("scope") != "statewide":
+        return f"order scope is {o.get('scope') or 'unrecorded'}, not stated statewide"
+    if not (o.get("end_date") or o.get("start_date") or o.get("date")):
+        return "no dated window behind the claim"
+    if not o.get("end_date"):
+        return "order has no stated end date (held open by the grace window)"
+    return None
+
+
+def needs_grace(d, state=None):
+    """Is this the shape the other source's lag takes, AND is our side solid?
+
+    Four disagreements in a row (IA, MS, NE, and MA before we covered it) had
+    the same shape: we saw a new order on a governor's own page, Mast had not
+    caught up, and it agreed within a day. So that direction waits for a
+    second run - but only when our half-staff claim is backed by a scoped,
+    dated order. Yutan was that same shape and we were wrong, so a weak claim
+    files immediately.
 
     The other direction never waits. If Mast reports half-staff and we do not,
     we may be missing a real order - flags down while the site says otherwise -
     and that is the failure worth being noisy about.
     """
-    return d["kind"] == "conflict" and d["ours"] == P.HALF and d["theirs"] == P.FULL
+    if not (d["kind"] == "conflict" and d["ours"] == P.HALF and d["theirs"] == P.FULL):
+        return False
+    return weak_half_claim(state or {}) is None
 
 
-def plan_filings(found, pending, now, force=()):
+def plan_filings(found, pending, now, force=(), states=None):
     """(file_now, deferred, pending): which disagreements to file this run.
 
     A lag-shaped disagreement files only once it has survived a previous run
@@ -136,7 +160,7 @@ def plan_filings(found, pending, now, force=()):
     """
     file_now, deferred, pending = {}, {}, dict(pending)
     for code, d in found.items():
-        if code in force or not needs_grace(d):
+        if code in force or not needs_grace(d, (states or {}).get(code)):
             file_now[code] = d
             continue
         p = pending.get(code)
@@ -338,7 +362,7 @@ def issue_body(code, state, status, theirs, d, their_url, issue=None, now=None):
     return "\n".join(lines)
 
 
-def resolved_body(code, state, status, theirs, now):
+def resolved_body(code, state, status, theirs, now, pending=None):
     """What changed, for the comment that closes an issue."""
     title, window, _ = order_line(state)
     if not title:
@@ -357,6 +381,17 @@ def resolved_body(code, state, status, theirs, now):
         f"- **{SOURCE_NAME} says {t or 'no answer'}**",
         "",
     ]
+    # Say WHOSE answer moved. "They caught up" and "we were wrong and fixed
+    # it" close identically otherwise, and the flattering reading is the one
+    # a reader assumes.
+    was = (pending or {}).get("ours")
+    if was and was != ours:
+        lines += [f"**Our answer changed**: we said {was} when this was filed and say "
+                  f"{ours} now. This closed because our reading changed, not because "
+                  f"{SOURCE_NAME} moved.", ""]
+    elif was:
+        lines += [f"Our answer did not change ({ours} then and now); "
+                  f"{SOURCE_NAME} moved to match.", ""]
     if ours == P.FULL and (title or window != "no dated window"):
         lines += [f"Our last order was {title or 'unnamed'}, window **{window}** - "
                   f"it has ended, so the state is back to full staff.", ""]
@@ -472,14 +507,16 @@ def main():
     log["runs"] = log.get("runs", 0) + 1
 
     # A disagreement that clears tells us how long the other source was behind.
+    cleared_pending = dict(log["pending"])
     events, pending = record_cleared(log["pending"], found, theirs, now)
     log["events"] = (log.get("events", []) + events)[-MAX_LAG_EVENTS:]
     for e in events:
         print(f"  CLEARED {e['code']}: {SOURCE_NAME} agreed after {e['hours']}h "
               f"(we said {e['ours']}, they said {e['theirs_then']})")
     # Lag-shaped disagreements wait a run; missed orders never do.
-    found, deferred, log["pending"] = plan_filings(found, pending, now,
-                                                   force={drilled} if drilled else ())
+    found, deferred, log["pending"] = plan_filings(
+        found, pending, now, force={drilled} if drilled else (),
+        states=status["states"])
     for code, d in sorted(deferred.items()):
         print(f"  WAITING {code}: we say {d['ours']}, {SOURCE_NAME} says {d['theirs']} "
               f"- first seen {d['first_seen']}, waited {d['waited']}; files if it "
@@ -527,7 +564,8 @@ def main():
         if not s:
             continue
         try:
-            gh.close(issue["number"], resolved_body(code, s, status, theirs[code], now))
+            gh.close(issue["number"], resolved_body(code, s, status, theirs[code], now,
+                                                    cleared_pending.get(code)))
             print(f"  RESOLVED {code}: closed #{issue['number']}")
             report.append(f"- **{code}**: resolved, closed #{issue['number']}")
         except Exception as e:
