@@ -151,6 +151,9 @@ select:focus-visible{outline:2px solid var(--navy-lit);outline-offset:2px}
   font-family:var(--mono);font-size:13px;color:var(--muted);
   display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .receipt a{color:var(--muted);text-underline-offset:3px}
+.conf{cursor:help}
+.conf.ok{color:var(--paper)}
+.conf.warn{color:var(--muted)}
 .receipt a:hover{color:var(--paper)}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--muted);
   display:inline-block;flex:none}
@@ -510,6 +513,29 @@ function sourceLink(url){
     ? ` <a href="${esc(url)}" target="_blank" rel="noopener">official source &nearr;</a>` : '';
 }
 
+// How many independent sources stand behind this answer. A state read twice
+// and a state read once were shown identically, which quietly presented our
+// weakest answers with the same authority as our strongest. One reading is
+// still worth publishing - it is just not the same claim.
+function confidenceNote(s){
+  const b = s.confidence_basis || '';
+  const srcs = (s.sources || []).filter(x => x && x.url);
+  if(s.reason_source === 'federal') return '';
+  if(b.indexOf('corroborated') === 0){
+    const kinds = srcs.map(x => x.kind).join(' and ');
+    const second = srcs[1] && srcs[1].url !== s.source_url
+      ? ` <a href="${esc(srcs[1].url)}" target="_blank" rel="noopener">second source &nearr;</a>` : '';
+    return ` <span class="conf ok" title="Its ${esc(kinds)} were read separately and agreed."`
+      + `>&middot; confirmed by two independent sources</span>${second}`;
+  }
+  if(b.indexOf('sources disagree') === 0)
+    return ` <span class="conf warn">&middot; its own sources disagree</span>`;
+  if(b.indexOf('single-source') === 0)
+    return ` <span class="conf warn" title="${esc(s.state || '')} has only one source we can read, so nothing`
+      + ` confirms it.">&middot; read from one source</span>`;
+  return '';
+}
+
 function render(){
   const s=(DATA.states||{})[current];
   const nameEl=document.getElementById('stateName');
@@ -585,6 +611,7 @@ function render(){
     checked.replace('DOT', stale||s.coverage==='frozen' ? 'stale' : 'live')
     + (changed?` <span>&middot; unchanged since ${changed}</span>`:'')
     + sourceLink(s.source_url)
+    + confidenceNote(s)
     + (stale?' <span>&middot; serving last known value</span>':'');
 
   setFlag(s.effective_status);
