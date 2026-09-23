@@ -39,13 +39,28 @@ QUIET_DAYS = 90
 TITLE_PREFIX = "Drift: "
 
 
-def days_since(stamp, today):
+# Three outcomes, not two. "Nobody ever wrote a date down", "somebody wrote
+# something we cannot read" and "it was N days ago" are different facts, and
+# collapsing the first two into None meant a channel that had NEVER delivered
+# was silently skipped by every drift check - the one source most worth
+# flagging read as the one least in need of attention.
+ABSENT, UNREADABLE = "absent", "unreadable"
+
+
+def age_of(stamp, today):
+    """(kind, days) where kind is ABSENT, UNREADABLE, or "ok"."""
     if not stamp:
-        return None
+        return ABSENT, None
     try:
-        return (today - date.fromisoformat(str(stamp)[:10])).days
+        return "ok", (today - date.fromisoformat(str(stamp)[:10])).days
     except ValueError:
-        return None
+        return UNREADABLE, None
+
+
+def days_since(stamp, today):
+    """Days since `stamp`, or None when there is no readable one. Callers that
+    need to tell the two apart use age_of()."""
+    return age_of(stamp, today)[1]
 
 
 def find_drift(registry, cache, status, mail, today, quiet_days=QUIET_DAYS):
@@ -61,8 +76,24 @@ def find_drift(registry, cache, status, mail, today, quiet_days=QUIET_DAYS):
             # Silence from a channel that has spoken before is "no order" -
             # until it has been silent so long that the channel itself is the
             # more likely explanation.
-            n = days_since(heard.get(code), today)
-            if n is not None and n >= quiet_days:
+            kind, n = age_of(heard.get(code), today)
+            if kind == ABSENT:
+                # Never delivered anything. run.py reports this state as
+                # "subscription pending"; the drift job used to skip it
+                # entirely, which is why a channel that never worked could
+                # sit unnoticed for as long as one that stopped working.
+                out.append({"code": code, "state": rec.get("state", code),
+                            "kind": "NEVER", "days": 0,
+                            "detail": "this channel has never delivered anything - "
+                                      "the subscription may not have been confirmed",
+                            "source": R.channel_url(rec) or "(channel)"})
+            elif kind == UNREADABLE:
+                out.append({"code": code, "state": rec.get("state", code),
+                            "kind": "BAD STAMP", "days": 0,
+                            "detail": f"last-heard date {heard.get(code)!r} cannot be "
+                                      f"read, so we cannot tell if this channel is alive",
+                            "source": R.channel_url(rec) or "(channel)"})
+            elif n >= quiet_days:
                 out.append({"code": code, "state": rec.get("state", code),
                             "kind": "CHANNEL", "days": n,
                             "detail": f"last delivered {heard.get(code)}",
@@ -71,7 +102,23 @@ def find_drift(registry, cache, status, mail, today, quiet_days=QUIET_DAYS):
         if not rec.get("buildable"):
             continue                       # already a declared gap
         url = R.pick_url(rec)
-        n = days_since(entry.get("hash_changed_at"), today)
+        stamp = entry.get("hash_changed_at")
+        kind, n = age_of(stamp, today)
+        if kind == UNREADABLE:
+            out.append({"code": code, "state": rec.get("state", code),
+                        "kind": "BAD STAMP", "days": 0,
+                        "detail": f"page-change date {stamp!r} cannot be read",
+                        "source": url})
+        if kind == ABSENT and entry.get("last_parsed"):
+            # We have checked this page but have no record of it ever
+            # changing. That is not the same as "it changed recently", which
+            # is how a missing stamp used to read - the source could have
+            # been frozen the whole time and nothing would have said so.
+            out.append({"code": code, "state": rec.get("state", code),
+                        "kind": "NO RECORD", "days": 0,
+                        "detail": "no record of this page ever changing - "
+                                  "cannot tell a quiet source from a fresh one",
+                        "source": url})
         if n is not None and n >= quiet_days:
             out.append({"code": code, "state": rec.get("state", code),
                         "kind": "PAGE", "days": n,
@@ -83,17 +130,26 @@ def find_drift(registry, cache, status, mail, today, quiet_days=QUIET_DAYS):
         # is routinely months old. That is a quiet state, not a dead source.
         age = s.get("source_age_days")
         if isinstance(age, int) and age >= quiet_days and (n is None or n >= quiet_days):
+            # n is None here means we do not know when the page last moved,
+            # so this alarm says "old dates and no change history", not
+            # "old dates on a page we know is frozen".
             out.append({"code": code, "state": rec.get("state", code),
                         "kind": "DATES", "days": age,
-                        "detail": f"newest date on the source is "
-                                  f"{s.get('source_last_modified') or 'unknown'}",
+                        "detail": (f"newest date on the source is "
+                                   f"{s.get('source_last_modified') or 'unknown'}"
+                                   + ("" if n is not None
+                                      else "; no record of the page changing")),
                         "source": url})
     return sorted(out, key=lambda d: (-d["days"], d["code"]))
 
 
 def issue_title(d):
     what = {"PAGE": "page has not changed", "DATES": "source dates are old",
-            "CHANNEL": "channel has gone quiet"}[d["kind"]]
+            "CHANNEL": "channel has gone quiet",
+            "NEVER": "channel has never delivered",
+            "NO RECORD": "no record of this page ever changing",
+            "BAD STAMP": "a date in our own records cannot be read",
+            }[d["kind"]]
     return f"{TITLE_PREFIX}{d['state']} ({d['code']}) - {what}"
 
 
@@ -110,6 +166,18 @@ def issue_body(d, status, quiet_days=QUIET_DAYS):
         "CHANNEL": f"This state is covered by an email channel that has not "
                    f"delivered anything for {d['days']} days. Its silence is being "
                    "read as 'no order' - but a dead subscription is silent too.",
+        "NEVER": "This state is covered by an email channel that has never "
+                 "delivered anything at all. Until it does, the subscription is "
+                 "unproven: a signup that was never confirmed, a confirmation that "
+                 "went to spam and a working list with nothing to say all look the "
+                 "same from here. Check the inbox, or re-subscribe.",
+        "NO RECORD": "We have been checking this page but have never recorded it "
+                     "changing, so we cannot tell a live source from one that was "
+                     "already frozen when we started watching. This resolves itself "
+                     "the first time the page moves.",
+        "BAD STAMP": "One of our own recorded dates cannot be parsed. This is a bug "
+                     "in what we wrote, not in the source - but while it stands, the "
+                     "drift check cannot tell whether this source is alive.",
     }[d["kind"]]
     return "\n".join([
         f"**{d['state']} ({d['code']})** - {d['kind'].lower()} drift, {d['days']} days "
@@ -150,7 +218,10 @@ def main():
     drift = find_drift(registry, cache, status, mail, today)
     tracked = sum(1 for c, e in cache.items()
                   if isinstance(e, dict) and e.get("hash_changed_at"))
-    print(f"{len(drift)} source(s) quiet for {QUIET_DAYS}+ days "
+    quiet = [d for d in drift if d["kind"] in ("PAGE", "DATES", "CHANNEL")]
+    unknown = [d for d in drift if d not in quiet]
+    print(f"{len(quiet)} source(s) quiet for {QUIET_DAYS}+ days, "
+          f"{len(unknown)} we cannot tell about "
           f"({tracked} pages have fingerprint history)")
     for d in drift:
         print(f"  {d['kind']:8} {d['code']}  {d['days']:4}d  {d['detail']}")

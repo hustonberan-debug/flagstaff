@@ -1228,8 +1228,14 @@ def check_state(rec, cache, session, verbose=False):
         # When this page's text last moved. A source that stops updating looks
         # exactly like a state with no orders, so drift_check.py watches this:
         # Arizona sat frozen from January 2025 and was found by hand.
-        "hash_changed_at": (out["checked_at"] if prev.get("hash") != h
-                            else prev.get("hash_changed_at") or out["checked_at"]),
+        # None means "we have no record", which is NOT "it changed today".
+        # Defaulting to now made a page we had never seen look freshly
+        # updated, and every PARSER_VERSION bump wiped the field - so drift
+        # detection went blind for 90 days after each bump, and there were
+        # five of those in one week. drift_check.py reads None as unknown.
+        "hash_changed_at": (None if not prev.get("hash")
+                            else out["checked_at"] if prev["hash"] != h
+                            else prev.get("hash_changed_at")),
         "state_status": out["state_status"],
         "state_order": out["state_order"],
         # The day THIS order first appeared. An order with no dates has no
@@ -1487,8 +1493,14 @@ def main():
                 if k in cache}
         for code, e in cache.items():
             if not code.startswith("_") and isinstance(e, dict):
+                # Observations, not parsed facts. A parser change does not
+                # un-see the day a page last moved or the day an order first
+                # appeared - and dropping those reset both the drift clock
+                # and the undated-order clock on every deploy.
                 keep[code] = {k: e[k] for k in ("last_known_status",
-                                                "last_status_change_at")
+                                                "last_status_change_at",
+                                                "hash_changed_at",
+                                                "order_first_seen", "order_sig")
                               if k in e}
         cache = keep
     session = requests.Session()
