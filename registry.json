@@ -208,7 +208,12 @@
     "confidence_source": "cowork, promoted by verified feed",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "notification_channel": {
+      "type": "newsroom",
+      "detail": "https://www.gov.ca.gov/newsroom/#updates",
+      "status": "subscribed 2026-09-23; no bulletin received yet"
+    }
   },
   {
     "state": "Colorado",
@@ -520,7 +525,13 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "https://public.govdelivery.com/accounts/IACIO/subscriber/new?category_id=IACIO_C88",
+      "status": "subscribed 2026-09-23; no bulletin received yet",
+      "account": "IACIO"
+    }
   },
   {
     "state": "Idaho",
@@ -907,7 +918,13 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "https://public.govdelivery.com/accounts/MEGOV/subscriber/qualify",
+      "status": "subscribed 2026-09-23; no bulletin received yet",
+      "account": "MEGOV"
+    }
   },
   {
     "state": "Michigan",
@@ -1241,7 +1258,13 @@
     "confidence_source": "cowork (researched)",
     "confidence": "high",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "notification_channel": {
+      "type": "govdelivery",
+      "detail": "https://public.govdelivery.com/accounts/NEGOV/subscriber/new",
+      "status": "subscribed 2026-09-23; no bulletin received yet",
+      "account": "NEGOV"
+    }
   },
   {
     "state": "New Hampshire",
@@ -1572,8 +1595,9 @@
       "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts/Search?org=GOV"
     ],
     "notification_channel": {
-      "type": "email_form",
-      "detail": "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts/Subscribe"
+      "type": "newsroom",
+      "detail": "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts/Subscribe",
+      "status": "subscribed 2026-09-23; no bulletin received yet"
     }
   },
   {
@@ -1858,7 +1882,7 @@
       "script"
     ],
     "flag_page_url": "https://www.governor.virginia.gov/constituent-services/flag-information/",
-    "press_url": "https://www.virginia.gov",
+    "press_url": null,
     "signup_url": null,
     "root_domain": "www.virginia.gov",
     "rss_url": null,
@@ -1874,7 +1898,7 @@
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": null,
+    "quirk": "Newsroom is JavaScript-rendered: /newsroom/ and /newsroom/news-releases/ return navigation only (0 headline-length links) and there is no feed (/feed/, /rss.xml, /newsroom/feed/ all 404, checked 2026-09-23). The flag page is the only source, so Virginia is single-source by fact, not by oversight.",
     "last_order_seen": null,
     "last_order_date": null,
     "staleness_days": null,
@@ -1883,7 +1907,8 @@
     "confidence_source": "script only (unresearched)",
     "confidence": "medium",
     "confidence_caps": [],
-    "buildable": true
+    "buildable": true,
+    "no_secondary": true
   },
   {
     "state": "Vermont",

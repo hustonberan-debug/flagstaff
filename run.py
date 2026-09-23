@@ -1259,11 +1259,36 @@ def usable_second(url, primary):
     return True
 
 
+_DELIVERED = None
+
+
+def delivered_channels():
+    """State codes whose notification channel has delivered a flag ORDER.
+    A signup confirmation is not delivery: it proves the list exists, not
+    that the flag topic reaches us."""
+    global _DELIVERED
+    if _DELIVERED is None:
+        _DELIVERED = set((load_json(EMAIL_ORDERS, {}).get("channels_seen") or {}))
+    return _DELIVERED
+
+
 def secondary_rec(rec):
     """A record for this state's OTHER source, or None if it has only one."""
     mode = SECONDARY_MODE.get(rec.get("ingest_mode"))
     if not mode or rec.get("no_secondary"):
         return None
+    # A bulletin the state mailed us is the most independent second source
+    # there is: a different system, sent rather than scraped, and DKIM-signed
+    # by the sender. Prefer it over another page whenever the state has a
+    # channel. A channel that has never delivered simply reads as unknown,
+    # which is not a disagreement - so this wires itself up the day the first
+    # bulletin arrives, with no further change here.
+    # Only a channel that has actually delivered a flag order counts. A
+    # subscription that has never sent one answers "unknown" every run, which
+    # would have quietly replaced a working second source with silence.
+    if (rec.get("ingest_mode") != "email"
+            and rec["state_code"] in delivered_channels()):
+        return dict(rec, ingest_mode="email", _secondary=True)
     primary = pick_url(rec)
     if mode == "index":
         url = rec.get("press_url")
@@ -1340,9 +1365,11 @@ def check_state_consensus(rec, cache, session, verbose=False):
     srec = secondary_rec(rec)
     second = None
     if srec:
+        # The second reading gets its own cache slot but keeps the real state
+        # code: the email branch looks its bulletins up by code, and a renamed
+        # record would have read as "no bulletin" forever.
         key = f"{code}~2"
-        scache = {key: cache.get(key, {})}
-        srec = dict(srec, state_code=key)
+        scache = {code: cache.get(key, {})}
         try:
             _, second, scent = check_state(srec, scache, session)
             cents[key] = scent
