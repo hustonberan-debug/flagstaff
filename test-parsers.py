@@ -221,6 +221,11 @@ _, o2, c2 = R.check_state(rec, {"TT": c3}, None)
 t("SAME unchanged feed six days later: full, not the cached half",
   o2["state_status"], P.FULL)
 t("page text did not move", o2["content_changed"], False)
+t("a page we have never read reports unknown, not unchanged",
+  R.check_state({"state": "Testland", "state_code": "ZQ", "buildable": True,
+                 "ingest_mode": "diff",
+                 "flag_page_url": "https://zq.gov/flag"}, {}, None)[1]["content_changed"]
+  in (None, True), True)
 t("order page fetched once, then read from the per-URL cache", calls.get(ART), 1)
 
 print("\n--- freshness: frozen sources say so on EVERY run, not just the first ---")
@@ -1234,8 +1239,15 @@ t("an email channel quiet for 100 days is drift",
   [("CHANNEL", 100)])
 t("...but one that delivered last week is not",
   drift([wy], mail={"channels_heard": {"WY": "2026-09-14"}}), [])
-t("a channel we have never heard from is not drift (it is a declared gap)",
-  drift([wy], mail={}), [])
+# This used to assert the opposite: a channel we had never heard from was
+# treated as a declared gap and passed over. It is the one most worth
+# flagging - a signup that was never confirmed, a confirmation lost to spam
+# and a working list with nothing to say all look identical from here.
+t("a channel that has never delivered is reported, not passed over",
+  [d["kind"] for d in drift([wy], mail={})], ["NEVER"])
+t("a last-heard date we cannot parse is its own finding",
+  [d["kind"] for d in drift([wy], mail={"channels_heard": {"WY": "sometime"}})],
+  ["BAD STAMP"])
 t("states we do not build are not accused of drifting",
   drift([dict(az, buildable=False)], states={"AZ": {"source_age_days": 900}}), [])
 dd = drift([az], states={"AZ": {"source_age_days": 620, "effective_status": "full",

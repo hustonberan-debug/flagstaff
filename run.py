@@ -712,7 +712,10 @@ def check_state(rec, cache, session, verbose=False):
         # "back to full staff" pushes in a month while the flag never moved.
         "checked_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "last_changed_at": None,
-        "content_changed": False,
+        # None until we have actually read the page this run. False means "we
+        # read it and the text is identical"; those are different facts, and
+        # a failed fetch used to report the second.
+        "content_changed": None,
         "error": None,
     }
 
@@ -795,7 +798,8 @@ def check_state(rec, cache, session, verbose=False):
         else:
             out["state_status"] = P.FULL
         h = content_hash(json.dumps(o, sort_keys=True))
-        out["content_changed"] = bool(prev.get("hash")) and prev["hash"] != h
+        out["content_changed"] = (None if not prev.get("hash")
+                                  else prev["hash"] != h)
         return code, out, dict(prev, hash=h, state_status=out["state_status"],
                                state_order=out["state_order"],
                                order_first_seen=order_first_seen(prev, out["state_order"]),
@@ -882,7 +886,7 @@ def check_state(rec, cache, session, verbose=False):
             text = text + "\n" + "\n".join(extra)
 
     h = content_hash(text)
-    out["content_changed"] = bool(prev.get("hash")) and prev["hash"] != h
+    out["content_changed"] = (None if not prev.get("hash") else prev["hash"] != h)
 
     # Always parse. There used to be a shortcut here that reused the cached
     # verdict whenever the page hash was unchanged. Every verdict depends on
@@ -1541,7 +1545,7 @@ def main():
                        "source_url": pick_url(rec),
                        "checked_at": datetime.now(timezone.utc).isoformat(
                            timespec="seconds"),
-                       "last_changed_at": None, "content_changed": False,
+                       "last_changed_at": None, "content_changed": None,
                        "error": f"pipeline error: {type(e).__name__}"}
                 cents = {}
             results[code] = out
