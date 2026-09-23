@@ -57,8 +57,16 @@ HISTORY = "history.jsonl"
 TIMEOUT = 20
 WORKERS = 10
 MAX_ORDER_AGE_DAYS = 21      # how far back to look for candidate orders
-AMBIGUOUS_WINDOW_DAYS = 2    # undated order this recent -> unknown, not full
-RECENT_ORDER_GRACE_DAYS = 2  # an order this fresh with no end date is treated as live
+# An undated order is trusted as live for UNDATED_ORDER_DAYS, then stops
+# being trusted - but "not trusted" is not "over". For the rest of this
+# window the answer is Unclear, because we know neither that the order is
+# still running nor that the flags went back up. Past it, an order nobody has
+# mentioned in a week has almost certainly ended; orders that run longer are
+# nearly always dated, and holding Unclear forever would make every state
+# with an old undated flag release permanently unreadable.
+AMBIGUOUS_WINDOW_DAYS = 7    # undated order this recent -> unknown, not full
+UNDATED_ORDER_DAYS = 3       # how long an order with no stated end is trusted
+RECENT_ORDER_GRACE_DAYS = UNDATED_ORDER_DAYS   # old name, same number
 FROZEN_PAGE_DAYS = 180       # a status page unchanged this long is not trusted
 # An email channel that has sent nothing at all (any message, not just flag
 # orders) for this long is no longer evidence of "no order". The email states
@@ -110,9 +118,14 @@ def covers_today(start, end, d):
         # day when seven states were genuinely at half-staff — the worst
         # failure this product can have. A short grace window fixes that
         # without reviving the 60-day false positives from before.
-        if age <= RECENT_ORDER_GRACE_DAYS:
+        if age <= UNDATED_ORDER_DAYS:
             return True, f"order dated {s} ({age}d ago), no stated end - treated as live"
-        return False, f"started {s}, no end date, {age}d old, presumed concluded"
+        # NOT False. "Presumed concluded" published full staff off an order
+        # nobody ever said had ended - which is the same class of error as
+        # announcing one that never came, just in the other direction. We do
+        # not know the flags went back up, so we say we do not know.
+        return None, (f"order dated {s} stated no end date; undated orders are "
+                      f"not trusted beyond {UNDATED_ORDER_DAYS} days")
     return None, "no dates parsed"
 FETCH_BODY_LIMIT = 400_000   # don't hash megabytes of junk
 
@@ -519,6 +532,33 @@ def _pick_url(rec):
     return rec.get("press_url") or rec.get("flag_page_url")
 
 
+def undated_recent(start, d):
+    """Is an undated order recent enough that we cannot yet call it over?"""
+    if not start:
+        return False
+    try:
+        return 0 <= (d - date.fromisoformat(start)).days <= AMBIGUOUS_WINDOW_DAYS
+    except ValueError:
+        return False
+
+
+def order_sig(order):
+    """Identity of an order, for noticing when a NEW one replaces it."""
+    o = order or {}
+    return "|".join(str(o.get(k) or "") for k in ("url", "title", "evidence",
+                                                  "start_date", "end_date"))
+
+
+def order_first_seen(prev, order):
+    """The date this order first appeared, carried while it is the same order
+    and re-stamped when a different one replaces it."""
+    if not order:
+        return None
+    if prev.get("order_sig") == order_sig(order) and prev.get("order_first_seen"):
+        return prev["order_first_seen"]
+    return today().isoformat()
+
+
 def revalidate(prev, d):
     """Re-derive a carried-forward verdict for date d.
 
@@ -534,7 +574,25 @@ def revalidate(prev, d):
     start = order.get("start_date") or order.get("date")
     end = order.get("end_date")
     if not (start or end):
-        return st, order, None
+        # An order with no dates at all used to be carried forever: a state
+        # was still half-staff a YEAR later because its page never changed.
+        # Anchor on the day we first saw the order (or, for cache entries
+        # written before that stamp existed, the day the answer became half)
+        # and apply the same 3-day rule.
+        anchor = (prev.get("order_first_seen")
+                  or (prev.get("last_status_change_at") or "")[:10])
+        if not anchor:
+            return st, order, None
+        try:
+            age = (d - date.fromisoformat(anchor)).days
+        except ValueError:
+            return st, order, None
+        if age <= UNDATED_ORDER_DAYS:
+            return st, order, None
+        return P.UNKNOWN, None, {
+            "title": order.get("title"), "url": order.get("url"),
+            "why": (f"order first seen {anchor} stated no end date; undated "
+                    f"orders are not trusted beyond {UNDATED_ORDER_DAYS} days")}
     v, why = covers_today(start, end, d)
     if v:
         return P.HALF, dict(order, coverage_reason=why), None
@@ -709,6 +767,13 @@ def check_state(rec, cache, session, verbose=False):
                 "via": "official notification email",
             }
             out["error"] = ingest_err
+        elif v is None and o and undated_recent(o.get("start_date"), today()):
+            # The bulletin stated no end and is past the trust window. It used
+            # to fall through to "full staff": silence from a channel that has
+            # already told us the flags came down is not proof they went back
+            # up.
+            out.update(state_status=P.UNKNOWN, state_order=dict(o, coverage_reason=why),
+                       error=why)
         elif seen is None:
             out.update(state_status=P.UNKNOWN, coverage="not_covered",
                        error=ingest_err or ("subscription pending - no flag bulletin "
@@ -725,12 +790,17 @@ def check_state(rec, cache, session, verbose=False):
                        error=ingest_err)
             if expired:
                 out["last_expired_order"] = expired
+                if st == P.UNKNOWN and expired.get("why"):
+                    out["error"] = f"{ingest_err}; {expired['why']}"
         else:
             out["state_status"] = P.FULL
         h = content_hash(json.dumps(o, sort_keys=True))
         out["content_changed"] = bool(prev.get("hash")) and prev["hash"] != h
         return code, out, dict(prev, hash=h, state_status=out["state_status"],
                                state_order=out["state_order"],
+                               order_first_seen=order_first_seen(prev, out["state_order"]),
+                               order_sig=(order_sig(out["state_order"])
+                                          if out["state_order"] else None),
                                last_parsed=out["checked_at"],
                                last_checked=out["checked_at"])
 
@@ -791,6 +861,8 @@ def check_state(rec, cache, session, verbose=False):
                        error=f"{err}; last read {last_ok or 'never'}")
             if expired:
                 out["last_expired_order"] = expired
+                if st == P.UNKNOWN and expired.get("why"):
+                    out["error"] = f"{err}; {expired['why']}"
         return code, out, dict(prev, last_checked=out["checked_at"],
                                consecutive_errors=fails)
 
@@ -1113,7 +1185,7 @@ def check_state(rec, cache, session, verbose=False):
             out["state_order"] = dict(order, coverage_reason=why)
             out["error"] = ("flag order found, but its page could not be read "
                             "to date it" if order.get("dates_unavailable")
-                            else "recent order found but dates unparseable")
+                            else why or "recent order found but dates unparseable")
         elif items and mode in ("index", "cards") and not listing_ok:
             # "No flag headline among these links" is only evidence of full
             # staff if the links are press releases. These are not.
@@ -1160,6 +1232,10 @@ def check_state(rec, cache, session, verbose=False):
                             else prev.get("hash_changed_at") or out["checked_at"]),
         "state_status": out["state_status"],
         "state_order": out["state_order"],
+        # The day THIS order first appeared. An order with no dates has no
+        # other anchor, and without one it was carried forever.
+        "order_first_seen": order_first_seen(prev, out["state_order"]),
+        "order_sig": order_sig(out["state_order"]) if out["state_order"] else None,
         "last_parsed": out["checked_at"],
         "last_checked": out["checked_at"],
         "articles": articles,

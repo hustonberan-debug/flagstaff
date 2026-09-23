@@ -185,7 +185,12 @@ nd = {"state_status": P.HALF, "state_order": {
     "title": "x", "url": "u", "start_date": "2026-09-09", "end_date": None,
     "date": "2026-09-09"}}
 t("carried order live on its date", R.revalidate(nd, date(2026, 9, 9))[0], P.HALF)
-t("carried order expired 6 days later", R.revalidate(nd, date(2026, 9, 15))[0], P.FULL)
+# Not FULL. The order stated no end, so six days later we know neither that
+# it is still running nor that the flags went back up (policy, 2026-09-23).
+t("carried order with no stated end is not trusted 6 days later",
+  R.revalidate(nd, date(2026, 9, 15))[0], P.UNKNOWN)
+t("and it is no longer half either",
+  R.revalidate(nd, date(2026, 9, 15))[0] == P.HALF, False)
 t("statutory day not carried into the next day",
   R.revalidate({"state_status": P.HALF, "state_order": {
       "start_date": "2026-09-11", "end_date": "2026-09-11"}}, date(2026, 9, 12))[0],
@@ -1352,6 +1357,56 @@ for _i, _eff in enumerate(_seqs):
         _bad.append(_i)
     _cache = _nc
 t("a move to Unclear is never marked as a change", _bad, [])
+
+# --- undated orders are trusted for 3 days, then Unclear (not full) --------
+# 380 of 388 state half-staff transitions in history.jsonl had no parsed
+# dates, so this is the common path, not an edge case. An undated order used
+# to be carried forever: a state was still half-staff a year later because
+# its page never changed.
+_undated = {"title": "Flags at half-staff", "url": "https://x.gov/a",
+            "start_date": None, "end_date": None}
+def _carry(day):
+    return R.revalidate({"state_status": P.HALF, "state_order": _undated,
+                         "order_first_seen": "2026-09-20"},
+                        date(2026, 9, day))
+
+t("an undated order holds on day 1", _carry(20)[0], P.HALF)
+t("an undated order holds on day 3", _carry(23)[0], P.HALF)
+t("an undated order is Unclear on day 4", _carry(24)[0], P.UNKNOWN)
+t("and not full - we never saw the flags go back up", _carry(24)[0] == P.FULL, False)
+t("it drops the order rather than carrying it", _carry(24)[1], None)
+t("the reason says plainly why",
+  _carry(24)[2]["why"],
+  "order first seen 2026-09-20 stated no end date; undated orders are not "
+  "trusted beyond 3 days")
+t("it does not expire a year later either - it expired on day 4",
+  _carry(24)[0], R.revalidate({"state_status": P.HALF, "state_order": _undated,
+                               "order_first_seen": "2026-09-20"},
+                              date(2027, 9, 23))[0])
+
+# A dated start with no end runs through covers_today, same window.
+t("dated start, no end: live on day 3",
+  R.covers_today("2026-09-20", None, date(2026, 9, 23))[0], True)
+t("dated start, no end: not trusted on day 4",
+  R.covers_today("2026-09-20", None, date(2026, 9, 24))[0], None)
+t("and 'cannot tell' is not 'concluded'",
+  R.covers_today("2026-09-20", None, date(2026, 9, 24))[0] is False, False)
+
+# The source settles it. A page re-read that declares full staff is a fresh
+# answer, not a carried one, so it never reaches revalidate.
+_first = R.order_first_seen({"order_sig": R.order_sig(_undated),
+                             "order_first_seen": "2026-09-20"}, _undated)
+t("the same order keeps its first-seen date", _first, "2026-09-20")
+on(date(2026, 9, 24))
+t("a different order re-stamps it",
+  R.order_first_seen({"order_sig": "something else",
+                      "order_first_seen": "2026-09-20"}, _undated), "2026-09-24")
+t("no order, no stamp", R.order_first_seen({}, None), None)
+
+_full_page = {"state_status": P.FULL, "state_order": None,
+              "order_first_seen": "2026-09-20"}
+t("a source that now declares full overrides the undated order",
+  R.revalidate(_full_page, date(2026, 9, 24))[0], P.FULL)
 
 R.fetch, R.today = _real_fetch, _real_today
 
