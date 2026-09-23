@@ -1256,6 +1256,46 @@ t("an upcoming date 10 days out means the page was written about now (Ohio)",
   P.page_last_modified(f"<p>Proclamation declaring a day of service on {_d(10)}. "
                        f"Policy adopted September 11, 2001.</p>"), _today)
 
+# --- consensus: two readings only count when they are two documents --------
+t("a site root is not a second source (Virginia)",
+  R.usable_second("https://www.virginia.gov",
+                  "https://www.governor.virginia.gov/flag-information/"), False)
+t("a search view of the same listing is not a second source (Oregon)",
+  R.usable_second("https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts/Search?cat=Flag",
+                  "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts"), False)
+t("the same URL is not a second source",
+  R.usable_second("https://gov.example.gov/news", "https://gov.example.gov/news"), False)
+t("a status page on the same host is a second source",
+  R.usable_second("https://gov.example.gov/flag-status",
+                  "https://gov.example.gov/newsroom"), True)
+
+def _combined(a, b):
+    out = {"state_status": a, "state_order": {"evidence": "x"}, "source_url": "u1",
+           "error": None}
+    second = None if b is None else {"state_status": b, "source_url": "u2",
+                                     "state_order": {"evidence": "y"}}
+    return R.combine(out, second, {"ingest_mode": "diff"}, {"ingest_mode": "index"})
+
+t("two sources agreeing are recorded as corroborated",
+  _combined(P.HALF, P.HALF)["confidence_basis"],
+  "corroborated by 2 independent sources")
+t("two sources agreeing still publish the answer",
+  _combined(P.FULL, P.FULL)["state_status"], P.FULL)
+t("two sources disagreeing publish neither",
+  _combined(P.HALF, P.FULL)["state_status"], P.UNKNOWN)
+t("a disagreement names both readings",
+  "status page says half" in (_combined(P.HALF, P.FULL)["error"] or ""), True)
+t("a disagreement is recorded for the cross-check job",
+  bool(_combined(P.HALF, P.FULL).get("source_conflict")), True)
+t("one source answering is published and marked single-source",
+  _combined(P.HALF, None)["confidence_basis"], "single-source")
+t("a second source answers when the primary cannot",
+  _combined(P.UNKNOWN, P.FULL)["state_status"], P.FULL)
+t("that answer is still one reading",
+  _combined(P.UNKNOWN, P.FULL)["confidence_basis"].startswith("single-source"), True)
+t("a silent second source is not a disagreement",
+  _combined(P.HALF, P.UNKNOWN)["state_status"], P.HALF)
+
 R.fetch, R.today = _real_fetch, _real_today
 
 print(f"\n{'='*52}\n  {ok} passed, {bad} failed\n{'='*52}\n")

@@ -259,6 +259,19 @@ def stale_claim(state):
             "limit": s.get("limit_days")}
 
 
+def source_conflict(state):
+    """A disagreement-shaped record for a state whose OWN two sources
+    disagree. The pipeline already publishes Unclear for it; this is how a
+    human finds out that one of the two pages is wrong, which is a fact no
+    outside comparison can supply - both outside sites read the same pages."""
+    c = state.get("source_conflict")
+    if not c:
+        return None
+    return {"kind": "sources disagree", "ours": f"{c['a']['status']} ({c['a']['kind']})",
+            "theirs": f"{c['b']['status']} ({c['b']['kind']})",
+            "a": c["a"], "b": c["b"]}
+
+
 def drill(status, code):
     """Flip one state's answer IN MEMORY, to prove the job files a real issue.
     status.json on disk is never touched; main() verifies that."""
@@ -286,6 +299,8 @@ DRILL_PREFIX = "[DRILL] "
 def issue_title(code, name, d, is_drill=False):
     if d.get("kind") == "stale page":
         tail = "page says half-staff with no recent order"
+    elif d.get("kind") == "sources disagree":
+        tail = f"its own sources disagree ({d['ours']} vs {d['theirs']})"
     else:
         tail = f"we say {d['ours']}, {SOURCE_NAME} says {d['theirs']}"
     return f"{DRILL_PREFIX if is_drill else ''}{TITLE_PREFIX}{name} ({code}) - {tail}"
@@ -309,7 +324,8 @@ def issue_body(code, state, status, theirs, d, their_url, issue=None, now=None):
     ours_detail = (state.get("reason") or state.get("error")
                    or ("no order in effect" if d["ours"] == P.FULL else ""))
     what = {"conflict": "a conflict", "missed order": "a possible missed order",
-            "stale page": "a stale half-staff page"}[d["kind"]]
+            "stale page": "a stale half-staff page",
+            "sources disagree": "two of its own sources disagreeing"}[d["kind"]]
     title, window, why = order_line(state)
     lines = []
     if state.get("_drill"):
@@ -341,6 +357,17 @@ def issue_body(code, state, status, theirs, d, their_url, issue=None, now=None):
         f"  - read from: {their_url}",
         "",
     ]
+    if d["kind"] == "sources disagree":
+        lines += ["Two independent official pages for this state give different "
+                  "answers, so neither is published and the site shows Unclear:",
+                  "",
+                  f"- **{d['a']['kind']} says {d['a']['status']}** - {d['a']['url']}",
+                  f"- **{d['b']['kind']} says {d['b']['status']}** - {d['b']['url']}",
+                  "",
+                  "One of those two pages is wrong. An outside site cannot settle "
+                  "it - it reads the same pages. Open both and decide which one "
+                  "the governor's office actually maintains.",
+                  ""]
     if d["kind"] == "stale page":
         lines += [f"Its own status page declares half-staff but shows no order dated "
                   f"in the last {d['limit']} days (newest: "
@@ -473,7 +500,7 @@ def main():
             found[code] = d
     stale = {}
     for code, s in status["states"].items():
-        d = stale_claim(s)
+        d = stale_claim(s) or source_conflict(s)
         if d and code not in found:
             stale[code] = d
     if drilled and drilled not in found:
@@ -530,7 +557,7 @@ def main():
         title = issue_title(code, s.get("state", code), d, is_drill=bool(s.get("_drill")))
         body = issue_body(code, s, status, t, d, their_url,
                           issue=existing.get(issue_key(title)), now=now)
-        print(f"  {'STALE PAGE' if d['kind'] == 'stale page' else 'DISAGREE'} {code}: "
+        print(f"  {d['kind'].upper()} {code}: "
               f"we say {d['ours']}, {SOURCE_NAME} says {d['theirs'] or t.get('status')} "
               f"({d['kind']})")
         report.append(f"- **{code}** ({d['kind']}): we say {d['ours']}, "

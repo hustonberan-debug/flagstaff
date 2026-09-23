@@ -1214,6 +1214,149 @@ def track_changes(results, cache, new_cache, legacy_floor=None):
 
 
 # ---------------------------------------------------------------------------
+# Consensus: more than one reading per state where we have one
+# ---------------------------------------------------------------------------
+# Most states rest on a single source, so one wrong page becomes a wrong
+# published answer - Oklahoma's stale badge, Arizona frozen for 19 months,
+# Michigan's alt text, Nebraska's city order. Where a state has a genuinely
+# separate source, both are read and compared.
+#
+# Independence is what counts, not the number of readings. Oklahoma's badge
+# had three agreeing signals - href, alt text and link text - and all three
+# were the same wrong page. A status page and a press listing are different
+# documents maintained by different people; a page and its own RSS are not,
+# so they are never paired here.
+SECONDARY_MODE = {"diff": "index", "toggle": "index", "index": "diff",
+                  "cards": "diff", "archive": "diff", "feed": "diff", "email": "diff"}
+
+
+def usable_second(url, primary):
+    """Is this URL a genuinely separate document from the primary one?
+
+    Two rejections, both learned the hard way:
+
+    A site root is not a source. Virginia's press_url is www.virginia.gov,
+    the state portal home page - reading it would produce a confident-looking
+    second reading of a page that never carries a flag order.
+
+    A page inside another page is not a second source. Oregon's "flag page"
+    is its newsroom search filtered to the category "Flag at half staff" -
+    same application, same posts, and the category name in the chrome reads
+    as a half-staff declaration. On the first run with consensus enabled it
+    turned Oregon half-staff off the search filter label. Two readings of one
+    document are one source, which is the whole point of this layer.
+    """
+    if not url or url == primary:
+        return False
+    from urllib.parse import urlparse
+    a, b = urlparse(url), urlparse(primary or "")
+    if not url or len(a.path.strip("/")) == 0:
+        return False
+    if a.netloc == b.netloc:
+        pa, pb = a.path.strip("/"), b.path.strip("/")
+        if pa.startswith(pb) or pb.startswith(pa):
+            return False
+    return True
+
+
+def secondary_rec(rec):
+    """A record for this state's OTHER source, or None if it has only one."""
+    mode = SECONDARY_MODE.get(rec.get("ingest_mode"))
+    if not mode or rec.get("no_secondary"):
+        return None
+    primary = pick_url(rec)
+    if mode == "index":
+        url = rec.get("press_url")
+        if not usable_second(url, primary):
+            return None
+        return dict(rec, ingest_mode="index", press_url=url, flag_page_url=None,
+                    render=False, url_candidates=None, _secondary=True)
+    url = rec.get("flag_page_url")
+    if not usable_second(url, primary):
+        return None
+    return dict(rec, ingest_mode="diff", flag_page_url=url, render=False,
+                url_candidates=None, listing_pages=None, _secondary=True)
+
+
+def source_kind(rec):
+    return {"diff": "status page", "toggle": "status page", "email": "email bulletin",
+            "cards": "press listing", "index": "press listing",
+            "archive": "press listing", "feed": "press feed"}.get(
+                rec.get("ingest_mode"), rec.get("ingest_mode"))
+
+
+def combine(out, second, rec, second_rec):
+    """Fold a second reading into the published answer.
+
+    Two agreeing -> publish, recorded as corroborated. Two disagreeing ->
+    Unclear, with both readings and both URLs, because a disagreement is
+    information. One reading only -> publish it, marked single-source, so how
+    much of the map rests on one page is visible rather than implied.
+    """
+    a, b = out["state_status"], (second or {}).get("state_status")
+    out["sources"] = [{"kind": source_kind(rec), "url": out.get("source_url"),
+                       "status": a, "evidence": (out.get("state_order") or {}).get("evidence")
+                       or (out.get("state_order") or {}).get("title") or out.get("error")}]
+    if not second:
+        out["confidence_basis"] = "single-source"
+        return out
+    out["sources"].append({"kind": source_kind(second_rec), "url": second.get("source_url"),
+                           "status": b,
+                           "evidence": (second.get("state_order") or {}).get("evidence")
+                           or (second.get("state_order") or {}).get("title")
+                           or second.get("error")})
+    definite = {P.HALF, P.FULL}
+    if a in definite and b in definite:
+        if a == b:
+            out["confidence_basis"] = "corroborated by 2 independent sources"
+        else:
+            out["source_conflict"] = {
+                "ours": a, "other": b,
+                "a": {"kind": source_kind(rec), "url": out.get("source_url"), "status": a},
+                "b": {"kind": source_kind(second_rec), "url": second.get("source_url"),
+                      "status": b}}
+            out["state_status"] = P.UNKNOWN
+            out["state_order"] = None
+            out["confidence_basis"] = "sources disagree"
+            out["error"] = (f"its {source_kind(rec)} says {a} and its "
+                            f"{source_kind(second_rec)} says {b} - two independent "
+                            f"readings disagree, so neither is published")
+    elif b in definite and a not in definite:
+        # Our primary could not answer; the second source could. Publishing
+        # it is still one reading, so it is marked as such.
+        out["state_status"] = b
+        out["state_order"] = second.get("state_order")
+        out["error"] = None
+        out["confidence_basis"] = f"single-source ({source_kind(second_rec)}; primary: {out.get('error') or a})"
+    else:
+        out["confidence_basis"] = "single-source" if a in definite else "no source answered"
+    return out
+
+
+def check_state_consensus(rec, cache, session, verbose=False):
+    """check_state, plus a second independent reading where one exists."""
+    code, out, cent = check_state(rec, cache, session, verbose)
+    cents = {code: cent}
+    srec = secondary_rec(rec)
+    second = None
+    if srec:
+        key = f"{code}~2"
+        scache = {key: cache.get(key, {})}
+        srec = dict(srec, state_code=key)
+        try:
+            _, second, scent = check_state(srec, scache, session)
+            cents[key] = scent
+        except Exception as e:
+            print(f"  {code} second source failed: {type(e).__name__}")
+            second = None
+        if second and second.get("state_status") == P.UNKNOWN and second.get("error"):
+            # A second source that cannot answer is not a disagreement.
+            pass
+    combine(out, second, rec, srec or rec)
+    return code, out, cents
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -1263,12 +1406,12 @@ def main():
     results, new_cache = {}, dict(cache)
     new_cache["_parser_version"] = PARSER_VERSION
     with cf.ThreadPoolExecutor(max_workers=WORKERS) as ex:
-        futs = {ex.submit(check_state, r, cache, requests.Session(),
+        futs = {ex.submit(check_state_consensus, r, cache, requests.Session(),
                           bool(args.state)): r
                 for r in targets}
         for f in cf.as_completed(futs):
             try:
-                code, out, cent = f.result()
+                code, out, cents = f.result()
             except Exception as e:
                 # Never drop a state from the output: the page builds its
                 # dropdown from status.json, so a missing state also erased
@@ -1285,10 +1428,9 @@ def main():
                            timespec="seconds"),
                        "last_changed_at": None, "content_changed": False,
                        "error": f"pipeline error: {type(e).__name__}"}
-                cent = None
+                cents = {}
             results[code] = out
-            if cent:
-                new_cache[code] = cent
+            new_cache.update({k: v for k, v in (cents or {}).items() if v})
 
     # --- Merge federal over state ------------------------------------------
     for code, s in results.items():
