@@ -123,6 +123,7 @@ jobs:
         run: python3 run.py
 
       - name: Sanity-check before publishing
+        id: sanity
         # Guard against publishing garbage. If coverage collapses, something
         # upstream broke — fail the job and keep the last good status.json.
         # Stale-but-correct beats fresh-and-wrong.
@@ -142,6 +143,7 @@ jobs:
           PY
 
       - name: Commit if anything changed
+        id: commit
         run: |
           git config user.name  "flag-bot"
           git config user.email "flag-bot@users.noreply.github.com"
@@ -166,15 +168,23 @@ jobs:
           # There is nothing to reconcile: the newest run is authoritative.
           # `-X ours` resolves every conflict in favour of what we just
           # generated, and real code changes still merge normally.
+          # A push that never succeeded used to exit 0 anyway. That made
+          # "published" and "tried three times and failed" the same value,
+          # and the consequence was not cosmetic: cache.json holds the memory
+          # of what we have already announced, so a lost push means the next
+          # run re-detects the same change and pushes a second notification
+          # for it. Fail here instead - the notify step is gated on this.
           for i in 1 2 3; do
             git fetch origin main || true
             git merge -X ours --no-edit origin/main || git merge --abort || true
             if git push; then
               echo "pushed"
-              break
+              exit 0
             fi
             sleep 5
           done
+          echo "::error::could not push after 3 attempts - status.json and cache.json were NOT published"
+          exit 1
 
       - name: Verify the committed JSON is readable
         # A file that parses locally can still be corrupted by a bad merge.
@@ -187,8 +197,14 @@ jobs:
         # being published. But DO surface the error — this step silently
         # crashed on its first line for days, so every notification the
         # pipeline should have sent was simply never sent.
+        #
+        # Gated on the publish actually happening. `always()` alone meant a
+        # run whose sanity check REFUSED to publish still notified
+        # subscribers from the file it had just refused, and a run whose push
+        # failed notified without persisting cache.json — so the next run
+        # announced the same change again. Only announce what was published.
         id: notify
-        if: always()
+        if: always() && steps.sanity.outcome == 'success' && steps.commit.outcome == 'success'
         continue-on-error: true
         env:
           NOTIFY_URL: ${{ vars.NOTIFY_URL }}
@@ -293,6 +309,11 @@ jobs:
                             ("Rendered pages - render", "RENDER_OUTCOME")):
               if os.environ.get(var) == "failure":
                   print(f"::warning::'{step}' FAILED (hidden by continue-on-error) - see its log")
+          # A skipped notify is not a quiet run: it means nothing was
+          # published, so any real change this run went unannounced.
+          if os.environ.get("NOTIFY_OUTCOME") == "skipped":
+              print("::warning::Notify was SKIPPED because this run did not publish - "
+                    "any status change it found was not announced")
           # A state bulletin dropped for failing DKIM is either a forgery or a
           # real channel we have stopped reading. Either way a human must look.
           try:

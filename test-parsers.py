@@ -1296,6 +1296,63 @@ t("that answer is still one reading",
 t("a silent second source is not a disagreement",
   _combined(P.HALF, P.UNKNOWN)["state_status"], P.HALF)
 
+# --- the notification path: once per real change, never on Unclear ---------
+# Every entry here is a real sequence this pipeline has produced. The claim
+# being proved is narrow and exact: a subscriber hears from us once when the
+# answer moves between half and full, and never because a page broke.
+def replay(seq):
+    """Run a sequence of daily answers through track_changes and return the
+    states that would have been PUSHED, run by run (the workflow only sends
+    for an answer of half or full)."""
+    cache, sent = {}, []
+    for i, eff in enumerate(seq):
+        results = {"ZZ": {"effective_status": eff, "state_status": eff,
+                          "checked_at": f"2026-09-{i + 1:02d}T00:00:00+00:00",
+                          "state_order": None}}
+        new_cache = dict(cache)
+        R.track_changes(results, cache, new_cache)
+        s = results["ZZ"]
+        if s["changed"] and s["effective_status"] in (P.HALF, P.FULL):
+            sent.append((i, s["effective_status"]))
+        cache = new_cache
+    return sent
+
+t("the first known answer is not a change to announce",
+  replay([P.FULL]), [])
+t("full -> half notifies once",
+  replay([P.FULL, P.HALF]), [(1, P.HALF)])
+t("half held for days notifies once, not daily",
+  replay([P.FULL, P.HALF, P.HALF, P.HALF]), [(1, P.HALF)])
+t("half -> full notifies once",
+  replay([P.FULL, P.HALF, P.HALF, P.FULL]), [(1, P.HALF), (3, P.FULL)])
+t("a page that breaks mid-order announces nothing",
+  replay([P.FULL, P.HALF, P.UNKNOWN, P.UNKNOWN]), [(1, P.HALF)])
+t("and recovering to the SAME answer announces nothing",
+  replay([P.FULL, P.HALF, P.UNKNOWN, P.HALF]), [(1, P.HALF)])
+t("a real move that happened while the page was broken still announces once",
+  replay([P.FULL, P.HALF, P.UNKNOWN, P.FULL]), [(1, P.HALF), (3, P.FULL)])
+t("a state that starts unknown announces nothing when it first resolves",
+  replay([P.UNKNOWN, P.UNKNOWN, P.FULL]), [])
+t("flapping between half and full announces each real move",
+  replay([P.FULL, P.HALF, P.FULL, P.HALF]),
+  [(1, P.HALF), (2, P.FULL), (3, P.HALF)])
+
+# The workflow filters on effective_status before sending. Prove no state can
+# reach that filter marked changed while its answer is unknown - that is the
+# push that would have read as "back to full staff".
+_seqs = [P.FULL, P.HALF, P.UNKNOWN, P.HALF, P.UNKNOWN, P.FULL, P.UNKNOWN]
+_cache, _bad = {}, []
+for _i, _eff in enumerate(_seqs):
+    _res = {"ZZ": {"effective_status": _eff, "state_status": _eff,
+                   "checked_at": f"2026-10-{_i + 1:02d}T00:00:00+00:00",
+                   "state_order": None}}
+    _nc = dict(_cache)
+    R.track_changes(_res, _cache, _nc)
+    if _res["ZZ"]["changed"] and _eff == P.UNKNOWN:
+        _bad.append(_i)
+    _cache = _nc
+t("a move to Unclear is never marked as a change", _bad, [])
+
 R.fetch, R.today = _real_fetch, _real_today
 
 print(f"\n{'='*52}\n  {ok} passed, {bad} failed\n{'='*52}\n")
