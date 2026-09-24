@@ -22,6 +22,8 @@ on:
       - 'test-parsers.py'
       - 'test-history.py'
       - 'render_fetch.py'
+      - 'notify.py'
+      - 'test-notify.py'
       # The site's own files: a change to them re-stamps version.json at once
       # rather than on the next scheduled run.
       - 'index.html'
@@ -40,7 +42,8 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # 10 was enough for the pipeline; a large notification fan-out needs room.
+    timeout-minutes: 25
 
     steps:
       - uses: actions/checkout@v4
@@ -59,6 +62,12 @@ jobs:
         # noticing.
         timeout-minutes: 2
         run: python3 test-parsers.py
+
+      - name: Notify tests
+        # The fan-out that tells subscribers, against a fake Worker. If this
+        # is broken, a real change would be announced to nobody.
+        timeout-minutes: 2
+        run: python3 test-notify.py
 
       - name: Read notification emails
         # Push ingest for states that cannot be scraped. Never fails the job:
@@ -250,138 +259,22 @@ jobs:
         # subscribers from the file it had just refused, and a run whose push
         # failed notified without persisting cache.json — so the next run
         # announced the same change again. Only announce what was published.
+        #
+        # The fan-out itself is in notify.py: the Worker is called in chunks
+        # (one invocation reaches ~14-40 people on the free plan), every chunk
+        # carries an idempotency id, and a chunk whose answer is lost to a
+        # timeout is RETRIED - the Worker answers a repeat from its record
+        # instead of sending again. A duplicate alert is far less harmful
+        # than a missed one. Tested in test-notify.py (here) and against the
+        # real Worker in push-worker (npm run test:integration).
         id: notify
         if: always() && steps.sanity.outcome == 'success' && steps.commit.outcome == 'success'
+        # A national broadcast to thousands is a few hundred Worker calls.
+        timeout-minutes: 12
         env:
           NOTIFY_URL: ${{ vars.NOTIFY_URL }}
           NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
-        run: |
-          python3 - <<'PY'
-          import json, os, socket, time, urllib.request, urllib.error
-
-          url = os.environ.get("NOTIFY_URL")
-          secret = os.environ.get("NOTIFY_SECRET")
-          if not url or not secret:
-              # Not configured means no subscriber hears anything, ever.
-              print("::error::NOTIFY_URL / NOTIFY_SECRET not set - no push notifications are being sent")
-              raise SystemExit(1)
-
-          try:
-              s = json.load(open("status.json"))
-          except Exception as e:
-              print(f"::error::status.json unreadable ({e}) - could not notify")
-              raise SystemExit(1)
-
-          # A national proclamation lowers flags in every state at once, so
-          # every state's "changed" flag flips together. That is ONE event,
-          # not 51 — send a single broadcast on the "US" channel, which the
-          # Worker fans out to all subscribers.
-          # run.py decides whether a national order is NEW, because it
-          # writes cache.json before the commit step and so its memory
-          # actually persists between runs. This step just obeys.
-          # "changed" means the answer moved between half and full (run.py).
-          # A move to "unknown" is never pushed: the service worker would
-          # have rendered it as "back to full staff".
-          fed = s.get("federal")
-          if fed:
-              changed = ["US"] if fed.get("_changed") else []
-          else:
-              changed = [c for c, v in s["states"].items()
-                         if v.get("changed")
-                         and v.get("effective_status") in ("half", "full")]
-
-          if not changed:
-              print("No changes this run - nothing to notify.")
-              raise SystemExit(0)
-
-          def reported_failures(body):
-              """Failures the Worker reports inside a 200: a fan-out that
-              reached only some subscribers is not a success."""
-              try:
-                  d = json.loads(body)
-              except Exception:
-                  return None
-              if not isinstance(d, dict):
-                  return None
-              for k in ("failed", "failures", "errors"):
-                  v = d.get(k)
-                  if (isinstance(v, int) and v > 0) or (isinstance(v, list) and v):
-                      return f"{k}={v if isinstance(v, int) else len(v)}"
-              if d.get("ok") is False or d.get("error"):
-                  return f"error={d.get('error') or 'ok:false'}"
-              return None
-
-          def send(req):
-              """One attempt, retried ONLY when the request never reached the
-              Worker (no connection). A timeout or an HTTP error may mean it
-              did arrive and pushes went out, so they fail the job instead.
-
-              Decided 2026-09-24: a duplicate alert is far less harmful than
-              a missed one, so these WOULD be retried with an idempotency key
-              - if the Worker could dedupe. It cannot: handleNotify in
-              push-worker/worker.js keeps no record of what it has sent, and
-              pushes to every matching subscriber on every call. A retried
-              timeout would alert everyone twice. To enable retries, the
-              Worker must first store each notification's key (for example in
-              KV with a day's TTL) and answer a repeat without sending. Until
-              then a timeout fails the job, which is visible, and stops."""
-              for attempt in range(3):
-                  try:
-                      with urllib.request.urlopen(req, timeout=20) as r:
-                          return r.read().decode(errors="replace"), None
-                  except urllib.error.HTTPError as e:
-                      return None, f"HTTP {e.code} {e.read().decode(errors='replace')[:200]}"
-                  except urllib.error.URLError as e:
-                      if isinstance(e.reason, (socket.timeout, TimeoutError)):
-                          return None, f"timed out ({e.reason}) - not retried, it may have been delivered"
-                      if attempt < 2:
-                          time.sleep(5 * (attempt + 1))
-                          continue
-                      return None, f"could not reach the Worker: {e.reason}"
-                  except (socket.timeout, TimeoutError) as e:
-                      return None, f"timed out ({e}) - not retried, it may have been delivered"
-              return None, "unreachable"
-
-          failed = []
-          for code in changed:
-              if code == "US":
-                  status = "half"
-                  reason = (fed or {}).get("reason") or "National half-staff order"
-              else:
-                  st = s["states"].get(code, {})
-                  status = st.get("effective_status", "unknown")
-                  reason = st.get("reason")
-
-              payload = json.dumps({
-                  "state": code,
-                  "status": status,
-                  "reason": reason,
-                  "url": "https://halfstaffnow.com/",
-              }).encode()
-
-              # urllib sends "Python-urllib/3.x" by default, which Cloudflare
-              # rejects with 403 before the request reaches the Worker.
-              req = urllib.request.Request(
-                  url.rstrip("/") + "/notify", data=payload,
-                  headers={"Content-Type": "application/json",
-                           "Authorization": f"Bearer {secret}",
-                           "User-Agent": "halfstaffnow-pipeline/1.0 "
-                                         "(+https://halfstaffnow.com)",
-                           "Accept": "application/json"})
-              body, err = send(req)
-              if err is None:
-                  err = reported_failures(body)
-                  print(code, body)
-              if err:
-                  print(f"::error::notify failed for {code}: {err}")
-                  failed.append(code)
-
-          if failed:
-              # Every state was attempted first; one failure must not stop
-              # the others going out.
-              raise SystemExit(f"notifications failed for {' '.join(failed)} - "
-                               f"subscribers to those were NOT told")
-          PY
+        run: python3 notify.py status.json
 
       - name: Email ingest health
         # The Gmail app password is revoked by any Google password change or
