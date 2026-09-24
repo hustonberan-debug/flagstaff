@@ -1,0 +1,64 @@
+name: Daily canary
+
+# Looks at the PUBLISHED site the way a visitor does - halfstaffnow.com, not
+# the repo - once a day, including a real browser visit through the service
+# worker. The pipeline stayed green through three outages found hours later
+# by hand: wiped VAPID keys, conflict markers in status.json, and a service
+# worker serving a stale build. Any failure opens or updates one issue; a
+# clean run closes it.
+#
+# Read-only on the repo: it can file issues, and cannot change anything the
+# site serves.
+
+on:
+  schedule:
+    - cron: '7 13 * * *'      # 13:07 UTC - early morning in the US
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'canary.py'
+      - 'test-canary.py'
+      - '.github/workflows/canary.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: canary
+  cancel-in-progress: false
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Restore browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.63.0-chromium-headless-shell
+
+      - name: Install
+        run: |
+          pip install requests playwright==1.63.0
+          python3 -m playwright install --with-deps --only-shell chromium
+
+      - name: Canary tests
+        # The canary must be shown to catch each failure it exists for, on a
+        # deliberately broken local copy of the site, before its "all clear"
+        # is believed.
+        timeout-minutes: 5
+        run: python3 test-canary.py
+
+      - name: Check the live site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 canary.py
