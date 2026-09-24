@@ -4,8 +4,11 @@ name: Daily canary
 # the repo - once a day, including a real browser visit through the service
 # worker. The pipeline stayed green through three outages found hours later
 # by hand: wiped VAPID keys, conflict markers in status.json, and a service
-# worker serving a stale build. Any failure opens or updates one issue; a
-# clean run closes it.
+# worker serving a stale build. It also reads the pipeline's own run history,
+# because a dead nudge (worker/nudge.js) is invisible in the published files:
+# the pipeline keeps running on GitHub's fallback cron and the site just goes
+# quietly 3h stale. Any failure opens or updates one issue; a clean run closes
+# it.
 #
 # Read-only on the repo: it can file issues, and cannot change anything the
 # site serves.
@@ -24,6 +27,7 @@ on:
 permissions:
   contents: read
   issues: write
+  actions: read               # read the pipeline's run history (cadence check)
 
 concurrency:
   group: canary

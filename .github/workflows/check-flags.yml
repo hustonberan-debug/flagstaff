@@ -7,9 +7,31 @@ name: Check flag status
 
 on:
   schedule:
-    # Every 30 minutes. GitHub's scheduler is best-effort and can lag several
-    # minutes under load, which is fine here. Don't go below 15 minutes; you
-    # get throttled and gain nothing.
+    # READ THIS BEFORE TRUSTING THE NUMBER BELOW.
+    #
+    # This asks for 48 runs a day. GitHub delivers about 6.5. Measured over the
+    # 30 days of run history the API retains (schedule-event runs only):
+    #
+    #   runs/day    6.9        (asked for 48)
+    #   median gap  3.2h       (asked for 30m)
+    #   p90 gap     ~5.5h
+    #   worst gap   12.5h
+    #
+    # It is not lag - it is dropped firings. The start minutes are scattered
+    # evenly across the hour rather than drifting from :00/:30, so the
+    # scheduler is running whichever firing it gets to and discarding the rest.
+    # Jobs are not the cause: runs take ~75s and 298 of the last 300 succeeded,
+    # so the `flag-check` concurrency group is not skipping anything. The daily
+    # canary, a separate workflow on `7 13 * * *`, started at 17:49 the same
+    # day - the same starvation, not something specific to this workflow.
+    #
+    # So the real publish cadence is ABOUT EVERY 3 HOURS, and anything that
+    # reasons about freshness must be set against that, not against `*/30`.
+    # A 2h staleness threshold in canary.py was set against the nominal
+    # interval and filed a false outage issue on a healthy day.
+    #
+    # Lowering this number will not help; GitHub's shared cron is the limit.
+    # Sub-hour freshness needs an external nudge calling workflow_dispatch.
     - cron: '*/30 * * * *'
   workflow_dispatch:          # lets you trigger a run by hand from the Actions tab
   push:

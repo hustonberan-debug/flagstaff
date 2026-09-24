@@ -50,15 +50,42 @@ t("a good status.json passes", C.check_status(json.dumps(GOOD), NOW), [])
 t("git conflict markers are caught",
   caught(C.check_status("<<<<<<< HEAD\n{}\n=======\n{}\n>>>>>>> x\n", NOW), "conflict markers"), True)
 t("a file that does not parse is caught", caught(C.check_status("{nope", NOW), "does not parse"), True)
-t("a status.json 3 hours old is caught",
-  caught(C.check_status(json.dumps(dict(GOOD, generated_at="2026-09-24T09:00:00+00:00")), NOW),
-         "stopped publishing"), True)
+# GitHub's scheduler delivers the `*/30` cron about 6.5 times a day, not 48:
+# a 3h gap is a normal day, not an outage. The canary used to fail on this and
+# filed an issue most mornings. See STATUS_MAX_AGE in canary.py.
+t("a status.json 3 hours old PASSES - that is the real cadence",
+  C.check_status(json.dumps(dict(GOOD, generated_at="2026-09-24T09:00:00+00:00")), NOW), [])
+t("a status.json 11 hours old is caught",
+  caught(C.check_status(json.dumps(dict(GOOD, generated_at="2026-09-24T01:00:00+00:00")), NOW),
+         "last publish was"), True)
 t("the sample payload is caught",
   caught(C.check_status(json.dumps(dict(GOOD, _sample=True)), NOW), "sample"), True)
 t("missing states are caught",
   caught(C.check_status(json.dumps(dict(GOOD, states={"OH": {}})), NOW), "1 states"), True)
 t("collapsed coverage is caught",
   caught(C.check_status(json.dumps(dict(GOOD, meta={"covered": 12})), NOW), "only 12"), True)
+
+print("\n--- pipeline cadence ---")
+# A dead nudge is the one failure that shows up nowhere else: the pipeline
+# keeps running on GitHub's fallback cron, status.json keeps being published,
+# and the site is simply 3h stale for ever with nothing saying so.
+def runs(*specs):
+    return [(e, NOW - timedelta(minutes=m)) for e, m in specs]
+
+NUDGED = runs(("workflow_dispatch", 5), ("workflow_dispatch", 20),
+              ("workflow_dispatch", 35), ("schedule", 150))
+t("a healthy nudged pipeline passes", C.check_cadence(NUDGED, NOW), [])
+t("a dead nudge is caught even though the pipeline is still running",
+  caught(C.check_cadence(runs(("schedule", 40), ("schedule", 220)), NOW),
+         "has not fired"), True)
+t("a dead nudge does NOT also claim the pipeline stopped",
+  caught(C.check_cadence(runs(("schedule", 40)), NOW), "has not RUN"), False)
+t("a pipeline that stopped entirely is caught",
+  caught(C.check_cadence(runs(("workflow_dispatch", 600)), NOW), "has not RUN"), True)
+t("a nudge that last fired 3 hours ago is caught (outside the window)",
+  caught(C.check_cadence(runs(("workflow_dispatch", 180), ("schedule", 30)), NOW),
+         "has not fired"), True)
+t("no runs at all is caught", caught(C.check_cadence([], NOW), "no runs"), True)
 
 print("\n--- config.js and the Worker ---")
 t("a good config.js passes", C.check_config(CONFIG), [])

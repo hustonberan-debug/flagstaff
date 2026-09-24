@@ -30,8 +30,43 @@ SITE = os.environ.get("CANARY_SITE", "https://halfstaffnow.com").rstrip("/")
 REPO = os.environ.get("GITHUB_REPOSITORY", "hustonberan-debug/flagstaff")
 SITE_FILES = ["index.html", "sw.js", "config.js", "manifest.json"]
 
-STATUS_MAX_AGE = timedelta(hours=2)      # the pipeline publishes every 30 minutes
+# How long since the last publish before we call it a problem.
+#
+# NOT derived from check-flags.yml's `*/30` cron. That cron asks for 48 runs a
+# day and GitHub's shared scheduler delivers about 6.5 - measured over the 30
+# days of run history the API retains: median gap between scheduled runs 3.2h,
+# p90 about 5.5h, worst observed 12.5h. A 2h threshold here was set against the
+# nominal interval and fired on healthy days.
+#
+# 8h passes the normal spread and still catches a pipeline that has genuinely
+# stopped. If you make the schedule actually deliver every 30 minutes, lower
+# this to match what you then measure - not to what the cron claims.
+STATUS_MAX_AGE = timedelta(hours=8)
+
+# This reads as "time since we last RAN", not "time since the answer last
+# CHANGED", and only because run.py stamps generated_at with the wall clock on
+# every run, so status.json differs every time and is committed every time.
+# That is load-bearing. If generated_at ever becomes change-only, this check
+# silently starts measuring the wrong fact and a frozen pipeline reads as calm.
 EXPECTED_STATES = 51                     # 50 states and DC
+
+# The pipeline is nudged every 15 minutes by the Cloudflare Worker (see
+# worker/nudge.js), with GitHub's own ~3h cron left in place underneath as the
+# fallback. Those two facts need two different checks, because the failure we
+# care about is invisible from the published files:
+#
+#   If the nudge dies, the pipeline KEEPS RUNNING on GitHub's cron. status.json
+#   keeps being published. Nothing looks wrong - it is just 3h stale instead of
+#   15m stale, forever, with nothing saying so.
+#
+# So STATUS_MAX_AGE above stays wide enough to tolerate the fallback (a
+# degraded pipeline is not an outage), and the cadence check below is what
+# actually notices the nudge is gone. It is measured from RUNS, via the Actions
+# API - not from status.json's timestamp. "Nothing has run" and "nothing has
+# changed" are two different facts and must not share one value.
+NUDGE_WINDOW = timedelta(hours=2)        # 15-minute nudge -> expect ~8 in here
+RUN_MAX_AGE = timedelta(hours=8)         # nothing ran at all, on either path
+PIPELINE_WORKFLOW = "check-flags.yml"
 MIN_COVERED = 35                         # 43 today; the pipeline refuses below 20
 STAMP_GRACE = timedelta(minutes=45)      # a site change is stamped on the next run
 PROBE_STATE = "OH"                       # the state the browser check picks
@@ -62,8 +97,14 @@ def check_status(text, now):
     try:
         age = now - datetime.fromisoformat(gen)
         if age > STATUS_MAX_AGE:
-            problems.append(f"status.json is {age.total_seconds() / 3600:.1f}h old "
-                            f"(generated {gen}) - the pipeline has stopped publishing")
+            # Report the observation, not a diagnosis. The old wording said the
+            # pipeline "has stopped publishing", which was a guess - and on the
+            # run that filed issue #15 it was a wrong one: the pipeline had run
+            # 4h10m earlier, exactly on its real cadence.
+            problems.append(f"the last publish was {age.total_seconds() / 3600:.1f}h ago "
+                            f"(status.json generated {gen}) - longer than the "
+                            f"{STATUS_MAX_AGE.total_seconds() / 3600:.0f}h we expect "
+                            f"between runs")
     except (TypeError, ValueError):
         problems.append(f"status.json has no readable generated_at ({gen!r})")
     if s.get("_sample"):
@@ -135,6 +176,44 @@ def check_version(stamp, latest, now):
         return []                        # the next pipeline run will stamp it
     return [f"the published site version is {str(got or '')[:7] or 'missing'}, but the latest "
             f"site commit is {sha[:7]} ({when:%Y-%m-%d %H:%M} UTC)"]
+
+
+def check_cadence(runs, now):
+    """Is the pipeline running, and is it running on the nudge or limping along
+    on GitHub's fallback cron? `runs` is [(event, started_at)], newest first."""
+    if not runs:
+        return ["no runs of the pipeline workflow were found at all"]
+    problems = []
+    newest = max(t for _, t in runs)
+    if now - newest > RUN_MAX_AGE:
+        problems.append(f"the pipeline has not RUN for "
+                        f"{(now - newest).total_seconds() / 3600:.1f}h "
+                        f"(last run {newest:%Y-%m-%d %H:%M} UTC)")
+    # The nudge dispatches; GitHub's fallback fires `schedule`. Absence of the
+    # first while the second continues is exactly the silent degradation.
+    nudged = [t for e, t in runs if e == "workflow_dispatch" and now - t <= NUDGE_WINDOW]
+    if not nudged:
+        hours = NUDGE_WINDOW.total_seconds() / 3600
+        problems.append(
+            f"the Worker nudge has not fired in {hours:.0f}h - publishing has fallen back "
+            f"to GitHub's own cron, which delivers about every 3 hours instead of every "
+            f"15 minutes. Check the Cron Trigger and GH_DISPATCH_TOKEN in the Worker "
+            f"(npx wrangler tail, or the nudge:last key in KV)")
+    return problems
+
+
+def pipeline_runs(token=None, limit=100):
+    """[(event, started_at)] for recent runs of the pipeline workflow."""
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": UA}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    r = requests.get(
+        f"https://api.github.com/repos/{REPO}/actions/workflows/{PIPELINE_WORKFLOW}/runs",
+        params={"per_page": limit}, headers=headers, timeout=30)
+    r.raise_for_status()
+    return [(w["event"],
+             datetime.fromisoformat(w["run_started_at"].replace("Z", "+00:00")))
+            for w in (r.json().get("workflow_runs") or [])]
 
 
 def latest_site_commit(token=None):
@@ -318,6 +397,12 @@ def run_checks(browser=True, token=None, now=None):
     except (requests.RequestException, ValueError) as e:
         probs = [f"could not compare the site version ({e})"]
     results.append(("site version", probs))
+
+    try:
+        probs = check_cadence(pipeline_runs(token), now)
+    except (requests.RequestException, ValueError, KeyError) as e:
+        probs = [f"could not read the pipeline's run history ({e})"]
+    results.append(("pipeline cadence", probs))
 
     if browser:
         if not status:
