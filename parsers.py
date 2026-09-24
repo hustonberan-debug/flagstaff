@@ -576,12 +576,30 @@ def strip_boilerplate(text):
     return " ".join(p for p in parts if not BOILERPLATE_RE.search(p))
 
 
+# Menu items, and only menu items. Both broader versions were tried against
+# every status page and failed: dropping every link erased the real status of
+# Alabama, Delaware, Florida and Michigan (each is a badge that links to the
+# flag page), and dropping <nav> blocks removed Florida's badge from its site
+# header - the parser then read a memo heading, "Flags to be Flown at
+# Half-Staff", and turned a correct FULL into a false HALF. A list item that
+# is nothing but a plain-text link is a menu entry; that is all this removes.
+LINK_TEXT_RE = re.compile(r"<li\b[^>]*>\s*<a\b[^>]*>[^<]*</a>\s*</li>", re.I | re.S)
+NOUN_AFTER_RE = re.compile(
+    r"\s+(?:notifications?|alerts?|updates?|requests?|forms?|polic(?:y|ies)|protocols?"
+    r"|information|guidelines|procedures|notices|sign[- ]?up|subscriptions?)\b", re.I)
+
+
 def classify_current_status(html):
     """Status of a current-status (diff-mode) page. Returns (status, evidence).
 
     Declaration beats everything. If the page plainly says what the status is,
     that is the answer regardless of how much protocol text surrounds it.
     """
+    # Link text is navigation, not a statement. Minnesota's flag page carries
+    # no status at all; its menu links are titled "Flags at Half-Staff", and
+    # the page read as a half-staff declaration.
+    if "<" in (html or ""):
+        html = LINK_TEXT_RE.sub(" ", html)
     text = strip_html(html) if "<" in (html or "") else (html or "")
     if not text:
         return UNKNOWN, None
@@ -598,6 +616,10 @@ def classify_current_status(html):
 
     for idx, pat in enumerate(DECLARATION_RE):
         for m in pat.finditer(text):
+            # "...receive flags at half-staff notifications" names a mailing
+            # list, not the flag (Minnesota again).
+            if NOUN_AFTER_RE.match(text, m.end()):
+                continue
             if idx >= GUARDED_FROM:
                 # Tier 3 is a bare phrase. Reject it if the preceding words
                 # show it is describing flag rules or labelling an archive

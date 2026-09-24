@@ -1543,6 +1543,22 @@ t("an unconfirmed half and another source's HALF: the confirmed half stands",
 t("a declared FULL on a frozen page is not a claim to protect",
   R.unconfirmed_half(_src(P.UNKNOWN, declared=P.FULL, coverage="frozen")), None)
 
+# --- menus and mailing lists are not a status (Minnesota) ------------------
+_mn = ("<ul><li class=''><a href='/governor/news/flagshalfstaff.jsp' target='_self'>"
+       "Flags at Half-Staff</a></li><li><a href='/p'>Proclamations</a></li></ul>"
+       "<p><a href='/f'>Sign up</a> to receive flags at half-staff notifications "
+       "from the Office of the Governor</p>")
+t("Minnesota: a menu entry and a mailing list are not a half-staff declaration",
+  P.parse_diff(_mn, selector_hint="flag")["status"], P.UNKNOWN)
+_fl = ("<nav><div class='flag-status'><a href='/eog/info/flag-information'><img "
+       "src='f.png' alt='flag'>Flag Status: <strong>Full Staff</strong></a></div></nav>"
+       "<h3>Flags to be Flown at Half-Staff</h3><p>Memo archive</p>")
+t("Florida: a status badge inside a link, in the site header, is still read",
+  P.parse_diff(_fl, selector_hint="flag")["status"], P.FULL)
+t("Nevada: a heading that states the status is still read",
+  P.parse_diff("<h2 style='text-align: center;'>Flags at Full-Staff</h2><p>x</p>",
+               selector_hint="flag")["status"], P.FULL)
+
 # --- county-only orders (Pennsylvania, Erie County, Sept 23 2026) ----------
 _pa = ("United States Flag: Full-Staff Erie County: Half-Staff Commonwealth Flag: "
        "Full-Staff Erie County: Half-Staff On Wednesday, September 23, 2026, Governor "
