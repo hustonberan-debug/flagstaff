@@ -129,6 +129,8 @@ select:focus-visible{outline:2px solid var(--navy-lit);outline-offset:2px}
   font-family:var(--mono);font-size:12px;letter-spacing:.05em;
   padding:6px 2px;text-decoration:underline;text-underline-offset:3px}
 .locate:hover{color:var(--paper)}
+.lost{margin-top:18px;padding:12px 14px;border-left:3px solid var(--red-lit);
+  background:var(--surface);font-size:15px;line-height:1.5}
 .locate.inline{font-family:var(--body);font-size:inherit;letter-spacing:0;
   color:var(--paper);padding:0}
 .locate:focus-visible{outline:2px solid var(--navy-lit);outline-offset:2px}
@@ -284,6 +286,9 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
     <h1 class="verdict" id="verdict">Loading</h1>
     <p class="reason" id="reason"></p>
     <div class="receipt" id="receipt"></div>
+    <!-- Shown only when alerts this device signed up for have stopped. Just
+         below the answer, so it is on the first screen without displacing it. -->
+    <div class="lost" id="alertsLost" role="alert" hidden></div>
 
     <!-- The pole sits AFTER the answer in the markup. On a wide screen it
          is a fixed column and its place here does not matter; stacked on a
@@ -961,7 +966,9 @@ document.getElementById('notifyBtn').onclick=async function(){
     btn.textContent='Alerts are on';
     new Notification('Alerts are on',{body:"You'll hear from Flagstaff when the flag changes position \u2014 and not otherwise.",icon:'./icon-192.png'});
     notifyStatus('Subscribed for '+((DATA.states[current]||{}).state||current)+'.');
-    if(Array.isArray(data.states)){ mySubs=data.states; subsError=null; renderSubs(); }
+    if(Array.isArray(data.states)){
+      mySubs=data.states; subsError=null; rememberAlerts(sub, mySubs); renderSubs();
+    }
     else refreshSubs();
   }catch(e){
     btn.disabled=false;btn.textContent='Try again';
@@ -988,13 +995,83 @@ async function currentSubscription(){
   if(!swReg) return null;
   return await swReg.pushManager.getSubscription().catch(()=>null);
 }
+/* --- Alerts that stopped without anyone noticing -------------------------
+   "Alerts are on" used to mean only that THIS BROWSER held a subscription.
+   Nothing checked that the alert server still had it. A browser can rotate
+   or drop a subscription, and the server can lose one; either way the
+   person simply stopped hearing from us, and silence looks exactly like a
+   quiet week. So this device remembers which states it signed up for, and
+   every visit checks them against the server: anything missing is put
+   back, and if that fails, the page says so where it will be seen. */
+const ALERTS_KEY='flagstaff.alerts';
+function loadAlerts(){
+  try{ return JSON.parse(localStorage.getItem(ALERTS_KEY)||'null'); }catch(_){ return null; }
+}
+function rememberAlerts(sub, states){
+  const rec = sub && states && states.length ? {endpoint:sub.endpoint, states} : null;
+  try{ rec ? localStorage.setItem(ALERTS_KEY, JSON.stringify(rec))
+           : localStorage.removeItem(ALERTS_KEY); }catch(_){}
+  // The service worker reconnects a rotated subscription on its own
+  // (pushsubscriptionchange), but it cannot read localStorage.
+  try{
+    const sw = swReg && (swReg.active || swReg.waiting || swReg.installing);
+    if(sw) sw.postMessage({type:'prefs', prefs: rec
+      ? {base:workerBase(), vapid:VAPID_PUBLIC_KEY, states:rec.states, endpoint:rec.endpoint}
+      : {}});
+  }catch(_){}
+}
+function showLost(msg, action){
+  const el=document.getElementById('alertsLost');
+  if(!msg){ el.hidden=true; el.innerHTML=''; return; }
+  el.hidden=false;
+  el.innerHTML=`<strong>Your flag alerts stopped.</strong> ${esc(msg)} `
+    + `<button class="locate inline" id="alertsLostBtn">${esc(action||'Turn them back on')}</button>`;
+  document.getElementById('alertsLostBtn').onclick=()=>{
+    const b=document.getElementById('notifyBtn');
+    b.scrollIntoView({behavior:'smooth',block:'center'});
+    if(!b.disabled) b.click(); else refreshSubs();
+  };
+}
+
 async function refreshSubs(){
   const box=document.getElementById('subList');
   const sub=await currentSubscription();
-  if(!workerBase() || !sub){ box.hidden=true; return; }
+  const rec=loadAlerts();
+  if(!workerBase()){ box.hidden=true; return; }
+  if(!sub){
+    box.hidden=true;
+    if(rec && rec.states && rec.states.length){
+      showLost(`This browser dropped its alert connection, so nothing about `
+        + `${rec.states.map(stateName).join(', ')} is reaching you.`);
+    }
+    return;
+  }
   try{
     const data=await postJSON('/my-states',{endpoint:sub.endpoint});
     mySubs=Array.isArray(data.states)?data.states:[]; subsError=null;
+    const missing = rec && rec.states ? rec.states.filter(s=>!mySubs.includes(s)) : [];
+    if(missing.length){
+      // The server no longer has states this device signed up for: the
+      // browser rotated its subscription, or the server lost it.
+      try{
+        for(const s of missing){
+          const d=await postJSON('/subscribe',{subscription:sub.toJSON(),state:s});
+          if(Array.isArray(d.states)) mySubs=d.states;
+        }
+        if(rec.endpoint && rec.endpoint!==sub.endpoint)
+          await postJSON('/unsubscribe',{endpoint:rec.endpoint}).catch(()=>{});
+        rememberAlerts(sub, mySubs);
+        showLost(null);
+        notifyStatus('Your alerts had stopped reaching this device. They are reconnected.');
+      }catch(e){
+        // Leave the record as it was, so the next visit knows too.
+        showLost(`The alert server no longer has this device, and reconnecting `
+          + `failed (${e.message}).`, 'Try again');
+      }
+    } else {
+      rememberAlerts(sub, mySubs);
+      showLost(null);
+    }
   }catch(e){ subsError=e.message; }
   renderSubs();
 }
@@ -1040,7 +1117,9 @@ function renderSubs(){
       notifyStatus('Could not turn alerts off: '+e.message); return;
     }
     await sub.unsubscribe().catch(()=>{});
-    mySubs=[]; renderSubs(); notifyStatus('Alerts off.');
+    // Turned off on purpose: forget them, so this is not reported as a loss.
+    mySubs=[]; rememberAlerts(null, null); showLost(null);
+    renderSubs(); notifyStatus('Alerts off.');
     refreshNotifyUI();
   };
 }
@@ -1052,7 +1131,9 @@ async function changeSub(path,extra){
     : {endpoint:sub.endpoint,...extra};
   try{
     const data=await postJSON(path,body);
-    if(Array.isArray(data.states)){ mySubs=data.states; subsError=null; renderSubs(); }
+    if(Array.isArray(data.states)){
+      mySubs=data.states; subsError=null; rememberAlerts(sub, mySubs); renderSubs();
+    }
     else await refreshSubs();
   }catch(e){ notifyStatus('Could not update your alerts: '+e.message); }
 }

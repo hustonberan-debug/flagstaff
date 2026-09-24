@@ -193,10 +193,12 @@ jobs:
           python3 -c "import json; json.load(open('status.json')); print('status.json parses')"
 
       - name: Notify subscribers of any change
-        # Never fail the job: a push problem must not stop status.json from
-        # being published. But DO surface the error — this step silently
-        # crashed on its first line for days, so every notification the
-        # pipeline should have sent was simply never sent.
+        # FAILS THE JOB when a notification does not go out. It runs after
+        # the commit, so status.json is already published and a failure here
+        # cannot hold it back - but it used to only warn, and a warning in a
+        # green run is something nobody reads. This step once crashed on its
+        # first line for days and every notification it should have sent was
+        # simply never sent. A red run is emailed.
         #
         # Gated on the publish actually happening. `always()` alone meant a
         # run whose sanity check REFUSED to publish still notified
@@ -205,27 +207,25 @@ jobs:
         # announced the same change again. Only announce what was published.
         id: notify
         if: always() && steps.sanity.outcome == 'success' && steps.commit.outcome == 'success'
-        continue-on-error: true
         env:
           NOTIFY_URL: ${{ vars.NOTIFY_URL }}
           NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
         run: |
           python3 - <<'PY'
-          import json, os, urllib.request, urllib.error
+          import json, os, socket, time, urllib.request, urllib.error
 
           url = os.environ.get("NOTIFY_URL")
           secret = os.environ.get("NOTIFY_SECRET")
           if not url or not secret:
-              # A warning, not a print: "not configured" and "nothing to
-              # send" otherwise look identical in a green run.
-              print("::warning::NOTIFY_URL / NOTIFY_SECRET not set - no push notifications are being sent")
-              raise SystemExit(0)
+              # Not configured means no subscriber hears anything, ever.
+              print("::error::NOTIFY_URL / NOTIFY_SECRET not set - no push notifications are being sent")
+              raise SystemExit(1)
 
           try:
               s = json.load(open("status.json"))
           except Exception as e:
-              print(f"::warning::status.json unreadable ({e}) - skipping notify")
-              raise SystemExit(0)
+              print(f"::error::status.json unreadable ({e}) - could not notify")
+              raise SystemExit(1)
 
           # A national proclamation lowers flags in every state at once, so
           # every state's "changed" flag flips together. That is ONE event,
@@ -249,6 +249,46 @@ jobs:
               print("No changes this run - nothing to notify.")
               raise SystemExit(0)
 
+          def reported_failures(body):
+              """Failures the Worker reports inside a 200: a fan-out that
+              reached only some subscribers is not a success."""
+              try:
+                  d = json.loads(body)
+              except Exception:
+                  return None
+              if not isinstance(d, dict):
+                  return None
+              for k in ("failed", "failures", "errors"):
+                  v = d.get(k)
+                  if (isinstance(v, int) and v > 0) or (isinstance(v, list) and v):
+                      return f"{k}={v if isinstance(v, int) else len(v)}"
+              if d.get("ok") is False or d.get("error"):
+                  return f"error={d.get('error') or 'ok:false'}"
+              return None
+
+          def send(req):
+              """One attempt, retried ONLY when the request never reached the
+              Worker (no connection). A timeout or an HTTP error may mean it
+              did arrive and pushes went out - retrying those could send every
+              subscriber the same alert twice, so they fail instead."""
+              for attempt in range(3):
+                  try:
+                      with urllib.request.urlopen(req, timeout=20) as r:
+                          return r.read().decode(errors="replace"), None
+                  except urllib.error.HTTPError as e:
+                      return None, f"HTTP {e.code} {e.read().decode(errors='replace')[:200]}"
+                  except urllib.error.URLError as e:
+                      if isinstance(e.reason, (socket.timeout, TimeoutError)):
+                          return None, f"timed out ({e.reason}) - not retried, it may have been delivered"
+                      if attempt < 2:
+                          time.sleep(5 * (attempt + 1))
+                          continue
+                      return None, f"could not reach the Worker: {e.reason}"
+                  except (socket.timeout, TimeoutError) as e:
+                      return None, f"timed out ({e}) - not retried, it may have been delivered"
+              return None, "unreachable"
+
+          failed = []
           for code in changed:
               if code == "US":
                   status = "half"
@@ -274,14 +314,55 @@ jobs:
                            "User-Agent": "halfstaffnow-pipeline/1.0 "
                                          "(+https://halfstaffnow.com)",
                            "Accept": "application/json"})
-              try:
-                  with urllib.request.urlopen(req, timeout=15) as r:
-                      print(code, r.read().decode())
-              except urllib.error.HTTPError as e:
-                  body = e.read().decode(errors="replace")[:200]
-                  print(f"::warning::notify failed for {code}: HTTP {e.code} {body}")
-              except Exception as e:
-                  print(f"::warning::notify failed for {code}: {e}")
+              body, err = send(req)
+              if err is None:
+                  err = reported_failures(body)
+                  print(code, body)
+              if err:
+                  print(f"::error::notify failed for {code}: {err}")
+                  failed.append(code)
+
+          if failed:
+              # Every state was attempted first; one failure must not stop
+              # the others going out.
+              raise SystemExit(f"notifications failed for {' '.join(failed)} - "
+                               f"subscribers to those were NOT told")
+          PY
+
+      - name: Email ingest health
+        # The Gmail app password is revoked by any Google password change or
+        # security event. Ingest then failed quietly behind continue-on-error:
+        # every email state went stale while the job stayed green. A rejected
+        # login does not fix itself, so it fails the job at once. A network
+        # error usually clears by the next run, so it fails only once ingest
+        # has not succeeded for a day.
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json
+          from datetime import datetime, timedelta, timezone
+          try:
+              m = json.load(open("email-orders.json"))
+          except Exception as e:
+              raise SystemExit(f"::error::email-orders.json unreadable ({e})")
+          if m.get("skipped"):
+              print("::warning::Email ingest not configured (MAIL_USER/MAIL_PASS not set)")
+              raise SystemExit(0)
+          err = m.get("ingest_error") or {}
+          if err.get("kind") == "auth":
+              raise SystemExit("::error::Gmail REJECTED the login for the alerts inbox - the app "
+                               "password was probably revoked. Every email state is going stale. "
+                               f"Create a new app password and update MAIL_PASS. ({err.get('detail')})")
+          gen = m.get("generated_at")
+          age = (datetime.now(timezone.utc) - datetime.fromisoformat(gen)) if gen else None
+          if age is None or age > timedelta(days=1):
+              raise SystemExit("::error::Email ingest has not succeeded for "
+                               + (f"{age.days}d {age.seconds // 3600}h" if age else "an unknown time")
+                               + f" - email states are going stale. Last error: {err.get('detail') or 'none recorded'}")
+          if err:
+              print(f"::warning::Email ingest failed this run ({err.get('detail')}); last success {gen}")
+          else:
+              print(f"Email ingest OK (last success {gen})")
           PY
 
       - name: History invariants
@@ -304,8 +385,8 @@ jobs:
           import json, os
           # continue-on-error steps report success even when they fail.
           # Their real outcome is only visible here.
+          # (Notify is not listed: it now fails the job itself.)
           for step, var in (("Read notification emails", "MAIL_OUTCOME"),
-                            ("Notify subscribers", "NOTIFY_OUTCOME"),
                             ("Rendered pages - render", "RENDER_OUTCOME")):
               if os.environ.get(var) == "failure":
                   print(f"::warning::'{step}' FAILED (hidden by continue-on-error) - see its log")

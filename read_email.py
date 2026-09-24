@@ -358,6 +358,16 @@ def parse_message(msg, allowed):
     }, None
 
 
+AUTH_FAILURE_RE = re.compile(
+    r"AUTHENTICATIONFAILED|Invalid credentials|Application-specific password"
+    r"|Web login required|Username and Password not accepted|LOGIN failed", re.I)
+
+
+def is_auth_failure(e):
+    """Did the server reject our credentials (as opposed to not answering)?"""
+    return isinstance(e, imaplib.IMAP4.error) and bool(AUTH_FAILURE_RE.search(str(e)))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -401,8 +411,23 @@ def main():
         M.select("INBOX")
         typ, data = M.search(None, f'(SINCE "{since}")')
     except Exception as e:
-        print(f"IMAP failed: {type(e).__name__}: {e}")
-        sys.exit(1)
+        # Two failures, two meanings. A rejected login does not fix itself:
+        # the app password was revoked (any Google password change or
+        # security event does it) and every email state will go stale while
+        # the job stays green. A network error usually clears by the next
+        # run. The workflow fails the job on the first immediately and on
+        # the second only once it has lasted a day, so a blip does not page
+        # anyone. Recorded in email-orders.json because the step's own exit
+        # code is hidden by continue-on-error.
+        kind = "auth" if is_auth_failure(e) else "network"
+        print(f"IMAP failed ({kind}): {type(e).__name__}: {e}")
+        if not args.dry_run:
+            json.dump(dict(previous, ingest_error={
+                "kind": kind,
+                "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "detail": f"{type(e).__name__}: {e}"[:300]}),
+                open(OUTPUT, "w"), indent=2)
+        sys.exit(2 if kind == "auth" else 1)
 
     ids = (data[0] or b"").split()
     print(f"{len(ids)} message(s) since {since}\n")

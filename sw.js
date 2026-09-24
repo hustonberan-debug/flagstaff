@@ -24,7 +24,7 @@
  * caching rules. HTML does not need a bump: it is network-first.
  */
 
-const VERSION = 'flagstaff-v4';
+const VERSION = 'flagstaff-v5';
 const SHELL = ['./index.html', './manifest.json'];
 
 self.addEventListener('install', (e) => {
@@ -40,7 +40,9 @@ self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys()
       .then((keys) => Promise.all(
-        keys.filter((k) => k !== VERSION).map((k) => caches.delete(k))))
+        // PREFS holds what is needed to reconnect alerts; a version bump
+        // must not throw it away with the old asset cache.
+        keys.filter((k) => k !== VERSION && k !== PREFS).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
@@ -115,6 +117,83 @@ self.addEventListener('push', (e) => {
     renotify: true,
     data: { url: d.url || './index.html' },
   }));
+});
+
+/* --- Subscription rotation -------------------------------------------------
+ * A browser can replace a push subscription at any time: the push service
+ * expires it, or rotates its keys. It says so once, here. There was no
+ * handler, so the Worker kept sending to the dead endpoint and the person
+ * simply stopped hearing from us - with nothing, on either side, to show it.
+ *
+ * The page mirrors what is needed to reconnect (the Worker's address, the
+ * public key and the states subscribed to) into PREFS, because a service
+ * worker cannot read the page's localStorage.
+ */
+const PREFS = 'flagstaff-prefs';
+const PREFS_KEY = './__prefs.json';
+
+async function readPrefs() {
+  try {
+    const hit = await (await caches.open(PREFS)).match(PREFS_KEY);
+    return hit ? await hit.json() : {};
+  } catch (_) { return {}; }
+}
+async function writePrefs(p) {
+  try {
+    await (await caches.open(PREFS)).put(PREFS_KEY,
+      new Response(JSON.stringify(p), { headers: { 'Content-Type': 'application/json' } }));
+  } catch (_) { /* nothing to do; the page re-checks on its next visit */ }
+}
+function b64ToU8(s) {
+  const pad = '='.repeat((4 - s.length % 4) % 4);
+  const raw = atob((s + pad).replace(/-/g, '+').replace(/_/g, '/'));
+  return Uint8Array.from(raw, (c) => c.charCodeAt(0));
+}
+async function postWorker(base, path, body) {
+  const r = await fetch(base + path, { method: 'POST',
+    headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json().catch(() => ({}));
+}
+
+self.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'prefs') e.waitUntil(writePrefs(e.data.prefs || {}));
+});
+
+self.addEventListener('pushsubscriptionchange', (e) => {
+  e.waitUntil((async () => {
+    const p = await readPrefs();
+    if (!p.base || !p.states || !p.states.length) return;   // never subscribed
+    try {
+      const key = (e.oldSubscription && e.oldSubscription.options
+                   && e.oldSubscription.options.applicationServerKey)
+                  || (p.vapid && b64ToU8(p.vapid));
+      const sub = e.newSubscription
+        || await self.registration.pushManager.subscribe({ userVisibleOnly: true,
+                                                           applicationServerKey: key });
+      for (const state of p.states) {
+        await postWorker(p.base, '/subscribe', { subscription: sub.toJSON(), state });
+      }
+      // Only a different endpoint is dropped. A rotation can keep the
+      // endpoint and change only the keys, and dropping it would delete the
+      // subscription just re-registered above.
+      if (e.oldSubscription && e.oldSubscription.endpoint !== sub.endpoint) {
+        await postWorker(p.base, '/unsubscribe',
+                         { endpoint: e.oldSubscription.endpoint }).catch(() => {});
+      }
+      await writePrefs(Object.assign(p, { endpoint: sub.endpoint, lost: null }));
+    } catch (err) {
+      // Could not reconnect. Say so - the one thing that must not happen is
+      // silence that looks exactly like "no flag news".
+      await writePrefs(Object.assign(p, { lost: new Date().toISOString() }));
+      await self.registration.showNotification('Flagstaff alerts stopped', {
+        body: 'Your browser reset its alert connection and it could not be '
+            + 'restored. Open Flagstaff to turn alerts back on.',
+        icon: './icon-192.png', badge: './icon-192.png', tag: 'flagstaff-alerts-lost',
+        data: { url: './index.html#alerts' },
+      });
+    }
+  })());
 });
 
 self.addEventListener('notificationclick', (e) => {
