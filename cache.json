@@ -18,8 +18,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://os.dc.gov/service/flag-status|fetch"
@@ -33,8 +33,8 @@
     "hash": "2e90c25e067eee42",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://www.gov.ca.gov/feed/|fetch"
@@ -48,8 +48,8 @@
     "hash": "0fd0758cff2ed548",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.alabama.gov/flag-status/|fetch"
@@ -63,8 +63,8 @@
     "hash": "39115882509bdb4c",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governorsoffice.colorado.gov/governor/flag-status|fetch"
@@ -86,8 +86,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://az.gov/half-staff-notices|fetch"
@@ -109,8 +109,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://gov.alaska.gov/services/status-of-the-flag/|fetch"
@@ -124,8 +124,8 @@
     "hash": "e025e1984f754fb5",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {
       "https://governor.iowa.gov/press-release/2026-09-17/gov-reynolds-orders-flags-half-staff-honor-and-remembrance-national-ag-leader-exceptional-iowan-ray": {
         "opening_status": "half",
@@ -162,8 +162,8 @@
     "hash": "fdda7c3723da96bb",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://governor.hawaii.gov/category/newsroom/feed/|fetch"
@@ -177,8 +177,8 @@
     "hash": "6e8956621fcf9be9",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://gov.ga.gov/rss.xml|fetch"
@@ -200,8 +200,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://news.delaware.gov/flag-status/|fetch"
@@ -223,8 +223,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.flgov.com/eog/info/flag-information|fetch"
@@ -238,8 +238,8 @@
     "hash": "f4bc31b3a5fa171e",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.arkansas.gov/newsroom/|fetch"
@@ -261,8 +261,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://gov.louisiana.gov/page/flag-status|fetch"
@@ -275,8 +275,8 @@
     "hash": "485b2a91758e6b1f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00"
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00"
   },
   "MD": {
     "last_known_status": "full",
@@ -287,8 +287,8 @@
     "hash": "b042b47730543d8f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.maryland.gov/news/press-releases|fetch"
@@ -302,8 +302,8 @@
     "hash": "d564bc6fa7206ed9",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://governor.nc.gov/news/feed|fetch"
@@ -317,8 +317,8 @@
     "hash": "f8eaa1b5e461bdd3",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {
       "https://www.maine.gov/governor/mills/news/governor-mills-orders-flags-lowered-honor-victims-and-survivors-september-11th-2026-09-10": {
         "opening_status": "half",
@@ -355,8 +355,8 @@
     "hash": "47193f8911eecdd1",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {
       "https://governor.nebraska.gov/gov-pillen-orders-flags-flown-half-staff-honor-yutan-firefighter": {
         "opening_status": "half",
@@ -392,8 +392,8 @@
     "hash": "a1908772c8d050ee",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00"
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00"
   },
   "CT": {
     "last_known_status": "full",
@@ -404,8 +404,8 @@
     "hash": "0803902a78211480",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://portal.ct.gov/governor/news/press-releases|fetch"
@@ -419,8 +419,8 @@
     "hash": "6c846fc158d3728d",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://events.in.gov/group/gov|fetch"
@@ -442,8 +442,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governorreeves.ms.gov/flag-status/|fetch"
@@ -465,8 +465,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://gov.idaho.gov/flag-status/|fetch"
@@ -480,8 +480,8 @@
     "hash": "e0f8dd84f814562a",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://governor.ri.gov/press-releases.xml|fetch"
@@ -495,8 +495,8 @@
     "hash": "be8d1307617c70d9",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {
       "https://www.governor.nd.gov/news/armstrong-directs-flags-flown-half-staff-friday-memory-911-victims-25th-anniversary-attacks": {
         "opening_status": "half",
@@ -516,10 +516,10 @@
   "NV": {
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:56+00:00",
-    "hash_changed_at": "2026-09-24T04:34:08+00:00",
+    "hash_changed_at": "2026-09-24T08:05:02+00:00",
     "order_first_seen": "2026-09-24",
     "order_sig": "https://www.gov.nv.gov/constituent-services/flag-status/||declaration: 'Flag Status Flags at Full-Staff'||",
-    "hash": "8994dd88dece6147",
+    "hash": "6f881dba7261e855",
     "state_status": "full",
     "state_order": {
       "title": null,
@@ -530,8 +530,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.gov.nv.gov/constituent-services/flag-status/|fetch"
@@ -545,8 +545,8 @@
     "hash": "3cb078f0d9e9ea2e",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://www.tn.gov/governor/news.html|fetch"
@@ -560,8 +560,8 @@
     "hash": "4459703f39b9c327",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.sc.gov/news|fetch"
@@ -575,8 +575,8 @@
     "hash": "3707ee7fff335cb6",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "archive|https://www.nj.gov/governor/news/2026/approved/news_archive.shtml|fetch"
@@ -590,8 +590,8 @@
     "hash": "fe13f355e48eead9",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {
       "https://www.congress.gov/107/plaws/publ89/PLAW-107publ89.pdf": {
         "opening_status": "unknown",
@@ -625,8 +625,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.ohio.gov/flag-honors|fetch"
@@ -640,8 +640,8 @@
     "hash": "0d69636d23671569",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:09+00:00",
-    "last_checked": "2026-09-24T04:34:09+00:00",
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://governor.vermont.gov/taxonomy/term/3/feed|fetch"
@@ -663,8 +663,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:09+00:00",
-    "last_checked": "2026-09-24T04:34:09+00:00",
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.governor.virginia.gov/constituent-services/flag-information/|fetch"
@@ -678,8 +678,8 @@
     "hash": "baad31a3594da578",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:09+00:00",
-    "last_checked": "2026-09-24T04:34:09+00:00",
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://governor.wa.gov/rss.xml|fetch"
@@ -693,8 +693,8 @@
     "hash": "669a359ef280a7e7",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:09+00:00",
-    "last_checked": "2026-09-24T04:34:09+00:00",
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00",
     "articles": {
       "https://governor.wv.gov/article/governor-morrisey-orders-flags-half-staff-honor-25th-anniversary-september-11-attacks": {
         "opening_status": "half",
@@ -720,8 +720,8 @@
     "hash": "2ed25a8477421472",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp|fetch"
@@ -743,8 +743,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.pa.gov/agencies/dgs/flag-notices.html|fetch"
@@ -757,8 +757,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:09+00:00",
-    "last_checked": "2026-09-24T04:34:09+00:00"
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00"
   },
   "OR": {
     "last_known_status": "full",
@@ -785,8 +785,8 @@
       "date": null,
       "coverage_reason": "order page could not be read to date it"
     },
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {
       "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts/Search?cat=Flag%20at%20half%20staff": {
         "opening_status": "half",
@@ -853,8 +853,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.utah.gov/flag-status|fetch"
@@ -868,8 +868,8 @@
     "hash": "f7842e1eb204a495",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:24:04+00:00",
-    "last_checked": "2026-09-24T04:24:04+00:00",
+    "last_parsed": "2026-09-24T08:04:59+00:00",
+    "last_checked": "2026-09-24T08:04:59+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "cards|https://governor.sd.gov/news/press-releases.aspx|render"
@@ -883,8 +883,8 @@
     "hash": "bc207e8d15c8678f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {
       "https://governor.nm.gov/newsroom/gov-lujan-grisham-orders-flags-to-half-staff-100004483": {
         "opening_status": "half",
@@ -951,8 +951,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://gov.texas.gov/flag-status|fetch"
@@ -965,8 +965,8 @@
     "hash": "ebe9b6da5c5bc320",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00"
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00"
   },
   "WY": {
     "last_known_status": "full",
@@ -976,8 +976,8 @@
     "hash": "3b46e4672d631580",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:09+00:00",
-    "last_checked": "2026-09-24T04:34:09+00:00"
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00"
   },
   "IL": {
     "last_known_status": null,
@@ -987,8 +987,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00"
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00"
   },
   "MA": {
     "last_known_status": null,
@@ -998,8 +998,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00"
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00"
   },
   "MT": {
     "last_known_status": "full",
@@ -1010,8 +1010,8 @@
     "hash": "0ec600cfd8b1516a",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:24:00+00:00",
-    "last_checked": "2026-09-24T04:24:00+00:00",
+    "last_parsed": "2026-09-24T08:04:48+00:00",
+    "last_checked": "2026-09-24T08:04:48+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "cards|https://news.mt.gov/Governors-Office|render"
@@ -1024,8 +1024,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00"
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00"
   },
   "OK": {
     "last_known_status": "full",
@@ -1036,8 +1036,8 @@
     "state_order": null,
     "order_first_seen": null,
     "order_sig": null,
-    "last_parsed": "2026-09-24T04:34:04+00:00",
-    "last_checked": "2026-09-24T04:34:04+00:00",
+    "last_parsed": "2026-09-24T08:04:53+00:00",
+    "last_checked": "2026-09-24T08:04:53+00:00",
     "articles": {
       "https://oklahoma.gov/governor/newsroom/newsroom/2026/governor-stitt-orders-flags-at-half-staff-to-honor-fallen-wellston-firefighter-joe-flake.html": {
         "opening_status": "half",
@@ -1068,8 +1068,8 @@
   "NY": {
     "last_known_status": null,
     "last_status_change_at": null,
-    "last_checked": "2026-09-24T04:34:08+00:00",
-    "consecutive_errors": 8
+    "last_checked": "2026-09-24T08:05:02+00:00",
+    "consecutive_errors": 9
   },
   "AL~2": {
     "hash_changed_at": null,
@@ -1078,8 +1078,8 @@
     "hash": "1a05213ddb2bf551",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.alabama.gov/newsroom/|fetch"
@@ -1091,8 +1091,8 @@
     "hash": "1efe0b34a8497365",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://gov.alaska.gov/newsroom/|fetch"
@@ -1104,8 +1104,8 @@
     "hash": "72452a97cc28992f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://mayor.dc.gov/newsroom|fetch"
@@ -1117,8 +1117,8 @@
     "hash": "6b70694267fb8e1c",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governorsoffice.colorado.gov/governor/news|fetch"
@@ -1130,8 +1130,8 @@
     "hash": "fcb6d31f2cca39b3",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00"
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00"
   },
   "FL~2": {
     "hash_changed_at": null,
@@ -1140,15 +1140,15 @@
     "hash": "af32c5bd5cebd928",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://www.flgov.com/eog/news|fetch"
   },
   "KS~2": {
-    "last_checked": "2026-09-24T04:34:06+00:00",
-    "consecutive_errors": 8
+    "last_checked": "2026-09-24T08:05:00+00:00",
+    "consecutive_errors": 9
   },
   "LA~2": {
     "hash_changed_at": null,
@@ -1157,8 +1157,8 @@
     "hash": "8fd4f0b230b451d1",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://gov.louisiana.gov/news|fetch"
@@ -1170,8 +1170,8 @@
     "hash": "60f3712a492810d2",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.ky.gov/flag-status|fetch"
@@ -1191,8 +1191,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.michigan.gov/whitmer/news/flag-honors|fetch"
@@ -1204,8 +1204,8 @@
     "hash": "6ada31b04a3fab81",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://portal.ct.gov/governor/flag-status|fetch"
@@ -1217,15 +1217,15 @@
     "hash": "64804d0704d9ceb6",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.delaware.gov/press-releases/|fetch"
   },
   "MT~2": {
-    "last_checked": "2026-09-24T04:34:07+00:00",
-    "consecutive_errors": 8
+    "last_checked": "2026-09-24T08:05:01+00:00",
+    "consecutive_errors": 9
   },
   "ID~2": {
     "hash_changed_at": null,
@@ -1234,8 +1234,8 @@
     "hash": "6badc938b0b08ef8",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00",
     "articles": {
       "https://gov.idaho.gov/pressrelease/half-staff-flag-directive-patriot-day-2026/": {
         "opening_status": "half",
@@ -1259,8 +1259,8 @@
     "hash": "6dea84b324c43372",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governorreeves.ms.gov/newsroom/|fetch"
@@ -1272,8 +1272,8 @@
     "hash": "dfe595f52519866b",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://mn.gov/governor/newsroom/flag-status/index.jsp|fetch"
@@ -1285,8 +1285,8 @@
     "hash": "deaa13c8d7a45d6b",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.ohio.gov/media/news-and-media|fetch"
@@ -1298,21 +1298,21 @@
     "hash": "3707ee7fff335cb6",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.nj.gov/governor/news/2026/approved/news_archive.shtml|fetch"
   },
   "NV~2": {
-    "hash_changed_at": "2026-09-24T04:34:08+00:00",
+    "hash_changed_at": "2026-09-24T08:05:02+00:00",
     "order_first_seen": null,
     "order_sig": null,
-    "hash": "8968d461f29102de",
+    "hash": "f686a63e60583b7c",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:08+00:00",
-    "last_checked": "2026-09-24T04:34:08+00:00",
+    "last_parsed": "2026-09-24T08:05:02+00:00",
+    "last_checked": "2026-09-24T08:05:02+00:00",
     "articles": {
       "https://www.gov.nv.gov/press-releases/governor-joe-lombardo-signs-patriot-day-proclamation-orders-flags-to-half-staff-in-honor-of-911-victims-and-first-responders2/": {
         "opening_status": "half",
@@ -1336,8 +1336,8 @@
     "hash": "db0abb7d2da3418d",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:09+00:00",
-    "last_checked": "2026-09-24T04:34:09+00:00",
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.utah.gov/news|fetch"
@@ -1349,8 +1349,8 @@
     "hash": "c7e1c2dff19a2d4f",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:09+00:00",
-    "last_checked": "2026-09-24T04:34:09+00:00",
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.wyo.gov/flag-status|fetch"
@@ -1362,8 +1362,8 @@
     "hash": "7d906cde02299a08",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:09+00:00",
-    "last_checked": "2026-09-24T04:34:09+00:00",
+    "last_parsed": "2026-09-24T08:05:03+00:00",
+    "last_checked": "2026-09-24T08:05:03+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://www.pa.gov/governor/newsroom.html|fetch"
@@ -1375,8 +1375,8 @@
     "hash": "811317c3378ace78",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:06+00:00",
-    "last_checked": "2026-09-24T04:34:06+00:00",
+    "last_parsed": "2026-09-24T08:05:00+00:00",
+    "last_checked": "2026-09-24T08:05:00+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.hawaii.gov/flag-orders|fetch"
@@ -1388,8 +1388,8 @@
     "hash": "bcd41036c2377f0c",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:21+00:00",
-    "last_checked": "2026-09-24T04:34:21+00:00",
+    "last_parsed": "2026-09-24T08:05:12+00:00",
+    "last_checked": "2026-09-24T08:05:12+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://gov.texas.gov/news|fetch"
@@ -1400,8 +1400,8 @@
     "hash": "4e17fee042f3ce81",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-24T04:34:07+00:00",
-    "last_checked": "2026-09-24T04:34:07+00:00"
+    "last_parsed": "2026-09-24T08:05:01+00:00",
+    "last_checked": "2026-09-24T08:05:01+00:00"
   },
   "_federal_articles_v2": {
     "https://www.whitehouse.gov/presidential-actions/2026/09/restriction-on-entry-of-certain-nonimmigrant-workers-faad/": "Restriction on Entry of Certain Nonimmigrant Workers &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Ratepayer Protection Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions RESTRICTION ON ENTRY OF CERTAIN NONIMMIGRANT WORKERS Proclamations September 18, 2026 BY THE PRESIDENT OF THE UNITED STATES OF AMERICA A PROCLAMATION On September 19, 2025, Proclamation 10973 (Restriction on Entry of Certain Nonimmigrant Workers) (2025 Proclamation), was issued to address significant abuses of the H-1B nonimmigrant visa program. The restrictions enacted by the 2025 Proclamation have proven to be highly effective but the underlying conditions necessitating the restrictions persist. It is therefore in the interests of the United States to extend the 2025 Proclamation for an additional 12 months, until 12:00 a.m. eastern daylight time on September 21, 2027. As explained in the 2025 Proclamation, the H-1B nonimmigrant visa program was created to bring temporary workers in high-skilled functions into the United States, but it has been exploited to replace, not supplement, American workers with lower-paid labor. Certain employers, including information technology (IT) staffing and outsourcing firms, have abused the system to suppress wages and displace American workers, and this has both harmed the labor market for American workers while also making it difficult to attract and retain the most highly skilled temporary workers. IT staffing and outsourcing firms were found to supply a large volume of entry-level temporary H\u20111B workers, generally at a much lower salary compared to full\u2011time, traditional workers, and some of these firms later outsourced IT roles to cheap labor markets overseas. This has led to a proliferation of lower-paid foreign labor flooding the American labor market and making it difficult for American workers and recent graduates, especially in science, technology, engineering, and math (STEM) fields, to find employment. To combat these abuses, the 2025 Proclamation set forth a restriction on entry of certain H-1B nonimmigrant workers, except for those petitions that were accompanied or supplemented by a $100,000 payment, subject to very limited exceptions. The 2025 Proclamation went into effect on September 21, 2025, and, since then, the $100,000 payment has been made for over 700 petitions. Additionally, the 2025 Proclamation required initiation of rulemakings by the Department of Homeland Security (DHS) and the Department of Labor (DOL) to address systemic H-1B program concerns. On December 29, 2025, DHS published a final rule, titled Weighted Selection Process for Registrants and Petitioners Seeking to File Cap-Subject H-1B Petitions, 90 Fed. Reg. 60864 (DHS final rule), to address the policy goals consistent with section 4(b) of the 2025 Proclamation. Through this rule, DHS created and implemented a weighted selection process that prioritizes the allocation of visas to higher-skilled and higher-paid aliens to better protect the wages, working conditions, and job opportunities for American workers. This policy better serves the intent of the H-1B statutory scheme, incentivizes employers to recruit temporary workers for roles at the highest pay and skill levels, and was in effect for the Fiscal Year (FY) 2027 H-1B cap season. On March 27, 2026, DOL published a notice of proposed rulemaking, titled Improving Wage Protections for the Temporary and Permanent Employment of Certain Foreign Nationals in the United States, 91 Fed. Reg. 15454, to address the policy goals consistent with section 4(a) of the 2025 Proclamation. The DOL&#8217;s analysis of labor condition application data found that the average wage actually paid to H-1B workers, and the prevailing wage assigned to their positions, both remain well below the average wage earned by comparable American workers. The rule, once finalized, will better align prevailing wage levels with wages paid to similarly employed and located American workers and will strengthen overall program integrity. Finally, my Administration continues to explore other complementary efforts that would, among other things, reform the H-1B program and assist with cost-recovery for immigration program administration. Since the effective date of the 2025 Proclamation and subsequent promulgation of the DHS final rule, there have been several measurable impacts on the H-1B program, including a significant reduction in H-1B registrations filed by large IT outsourcing firms, with the largest IT staffing and outsourcing firms reducing their combined H-1B registrations from 24,946 to 2,055, a 92 percent decrease. There has also been a large reduction in consular processing requests, which are used to bring workers into the United States, noting a nearly 97 percent decrease from the FY 2025 to FY 2027 cap seasons. Finally, there has been a positive shift in FY 2027 H-1B registration and selection data toward higher-skilled and higher-paid workers, with registrations for beneficiaries with at least a U.S. Master&#8217;s degree rising from 45.1 percent of total registrants for FY 2026 to 66.1 percent for FY 2027. Job offers with wages corresponding to the two highest wage levels accounted for approximately 46.3 percent of H-1B registration selections while those corresponding with the lowest wage level accounted for only 17.8 percent. It is reasonable to conclude that the required $100,000 payment and newly implemented weighted selection process have had the combined effect of deterring low-wage and low-skilled recruitment while increasing access for high-skilled and high-wage workers, as intended by the 2025 Proclamation. Although the 2025 Proclamation and subsequent rulemaking have had the desired effects, the underlying conditions precipitating their issuance persist and, without an extension of the 2025 Proclamation, it is highly likely that progress will halt and program abuse will resume, undermining American workers and posing a threat to the labor market that would be detrimental to the interests of the United States. The 2025 Proclamation highlighted a number of concerns, including high unemployment rates for recent graduates, wage suppression, fraud, and national security threats. Currently, these issues continue to undermine our economy, with unemployment rates for recent college graduates standing at 5.7 percent as of June 2026, a marginal decrease from September 2025, when the rate was 5.8 percent. Underemployment for recent college graduates also continues to cause concern, having risen from 41.8 percent in September 2025 to 42 percent as of June 2026. Additionally, while DOL is actively in the process of promulgating a rule to restore integrity to the prevailing wage system, it will take a significant amount of time to correct and balance the labor market. Finally, while fraud and abuse continue to be identified and investigated, these are ongoing and pervasive concerns that require a sustained, comprehensive response reflected in the entry restriction imposed by the 2025 Proclamation. A review of the 2025 Proclamation&#8217;s impacts and other recent policy changes has shown significant measurable changes in H-1B filing patterns that demonstrate the effectiveness of the 2025 Proclamation and a need for its extension. An extension of the 2025 Proclamation will continue to protect the economic and national security interests of the United States, improve labor market access for American workers and graduates, and ensure that employers recruit only the most highly-skilled and essential alien workers when needed in line with the original intent of the program. As a result, the Secretary of State, the Attorney General, the Secretary of Labor, and the Secretary of Homeland Security have jointly recommended an extension of the 2025 Proclamation. As a result of these reviews and considerations, I have decided to continue to impose the limitations set forth in Proclamation 10973 on the entry into the United States by certain nonimmigrant workers. Accordingly, by the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Restriction on Entry . (a) Pursuant to sections 212(f) and 215(a) of the Immigration and Nationality Act (INA) (8 U.S.C. 1182(f) and 1185(a)), the entry into the United States of aliens as nonimmigrants to perform services in a specialty occupation under section 101(a)(15)(H)(i)(b) of the INA (8 U.S.C. 1101(a)(15)(H)(i)(b)), is restricted, except for those aliens whose petitions are accompanied or supplemented by a payment of $100,000 &#8212; subject to the exceptions set forth in subsection (c) of this section. This restriction shall expire, absent extension, 12 months after the effective date of this proclamation, which shall be 12:01 a.m. eastern daylight time on September 21, 2026. (b) The Secretary of Homeland Security shall restrict decisions on petitions not accompanied by a $100,000 payment for H-1B specialty occupation workers under section 101(a)(15)(H)(i)(b) of the INA, who are currently outside the United States, for 12 months following the effective date of this proclamation as set forth in subsection (a) of this section. (c) The restriction imposed pursuant to subsections (a) and (b) of this section shall not apply to any individual alien, all aliens working for a company, or all aliens working in an industry, if the Secretary of Homeland Security determines, in the Secretary&#8217;s discretion, that the hiring of such aliens to be employed as H-1B specialty occupation workers is in the national interest and does not pose a threat to the security or welfare of the United States. Sec . 2 . Compliance . (a) Employers shall, prior to filing an H-1B petition on behalf of an alien outside the United States, obtain and retain documentation showing that the payment described in section 1 of this proclamation has been made. (b) The Secretary of State shall verify receipt of payment of the amount described in section 1 of this proclamation during the H-1B visa petition process and shall approve only those visa applications for which the filing employer has made the payment described in section 1 of this proclamation. (c) The Department of State and the Department of Homeland Security shall coordinate to take all necessary and appropriate action to implement this proclamation and to deny entry to the United States to any H-1B nonimmigrant for whom the prospective employer has not made the payment described in section 1 of this proclamation. Sec . 3 . Scope and Implementation of Restriction on Entry . (a) The restriction on entry pursuant to section 1 of this proclamation shall apply only to aliens who enter or attempt to enter the United States after the effective date of this proclamation as set forth in section 1(a) of this proclamation. This restriction applies to aliens who must seek admission to the United States to effectuate the approval of a petition described in section 1 of this proclamation, including through consular notification, notification at a port of entry, pre\u2011flight inspection, or pre-clearance. (b) No later than 30 days following the completion of the H-1B lottery that immediately follows this proclamation, the Secretary of State, the Attorney General, the Secretary of Labor, and the Secretary of Homeland Security shall jointly submit to the President, through the Assistant to the President and Homeland Security Advisor, a recommendation on whether an additional extension or renewal of the restriction on entry pursuant to section 1 of this proclamation is in the interests of the United States. Sec . 4 . General Provisions . (a) Nothing in this proclamation shall be construed to impair or otherwise affect: (i) the authority granted by law to an executive department or agency, or the head thereof; or (ii) the functions of the Director of the Office of Management and Budget relating to budgetary, administrative, or legislative proposals. (b) This proclamation shall be implemented consistent with applicable law and subject to the availability of appropriations. (c) This proclamation is not intended to, and does not, create any right or benefit, substantive or procedural, enforceable at law or in equity by any party against the United States, its departments, agencies, or entities, its officers, employees, or agents, or any other person. IN WITNESS WHEREOF, I have hereunto set my hand this eighteenth day of September, in the year of our Lord two thousand twenty-six, and of the Independence of the United States of America the two hundred and fifty-first. DONALD J. TRUMP Related Restriction on Entry of Certain Nonimmigrant Workers Presidential Actions , Proclamations September 19, 2025 Fact Sheet: President Donald J. Trump Suspends the Entry of Certain Alien Nonimmigrant Workers Fact Sheets September 19, 2025 Enhancing Program Integrity and Integrity and Interagency Coordination in the Administration of the H-1B Nonimmigrant Visa Program Presidential Actions , Executive Orders September 18, 2026 H-1B FAQ Releases September 21, 2025 Fact Sheet: President Donald J. Trump Further Enhances Program Integrity and Interagency Coordination in the H-1B Visa Program Fact Sheets September 18, 2026 1 2 3 &hellip; 86 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Your browser does not support the audio element. Click to listen 0:00 11:35 0.75\u00d7 1\u00d7 1.5\u00d7 2\u00d7 Notifications",
