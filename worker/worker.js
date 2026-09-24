@@ -24,6 +24,7 @@ import {
   json, handleSubscribe, handleUnsubscribe, handleMyStates, handleDropState,
   handleNotify, handleNotifyPlan,
 } from './handlers.js';
+import { nudge } from './nudge.js';
 
 export default {
   async fetch(request, env) {
@@ -53,5 +54,12 @@ export default {
       console.error('unhandled:', (err && err.stack) || String(err));
       return json({ error: 'server error' }, cors, 500);
     }
+  },
+
+  // Cron Trigger (see wrangler.toml). Asks GitHub to run the pipeline, because
+  // GitHub's own scheduler delivers the 30-minute cron about every 3 hours.
+  // Everything, including why a failure here is not silent, is in nudge.js.
+  async scheduled(controller, env, ctx) {
+    ctx.waitUntil(nudge(env));
   },
 };

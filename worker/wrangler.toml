@@ -22,3 +22,27 @@ ALLOWED_ORIGIN = "https://halfstaffnow.com"
 #   VAPID_PUBLIC_KEY
 #   VAPID_PRIVATE_KEY
 #   NOTIFY_SECRET       <- a random string only you and GitHub Actions know
+
+# Cron Trigger: the pipeline nudge. See nudge.js.
+#
+# GitHub's shared scheduler delivers check-flags.yml's 30-minute cron about
+# 6.5 times a day (median gap 3.2h, measured over 30 days). Cloudflare keeps
+# this one, so the real publish cadence becomes 15 minutes. GitHub's cron is
+# left in place as the fallback: if this Worker or its token dies, the site
+# degrades to the ~3h cadence rather than stopping.
+#
+# Cost: 96 invocations a day. Cron Triggers are on the Workers Free plan
+# (5 per account); the free daily budget is 100,000 requests, and each
+# invocation makes at most 6 subrequests against a limit of 50.
+#
+# Cron Trigger changes can take up to 15 minutes to propagate after a deploy.
+[triggers]
+crons = ["*/15 * * * *"]
+
+# Also needed, and NOT set here:
+#   GH_DISPATCH_TOKEN   secret. A fine-grained PAT, this repo only, with
+#                       Actions: Read and write. Nothing else. Set with
+#                       `npx wrangler secret put GH_DISPATCH_TOKEN`.
+# Optional overrides, defaulted in nudge.js:
+#   GH_REPO (hustonberan-debug/flagstaff), GH_WORKFLOW (check-flags.yml),
+#   GH_REF (main)
