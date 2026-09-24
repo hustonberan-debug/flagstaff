@@ -131,6 +131,8 @@ select:focus-visible{outline:2px solid var(--navy-lit);outline-offset:2px}
 .locate:hover{color:var(--paper)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.county-alert{display:inline-block;margin-top:10px;padding:8px 12px;
+  border-left:3px solid var(--red-lit);background:var(--surface)}
 .lost{margin-top:18px;padding:12px 14px;border-left:3px solid var(--red-lit);
   background:var(--surface);font-size:15px;line-height:1.5}
 .locate.inline{font-family:var(--body);font-size:inherit;letter-spacing:0;
@@ -586,6 +588,15 @@ function unclearReason(s){
   const e = String(s.error || '');
   const link = (u, t) => /^https?:\/\//i.test(u||'')
     ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} &nearr;</a>` : esc(t);
+  if(s.source_conflict && s.source_conflict.unconfirmed){
+    // One source claims half-staff without anything to confirm it; the
+    // other shows no order. Neither is published (Colorado, Sept 2026).
+    const a = s.source_conflict.a || {}, b = s.source_conflict.b || {};
+    return `<strong>Two official sources disagree right now.</strong> `
+      + `The state's ${link(a.url, a.kind || 'status page')} says half-staff, but shows no dated order behind it; `
+      + `its ${link(b.url, b.kind || 'other source')} shows no current order. `
+      + `Until they agree, we won't pick one.`;
+  }
   if(s.source_conflict){
     const a = s.source_conflict.a || {}, b = s.source_conflict.b || {};
     const word = x => x.status === 'half' ? 'half-staff' : x.status === 'full' ? 'full staff' : 'unclear';
@@ -714,7 +725,16 @@ function render(){
     rEl.innerHTML = '<em>No half-staff order is in effect today.</em>';
   }
 
-  if(s.county_exceptions && s.county_exceptions.length){
+  // A county order under a statewide answer. Said as its own fact, prominently:
+  // "No half-staff order is in effect today. Except in Erie County" read as a
+  // contradiction, and a fire station in Erie County needs this line most.
+  const halfCounties = (s.county_exceptions||[]).filter(c=>c.status==='half');
+  if(halfCounties.length && s.effective_status==='full'){
+    const names = halfCounties.map(c=>`<strong>${esc(c.county)} County</strong>`).join(', ');
+    rEl.innerHTML = `<em>No statewide order today.</em><br>`
+      + `<span class="county-alert">Flags are at <strong>half-staff in ${names}</strong> `
+      + `by a county-only order.</span>`;
+  } else if(s.county_exceptions && s.county_exceptions.length){
     rEl.innerHTML += `<br><br>Except in `
       + s.county_exceptions.map(c=>`<strong>${esc(c.county)} County</strong> (${esc(c.status)}-staff)`).join(', ')
       + '.';

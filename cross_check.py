@@ -102,6 +102,13 @@ def compare(ours, theirs):
     t = theirs.get("status")
     if t not in (P.HALF, P.FULL):
         return None
+    # Full statewide with a county at half-staff (Pennsylvania, Erie County,
+    # Sept 2026) is what we publish; the other source cannot say "county",
+    # so it says half. That is agreement at a coarser grain, not a conflict -
+    # the issue would otherwise stay open until the county order ends.
+    if o == P.FULL and t == P.HALF and any(
+            c.get("status") == P.HALF for c in ours.get("county_exceptions") or []):
+        return None
     if o in (P.HALF, P.FULL) and o != t:
         kind = "conflict"
     elif t == P.HALF and o != P.HALF:

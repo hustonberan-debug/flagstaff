@@ -443,11 +443,20 @@ def main():
     unattributed, unauthenticated = {}, {}
 
     def note(bucket, key, msg):
-        entry = bucket.setdefault(key, {"count": 0, "subjects": []})
+        entry = bucket.setdefault(key, {"count": 0, "subjects": [], "senders": []})
         entry["count"] += 1
         subj = decoded(msg.get("Subject"))[:70]
         if subj and subj not in entry["subjects"]:
             entry["subjects"].append(subj)
+        # The whole address, not just the domain. A shared sending domain
+        # (service.govdelivery.com) says nothing about which state; the
+        # account name before the @ does - and it used to be thrown away, so
+        # a confirmation from a state we had just subscribed to could not be
+        # traced to it.
+        local, dom = sender_address(decoded(msg.get("From")))
+        addr = f"{local}@{dom}" if local and dom else None
+        if addr and addr not in entry.setdefault("senders", []):
+            entry["senders"].append(addr)
 
     for mid in ids:
         try:

@@ -162,17 +162,22 @@ PROSE_BEFORE = re.compile(
 # matches ANY word, so without it the pattern happily started at "Staff" inside
 # "Full-Staff Allegheny County Only ..." and deleted the statewide line along
 # with the county line, turning a clean FULL into UNKNOWN.
+# "Only" is optional: Pennsylvania's page changed from "Allegheny County
+# Only United States Flags: Half-Staff" to "Erie County: Half-Staff", and the
+# Erie County order of Sept 23 2026 matched nothing - we showed plain "full"
+# to fire stations in Erie County. A colon is still required, so narrative
+# text ("...in Erie County to fly at half-staff") is not read as a line.
 COUNTY_LINE_RE = re.compile(
-    r"(?<![-\w])[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?\s+count(?:y|ies)\s+only"
-    r"[^:]{0,60}:\s*(?:half|full)[-\s]?staff", re.I)
+    r"(?<![-\w])[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?\s+count(?:y|ies)(?:\s+only)?"
+    r"[^:.]{0,60}:\s*(?:half|full)[-\s]?staff", re.I)
 
 # Same lookbehind as COUNTY_LINE_RE, and for a second reason: without it the
 # pattern can start at every position inside a long word, and [a-z]+ backtracks
 # across the whole run each time. 50,000 letters with no spaces took forever,
 # which hung test-parsers.py and could hang a real run on minified page text.
 COUNTY_SCOPED_RE = re.compile(
-    r"(?<![-\w])([A-Z][a-z]{1,30}(?:\s+[A-Z][a-z]{1,30})?)\s+count(?:y|ies)\s+only"
-    r"[^:]{0,60}:\s*(half|full)[-\s]?staff", re.I)
+    r"(?<![-\w])([A-Z][a-z]{1,30}(?:\s+[A-Z][a-z]{1,30})?)\s+count(?:y|ies)(?:\s+only)?"
+    r"[^:.]{0,60}:\s*(half|full)[-\s]?staff", re.I)
 
 # Alaska advertises an explicit window: "From: Sunrise Sunday, July 12, 2026
 # Until: Sunset Saturday, July 18, 2026". A status page can keep displaying an

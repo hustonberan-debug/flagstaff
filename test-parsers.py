@@ -1493,6 +1493,89 @@ t("...and says it could not tell, rather than 'no national order'",
   "states no day" in (ferr or ""), True)
 del os.environ["FEDERAL_PROCLAMATION_URL"]
 
+# --- an unconfirmed half-staff claim is not a failed read (Colorado) -------
+# Colorado's status page says "Flag at Half Staff" with no dated order (its
+# newest date is 2007). We rightly would not publish half from it - and then
+# published its press listing's "full" as if the page had said nothing.
+def _src(status, **kw):
+    return dict({"state_status": status, "source_url": "u-" + status}, **kw)
+_page, _listing = {"ingest_mode": "diff"}, {"ingest_mode": "index"}
+
+_co = _src(P.UNKNOWN, declared=P.HALF, coverage="frozen", source_last_modified="2007-06-29")
+t("a frozen page that declares half is an unconfirmed claim, not a failed read",
+  R.unconfirmed_half(_co) is not None, True)
+_r = R.combine(dict(_co), _src(P.FULL), _page, _listing)
+t("Colorado: unconfirmed half + another source's full -> Unclear, not full",
+  _r["state_status"], P.UNKNOWN)
+t("...recorded as a disagreement, so the cross-check files an issue",
+  (bool(_r.get("source_conflict")), _r["source_conflict"]["a"]["status"]), (True, P.HALF))
+_stale = _src(P.UNKNOWN, declared=P.HALF, stale_half_claim={"newest_order_date": None})
+t("Minnesota: a menu link 'Flags at Half-Staff' is not a claim (no status label)",
+  R.unconfirmed_half(_src(P.UNKNOWN, declared=P.UNKNOWN,
+                          stale_half_claim={"newest_order_date": None})), None)
+t("...so the other source's full still stands",
+  R.combine(_src(P.UNKNOWN, declared=P.UNKNOWN, stale_half_claim={"newest_order_date": None}),
+            _src(P.FULL), _page, _listing)["state_status"], P.FULL)
+t("the label reader: Colorado's label is a claim, Minnesota's menu is not",
+  (R.declared_label("<p>Flag Status: Flag at Half Staff</p>"),
+   R.declared_label("<nav>Flags at Half-Staff</nav><p>Sign up to receive flags at half-staff notifications</p>")),
+  (P.HALF, P.UNKNOWN))
+t("an undated half badge (stale_half_claim) blocks another source's full",
+  R.combine(dict(_stale), _src(P.FULL), _page, _listing)["state_status"], P.UNKNOWN)
+t("either way round: the SECOND source's unconfirmed half blocks the first's full",
+  R.combine(_src(P.FULL), dict(_stale), _listing, _page)["state_status"], P.UNKNOWN)
+_unscoped = _src(P.UNKNOWN, state_order={"status": P.HALF, "title": "x"},
+                 error="order found and current, but it does not say whether it is statewide")
+t("a current order of unknown scope blocks another source's full",
+  R.combine(dict(_unscoped), _src(P.FULL), _listing, _page)["state_status"], P.UNKNOWN)
+_failed = _src(P.UNKNOWN, error="HTTP 403")
+t("a source that FAILED is still replaced by the other's answer",
+  R.combine(dict(_failed), _src(P.FULL), _page, _listing)["state_status"], P.FULL)
+t("...and takes that source's coverage, not the failed one's",
+  R.combine(dict(_failed, coverage="frozen"), _src(P.FULL, coverage="covered"),
+            _page, _listing)["coverage"], "covered")
+_ended = _src(P.UNKNOWN, declared=P.HALF,
+              last_expired_order={"why": "listed order ended 2026-09-12"})
+t("a page whose own dated order has ended is evidence for full, not a claim",
+  R.unconfirmed_half(_ended), None)
+t("an unconfirmed half and another source's HALF: the confirmed half stands",
+  R.combine(dict(_co), _src(P.HALF), _page, _listing)["state_status"], P.HALF)
+t("a declared FULL on a frozen page is not a claim to protect",
+  R.unconfirmed_half(_src(P.UNKNOWN, declared=P.FULL, coverage="frozen")), None)
+
+# --- county-only orders (Pennsylvania, Erie County, Sept 23 2026) ----------
+_pa = ("United States Flag: Full-Staff Erie County: Half-Staff Commonwealth Flag: "
+       "Full-Staff Erie County: Half-Staff On Wednesday, September 23, 2026, Governor "
+       "Josh Shapiro ordered flags in Erie County to fly at half-staff.")
+t("Pennsylvania's new layout: statewide stays full",
+  P.parse_diff(_pa, selector_hint="flag")["status"], P.FULL)
+t("...and Erie County is read as a county at half-staff, once",
+  P.county_exceptions(_pa), [{"county": "Erie", "status": P.HALF}])
+t("the old layout ('County Only ...:') still reads",
+  P.county_exceptions("United States Flag: Full-Staff Allegheny County Only United "
+                      "States Flags: Half-Staff"), [{"county": "Allegheny", "status": P.HALF}])
+t("narrative text is not a county status line",
+  P.county_exceptions("Governor ordered flags in Erie County to fly at half-staff."), [])
+PA_URL = "https://pa.test/flag-notices"
+_parec = {"state": "Pennsylvania", "state_code": "PA", "ingest_mode": "diff",
+          "buildable": True, "flag_page_url": PA_URL}
+on(date(2026, 9, 24))
+R.fetch = stub({PA_URL: f"<p>{_pa}</p><p>Page reviewed September 24, 2026.</p>"})
+_, _o, _ = R.check_state(_parec, {}, None)
+t("a county at half-staff with a recent dated order is published as an exception",
+  (_o["state_status"], _o.get("county_exceptions")), (P.FULL, [{"county": "Erie", "status": P.HALF}]))
+on(date(2026, 11, 30))
+R.fetch = stub({PA_URL: f"<p>{_pa}</p><p>Page reviewed November 30, 2026.</p>"})
+_, _o, _ = R.check_state(_parec, {}, None)
+t("a county line left up with no recent order is dropped, and recorded",
+  (_o.get("county_exceptions"), _o.get("stale_county_claims")), (None, ["Erie"]))
+import cross_check as X
+t("the cross-check does not call 'full with a county at half' a conflict",
+  X.compare({"effective_status": P.FULL, "county_exceptions": [{"county": "Erie", "status": P.HALF}]},
+            {"status": P.HALF}), None)
+t("...but still does when there is no county order",
+  (X.compare({"effective_status": P.FULL}, {"status": P.HALF}) or {}).get("kind"), "conflict")
+
 # --- undated orders are trusted for 3 days, then Unclear (not full) --------
 # 380 of 388 state half-staff transitions in history.jsonl had no parsed
 # dates, so this is the common path, not an edge case. An undated order used

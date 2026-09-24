@@ -300,6 +300,16 @@ jobs:
               raise SystemExit("::error::Gmail REJECTED the login for the alerts inbox - the app "
                                "password was probably revoked. Every email state is going stale. "
                                f"Create a new app password and update MAIL_PASS. ({err.get('detail')})")
+          # A flag bulletin from a state we subscribe to that FAILED DKIM was
+          # dropped. It is a forgery or, far more likely, a real order whose
+          # sender setup we have wrong - either way a real order may be
+          # missing from the site, and a warning is not enough.
+          bad = m.get("unauthenticated_senders") or {}
+          if bad:
+              raise SystemExit("::error::Flag bulletin(s) dropped for failing DKIM: "
+                               + "; ".join(f"{c} x{e.get('count')} ({(e.get('subjects') or [''])[0]})"
+                                           for c, e in bad.items())
+                               + " - check the sender setup in registry.json")
           gen = m.get("generated_at")
           age = (datetime.now(timezone.utc) - datetime.fromisoformat(gen)) if gen else None
           if age is None or age > timedelta(days=1):

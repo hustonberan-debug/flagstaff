@@ -529,9 +529,10 @@
     "notification_channel": {
       "type": "govdelivery",
       "detail": "https://public.govdelivery.com/accounts/IACIO/subscriber/new?category_id=IACIO_C88",
-      "status": "subscribed 2026-09-23; no bulletin received yet",
+      "status": "subscribed 2026-09-23; confirmation arrived from email.iowa.gov (IACIO) and was dropped as unattributed until this domain was registered",
       "account": "IACIO"
-    }
+    },
+    "expected_sender_domain": "email.iowa.gov"
   },
   {
     "state": "Idaho",
@@ -922,9 +923,10 @@
     "notification_channel": {
       "type": "govdelivery",
       "detail": "https://public.govdelivery.com/accounts/MEGOV/subscriber/qualify",
-      "status": "subscribed 2026-09-23; no bulletin received yet",
+      "status": "subscribed 2026-09-23; confirmation arrived from subscriptions.maine.gov (MEGOV) and was dropped as unattributed until this domain was registered",
       "account": "MEGOV"
-    }
+    },
+    "expected_sender_domain": "subscriptions.maine.gov"
   },
   {
     "state": "Michigan",

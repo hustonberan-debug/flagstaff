@@ -1001,6 +1001,7 @@ def check_state(rec, cache, session, verbose=False):
     if mode == "toggle":
         st, ev = P.parse_toggle(text, url)
         out["state_status"] = st
+        out["declared"] = st
         if st != P.UNKNOWN:
             out["state_order"] = {"title": None, "url": url, "status": st,
                                   "authority": P.GOVERNOR, "evidence": ev,
@@ -1015,6 +1016,11 @@ def check_state(rec, cache, session, verbose=False):
         out["coverage"] = "frozen"
         out["error"] = (f"source appears frozen: newest date on page is "
                         f"{lastmod} ({age}d old) - not trusted")
+        # Not trusted is not unread. What the page DECLARES is kept, so a
+        # half-staff claim here cannot be quietly replaced by another
+        # source's "full" (see unconfirmed_half). Colorado's page says "Flag
+        # at Half Staff" and its newest date is 2007; that became FULL.
+        out["declared"] = declared_label(text)
     elif mode == "diff":
         # No history exists on these pages. The page IS the status.
         d = P.parse_diff(text, previous_hash=prev.get("hash"),
@@ -1026,13 +1032,28 @@ def check_state(rec, cache, session, verbose=False):
             # one did not run, and the page cannot be read.
             d["status"] = out["state_status"] = P.UNKNOWN
             d["evidence"] = "page shows both a half-staff and a full-staff status label"
+        # What the page's status LABEL says, before any of the checks below
+        # decide whether to believe it. They can withhold a half-staff claim;
+        # they must not erase that it was made.
+        out["declared"] = declared_label(text)
         if d["status"] == P.UNKNOWN:
             # Record why. With error left empty, "page read but states no
             # status" was indistinguishable from a healthy state, and the CI
             # warning step (which lists states with errors) never saw it.
             out["error"] = d["evidence"] or "no status declaration found on page"
         if d.get("counties"):
-            out["county_exceptions"] = d["counties"]
+            # A half-staff county line is held to the same rule as a
+            # statewide one: a recent dated order must be on the page, or a
+            # county line left up after its order ended would be shown to
+            # that county as current.
+            recent = [x for x in P.order_dates(text)
+                      if (today() - x).days <= STALE_HALF_ORDER_DAYS]
+            kept = [c for c in d["counties"] if c["status"] != P.HALF or recent]
+            if kept:
+                out["county_exceptions"] = kept
+            if len(kept) < len(d["counties"]):
+                out["stale_county_claims"] = [c["county"] for c in d["counties"]
+                                              if c not in kept]
         # A status page can keep advertising an order that already ended.
         # Alaska was still showing the expired July 12-18 federal proclamation
         # in mid-August. If the page states a window, honour it.
@@ -1478,6 +1499,48 @@ def source_kind(rec):
                 rec.get("ingest_mode"), rec.get("ingest_mode"))
 
 
+def declared_label(text):
+    """What a status page's own status LABEL says ("Flag Status: Half Staff"),
+    or UNKNOWN. Stricter than the page reading on purpose: Minnesota's page
+    has no status at all, only a menu link titled "Flags at Half-Staff", and
+    the looser reading took the menu for a declaration. A claim that blocks
+    another source's answer must be the page actually saying it."""
+    vals = P.declared_values(text)
+    return next(iter(vals)) if len(vals) == 1 else P.UNKNOWN
+
+
+def unconfirmed_half(out):
+    """Why this reading is a half-staff claim we could not confirm, or None.
+
+    "Unknown" had two meanings sharing one value: "we could not read this
+    source" and "we read it, and it says half-staff, and we cannot confirm
+    that". Only the first may be replaced by another source's answer.
+    """
+    if not out or out.get("state_status") != P.UNKNOWN:
+        return None
+    exp = (out.get("last_expired_order") or {}).get("why") or ""
+    if exp.startswith("listed order ended"):
+        return None       # the page's own dated order has ended: evidence for full
+    # Only a page whose status LABEL says half is making a claim. Minnesota's
+    # menu link "Flags at Half-Staff" was read as half by the looser reading
+    # and withheld as stale - correctly - but is not a claim to protect.
+    if out.get("stale_half_claim") and out.get("declared") == P.HALF:
+        newest = out["stale_half_claim"].get("newest_order_date")
+        return ("its newest dated order is " + newest if newest
+                else "it shows no dated order")
+    if out.get("declared") == P.HALF:
+        if out.get("coverage") == "frozen":
+            return (f"it shows no dated order (the newest date on the page is "
+                    f"{out.get('source_last_modified')})")
+        return "it cannot be confirmed"
+    o = out.get("state_order") or {}
+    if o.get("status") == P.HALF:
+        return "the order could not be confirmed (" + (out.get("error") or "unverified")[:80] + ")"
+    if "not trusted beyond" in exp:
+        return "the order stated no end date and is past the point it can be trusted"
+    return None
+
+
 def combine(out, second, rec, second_rec):
     """Fold a second reading into the published answer.
 
@@ -1499,6 +1562,30 @@ def combine(out, second, rec, second_rec):
                            or (second.get("state_order") or {}).get("title")
                            or second.get("error")})
     definite = {P.HALF, P.FULL}
+    # A source that read fine and found a half-staff claim it could not
+    # confirm is NOT a source that failed. Colorado's status page says "Flag
+    # at Half Staff" with no dated order; we rightly would not publish half
+    # from it - and then published its press listing's "full", as if the
+    # page had said nothing. Either way round, that is two official sources
+    # disagreeing, and the answer is Unclear, with a person told.
+    ua, ub = unconfirmed_half(out), unconfirmed_half(second)
+    if (ua and b == P.FULL) or (ub and a == P.FULL):
+        claim, cr, other, orec = ((out, rec, second, second_rec) if ua
+                                  else (second, second_rec, out, rec))
+        why = ua or ub
+        out["source_conflict"] = {
+            "ours": P.HALF, "other": P.FULL, "unconfirmed": True,
+            "a": {"kind": source_kind(cr), "url": claim.get("source_url"),
+                  "status": P.HALF, "unconfirmed": why},
+            "b": {"kind": source_kind(orec), "url": other.get("source_url"),
+                  "status": P.FULL}}
+        out["state_status"] = P.UNKNOWN
+        out["state_order"] = None
+        out["coverage"] = "covered"
+        out["confidence_basis"] = "sources disagree"
+        out["error"] = (f"its {source_kind(cr)} claims half-staff but {why}, and its "
+                        f"{source_kind(orec)} shows no order - neither is published")
+        return out
     if a in definite and b in definite:
         if a == b:
             out["confidence_basis"] = "corroborated by 2 independent sources"
@@ -1520,6 +1607,10 @@ def combine(out, second, rec, second_rec):
         out["state_status"] = b
         out["state_order"] = second.get("state_order")
         out["error"] = None
+        # The answer is the second source's, so its coverage is too: Colorado
+        # showed "full" beside a "frozen" (stale) marker from the page that
+        # did not answer.
+        out["coverage"] = second.get("coverage") or "covered"
         out["confidence_basis"] = f"single-source ({source_kind(second_rec)}; primary: {out.get('error') or a})"
     else:
         out["confidence_basis"] = "single-source" if a in definite else "no source answered"
