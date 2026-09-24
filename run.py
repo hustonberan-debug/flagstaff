@@ -738,9 +738,19 @@ def facts_from_text(text, state_name=None):
 def order_facts(item, page_url, session, known, keep, state_name=None):
     """Facts for one listed order, or None. A card listing's own summary is
     used as-is; otherwise the order's page is opened (once, cached)."""
-    if item.get("summary"):
-        return facts_from_text(item["summary"], state_name)
     url = item.get("url")
+    if item.get("summary"):
+        f = facts_from_text(item["summary"], state_name)
+        # A card's summary rarely carries the window. Oklahoma's Joe Flake
+        # card said nothing about dates; the order itself says "from sunrise
+        # on Wednesday, September 9 until sunset on Friday, September 11".
+        # Without the page, a real three-day order read as undated: half for
+        # three days, then Unclear, instead of ending when it said it would.
+        if (f["body_start"] or f["body_end"]) or not url or url == page_url \
+                or not own_source(url, page_url):
+            return f
+        page = article_facts(url, session, known, keep, state_name)
+        return page or f
     if url and url != page_url:
         if not own_source(url, page_url):
             return None
@@ -1026,10 +1036,11 @@ def check_state(rec, cache, session, verbose=False):
         d = P.parse_diff(text, previous_hash=prev.get("hash"),
                          selector_hint="flag")
         out["state_status"] = d["status"]
-        if rec.get("render") and len(P.declared_values(text)) > 1:
-            # Rendered, Oklahoma's hidden widget is gone from the visible
-            # text. If both labels are still visible, the script that picks
-            # one did not run, and the page cannot be read.
+        if len(P.declared_values(text)) > 1:
+            # A page that shows both a half-staff and a full-staff label
+            # cannot be read, rendered or not. (This used to apply only to
+            # rendered pages; Oklahoma's raw page carries both widgets, and
+            # read without a browser it could have answered half-staff.)
             d["status"] = out["state_status"] = P.UNKNOWN
             d["evidence"] = "page shows both a half-staff and a full-staff status label"
         # What the page's status LABEL says, before any of the checks below

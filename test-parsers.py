@@ -743,17 +743,20 @@ t("every state we do not build has a reason on record",
    if not r.get("buildable") and r.get("ingest_mode") != "email"
    and not r.get("blocked_reason")], [])
 t("rendered states use a mode that reads a rendered page",
-  sorted(r["state_code"] for r in _reg if r.get("render")), ["MT", "SD"])
+  sorted(r["state_code"] for r in _reg if r.get("render")), ["MT", "OK", "SD"])
 t("email states have a channel to name as their source",
   [r["state_code"] for r in _reg
    if r.get("ingest_mode") == "email" and not R.channel_url(r)], [])
 # Oklahoma: its header badge said HALF on 2026-09-17 while the only recent
 # order (Joe Flake) ran Sept 9-11 and had ended, and its footer link's title
 # attribute contradicts its own text. Reading either would publish a wrong
-# answer, so it stays off until there is a notification channel.
-t("Oklahoma is not built from its contradictory page",
-  (_by["OK"].get("buildable"), _by["OK"].get("render"),
-   "badge is stale" in (_by["OK"].get("blocked_reason") or "")), (False, False, True))
+# answer. Since 2026-09-24 it is built from its rendered NEWSROOM instead -
+# dated orders, each opened for its window - and the widget page is never a
+# source, primary or second.
+t("Oklahoma is built from its newsroom, never from its contradictory page",
+  (_by["OK"].get("ingest_mode"), _by["OK"].get("render"), R.pick_url(_by["OK"]),
+   R.secondary_rec(_by["OK"])),
+  ("cards", True, "https://oklahoma.gov/governor/newsroom.html", None))
 
 print("\n--- daily cross-check (an alarm, never an input) ---")
 import cross_check as X

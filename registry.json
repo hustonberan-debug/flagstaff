@@ -1521,7 +1521,7 @@
     "rss_verified": false,
     "rss_item_count": 0,
     "rss_evidence": null,
-    "ingest_mode": "none",
+    "ingest_mode": "cards",
     "cms": null,
     "js_blocked": false,
     "signature_check_required": false,
@@ -1530,7 +1530,7 @@
     "govdelivery": false,
     "govdelivery_flag_topic": false,
     "listserv": null,
-    "quirk": "The page ships BOTH a half-staff and a full-staff widget and hides one with JavaScript; flag-status-half.html and flag-status-full.html are constants that always name themselves. Only the rendered page's VISIBLE text is read. If both labels are visible, it reports unknown.",
+    "quirk": "The page ships BOTH a half-staff and a full-staff widget and hides one with JavaScript; flag-status-half.html and flag-status-full.html are constants that always name themselves. Only the rendered page's VISIBLE text is read. If both labels are visible, it reports unknown. | 2026-09-24: read from the rendered NEWSROOM (dated, linked cards, like MT and SD). The status widget is not used at all: even rendered, both its half and full labels are visible, so it cannot be read, and it is not a second source.",
     "last_order_seen": {
       "date": "2026-05-20",
       "title": "Governor Stitt Orders Flags to Half-Staff to Honor Osage County Commissioner Charlie Cartwright",
@@ -1541,17 +1541,15 @@
     "stale": false,
     "methods_disagree": true,
     "confidence_source": "cowork (researched)",
-    "confidence": "low",
+    "confidence": "medium",
     "confidence_caps": [],
-    "buildable": false,
+    "buildable": true,
     "toggle_hub_url": "https://oklahoma.gov/governor.html",
-    "url_candidates": [
-      "https://oklahoma.gov/governor.html",
-      "https://oklahoma.gov/governor/newsroom.html"
-    ],
-    "blocked_reason": "No readable source, and no notification channel on record. Rendering does NOT fix this - tested twice. At a real desktop viewport (1280x800) both labels render and NOTHING is hidden: a 'Flag Status : Half Staff' badge in the header (div.text.flag-status) and a 'Flag Status: Full-Staff' link in the footer links. They can be told apart by scope, but neither can be trusted: on 2026-09-17 the header badge said HALF while the only recent order (Stitt, fallen Wellston firefighter Joe Flake) ran Sept 9-11 and had ended, so the badge is stale; and the footer link's own title attribute says 'Flag Status: Half-Staff' while its text says 'Full-Staff'. Reading the badge would have published half-staff for Oklahoma on a full-staff day. Reports not covered until there is an official notification channel.",
-    "render": false,
-    "_mode_fixed_by": "2026-09-17: rendered DOM inspected at desktop size - both labels visible, badge stale, footer link self-contradictory"
+    "url_candidates": null,
+    "render": true,
+    "_mode_fixed_by": "2026-09-17: rendered DOM inspected at desktop size - both labels visible, badge stale, footer link self-contradictory",
+    "no_secondary": true,
+    "blocked_reason_history": "No readable source, and no notification channel on record. Rendering does NOT fix this - tested twice. At a real desktop viewport (1280x800) both labels render and NOTHING is hidden: a 'Flag Status : Half Staff' badge in the header (div.text.flag-status) and a 'Flag Status: Full-Staff' link in the footer links. They can be told apart by scope, but neither can be trusted: on 2026-09-17 the header badge said HALF while the only recent order (Stitt, fallen Wellston firefighter Joe Flake) ran Sept 9-11 and had ended, so the badge is stale; and the footer link's own title attribute says 'Flag Status: Half-Staff' while its text says 'Full-Staff'. Reading the badge would have published half-staff for Oklahoma on a full-staff day. Reports not covered until there is an official notification channel."
   },
   {
     "state": "Oregon",
