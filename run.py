@@ -45,7 +45,7 @@ import parsers as P
 # recomputed every run), but facts extracted from individual order pages are,
 # and those were produced by whatever parser was current at the time. A bump
 # discards them while keeping the memory of last known answers.
-PARSER_VERSION = "27"       # 27: scope is stated or unknown; order facts re-read
+PARSER_VERSION = "28"       # 28: an order's window comes from its own sentence, not the dateline
 
 REGISTRY = "registry.json"
 CACHE = "cache.json"
@@ -269,6 +269,7 @@ def federal_statutory(d):
                 # this order expires instead of living on undated.
                 "start_date": d.isoformat(),
                 "end_date": d.isoformat(),
+                "observance": f"{obs.get('id')}:{d.isoformat()}",
             }
     return None
 
@@ -361,7 +362,7 @@ def federal_proclamation(session, cache):
                               -(x[0].toordinal() if x[0] else 0)))
 
     art_cache = cache.setdefault(FEDERAL_ARTICLE_CACHE, {})
-    checked, unread = 0, []
+    checked, unread, undated = 0, [], []
     for d, i in cands:
         if checked >= 12:
             break
@@ -395,37 +396,117 @@ def federal_proclamation(session, cache):
         auth, aev = P.classify_authority(window)
         if auth == P.GOVERNOR:
             continue          # a governor's order does not belong here
-        start, end = P.date_range(window)
+        # The listing's date is the publication day; a URL gives only the
+        # month, which is not a day anything happened.
+        published = d if i.get("date") else None
+        start, end = P.order_window(window, published)
+
+        # An observance proclamation often orders half-staff in a sentence
+        # with no date of its own - Patriot Day 2026's reads "display the
+        # Flag ... at half-staff in honor of the 2,977 victims" and nothing
+        # more. Held open from its publication, that published national
+        # half-staff for every state on Sept 12, 13 and 14. The day is fixed
+        # elsewhere: by statute (the calendar) or by the proclamation itself
+        # ("do hereby proclaim September 11, 2026, as Patriot Day").
+        obs = calendar_observance(f"{i['title']} {window}", today())
+        day, day_from = None, None
+        if obs and obs.get("active"):
+            # A fixed statutory day: the law decides, whatever the sentence says.
+            day, day_from = date.fromisoformat(obs["date"]), "statutory calendar"
+        elif not (start or end):
+            pd = proclaimed_day(body)
+            if pd:
+                day, day_from = pd, "the day the proclamation proclaims"
+            else:
+                # A half-staff order whose day we cannot establish. Skipping
+                # it would read as "no national order" - a confident full on a
+                # day we cannot read. Report it as a failed check instead, so
+                # the site says it could not tell. (A variable observance's
+                # calendar date is an estimate and is not used for this.)
+                # Only while it is recent enough to plausibly still apply.
+                if not published or (today() - published).days <= AMBIGUOUS_WINDOW_DAYS:
+                    undated.append(i["title"])
+                continue
+        if day:
+            start = end = day
 
         # A proclamation usually states only its END ("...until sunset,
-        # August 31, 2026"). With no earlier date in the text, date_range
-        # returns that same date as the start too, which makes the order look
-        # like it has not begun yet — and the site keeps showing full staff
-        # through the entire order. If the only date we have is the end, the
-        # start is when it was published.
-        if start and end and start >= end:
+        # August 31, 2026"). If the only date we have is the end, the start
+        # is when it was published.
+        if start and end and start > end:
             start = d if (d and d < end) else None
         v, why = covers_today(start.isoformat() if start else None,
                               end.isoformat() if end else None, today())
+        if day_from and v is not None:
+            why = f"{why} ({day_from})"
         if v is not True:
             continue
 
         return {
             "status": P.HALF,
-            "scope": "until-noon" if P.until_noon(window) else "full-day",
+            "scope": ("until-noon" if (obs and obs.get("scope") == "until-noon")
+                      or P.until_noon(window) else "full-day"),
             "reason": i["title"],
             "authority": "presidential proclamation",
-            "citation": None,
+            "citation": obs.get("citation") if obs else None,
             "source_url": u,
             "start_date": start.isoformat() if start else None,
             "end_date": end.isoformat() if end else None,
             "coverage_reason": why,
+            # What this order IS, independent of how it is worded - see
+            # federal_key().
+            "observance": (f"{obs['id']}:{start.isoformat()}" if obs and start
+                           else None),
         }, None
+    if undated:
+        return None, (f"a recent proclamation orders half-staff but states no day "
+                      f"we can establish ({'; '.join(undated)[:200]})")
     if unread:
         # The one page we could not open may be the order.
         return None, (f"{len(unread)} recent proclamation page(s) could not be "
                       f"read ({', '.join(sorted(set(unread)))})")
     return None, None
+
+
+PROCLAIM_DAY_RE = re.compile(
+    r"\bproclaim\s+(?:\w+day,\s+)?([A-Z][a-z]+\.?\s+\d{1,2},?\s+20\d\d)\s*,?\s+as\b")
+
+
+def proclaimed_day(body):
+    """The single day a proclamation proclaims: "do hereby proclaim September
+    11, 2026, as Patriot Day". None for a range ("October 4 through October
+    10, 2026, as Fire Prevention Week") - a week is not the day the flag is
+    lowered."""
+    m = PROCLAIM_DAY_RE.search(body or "")
+    return P.parse_any_date(m.group(1)) if m else None
+
+
+def calendar_observance(text, d):
+    """The statutory-calendar entry this proclamation is about, if any: its
+    name appears in the text and its date is within three weeks of d.
+    Longest name first, so "Peace Officers Memorial Day" is not read as
+    "Memorial Day"."""
+    cal = load_json(CALENDAR, {}).get("years", {})
+    low = (text or "").lower()
+    entries = [o for y in (d.year - 1, d.year, d.year + 1) for o in cal.get(str(y), [])
+               if o.get("date") and abs((date.fromisoformat(o["date"]) - d).days) <= 21]
+    for o in sorted(entries, key=lambda o: -len(o.get("name") or "")):
+        name = (o.get("name") or "").lower()
+        key = name.removeprefix("national ").strip()
+        if key and key in low:
+            return o
+    return None
+
+
+def federal_key(fed):
+    """What a national order IS, for deciding whether it is new. Keyed on the
+    observance, not its wording: the statutory entry says "Patriot Day" and
+    the proclamation says "Patriot Day 2026, The 25th Anniversary of the
+    September 11 Terrorist Attacks" - one order, and keying on the text
+    counted it twice and pushed to every subscriber the second time."""
+    if not fed:
+        return None
+    return fed.get("observance") or fed.get("source_url") or fed.get("reason")
 
 
 # Hosts that are official state sources without a government domain. Each one
@@ -645,7 +726,7 @@ def facts_from_text(text, state_name=None):
     opening = " ".join(re.split(r"(?<=[.!?])\s+", text)[:3])[:700]
     st, sev = P.classify_status(opening)
     au, aev = P.classify_authority(opening)
-    bs, be = P.date_range(text[:8000])
+    bs, be = P.order_window(text[:12000])
     scope, scope_ev = P.order_scope(text[:12000], state_name)
     return {"opening_status": st, "opening_evidence": sev,
             "opening_authority": au, "opening_authority_evidence": aev,
@@ -1110,11 +1191,12 @@ def check_state(rec, cache, session, verbose=False):
                     and (not rec_o["end_date"] or not f):
                 f = order_facts(i, url, session, prev_articles, articles,
                                 rec.get("state"))
-                if f:
-                    if f["body_start"] and not rec_o["start_date"]:
-                        rec_o["start_date"] = f["body_start"]
-                    if f["body_end"]:
-                        rec_o["end_date"] = f["body_end"]
+                if f and (f["body_start"] or f["body_end"]):
+                    # The order's own sentence decides its window, over the
+                    # headline and over the listing's date. Only when it
+                    # states nothing does the release date stand in, below.
+                    rec_o["start_date"] = f["body_start"]
+                    rec_o["end_date"] = f["body_end"]
                     rec_o["dates_from"] = "order body"
                 elif not rec_o["start_date"] and not d:
                     # We have a flag headline and no date anywhere, because
@@ -1585,7 +1667,7 @@ def main():
     #
     # It belongs here: run.py writes cache.json BEFORE the commit, so the
     # memory actually survives to the next run.
-    fed_key = (fed or {}).get("reason")
+    fed_key = federal_key(fed)
     already = cache.get("_federal_announced")
     fed_is_new = bool(fed_key) and fed_key != already
     if fed or not fed_check.startswith("failed"):

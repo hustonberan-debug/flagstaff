@@ -204,7 +204,7 @@ def listed_order_windows(html):
             continue
         if BOILERPLATE_RE.search(sentence):
             continue
-        s, e = date_range(sentence)
+        s, e = order_window(sentence)
         if e:
             out.append((s, e))
     return out
@@ -973,6 +973,224 @@ def weekday_window(text, ref):
     return days[0], days[-1]
 
 
+# ---------------------------------------------------------------------------
+# The window an order states, read from the order's own sentence.
+# ---------------------------------------------------------------------------
+# date_range reads a whole page and takes the first date it finds - which on a
+# press release is the release's own dateline. Maine's order for "Friday,
+# September 11" started Sept 10, the day it was posted; Iowa's for Sept 18-20
+# started Sept 17. And a one-day order ("on Friday", "today", "on September
+# 11") came back as a start with no end, so the no-end hold kept it up for
+# days. order_window reads the half-staff sentence and the one after it, and
+# nothing else, and says so when it finds nothing: only then does a caller
+# fall back to the release date.
+
+YEARLESS_DATE_RE = re.compile(
+    rf"\b({MONTH_RE})\.?\s+(\d{{1,2}})(?:st|nd|rd|th)?\b(?!,?\s*20\d\d)", re.I)
+# A date right after one of these is a death, a birth or an anniversary being
+# remembered - not the day the flag comes down.
+NOT_ORDER_DATE_RE = re.compile(
+    r"(?:died|passed(?:\s+away)?|death|born|killed|attacks?\s+of|anniversary\s+of|"
+    r"since)\s+(?:on\s+)?(?:\w+day,?\s+)?$", re.I)
+OPEN_ENDED_RE = re.compile(
+    r"until\s+(?:further\s+notice|(?:the\s+)?(?:day\s+of\s+)?(?:(?:his|her|their)\s+)?"
+    r"(?:interment|burial|funeral))", re.I)
+TODAY_RE = re.compile(r"\b(?:today|tonight)\b", re.I)
+RANGE_RE = re.compile(
+    r"\b(?:from|beginning|effective|starting)\s+(.{0,90}?)\s+"
+    r"(?:through|until|thru|to)\s+(.{0,90})", re.I)
+OW_UNTIL_RE = re.compile(r"\b(?:until|through|thru)\s+(.{0,70})", re.I)
+ON_DAY_BEFORE_RE = re.compile(
+    r"(?:\bon\s+(?:[a-z]+day,?\s+)?|\b[a-z]+day,?\s+)$", re.I)
+HISTORIC_DAYS = 366
+# The sentence that carries the order. Wider than HALF_SIGNALS, which decide
+# half vs full and must stay strict: "flags be lowered from sunrise to sunset
+# on Friday, September 11" is Maine's whole order and matches none of them.
+ORDER_SENTENCE_RES = [re.compile(p, re.I) for p in HALF_SIGNALS] + [
+    re.compile(r"\bflags?\b.{0,60}?\blowered\b", re.I),
+    re.compile(r"\bdisplay(?:ed)?\b.{0,60}?\bat\s+half", re.I),
+]
+
+
+def _dates_in(text, ref=None):
+    """[(offset, date)] for every date in text, in order. A date with no year
+    takes ref's year. Dates far from ref (a 2001 attack, a 1941 raid) are
+    history being remembered, not order dates, and are dropped."""
+    out = []
+    for pat in DATE_PATTERNS:
+        for m in pat.finditer(text or ""):
+            d = parse_any_date(m.group(0))
+            if d:
+                out.append((m.start(), d))
+    if ref:
+        for m in YEARLESS_DATE_RE.finditer(text or ""):
+            try:
+                d = date(ref.year, _month_num(m.group(1)), int(m.group(2)))
+            except (ValueError, TypeError):
+                continue
+            if not any(abs(a - m.start()) < 3 for a, _ in out):
+                out.append((m.start(), d))
+        out = [(a, d) for a, d in out if abs((d - ref).days) <= HISTORIC_DAYS]
+    else:
+        out = [(a, d) for a, d in out if d.year >= 2020]
+    return sorted(out)
+
+
+def _order_dates(text, ref=None):
+    """Dates in text that could be the day an order applies to."""
+    return [(a, d) for a, d in _dates_in(text, ref)
+            if not NOT_ORDER_DATE_RE.search((text or "")[max(0, a - 40):a])]
+
+
+def release_date(text):
+    """The release's own date: the first plausible date near the top."""
+    for _, d in _dates_in((text or "")[:1500]):
+        return d
+    return None
+
+
+def _window_in(span, published):
+    # 1. "from X until/through/to Y" - every occurrence, not only the first:
+    #    "from the Governor to all agencies" must not end the search.
+    # Dates are found in the whole span, then assigned to the "from" and
+    # "until" parts by position. Parsing the regex groups directly cut
+    # "attacks of September 11, 2001" to "September 11, 20" at the group's
+    # length limit - which then read as a yearless September 11 of THIS year.
+    every = _dates_in(span, published)
+    orderish = set(_order_dates(span, published))
+    for m in RANGE_RE.finditer(span):
+        a = [d for x, d in every if m.start(1) <= x < m.end(1) and (x, d) in orderish]
+        b = [d for x, d in every if m.start(2) <= x < m.end(2)]
+        s = a[0] if a else None
+        e = b[0] if b else None
+        # "from sunrise to sunset on Friday, September 11" is one day.
+        if e and not s and TIME_OF_DAY_RE.fullmatch(m.group(1).strip()):
+            return e, e
+        if s and e and s <= e:
+            return s, e
+        if e and not s:
+            return None, e
+        if s and not e and TIME_OF_DAY_RE.match(m.group(2).strip()) \
+                and not WEEKDAY_RE.search(m.group(2)[:40]):
+            return s, s        # "from dawn on Sept 18 to dusk"
+    # 2. "until/through <date>" with no "from"
+    for m in OW_UNTIL_RE.finditer(span):
+        b = [(x - m.start(1), d) for x, d in every if m.start(1) <= x < m.end(1)]
+        if b and b[0][0] < 40:
+            before = [d for x, d in sorted(orderish) if x < m.start()]
+            return (before[-1] if before else None), b[0][1]
+    # 3. "until further notice", "until the day of interment": open-ended
+    if OPEN_ENDED_RE.search(span):
+        before = _order_dates(span, published)
+        return (before[0][1] if before else published), None
+    # 4. explicit days: "on Friday, September 11, 2026". Only a date said to
+    #    be a day - after "on" or a weekday. "...in honor of a trooper,
+    #    September 21, 2026" is when it was ordered, not a one-day order, and
+    #    reading it as one expired live orders on status pages.
+    days = sorted({d for a, d in _order_dates(span, published)
+                   if ON_DAY_BEFORE_RE.search(span[max(0, a - 30):a])})
+    if days and (days[-1] - days[0]).days <= 7:
+        return days[0], days[-1]
+    # 5. weekdays only: "at half-staff on Friday", "until sunset Sunday"
+    if published:
+        s, e = weekday_window(span, published)
+        if s:
+            return s, e
+    # 6. "today": the day it was issued
+    if published and TODAY_RE.search(span):
+        return published, published
+    return None
+
+
+def order_window(text, published=None):
+    """(start, end) as stated by the order's own half-staff sentence.
+
+    (None, None) when that sentence states no window - the only case where a
+    caller should fall back to the release date. A one-day order returns
+    start == end, so the hold for orders with no stated end never applies.
+
+    published is the day the order was issued, used to resolve "Friday" and
+    "today". When not given, the release's dateline is used for that and
+    ONLY that - never as the start of the order.
+    """
+    t = strip_html(text) if "<" in (text or "") else (text or "")
+    # The release's own dateline is when it was issued, never an order date.
+    # It is blanked (offsets kept) so nothing below can read it as one: North
+    # Dakota's "Wednesday, September 9, 2026 - 03:26 pm" sits right after a
+    # headline with no full stop, and read as a one-day order for Wednesday
+    # when the order was for Friday. It still resolves "Friday" and "today".
+    dl = _dateline(t)
+    if dl and (published is None or dl[0] == published):
+        published = dl[0]
+        a, b = dl[1]
+        t = t[:a] + " " * (b - a) + t[b:]
+    # Spans are bounded around each half-staff phrase rather than trusted to
+    # sentence punctuation: navigation and headlines carry no full stops, so
+    # Maine's order sentence arrived glued to 700+ characters of menu and was
+    # skipped as too long.
+    spans, seen = [], set()
+    for h in sorted({m.start() for p in ORDER_SENTENCE_RES for m in p.finditer(t)}):
+        lo = max(_boundary_before(t, h), h - SPAN_BEFORE)
+        hi1 = min(_boundary_after(t, h), h + SPAN_AFTER)
+        if (lo, hi1) in seen:
+            continue
+        seen.add((lo, hi1))
+        hi2 = min(_boundary_after(t, hi1 + 1), hi1 + SPAN_AFTER)
+        spans.append((lo, hi1, hi2))
+    # Protocol prose ("flags shall be flown at half-staff upon the death of")
+    # is read last, not skipped: a proclamation's own order sentence uses the
+    # same words - "shall be flown at half-staff ... until sunset, September
+    # 1" - and skipping it lost the Dolly Parton window.
+    spans.sort(key=lambda s: bool(BOILERPLATE_RE.search(t[s[0]:s[1]])))
+    for lo, hi1, hi2 in spans:
+        for span in (t[lo:hi1], t[lo:hi2]):
+            w = _window_in(span, published)
+            if w:
+                return w
+    return None, None
+
+
+SPAN_BEFORE, SPAN_AFTER = 300, 400
+DATELINE_REACH = 6000
+ORDER_PHRASE_BEFORE_RE = re.compile(
+    r"\b(?:on|from|until|through|thru|to|beginning|effective|starting)\b[^.]{0,28}$", re.I)
+_SENT_END_RE = re.compile(r"[.!?](?=\s|$)")
+
+
+def _boundary_before(t, i):
+    ends = [m.end() for m in _SENT_END_RE.finditer(t, max(0, i - 2000), i)]
+    return ends[-1] if ends else 0
+
+
+def _boundary_after(t, i):
+    m = _SENT_END_RE.search(t, i)
+    return m.end() if m else len(t)
+
+
+def _dateline(t):
+    """(date, (start, end)) of the release's own date near the top, with any
+    weekday in front of it and any time after it, or None. "Near the top"
+    is generous: North Dakota's dateline sits 3,367 characters in, behind
+    the site's navigation, and whitehouse.gov's behind 3,000."""
+    top = t[:DATELINE_REACH]
+    found = [(m.start(), m.end(), parse_any_date(m.group(0)))
+             for pat in DATE_PATTERNS for m in pat.finditer(top)]
+    # A date inside an order phrase ("on Friday, September 11", "until
+    # sunset, September 1") is the order's, even when it is the first date
+    # there is - a bare order sentence has no dateline at all.
+    found = sorted(f for f in found if f[2] and f[2].year >= 2020
+                   and not ORDER_PHRASE_BEFORE_RE.search(top[max(0, f[0] - 40):f[0]]))
+    if not found:
+        return None
+    a, b, d = found[0]
+    wd = re.search(r"(?:[A-Z][a-z]+day,?\s*)$", t[:a])
+    if wd:
+        a = wd.start()
+    tm = re.match(r"\s*[-–—|,]?\s*\d{1,2}:\d{2}\s*[ap]\.?m\.?", t[b:], re.I)
+    if tm:
+        b += tm.end()
+    return d, (a, b)
+
 # An index page is evidence of "no current order" only if it actually lists
 # press releases. parse_index returns every link-ish headline, so a page that
 # renders its list with JavaScript still yields items — the site's own
@@ -1224,7 +1442,7 @@ def extract_order(text, url=None, title=None):
     """
     status, s_ev = classify_status(text)
     authority, a_ev = classify_authority(text)
-    start, end = date_range(text)
+    start, end = order_window(text)
     return {
         "title": (title or "")[:200] or None,
         "url": url,

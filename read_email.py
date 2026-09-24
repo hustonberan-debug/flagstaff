@@ -317,8 +317,10 @@ def parse_message(msg, allowed):
         return None, f"limited scope: {scope_ev}"
 
     authority, a_ev = P.classify_authority(blob)
-    start, end = P.date_range(blob)
     sent = sent_day(msg)
+    # The order's own sentence, with "Friday" and "today" resolved against the
+    # day the bulletin was sent - never the send date as the start.
+    start, end = P.order_window(blob, sent)
     sent_date = sent.isoformat() if sent else None
 
     # An order cannot start or end well before the email announcing it. A

@@ -296,8 +296,11 @@ cache = {}
 fed, ferr = R.federal_proclamation(None, cache)
 t("long proclamation detected", (fed or {}).get("reason"), "Honoring the Memory of X")
 t("no error when checked cleanly", ferr, None)
+# The listing gives no publication day here, so the reason reads "ends ..."
+# rather than "window ...". What is being proved is that it is live.
 t("end-date-only order stays active mid-window",
-  (fed or {}).get("coverage_reason", "").startswith("window"), True)
+  (fed or {}).get("status") == P.HALF and
+  (fed or {}).get("coverage_reason", "").startswith(("window", "ends")), True)
 calls.clear()
 R.fetch = stub({LIST: listing})          # the proclamation page errors
 fed, ferr = R.federal_proclamation(None, {})
@@ -1369,6 +1372,126 @@ for _i, _eff in enumerate(_seqs):
         _bad.append(_i)
     _cache = _nc
 t("a move to Unclear is never marked as a change", _bad, [])
+
+# --- an order's window comes from its own sentence (backtest, 2026-09-24) ---
+# Every sentence here is from a real order the backtest caught us misreading.
+# The release date is a fallback for when the sentence states nothing - it
+# is never the start of an order that names its own day.
+_ow = [
+    ("Maine: a one-day order posted the day before",
+     "Governor Janet Mills has directed that the United States and State of Maine "
+     "flags be lowered from sunrise to sunset on Friday, September 11, 2026, in "
+     "honor of the victims.", date(2026, 9, 10), (date(2026, 9, 11), date(2026, 9, 11))),
+    ("Iowa: a window that starts the day after its release",
+     "Governor Kim Reynolds has ordered flags flown at half-staff from sunrise on "
+     "Friday, September 18, 2026, until sunset on Sunday, September 20, 2026, in "
+     "honor and remembrance of Ray Gaesser.", date(2026, 9, 17),
+     (date(2026, 9, 18), date(2026, 9, 20))),
+    ("North Dakota: 'on Friday' is one day",
+     "Kelly Armstrong has directed all government agencies to fly the United States "
+     "and North Dakota flags at half-staff on Friday, and encourages residents to do "
+     "the same, in remembrance of those who died in the Sept. 11, 2001, attacks.",
+     date(2026, 9, 9), (date(2026, 9, 11), date(2026, 9, 11))),
+    ("West Virginia: 'dawn to dusk today' is the day it was issued",
+     "The proclamation orders all State flags displayed at State facilities to remain "
+     "at half-staff from dawn to dusk today.", date(2026, 9, 10),
+     (date(2026, 9, 10), date(2026, 9, 10))),
+    ("Patriot Day proclamation: no date in the sentence, and 2001 is not one",
+     "I call upon all departments, agencies, and instrumentalities of the United "
+     "States to display the Flag of the United States at half-staff in honor of the "
+     "2,977 victims of the attacks of September 11, 2001.", date(2026, 9, 10), (None, None)),
+    ("Dolly Parton proclamation: 'shall be flown' is an order, not protocol",
+     "The flag of the United States shall be flown at half-staff at the White House "
+     "and upon all public buildings until sunset, September 1, 2026.",
+     date(2026, 8, 26), (None, date(2026, 9, 1))),
+    ("a date of death is not the day of the order",
+     "Flags will fly at half-staff on Saturday, September 19, 2026, for the trooper "
+     "who died September 14, 2026.", date(2026, 9, 16),
+     (date(2026, 9, 19), date(2026, 9, 19))),
+    ("an earlier 'from ... to' that is not a window does not end the search",
+     "A message from the Governor to all agencies. Flags will be lowered to "
+     "half-staff on September 25, 2026.", date(2026, 9, 23),
+     (date(2026, 9, 25), date(2026, 9, 25))),
+    ("a bare date after a comma is when it was ordered, not a one-day order",
+     "Governor directs flags to half-staff in honor of a trooper, September 21, 2026.",
+     date(2026, 9, 21), (None, None)),
+    ("until the day of interment is open-ended from issue",
+     "Flags will remain at half-staff until the day of interment.",
+     date(2026, 9, 1), (date(2026, 9, 1), None)),
+]
+for label, text, pub, want in _ow:
+    t(label, P.order_window(text, pub), want)
+# Shapes from the real pages, which the clean sentences above did not catch.
+t("North Dakota's page: a period-less headline glued to its dateline is not "
+  "a one-day order for the dateline",
+  P.order_window("Menu " * 700 + "Armstrong directs flags flown at half-staff Friday in "
+                 "memory of 9/11 victims on 25th anniversary of attacks &laquo; All News "
+                 "Wednesday, September 9, 2026 - 03:26 pm Categories: Flag Directives "
+                 "BISMARCK, N.D. - Gov. Kelly Armstrong has directed all government "
+                 "agencies to fly the flags at half-staff on Friday."),
+  (date(2026, 9, 11), date(2026, 9, 11)))
+t("West Virginia's page: 'attacks of September 11, 2001' is not this year's "
+  "September 11 when a phrase runs long",
+  P.order_window("September 10, 2026 CHARLESTON, W.Va. - Governor Patrick Morrisey "
+                 "ordered all flags at state facilities to be displayed at half-staff "
+                 "from dawn to dusk in remembrance of those who lost their lives in the "
+                 "terrorist attacks of September 11, 2001. The proclamation orders all "
+                 "State flags to remain at half-staff from dawn to dusk today."),
+  (date(2026, 9, 10), date(2026, 9, 10)))
+t("Maine's page: an order sentence behind 700+ characters of menu is still read",
+  P.order_window("Home Menu Governor News " * 40 + "September 10, 2026 AUGUSTA, MAINE - "
+                 "Governor Janet Mills has directed that the United States and State of "
+                 "Maine flags be lowered from sunrise to sunset on Friday, September 11, "
+                 "2026, in honor of the victims."),
+  (date(2026, 9, 11), date(2026, 9, 11)))
+t("with no publication day given, the dateline resolves 'Friday' - and only that",
+  P.order_window("Bismarck, Wednesday, September 9, 2026. Flags will fly at "
+                 "half-staff on Friday."), (date(2026, 9, 11), date(2026, 9, 11)))
+
+# --- a statutory observance's day comes from the law, not a 3-day hold -----
+PD_URL = "https://www.whitehouse.gov/presidential-actions/2026/09/patriot-day-2026-the-25th-anniversary/"
+PD_LIST = f'<a href="{PD_URL}">Patriot Day 2026, The 25th Anniversary of the September 11 Terrorist Attacks</a>'
+PD_BODY = ("<p>NOW, THEREFORE, I do hereby proclaim September 11, 2026, as Patriot Day. "
+           "I call upon all departments, agencies, and instrumentalities of the United "
+           "States to display the Flag of the United States at half-staff in honor of "
+           "the 2,977 victims of the attacks of September 11, 2001.</p>")
+os.environ["FEDERAL_PROCLAMATION_URL"] = LIST
+R.fetch = stub({LIST: PD_LIST, PD_URL: PD_BODY})
+for day, want in ((date(2026, 9, 11), P.HALF), (date(2026, 9, 12), None),
+                  (date(2026, 9, 13), None), (date(2026, 9, 14), None)):
+    on(day)
+    fed, ferr = R.federal_proclamation(None, {})
+    t(f"Patriot Day proclamation on {day:%b %d}: {'half' if want else 'no national order'}",
+      (fed or {}).get("status"), want)
+on(date(2026, 9, 11))
+_procl = R.federal_proclamation(None, {})[0]
+t("the statute and the proclamation are ONE order - same key, one push",
+  R.federal_key(R.federal_statutory(date(2026, 9, 11))), R.federal_key(_procl))
+t("and the key is the observance, not the wording", R.federal_key(_procl),
+  "patriot-day:2026-09-11")
+
+FF_URL = "https://www.whitehouse.gov/presidential-actions/2026/10/fire-prevention-week-2026/"
+FF_LIST = f'<a href="{FF_URL}">Fire Prevention Week, 2026</a>'
+FF_DATED = ("<p>NOW, THEREFORE, I do hereby proclaim October 4 through October 10, 2026, "
+            "as Fire Prevention Week. I direct that the flag of the United States be "
+            "flown at half-staff on Sunday, October 4, 2026, in honor of the National "
+            "Fallen Firefighters Memorial Service.</p>")
+R.fetch = stub({LIST: FF_LIST, FF_URL: FF_DATED})
+for day, want in ((date(2026, 10, 4), P.HALF), (date(2026, 10, 5), None)):
+    on(day)
+    t(f"Fallen Firefighters (dated sentence) on {day:%b %d}",
+      (R.federal_proclamation(None, {})[0] or {}).get("status"), want)
+FF_UNDATED = ("<p>NOW, THEREFORE, I do hereby proclaim October 4 through October 10, "
+              "2026, as Fire Prevention Week. I direct that the flag of the United "
+              "States be flown at half-staff in honor of the National Fallen "
+              "Firefighters Memorial Service.</p>")
+R.fetch = stub({LIST: FF_LIST, FF_URL: FF_UNDATED})
+on(date(2026, 10, 5))
+fed, ferr = R.federal_proclamation(None, {})
+t("an undated variable observance is not guessed from the calendar estimate", fed, None)
+t("...and says it could not tell, rather than 'no national order'",
+  "states no day" in (ferr or ""), True)
+del os.environ["FEDERAL_PROCLAMATION_URL"]
 
 # --- undated orders are trusted for 3 days, then Unclear (not full) --------
 # 380 of 388 state half-staff transitions in history.jsonl had no parsed
