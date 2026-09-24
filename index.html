@@ -129,6 +129,8 @@ select:focus-visible{outline:2px solid var(--navy-lit);outline-offset:2px}
   font-family:var(--mono);font-size:12px;letter-spacing:.05em;
   padding:6px 2px;text-decoration:underline;text-underline-offset:3px}
 .locate:hover{color:var(--paper)}
+.locate.inline{font-family:var(--body);font-size:inherit;letter-spacing:0;
+  color:var(--paper);padding:0}
 .locate:focus-visible{outline:2px solid var(--navy-lit);outline-offset:2px}
 
 /* --- The answer -------------------------------------------------------- */
@@ -243,8 +245,11 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
 
 @media (max-width:900px){
   body{padding-left:0}
-  .stage{position:relative;width:100%;height:46vh;min-height:300px;
-    border-right:none;border-bottom:1px solid var(--line)}
+  /* Stacked, the pole follows the answer (it used to come first and push
+     the verdict below the fold). Full-bleed out of .wrap's side padding. */
+  .stage{position:relative;width:calc(100% + 44px);margin:32px -22px 8px;
+    height:40vh;min-height:240px;
+    border-right:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .truck{left:18%;top:9%}
   .staff{left:18%;top:calc(9% + 12px)}
   .halyard{left:18%;top:calc(9% + 14px)}
@@ -264,38 +269,6 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
 </head>
 <body>
 
-<!-- The pole. Ticks are a measure of the pole, echoing the precision the
-     product claims. The flag rides to full or half depending on the answer. -->
-<div class="stage" aria-hidden="true">
-  <div class="truck"></div>
-  <div class="staff"></div>
-  <div class="halyard"></div>
-  <div class="cleat"></div>
-  <div class="tick major" style="top:calc(6% + 26px)"></div>
-  <span class="tick-label" style="top:calc(6% + 26px)">full</span>
-  <div class="tick" style="top:28%"></div>
-  <div class="tick major" style="top:50%"></div>
-  <span class="tick-label" style="top:50%">half</span>
-  <div class="tick" style="top:72%"></div>
-  <div class="flagwrap waving" id="flag">
-    <svg viewBox="0 0 190 100" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <clipPath id="fc"><rect width="190" height="100"/></clipPath>
-        <linearGradient id="fg" x1="0" x2="1">
-          <stop offset="0" stop-color="#000" stop-opacity=".22"/>
-          <stop offset=".35" stop-color="#fff" stop-opacity=".10"/>
-          <stop offset=".62" stop-color="#000" stop-opacity=".18"/>
-          <stop offset="1" stop-color="#fff" stop-opacity=".06"/>
-        </linearGradient>
-      </defs>
-      <rect width="190" height="100" fill="#B31942"/><rect y="7.692" width="190" height="7.692" fill="#F4F6FA"/><rect y="23.077" width="190" height="7.692" fill="#F4F6FA"/><rect y="38.462" width="190" height="7.692" fill="#F4F6FA"/><rect y="53.846" width="190" height="7.692" fill="#F4F6FA"/><rect y="69.231" width="190" height="7.692" fill="#F4F6FA"/><rect y="84.615" width="190" height="7.692" fill="#F4F6FA"/><rect width="76.00" height="53.85" fill="#0A3161"/><polygon points="6.33,2.05 7.08,4.35 9.51,4.35 7.55,5.78 8.30,8.09 6.33,6.66 4.37,8.09 5.12,5.78 3.16,4.35 5.58,4.35" fill="#F4F6FA"/><polygon points="19.00,2.05 19.75,4.35 22.18,4.35 20.21,5.78 20.96,8.09 19.00,6.66 17.04,8.09 17.79,5.78 15.82,4.35 18.25,4.35" fill="#F4F6FA"/><polygon points="31.67,2.05 32.42,4.35 34.84,4.35 32.88,5.78 33.63,8.09 31.67,6.66 29.70,8.09 30.45,5.78 28.49,4.35 30.92,4.35" fill="#F4F6FA"/><polygon points="44.33,2.05 45.08,4.35 47.51,4.35 45.55,5.78 46.30,8.09 44.33,6.66 42.37,8.09 43.12,5.78 41.16,4.35 43.58,4.35" fill="#F4F6FA"/><polygon points="57.00,2.05 57.75,4.35 60.18,4.35 58.21,5.78 58.96,8.09 57.00,6.66 55.04,8.09 55.79,5.78 53.82,4.35 56.25,4.35" fill="#F4F6FA"/><polygon points="69.67,2.05 70.42,4.35 72.84,4.35 70.88,5.78 71.63,8.09 69.67,6.66 67.70,8.09 68.45,5.78 66.49,4.35 68.92,4.35" fill="#F4F6FA"/><polygon points="12.67,7.43 13.42,9.74 15.84,9.74 13.88,11.16 14.63,13.47 12.67,12.04 10.70,13.47 11.45,11.16 9.49,9.74 11.92,9.74" fill="#F4F6FA"/><polygon points="25.33,7.43 26.08,9.74 28.51,9.74 26.55,11.16 27.30,13.47 25.33,12.04 23.37,13.47 24.12,11.16 22.16,9.74 24.58,9.74" fill="#F4F6FA"/><polygon points="38.00,7.43 38.75,9.74 41.18,9.74 39.21,11.16 39.96,13.47 38.00,12.04 36.04,13.47 36.79,11.16 34.82,9.74 37.25,9.74" fill="#F4F6FA"/><polygon points="50.67,7.43 51.42,9.74 53.84,9.74 51.88,11.16 52.63,13.47 50.67,12.04 48.70,13.47 49.45,11.16 47.49,9.74 49.92,9.74" fill="#F4F6FA"/><polygon points="63.33,7.43 64.08,9.74 66.51,9.74 64.55,11.16 65.30,13.47 63.33,12.04 61.37,13.47 62.12,11.16 60.16,9.74 62.58,9.74" fill="#F4F6FA"/><polygon points="6.33,12.82 7.08,15.12 9.51,15.12 7.55,16.55 8.30,18.85 6.33,17.43 4.37,18.85 5.12,16.55 3.16,15.12 5.58,15.12" fill="#F4F6FA"/><polygon points="19.00,12.82 19.75,15.12 22.18,15.12 20.21,16.55 20.96,18.85 19.00,17.43 17.04,18.85 17.79,16.55 15.82,15.12 18.25,15.12" fill="#F4F6FA"/><polygon points="31.67,12.82 32.42,15.12 34.84,15.12 32.88,16.55 33.63,18.85 31.67,17.43 29.70,18.85 30.45,16.55 28.49,15.12 30.92,15.12" fill="#F4F6FA"/><polygon points="44.33,12.82 45.08,15.12 47.51,15.12 45.55,16.55 46.30,18.85 44.33,17.43 42.37,18.85 43.12,16.55 41.16,15.12 43.58,15.12" fill="#F4F6FA"/><polygon points="57.00,12.82 57.75,15.12 60.18,15.12 58.21,16.55 58.96,18.85 57.00,17.43 55.04,18.85 55.79,16.55 53.82,15.12 56.25,15.12" fill="#F4F6FA"/><polygon points="69.67,12.82 70.42,15.12 72.84,15.12 70.88,16.55 71.63,18.85 69.67,17.43 67.70,18.85 68.45,16.55 66.49,15.12 68.92,15.12" fill="#F4F6FA"/><polygon points="12.67,18.20 13.42,20.51 15.84,20.51 13.88,21.93 14.63,24.24 12.67,22.81 10.70,24.24 11.45,21.93 9.49,20.51 11.92,20.51" fill="#F4F6FA"/><polygon points="25.33,18.20 26.08,20.51 28.51,20.51 26.55,21.93 27.30,24.24 25.33,22.81 23.37,24.24 24.12,21.93 22.16,20.51 24.58,20.51" fill="#F4F6FA"/><polygon points="38.00,18.20 38.75,20.51 41.18,20.51 39.21,21.93 39.96,24.24 38.00,22.81 36.04,24.24 36.79,21.93 34.82,20.51 37.25,20.51" fill="#F4F6FA"/><polygon points="50.67,18.20 51.42,20.51 53.84,20.51 51.88,21.93 52.63,24.24 50.67,22.81 48.70,24.24 49.45,21.93 47.49,20.51 49.92,20.51" fill="#F4F6FA"/><polygon points="63.33,18.20 64.08,20.51 66.51,20.51 64.55,21.93 65.30,24.24 63.33,22.81 61.37,24.24 62.12,21.93 60.16,20.51 62.58,20.51" fill="#F4F6FA"/><polygon points="6.33,23.58 7.08,25.89 9.51,25.89 7.55,27.32 8.30,29.62 6.33,28.20 4.37,29.62 5.12,27.32 3.16,25.89 5.58,25.89" fill="#F4F6FA"/><polygon points="19.00,23.58 19.75,25.89 22.18,25.89 20.21,27.32 20.96,29.62 19.00,28.20 17.04,29.62 17.79,27.32 15.82,25.89 18.25,25.89" fill="#F4F6FA"/><polygon points="31.67,23.58 32.42,25.89 34.84,25.89 32.88,27.32 33.63,29.62 31.67,28.20 29.70,29.62 30.45,27.32 28.49,25.89 30.92,25.89" fill="#F4F6FA"/><polygon points="44.33,23.58 45.08,25.89 47.51,25.89 45.55,27.32 46.30,29.62 44.33,28.20 42.37,29.62 43.12,27.32 41.16,25.89 43.58,25.89" fill="#F4F6FA"/><polygon points="57.00,23.58 57.75,25.89 60.18,25.89 58.21,27.32 58.96,29.62 57.00,28.20 55.04,29.62 55.79,27.32 53.82,25.89 56.25,25.89" fill="#F4F6FA"/><polygon points="69.67,23.58 70.42,25.89 72.84,25.89 70.88,27.32 71.63,29.62 69.67,28.20 67.70,29.62 68.45,27.32 66.49,25.89 68.92,25.89" fill="#F4F6FA"/><polygon points="12.67,28.97 13.42,31.28 15.84,31.28 13.88,32.70 14.63,35.01 12.67,33.58 10.70,35.01 11.45,32.70 9.49,31.28 11.92,31.28" fill="#F4F6FA"/><polygon points="25.33,28.97 26.08,31.28 28.51,31.28 26.55,32.70 27.30,35.01 25.33,33.58 23.37,35.01 24.12,32.70 22.16,31.28 24.58,31.28" fill="#F4F6FA"/><polygon points="38.00,28.97 38.75,31.28 41.18,31.28 39.21,32.70 39.96,35.01 38.00,33.58 36.04,35.01 36.79,32.70 34.82,31.28 37.25,31.28" fill="#F4F6FA"/><polygon points="50.67,28.97 51.42,31.28 53.84,31.28 51.88,32.70 52.63,35.01 50.67,33.58 48.70,35.01 49.45,32.70 47.49,31.28 49.92,31.28" fill="#F4F6FA"/><polygon points="63.33,28.97 64.08,31.28 66.51,31.28 64.55,32.70 65.30,35.01 63.33,33.58 61.37,35.01 62.12,32.70 60.16,31.28 62.58,31.28" fill="#F4F6FA"/><polygon points="6.33,34.35 7.08,36.66 9.51,36.66 7.55,38.09 8.30,40.39 6.33,38.97 4.37,40.39 5.12,38.09 3.16,36.66 5.58,36.66" fill="#F4F6FA"/><polygon points="19.00,34.35 19.75,36.66 22.18,36.66 20.21,38.09 20.96,40.39 19.00,38.97 17.04,40.39 17.79,38.09 15.82,36.66 18.25,36.66" fill="#F4F6FA"/><polygon points="31.67,34.35 32.42,36.66 34.84,36.66 32.88,38.09 33.63,40.39 31.67,38.97 29.70,40.39 30.45,38.09 28.49,36.66 30.92,36.66" fill="#F4F6FA"/><polygon points="44.33,34.35 45.08,36.66 47.51,36.66 45.55,38.09 46.30,40.39 44.33,38.97 42.37,40.39 43.12,38.09 41.16,36.66 43.58,36.66" fill="#F4F6FA"/><polygon points="57.00,34.35 57.75,36.66 60.18,36.66 58.21,38.09 58.96,40.39 57.00,38.97 55.04,40.39 55.79,38.09 53.82,36.66 56.25,36.66" fill="#F4F6FA"/><polygon points="69.67,34.35 70.42,36.66 72.84,36.66 70.88,38.09 71.63,40.39 69.67,38.97 67.70,40.39 68.45,38.09 66.49,36.66 68.92,36.66" fill="#F4F6FA"/><polygon points="12.67,39.74 13.42,42.05 15.84,42.05 13.88,43.47 14.63,45.78 12.67,44.35 10.70,45.78 11.45,43.47 9.49,42.05 11.92,42.05" fill="#F4F6FA"/><polygon points="25.33,39.74 26.08,42.05 28.51,42.05 26.55,43.47 27.30,45.78 25.33,44.35 23.37,45.78 24.12,43.47 22.16,42.05 24.58,42.05" fill="#F4F6FA"/><polygon points="38.00,39.74 38.75,42.05 41.18,42.05 39.21,43.47 39.96,45.78 38.00,44.35 36.04,45.78 36.79,43.47 34.82,42.05 37.25,42.05" fill="#F4F6FA"/><polygon points="50.67,39.74 51.42,42.05 53.84,42.05 51.88,43.47 52.63,45.78 50.67,44.35 48.70,45.78 49.45,43.47 47.49,42.05 49.92,42.05" fill="#F4F6FA"/><polygon points="63.33,39.74 64.08,42.05 66.51,42.05 64.55,43.47 65.30,45.78 63.33,44.35 61.37,45.78 62.12,43.47 60.16,42.05 62.58,42.05" fill="#F4F6FA"/><polygon points="6.33,45.12 7.08,47.43 9.51,47.43 7.55,48.86 8.30,51.16 6.33,49.74 4.37,51.16 5.12,48.86 3.16,47.43 5.58,47.43" fill="#F4F6FA"/><polygon points="19.00,45.12 19.75,47.43 22.18,47.43 20.21,48.86 20.96,51.16 19.00,49.74 17.04,51.16 17.79,48.86 15.82,47.43 18.25,47.43" fill="#F4F6FA"/><polygon points="31.67,45.12 32.42,47.43 34.84,47.43 32.88,48.86 33.63,51.16 31.67,49.74 29.70,51.16 30.45,48.86 28.49,47.43 30.92,47.43" fill="#F4F6FA"/><polygon points="44.33,45.12 45.08,47.43 47.51,47.43 45.55,48.86 46.30,51.16 44.33,49.74 42.37,51.16 43.12,48.86 41.16,47.43 43.58,47.43" fill="#F4F6FA"/><polygon points="57.00,45.12 57.75,47.43 60.18,47.43 58.21,48.86 58.96,51.16 57.00,49.74 55.04,51.16 55.79,48.86 53.82,47.43 56.25,47.43" fill="#F4F6FA"/><polygon points="69.67,45.12 70.42,47.43 72.84,47.43 70.88,48.86 71.63,51.16 69.67,49.74 67.70,51.16 68.45,48.86 66.49,47.43 68.92,47.43" fill="#F4F6FA"/>
-      <g clip-path="url(#fc)">
-        <rect class="fold" x="-40" width="270" height="100" fill="url(#fg)"/>
-      </g>
-    </svg>
-  </div>
-</div>
-
 <div class="wrap">
   <header>
     <div class="brand">Flag<span>staff</span></div>
@@ -311,6 +284,43 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
     <h1 class="verdict" id="verdict">Loading</h1>
     <p class="reason" id="reason"></p>
     <div class="receipt" id="receipt"></div>
+
+    <!-- The pole sits AFTER the answer in the markup. On a wide screen it
+         is a fixed column and its place here does not matter; stacked on a
+         phone or at 200% zoom it used to come first and push the verdict
+         below the fold. The answer is the text; the flag repeats it. -->
+
+    <!-- The pole. Ticks are a measure of the pole, echoing the precision the
+         product claims. The flag rides to full or half depending on the answer. -->
+    <div class="stage" aria-hidden="true">
+      <div class="truck"></div>
+      <div class="staff"></div>
+      <div class="halyard"></div>
+      <div class="cleat"></div>
+      <div class="tick major" style="top:calc(6% + 26px)"></div>
+      <span class="tick-label" style="top:calc(6% + 26px)">full</span>
+      <div class="tick" style="top:28%"></div>
+      <div class="tick major" style="top:50%"></div>
+      <span class="tick-label" style="top:50%">half</span>
+      <div class="tick" style="top:72%"></div>
+      <div class="flagwrap waving" id="flag">
+        <svg viewBox="0 0 190 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="fc"><rect width="190" height="100"/></clipPath>
+            <linearGradient id="fg" x1="0" x2="1">
+              <stop offset="0" stop-color="#000" stop-opacity=".22"/>
+              <stop offset=".35" stop-color="#fff" stop-opacity=".10"/>
+              <stop offset=".62" stop-color="#000" stop-opacity=".18"/>
+              <stop offset="1" stop-color="#fff" stop-opacity=".06"/>
+            </linearGradient>
+          </defs>
+          <rect width="190" height="100" fill="#B31942"/><rect y="7.692" width="190" height="7.692" fill="#F4F6FA"/><rect y="23.077" width="190" height="7.692" fill="#F4F6FA"/><rect y="38.462" width="190" height="7.692" fill="#F4F6FA"/><rect y="53.846" width="190" height="7.692" fill="#F4F6FA"/><rect y="69.231" width="190" height="7.692" fill="#F4F6FA"/><rect y="84.615" width="190" height="7.692" fill="#F4F6FA"/><rect width="76.00" height="53.85" fill="#0A3161"/><polygon points="6.33,2.05 7.08,4.35 9.51,4.35 7.55,5.78 8.30,8.09 6.33,6.66 4.37,8.09 5.12,5.78 3.16,4.35 5.58,4.35" fill="#F4F6FA"/><polygon points="19.00,2.05 19.75,4.35 22.18,4.35 20.21,5.78 20.96,8.09 19.00,6.66 17.04,8.09 17.79,5.78 15.82,4.35 18.25,4.35" fill="#F4F6FA"/><polygon points="31.67,2.05 32.42,4.35 34.84,4.35 32.88,5.78 33.63,8.09 31.67,6.66 29.70,8.09 30.45,5.78 28.49,4.35 30.92,4.35" fill="#F4F6FA"/><polygon points="44.33,2.05 45.08,4.35 47.51,4.35 45.55,5.78 46.30,8.09 44.33,6.66 42.37,8.09 43.12,5.78 41.16,4.35 43.58,4.35" fill="#F4F6FA"/><polygon points="57.00,2.05 57.75,4.35 60.18,4.35 58.21,5.78 58.96,8.09 57.00,6.66 55.04,8.09 55.79,5.78 53.82,4.35 56.25,4.35" fill="#F4F6FA"/><polygon points="69.67,2.05 70.42,4.35 72.84,4.35 70.88,5.78 71.63,8.09 69.67,6.66 67.70,8.09 68.45,5.78 66.49,4.35 68.92,4.35" fill="#F4F6FA"/><polygon points="12.67,7.43 13.42,9.74 15.84,9.74 13.88,11.16 14.63,13.47 12.67,12.04 10.70,13.47 11.45,11.16 9.49,9.74 11.92,9.74" fill="#F4F6FA"/><polygon points="25.33,7.43 26.08,9.74 28.51,9.74 26.55,11.16 27.30,13.47 25.33,12.04 23.37,13.47 24.12,11.16 22.16,9.74 24.58,9.74" fill="#F4F6FA"/><polygon points="38.00,7.43 38.75,9.74 41.18,9.74 39.21,11.16 39.96,13.47 38.00,12.04 36.04,13.47 36.79,11.16 34.82,9.74 37.25,9.74" fill="#F4F6FA"/><polygon points="50.67,7.43 51.42,9.74 53.84,9.74 51.88,11.16 52.63,13.47 50.67,12.04 48.70,13.47 49.45,11.16 47.49,9.74 49.92,9.74" fill="#F4F6FA"/><polygon points="63.33,7.43 64.08,9.74 66.51,9.74 64.55,11.16 65.30,13.47 63.33,12.04 61.37,13.47 62.12,11.16 60.16,9.74 62.58,9.74" fill="#F4F6FA"/><polygon points="6.33,12.82 7.08,15.12 9.51,15.12 7.55,16.55 8.30,18.85 6.33,17.43 4.37,18.85 5.12,16.55 3.16,15.12 5.58,15.12" fill="#F4F6FA"/><polygon points="19.00,12.82 19.75,15.12 22.18,15.12 20.21,16.55 20.96,18.85 19.00,17.43 17.04,18.85 17.79,16.55 15.82,15.12 18.25,15.12" fill="#F4F6FA"/><polygon points="31.67,12.82 32.42,15.12 34.84,15.12 32.88,16.55 33.63,18.85 31.67,17.43 29.70,18.85 30.45,16.55 28.49,15.12 30.92,15.12" fill="#F4F6FA"/><polygon points="44.33,12.82 45.08,15.12 47.51,15.12 45.55,16.55 46.30,18.85 44.33,17.43 42.37,18.85 43.12,16.55 41.16,15.12 43.58,15.12" fill="#F4F6FA"/><polygon points="57.00,12.82 57.75,15.12 60.18,15.12 58.21,16.55 58.96,18.85 57.00,17.43 55.04,18.85 55.79,16.55 53.82,15.12 56.25,15.12" fill="#F4F6FA"/><polygon points="69.67,12.82 70.42,15.12 72.84,15.12 70.88,16.55 71.63,18.85 69.67,17.43 67.70,18.85 68.45,16.55 66.49,15.12 68.92,15.12" fill="#F4F6FA"/><polygon points="12.67,18.20 13.42,20.51 15.84,20.51 13.88,21.93 14.63,24.24 12.67,22.81 10.70,24.24 11.45,21.93 9.49,20.51 11.92,20.51" fill="#F4F6FA"/><polygon points="25.33,18.20 26.08,20.51 28.51,20.51 26.55,21.93 27.30,24.24 25.33,22.81 23.37,24.24 24.12,21.93 22.16,20.51 24.58,20.51" fill="#F4F6FA"/><polygon points="38.00,18.20 38.75,20.51 41.18,20.51 39.21,21.93 39.96,24.24 38.00,22.81 36.04,24.24 36.79,21.93 34.82,20.51 37.25,20.51" fill="#F4F6FA"/><polygon points="50.67,18.20 51.42,20.51 53.84,20.51 51.88,21.93 52.63,24.24 50.67,22.81 48.70,24.24 49.45,21.93 47.49,20.51 49.92,20.51" fill="#F4F6FA"/><polygon points="63.33,18.20 64.08,20.51 66.51,20.51 64.55,21.93 65.30,24.24 63.33,22.81 61.37,24.24 62.12,21.93 60.16,20.51 62.58,20.51" fill="#F4F6FA"/><polygon points="6.33,23.58 7.08,25.89 9.51,25.89 7.55,27.32 8.30,29.62 6.33,28.20 4.37,29.62 5.12,27.32 3.16,25.89 5.58,25.89" fill="#F4F6FA"/><polygon points="19.00,23.58 19.75,25.89 22.18,25.89 20.21,27.32 20.96,29.62 19.00,28.20 17.04,29.62 17.79,27.32 15.82,25.89 18.25,25.89" fill="#F4F6FA"/><polygon points="31.67,23.58 32.42,25.89 34.84,25.89 32.88,27.32 33.63,29.62 31.67,28.20 29.70,29.62 30.45,27.32 28.49,25.89 30.92,25.89" fill="#F4F6FA"/><polygon points="44.33,23.58 45.08,25.89 47.51,25.89 45.55,27.32 46.30,29.62 44.33,28.20 42.37,29.62 43.12,27.32 41.16,25.89 43.58,25.89" fill="#F4F6FA"/><polygon points="57.00,23.58 57.75,25.89 60.18,25.89 58.21,27.32 58.96,29.62 57.00,28.20 55.04,29.62 55.79,27.32 53.82,25.89 56.25,25.89" fill="#F4F6FA"/><polygon points="69.67,23.58 70.42,25.89 72.84,25.89 70.88,27.32 71.63,29.62 69.67,28.20 67.70,29.62 68.45,27.32 66.49,25.89 68.92,25.89" fill="#F4F6FA"/><polygon points="12.67,28.97 13.42,31.28 15.84,31.28 13.88,32.70 14.63,35.01 12.67,33.58 10.70,35.01 11.45,32.70 9.49,31.28 11.92,31.28" fill="#F4F6FA"/><polygon points="25.33,28.97 26.08,31.28 28.51,31.28 26.55,32.70 27.30,35.01 25.33,33.58 23.37,35.01 24.12,32.70 22.16,31.28 24.58,31.28" fill="#F4F6FA"/><polygon points="38.00,28.97 38.75,31.28 41.18,31.28 39.21,32.70 39.96,35.01 38.00,33.58 36.04,35.01 36.79,32.70 34.82,31.28 37.25,31.28" fill="#F4F6FA"/><polygon points="50.67,28.97 51.42,31.28 53.84,31.28 51.88,32.70 52.63,35.01 50.67,33.58 48.70,35.01 49.45,32.70 47.49,31.28 49.92,31.28" fill="#F4F6FA"/><polygon points="63.33,28.97 64.08,31.28 66.51,31.28 64.55,32.70 65.30,35.01 63.33,33.58 61.37,35.01 62.12,32.70 60.16,31.28 62.58,31.28" fill="#F4F6FA"/><polygon points="6.33,34.35 7.08,36.66 9.51,36.66 7.55,38.09 8.30,40.39 6.33,38.97 4.37,40.39 5.12,38.09 3.16,36.66 5.58,36.66" fill="#F4F6FA"/><polygon points="19.00,34.35 19.75,36.66 22.18,36.66 20.21,38.09 20.96,40.39 19.00,38.97 17.04,40.39 17.79,38.09 15.82,36.66 18.25,36.66" fill="#F4F6FA"/><polygon points="31.67,34.35 32.42,36.66 34.84,36.66 32.88,38.09 33.63,40.39 31.67,38.97 29.70,40.39 30.45,38.09 28.49,36.66 30.92,36.66" fill="#F4F6FA"/><polygon points="44.33,34.35 45.08,36.66 47.51,36.66 45.55,38.09 46.30,40.39 44.33,38.97 42.37,40.39 43.12,38.09 41.16,36.66 43.58,36.66" fill="#F4F6FA"/><polygon points="57.00,34.35 57.75,36.66 60.18,36.66 58.21,38.09 58.96,40.39 57.00,38.97 55.04,40.39 55.79,38.09 53.82,36.66 56.25,36.66" fill="#F4F6FA"/><polygon points="69.67,34.35 70.42,36.66 72.84,36.66 70.88,38.09 71.63,40.39 69.67,38.97 67.70,40.39 68.45,38.09 66.49,36.66 68.92,36.66" fill="#F4F6FA"/><polygon points="12.67,39.74 13.42,42.05 15.84,42.05 13.88,43.47 14.63,45.78 12.67,44.35 10.70,45.78 11.45,43.47 9.49,42.05 11.92,42.05" fill="#F4F6FA"/><polygon points="25.33,39.74 26.08,42.05 28.51,42.05 26.55,43.47 27.30,45.78 25.33,44.35 23.37,45.78 24.12,43.47 22.16,42.05 24.58,42.05" fill="#F4F6FA"/><polygon points="38.00,39.74 38.75,42.05 41.18,42.05 39.21,43.47 39.96,45.78 38.00,44.35 36.04,45.78 36.79,43.47 34.82,42.05 37.25,42.05" fill="#F4F6FA"/><polygon points="50.67,39.74 51.42,42.05 53.84,42.05 51.88,43.47 52.63,45.78 50.67,44.35 48.70,45.78 49.45,43.47 47.49,42.05 49.92,42.05" fill="#F4F6FA"/><polygon points="63.33,39.74 64.08,42.05 66.51,42.05 64.55,43.47 65.30,45.78 63.33,44.35 61.37,45.78 62.12,43.47 60.16,42.05 62.58,42.05" fill="#F4F6FA"/><polygon points="6.33,45.12 7.08,47.43 9.51,47.43 7.55,48.86 8.30,51.16 6.33,49.74 4.37,51.16 5.12,48.86 3.16,47.43 5.58,47.43" fill="#F4F6FA"/><polygon points="19.00,45.12 19.75,47.43 22.18,47.43 20.21,48.86 20.96,51.16 19.00,49.74 17.04,51.16 17.79,48.86 15.82,47.43 18.25,47.43" fill="#F4F6FA"/><polygon points="31.67,45.12 32.42,47.43 34.84,47.43 32.88,48.86 33.63,51.16 31.67,49.74 29.70,51.16 30.45,48.86 28.49,47.43 30.92,47.43" fill="#F4F6FA"/><polygon points="44.33,45.12 45.08,47.43 47.51,47.43 45.55,48.86 46.30,51.16 44.33,49.74 42.37,51.16 43.12,48.86 41.16,47.43 43.58,47.43" fill="#F4F6FA"/><polygon points="57.00,45.12 57.75,47.43 60.18,47.43 58.21,48.86 58.96,51.16 57.00,49.74 55.04,51.16 55.79,48.86 53.82,47.43 56.25,47.43" fill="#F4F6FA"/><polygon points="69.67,45.12 70.42,47.43 72.84,47.43 70.88,48.86 71.63,51.16 69.67,49.74 67.70,51.16 68.45,48.86 66.49,47.43 68.92,47.43" fill="#F4F6FA"/>
+          <g clip-path="url(#fc)">
+            <rect class="fold" x="-40" width="270" height="100" fill="url(#fg)"/>
+          </g>
+        </svg>
+      </div>
+    </div>
 
     <div class="pair">
     <section id="federalSection">
@@ -469,7 +479,8 @@ function saveState(code){
 function loadState(){
   try{ return localStorage.getItem(STORE_KEY); }catch(_){ return null; }
 }
-let DATA=null, current=loadState()||'NE';
+// null until the visitor chooses. Never a default state: see render().
+let DATA=null, current=loadState()||null;
 
 /* --- Rendering --------------------------------------------------------- */
 function setFlag(status){
@@ -477,7 +488,8 @@ function setFlag(status){
   // Full staff sits just under the truck; half-staff is the true midpoint of
   // the staff, which is what "half-staff" actually means.
   g.style.setProperty('--flag-top', status==='half' ? '50%' : 'calc(6% + 26px)');
-  g.style.opacity = status==='unknown' ? '.2' : '1';
+  // 'none': no state chosen, so there is no position to show at all.
+  g.style.opacity = status==='none' ? '0' : status==='unknown' ? '.2' : '1';
   g.classList.toggle('waving', status!=='unknown');
 }
 
@@ -542,6 +554,34 @@ function render(){
   const vEl=document.getElementById('verdict');
   const rEl=document.getElementById('reason');
   const recEl=document.getElementById('receipt');
+
+  // No state chosen: never answer for one. A first visit used to show
+  // Nebraska, so someone in Ohio read "NEBRASKA - FULL STAFF" as their own
+  // answer, and on a day Nebraska was half-staff could have lowered a flag
+  // that should have stayed up. A national order is the one answer that
+  // holds everywhere, so it is shown - and nothing else is.
+  if(!current){
+    const fed = DATA.federal;
+    nameEl.textContent = 'Your state';
+    if(fed){
+      vEl.textContent = fed.scope==='until-noon' ? 'Half until noon' : 'Half-staff';
+      vEl.className='verdict half';
+      rEl.innerHTML = `<strong>Nationwide, by presidential proclamation</strong><br>${esc(fed.reason)}`
+        + `<br><em>This applies in every state. Choose yours above to see anything more local.</em>`;
+      recEl.innerHTML = sourceLink(fed.source_url);
+      setFlag('half');
+    } else {
+      vEl.textContent = 'Choose your state';
+      vEl.className = 'verdict unknown';
+      rEl.innerHTML = `<em>Half-staff orders are made state by state, so the answer depends on where the flag is.</em>`
+        + ` <button class="locate inline" id="locateInline">Use my location</button>`;
+      recEl.innerHTML = '';
+      setFlag('none');
+      const b = document.getElementById('locateInline');
+      if(b) b.onclick = () => document.getElementById('locate').click();
+    }
+    return;
+  }
 
   if(!s){ nameEl.textContent='—'; vEl.textContent='No data'; vEl.className='verdict unknown';
     rEl.textContent=''; recEl.innerHTML=''; setFlag('unknown'); return; }
@@ -667,12 +707,19 @@ function renderUpcoming(){
 function buildSelect(){
   const sel=document.getElementById('state');
   const codes=Object.keys(DATA.states||{}).sort();
-  sel.innerHTML=codes.map(c=>
+  // A remembered state that is no longer in the data is not replaced with
+  // another one - that was the second way a visitor got a state they never
+  // chose (the first in the list, Alaska).
+  if(current && !DATA.states[current]) current=null;
+  sel.innerHTML=(current ? '' : '<option value="" selected disabled>Choose your state</option>')
+    + codes.map(c=>
     `<option value="${c}"${c===current?' selected':''}>${DATA.states[c].state||c}</option>`).join('');
-  sel.onchange=()=>{current=sel.value;saveState(current);render();renderFederal();renderSubs()};
-  if(!DATA.states[current] && codes.length){
-    current=codes[0]; sel.value=current; saveState(current);
-  }
+  sel.onchange=()=>{
+    if(!sel.value) return;
+    current=sel.value;saveState(current);
+    const ph=sel.querySelector('option[value=""]'); if(ph) ph.remove();
+    render();renderFederal();renderSubs();
+  };
 }
 
 document.getElementById('locate').onclick=function(){
@@ -880,6 +927,13 @@ async function postJSON(path, body){
 
 document.getElementById('notifyBtn').onclick=async function(){
   const btn=this;
+  // Alerts are per state. With none chosen there is nothing to subscribe to,
+  // and sending state:null would store a subscription that never fires.
+  if(!current){
+    notifyStatus('Choose your state at the top first, then turn on alerts.');
+    document.getElementById('state').focus();
+    return;
+  }
   btn.disabled=true;btn.textContent='Asking\u2026';
   let perm;
   try{ perm=await Notification.requestPermission(); }
@@ -962,9 +1016,11 @@ function renderSubs(){
     : '<span style="color:var(--muted);font-size:14px">No states yet.</span>';
   const here=stateName(current);
   const has=mySubs.includes(current);
+  // No state chosen: no "Add" button - it would add nothing, or the wrong
+  // state if one were defaulted.
   box.innerHTML=`<h4>Alerting you about</h4>${chips}
-    <button class="add" id="addState" ${has?'disabled':''}>
-      ${has?`${esc(here)} is on`:`Add ${esc(here)}`}</button>
+    ${current ? `<button class="add" id="addState" ${has?'disabled':''}>
+      ${has?`${esc(here)} is on`:`Add ${esc(here)}`}</button>` : ''}
     ${mySubs.length?'<button class="off" id="allOff">turn off all alerts</button>':''}`;
 
   box.querySelectorAll('[data-drop]').forEach(b=>{
