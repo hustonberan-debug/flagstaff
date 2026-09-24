@@ -23,6 +23,6 @@ window.FLAGSTAFF_CONFIG = {
   // Your Cloudflare Worker, with /subscribe on the end.
   SUBSCRIBE_ENDPOINT: 'https://halfstaff-push.hustonberan.workers.dev/subscribe',
 
-  // Shown in the footer so you can tell at a glance which build is live.
-  BUILD: '2026-09-24',
+  // (The footer's site version is no longer set here. It was typed by hand
+  // and went stale; the pipeline now writes version.json from git.)
 };

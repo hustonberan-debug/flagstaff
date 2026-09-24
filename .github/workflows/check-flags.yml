@@ -22,6 +22,12 @@ on:
       - 'test-parsers.py'
       - 'test-history.py'
       - 'render_fetch.py'
+      # The site's own files: a change to them re-stamps version.json at once
+      # rather than on the next scheduled run.
+      - 'index.html'
+      - 'sw.js'
+      - 'config.js'
+      - 'manifest.json'
 
 permissions:
   contents: write             # needed to commit status.json back
@@ -142,6 +148,45 @@ jobs:
               sys.exit("REFUSING TO PUBLISH: no states in output.")
           PY
 
+      - name: Stamp site version
+        # The footer's version date used to be typed into config.js by hand,
+        # and it was nine days stale. It now comes from the repository: the
+        # last commit that touched the site's own files. Asked of the API
+        # because the checkout is shallow (one commit), and the pipeline's own
+        # status commits never touch these files, so they do not move it.
+        # If the lookup fails the stamp is CLEARED, not kept: the page then
+        # shows no version at all rather than one that might be wrong.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          SITE_FILES = ["index.html", "sw.js", "config.js", "manifest.json"]
+          newest = None
+          try:
+              for path in SITE_FILES:
+                  req = urllib.request.Request(
+                      f"https://api.github.com/repos/{os.environ['REPO']}/commits"
+                      f"?path={path}&sha=main&per_page=1",
+                      headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+                               "Accept": "application/vnd.github+json"})
+                  with urllib.request.urlopen(req, timeout=20) as r:
+                      c = (json.load(r) or [None])[0]
+                  if c and (newest is None or c["commit"]["committer"]["date"]
+                            > newest["commit"]["committer"]["date"]):
+                      newest = c
+          except Exception as e:
+              print(f"::warning::could not look up the site version ({e}) - clearing it")
+              newest = None
+          # No run id or stamp time: the file changes only when the site does.
+          stamp = ({"site_commit": newest["sha"],
+                    "site_committed_at": newest["commit"]["committer"]["date"]}
+                   if newest else {})
+          json.dump(stamp, open("version.json", "w"), indent=2)
+          print(json.dumps(stamp))
+          PY
+
       - name: Commit if anything changed
         id: commit
         run: |
@@ -150,7 +195,7 @@ jobs:
           # Add only the generated files that actually exist — not all of
           # them are produced on every run, and a bare `git add` of a missing
           # path aborts the whole step with exit 128.
-          for f in status.json cache.json history.jsonl email-orders.json; do
+          for f in status.json cache.json history.jsonl email-orders.json version.json; do
             [ -f "$f" ] && git add "$f" || true
           done
 
@@ -269,8 +314,17 @@ jobs:
           def send(req):
               """One attempt, retried ONLY when the request never reached the
               Worker (no connection). A timeout or an HTTP error may mean it
-              did arrive and pushes went out - retrying those could send every
-              subscriber the same alert twice, so they fail instead."""
+              did arrive and pushes went out, so they fail the job instead.
+
+              Decided 2026-09-24: a duplicate alert is far less harmful than
+              a missed one, so these WOULD be retried with an idempotency key
+              - if the Worker could dedupe. It cannot: handleNotify in
+              push-worker/worker.js keeps no record of what it has sent, and
+              pushes to every matching subscriber on every call. A retried
+              timeout would alert everyone twice. To enable retries, the
+              Worker must first store each notification's key (for example in
+              KV with a day's TTL) and answer a repeat without sending. Until
+              then a timeout fails the job, which is visible, and stops."""
               for attempt in range(3):
                   try:
                       with urllib.request.urlopen(req, timeout=20) as r:

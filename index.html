@@ -1259,7 +1259,18 @@ async function changeSub(path,extra){
 // Build stamp in the footer, so which version is live is visible at a glance.
 // Labelled: a bare date beside live data read as "last updated". It is the
 // version of the site, not the age of the answer (that is "checked ... ago").
-try{ document.getElementById('buildStamp').textContent = CFG.BUILD ? 'Site version ' + CFG.BUILD : ''; }catch(_){}
+// Written by the pipeline from the last commit that touched the site - it was
+// typed into config.js by hand, and was nine days stale. No stamp, no version
+// shown: a wrong date about ourselves is worse than none.
+fetch('version.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(v=>{
+  const el=document.getElementById('buildStamp');
+  const when=new Date(v && v.site_committed_at);
+  if(!v || !v.site_commit || isNaN(when)) return;
+  // The reader's own date: git stamps UTC, and an evening change in the US
+  // would otherwise show tomorrow's date.
+  el.textContent='Site version '+when.toLocaleDateString('en-CA')+' · '+String(v.site_commit).slice(0,7);
+  el.title='Last change to the site: '+when.toLocaleString();
+}).catch(()=>{});
 
 /* --- Boot -------------------------------------------------------------- */
 fetch('status.json',{cache:'no-store'})

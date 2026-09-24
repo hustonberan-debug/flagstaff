@@ -24,7 +24,7 @@
  * caching rules. HTML does not need a bump: it is network-first.
  */
 
-const VERSION = 'flagstaff-v6';
+const VERSION = 'flagstaff-v7';
 const SHELL = ['./index.html', './manifest.json'];
 
 self.addEventListener('install', (e) => {
@@ -71,8 +71,11 @@ self.addEventListener('fetch', (e) => {
     || url.pathname.endsWith('/')
     || url.pathname.endsWith('.html');
 
+  // version.json too: served stale, the footer would name the previous
+  // version of the site for a visit after every change.
   if (isPage || url.pathname.endsWith('status.json')
-      || url.pathname.endsWith('config.js')) {
+      || url.pathname.endsWith('config.js')
+      || url.pathname.endsWith('version.json')) {
     e.respondWith(networkFirst(req));
     return;
   }
