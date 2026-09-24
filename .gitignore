@@ -2,3 +2,5 @@ rendered/
 __pycache__/
 .backtest-cache/
 backtest-results.json
+worker/node_modules/
+worker/.wrangler/

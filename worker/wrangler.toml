@@ -1,0 +1,24 @@
+name = "halfstaff-push"
+main = "worker.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]   # required: the web-push package needs Node's crypto
+
+# Created with: npx wrangler kv namespace create SUBS
+# Paste the id it prints below.
+kv_namespaces = [
+  { binding = "SUBS", id = "ad7cfd4065494c9cb880f7dceddfeeea" }
+]
+
+[vars]
+ALLOWED_ORIGIN = "https://halfstaffnow.com"
+# VAPID_SUBJECT: a contact for push services (mailto: or https:). Not kept
+# in this public repo because it was a personal address. Without it the
+# Worker uses https://halfstaffnow.com. To keep an email address, run:
+#   npx wrangler secret put VAPID_SUBJECT     (value: mailto:you@example.com)
+# VAPID_PUBLIC_KEY  -> also a var, but set via `wrangler secret put` alongside
+#                      the private key so both are managed together. See README.
+
+# Secrets (never go in this file, set via `wrangler secret put NAME`):
+#   VAPID_PUBLIC_KEY
+#   VAPID_PRIVATE_KEY
+#   NOTIFY_SECRET       <- a random string only you and GitHub Actions know

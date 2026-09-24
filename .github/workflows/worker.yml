@@ -1,0 +1,42 @@
+name: Worker tests
+
+# The push Worker (worker/) is what every alert depends on, and for its first
+# month it existed only as a file on one laptop, untested and unversioned.
+# Its unit tests, and the end-to-end run of notify.py against it with the
+# Cloudflare free plan's limits enforced, now run on every change to either.
+#
+# This does NOT deploy. Deploying needs Cloudflare credentials and stays a
+# deliberate step:  cd worker && npx wrangler deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'worker/**'
+      - 'notify.py'
+      - '.github/workflows/worker.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests
+        working-directory: worker
+        run: node --test "test/*.test.mjs"
+      - name: notify.py against the real Worker, with the platform's limits
+        working-directory: worker
+        env:
+          PYTHON: python3
+        run: node test/integration.mjs
