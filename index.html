@@ -8,11 +8,11 @@
 <script src="config.js"></script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Flagstaff">
+<meta name="apple-mobile-web-app-title" content="Half Staff Now">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<title>Flagstaff — is the flag at half-staff today?</title>
+<title>Half Staff Now — is the flag at half-staff today?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -129,6 +129,8 @@ select:focus-visible{outline:2px solid var(--navy-lit);outline-offset:2px}
   font-family:var(--mono);font-size:12px;letter-spacing:.05em;
   padding:6px 2px;text-decoration:underline;text-underline-offset:3px}
 .locate:hover{color:var(--paper)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .lost{margin-top:18px;padding:12px 14px;border-left:3px solid var(--red-lit);
   background:var(--surface);font-size:15px;line-height:1.5}
 .locate.inline{font-family:var(--body);font-size:inherit;letter-spacing:0;
@@ -155,9 +157,15 @@ select:focus-visible{outline:2px solid var(--navy-lit);outline-offset:2px}
   font-family:var(--mono);font-size:13px;color:var(--muted);
   display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .receipt a{color:var(--muted);text-underline-offset:3px}
-.conf{cursor:help}
-.conf.ok{color:var(--paper)}
-.conf.warn{color:var(--muted)}
+/* A credential, not a status line: its own quiet row in the body face, a
+   small seal, the second source linked. Absent when an answer rests on one
+   source - the absence is the signal. */
+.credential{flex-basis:100%;display:flex;align-items:center;gap:8px;
+  font-family:var(--body);font-size:13px;letter-spacing:.01em;color:var(--muted)}
+.credential .seal{display:inline-grid;place-items:center;width:16px;height:16px;
+  border:1px solid var(--muted);border-radius:50%;font-size:9px;line-height:1;
+  color:var(--paper)}
+.credential a{color:var(--muted)}
 .receipt a:hover{color:var(--paper)}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--muted);
   display:inline-block;flex:none}
@@ -181,6 +189,7 @@ h2{font-family:var(--display);font-weight:400;font-size:13px;
   text-transform:uppercase;padding:2px 6px;border:1px solid var(--line);
   border-radius:2px;color:var(--muted);flex:none}
 .tag.law{border-color:var(--navy-lit);color:var(--navy-lit)}
+.tag.expected{border-color:var(--muted);color:var(--muted)}
 
 .gap{background:var(--surface);border:1px solid var(--line);
   border-left:2px solid var(--red);padding:16px 18px;border-radius:2px}
@@ -273,7 +282,7 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
 
 <div class="wrap">
   <header>
-    <div class="brand">Flag<span>staff</span></div>
+    <div class="brand">Half Staff <span>Now</span></div>
     <div>
       <label for="state" class="visually-hidden" style="position:absolute;left:-9999px">Choose a state</label>
       <select id="state"></select>
@@ -289,6 +298,9 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
     <!-- Shown only when alerts this device signed up for have stopped. Just
          below the answer, so it is on the first screen without displacing it. -->
     <div class="lost" id="alertsLost" role="alert" hidden></div>
+    <!-- Announces the new answer when the reader changes state. The page
+         rewrote the heading silently, so a screen reader heard nothing. -->
+    <div class="sr-only" id="announce" role="status" aria-live="polite"></div>
 
     <!-- The pole sits AFTER the answer in the markup. On a wide screen it
          is a fixed column and its place here does not matter; stacked on a
@@ -355,7 +367,7 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
       <h2>Get told when it changes</h2>
 
       <div class="action" id="installCard">
-        <h3 id="installTitle">Add Flagstaff to your home screen</h3>
+        <h3 id="installTitle">Add to your home screen</h3>
         <p id="installWhy"></p>
         <ol id="installSteps"></ol>
         <button class="btn" id="installBtn" hidden>Install</button>
@@ -492,10 +504,13 @@ function setFlag(status){
   const g=document.getElementById('flag');
   // Full staff sits just under the truck; half-staff is the true midpoint of
   // the staff, which is what "half-staff" actually means.
-  g.style.setProperty('--flag-top', status==='half' ? '50%' : 'calc(6% + 26px)');
-  // 'none': no state chosen, so there is no position to show at all.
-  g.style.opacity = status==='none' ? '0' : status==='unknown' ? '.2' : '1';
-  g.classList.toggle('waving', status!=='unknown');
+  // Only a known answer has a position. Unclear, Not covered and no state
+  // chosen show the bare pole: a faded flag still sat at the top, which
+  // reads as "full staff" - a claim we were not making.
+  const known = status==='half' || status==='full';
+  if(known) g.style.setProperty('--flag-top', status==='half' ? '50%' : 'calc(6% + 26px)');
+  g.style.opacity = known ? '1' : '0';
+  g.classList.toggle('waving', known);
 }
 
 function timeAgo(iso){
@@ -530,27 +545,86 @@ function sourceLink(url){
     ? ` <a href="${esc(url)}" target="_blank" rel="noopener">official source &nearr;</a>` : '';
 }
 
-// How many independent sources stand behind this answer. A state read twice
-// and a state read once were shown identically, which quietly presented our
-// weakest answers with the same authority as our strongest. One reading is
-// still worth publishing - it is just not the same claim.
-function confidenceNote(s){
-  const b = s.confidence_basis || '';
-  const srcs = (s.sources || []).filter(x => x && x.url);
+/* Text that came off a government page is shown only as a HEADLINE, and only
+   after it is cleaned: entities decoded (some pages double-encode, so one
+   decode in the pipeline left "Governor&#x27;s" on screen), whitespace
+   collapsed, and anything that looks like page furniture dropped. Everything
+   else a reader sees is written here, in plain words. */
+function decodeEntities(v){
+  const t=document.createElement('textarea');
+  t.innerHTML=String(v==null?'':v);
+  return t.value;
+}
+const CHROME_RE=/skip to|main content|official website|learn how you|menu|search|sign up|subscribe|cookie|newsroom|governor's office\s*$/i;
+function headline(v){
+  if(!v) return null;
+  const t=decodeEntities(decodeEntities(v)).replace(/\s+/g,' ').trim();
+  if(!t || t.length>180 || CHROME_RE.test(t)) return null;
+  return t;
+}
+
+// A corroborated answer carries a small credential: two independent official
+// sources were read separately and agreed. A single reading shows nothing -
+// the absence of the credential is the signal, and "read from one source"
+// read like debug output. (confidence_basis stays in status.json.)
+function credential(s){
   if(s.reason_source === 'federal') return '';
-  if(b.indexOf('corroborated') === 0){
-    const kinds = srcs.map(x => x.kind).join(' and ');
-    const second = srcs[1] && srcs[1].url !== s.source_url
-      ? ` <a href="${esc(srcs[1].url)}" target="_blank" rel="noopener">second source &nearr;</a>` : '';
-    return ` <span class="conf ok" title="Its ${esc(kinds)} were read separately and agreed."`
-      + `>&middot; confirmed by two independent sources</span>${second}`;
+  if((s.confidence_basis || '').indexOf('corroborated') !== 0) return '';
+  const srcs = (s.sources || []).filter(x => x && /^https?:\/\//i.test(x.url||''));
+  const second = srcs.find(x => x.url !== s.source_url);
+  return `<div class="credential"><span class="seal" aria-hidden="true">&#10003;</span>`
+    + `Confirmed by two independent sources`
+    + (second ? ` &middot; <a href="${esc(second.url)}" target="_blank" rel="noopener">second source &nearr;</a>` : '')
+    + `</div>`;
+}
+
+// Why we cannot answer, in words a reader understands. Built from what the
+// pipeline found, never from the text it scraped. Oregon showed "(no scope
+// stated in: Newsroom - Governor's Office An official website of the State
+// of Oregon Learn How you)" - page chrome, verbatim, with an escape bug.
+function unclearReason(s){
+  const e = String(s.error || '');
+  const link = (u, t) => /^https?:\/\//i.test(u||'')
+    ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} &nearr;</a>` : esc(t);
+  if(s.source_conflict){
+    const a = s.source_conflict.a || {}, b = s.source_conflict.b || {};
+    const word = x => x.status === 'half' ? 'half-staff' : x.status === 'full' ? 'full staff' : 'unclear';
+    return `<strong>Two official sources disagree right now.</strong> `
+      + `One says ${word(a)} (${link(a.url, a.kind || 'source')}), `
+      + `the other says ${word(b)} (${link(b.url, b.kind || 'source')}). `
+      + `Until they agree, we won't pick one.`;
   }
-  if(b.indexOf('sources disagree') === 0)
-    return ` <span class="conf warn">&middot; its own sources disagree</span>`;
-  if(b.indexOf('single-source') === 0)
-    return ` <span class="conf warn" title="${esc(s.state || '')} has only one source we can read, so nothing`
-      + ` confirms it.">&middot; read from one source</span>`;
-  return '';
+  const say = t => `<em>${t}</em>`;
+  if(s.stale_half_claim || /no order dated in the last/.test(e))
+    return say(`The state's page says half-staff, but it shows no recent order behind that, so we can't confirm it.`);
+  if(/does not say whether it is statewide/.test(e))
+    return say(`There is a recent flag order, but it doesn't say whether it applies statewide or only locally.`);
+  if(/undated orders are not trusted|stated no end date/.test(e))
+    return say(`A recent order didn't say when it ends. It may be over; we can't tell.`);
+  if(/could not be read to date it|dates unparseable/.test(e))
+    return say(`There is a recent flag order, but we couldn't read what dates it covers.`);
+  if(/order it lists ended/.test(e))
+    return say(`The state's page still shows half-staff, but the order it lists has ended.`);
+  if(/authority unproven/.test(e))
+    return say(`An official page mentions half-staff, but we couldn't confirm who ordered it.`);
+  if(/frozen/.test(e))
+    return say(`The state's page hasn't been updated in months, so we don't rely on it.`);
+  if(/navigation only|no press listing|no items parsed/.test(e))
+    return say(`We couldn't find the state's announcements on its website today.`);
+  if(/bulletin|channel|email/.test(e))
+    return say(`We haven't been able to read the state's official email announcements.`);
+  return say(`We couldn't read a clear answer from the state's official sources today.`);
+}
+
+function announce(){
+  const el=document.getElementById('announce');
+  if(!el) return;
+  const parts=[document.getElementById('stateName').textContent,
+               document.getElementById('verdict').textContent,
+               document.getElementById('reason').textContent];
+  // Cleared first, so choosing the same answer twice is still announced.
+  el.textContent='';
+  setTimeout(()=>{ el.textContent=parts.filter(Boolean).map(t=>t.trim()).join('. '); },60);
 }
 
 function render(){
@@ -571,7 +645,7 @@ function render(){
     if(fed){
       vEl.textContent = fed.scope==='until-noon' ? 'Half until noon' : 'Half-staff';
       vEl.className='verdict half';
-      rEl.innerHTML = `<strong>Nationwide, by presidential proclamation</strong><br>${esc(fed.reason)}`
+      rEl.innerHTML = `<strong>Nationwide, by presidential proclamation</strong><br>${esc(headline(fed.reason)||'National half-staff order')}`
         + `<br><em>This applies in every state. Choose yours above to see anything more local.</em>`;
       recEl.innerHTML = sourceLink(fed.source_url);
       setFlag('half');
@@ -602,7 +676,7 @@ function render(){
   if(fed && s.coverage!=='covered'){
     vEl.textContent = fed.scope==='until-noon' ? 'Half until noon' : 'Half-staff';
     vEl.className='verdict half';
-    rEl.innerHTML = `<strong>By presidential proclamation</strong><br>${esc(fed.reason)}`;
+    rEl.innerHTML = `<strong>By presidential proclamation</strong><br>${esc(headline(fed.reason)||'National half-staff order')}`;
     recEl.innerHTML = checked.replace('DOT','live')
       + ` <span>&middot; national order in effect</span>` + sourceLink(fed.source_url);
     setFlag('half');
@@ -621,7 +695,7 @@ function render(){
   }
   if(s.effective_status==='unknown'){
     vEl.textContent='Unclear'; vEl.className='verdict unknown';
-    rEl.innerHTML=`<em>${esc(s.error||'The official page did not state a status we could read.')}</em>`;
+    rEl.innerHTML=unclearReason(s);
   } else if(s.effective_status==='half'){
     vEl.textContent = s.scope==='until-noon' ? 'Half until noon' : 'Half-staff';
     vEl.className='verdict half';
@@ -633,7 +707,7 @@ function render(){
     const who = s.reason_source==='federal' ? 'By presidential proclamation'
       : s.authority==='governor' ? `By order of the Governor of ${esc(s.state)}`
       : `Announced by an official ${esc(s.state)} source`;
-    const detail = (s.reason && s.reason!=='State order') ? s.reason : null;
+    const detail = s.reason && s.reason!=='State order' ? headline(s.reason) : null;
     rEl.innerHTML = `<strong>${who}</strong>` + (detail?`<br>${esc(detail)}`:'');
   } else {
     vEl.textContent='Full staff'; vEl.className='verdict full';
@@ -656,8 +730,9 @@ function render(){
     checked.replace('DOT', stale||s.coverage==='frozen' ? 'stale' : 'live')
     + (changed?` <span>&middot; unchanged since ${changed}</span>`:'')
     + sourceLink(s.source_url)
-    + confidenceNote(s)
-    + (stale?' <span>&middot; serving last known value</span>':'');
+    + (stale?' <span>&middot; serving last known value</span>':'')
+    // Only an answer can be confirmed; Unclear never carries the credential.
+    + (answered ? credential(s) : '');
 
   setFlag(s.effective_status);
 }
@@ -667,7 +742,7 @@ function renderFederal(){
   const f=DATA.federal;
   const s=(DATA.states||{})[current];
   if(f){
-    el.innerHTML = `<div class="row"><span class="when">now</span><span class="what">${esc(f.reason)}
+    el.innerHTML = `<div class="row"><span class="when">now</span><span class="what">${esc(headline(f.reason)||'National half-staff order')}
         <span class="note">Applies to all 50 states &middot; ${esc(f.citation||f.authority||'')}</span></span></div>`;
     return;
   }
@@ -693,20 +768,44 @@ function renderFederal(){
     + `</span></div>`;
 }
 
-function renderUpcoming(){
+/* Coming up: from statutory-calendar.json, the same calendar the pipeline
+   uses, rather than a hand-kept list here. The hand-kept list had three
+   days and missed Memorial Day and the National Fallen Firefighters
+   Memorial Service - the day a fire station cares most about. Days whose
+   date is set each year by proclamation are shown as expected, not as law;
+   lapsed observances, and years a day is suppressed by statute, are not
+   shown at all. */
+async function renderUpcoming(){
   const el=document.getElementById('upcoming');
-  const now=new Date(), y=now.getFullYear();
-  const items=STATUTORY.map(o=>{
-    let d=new Date(`${y}-${o.date}T12:00:00`);
-    if(d<now) d=new Date(`${y+1}-${o.date}T12:00:00`);
-    return {...o,d};
-  }).sort((a,b)=>a.d-b.d).slice(0,3);
-  el.innerHTML=items.map(o=>`
+  const today=new Date(); today.setHours(0,0,0,0);
+  let items=null;
+  try{
+    const cal=await (await fetch('statutory-calendar.json')).json();
+    items=Object.values(cal.years||{}).flat()
+      .filter(o=>o && o.date && (o.active || o.authority==='variable'))
+      .map(o=>({...o, d:new Date(o.date+'T12:00:00')}))
+      .filter(o=>o.d>=today)
+      .sort((a,b)=>a.d-b.d).slice(0,3);
+  }catch(_){ items=null; }
+  if(!items || !items.length){
+    items=STATUTORY.map(o=>{
+      let d=new Date(`${today.getFullYear()}-${o.date}T12:00:00`);
+      if(d<today) d=new Date(`${today.getFullYear()+1}-${o.date}T12:00:00`);
+      return {...o, citation:o.cite, active:true, d};
+    }).sort((a,b)=>a.d-b.d).slice(0,3);
+  }
+  el.innerHTML=items.map(o=>{
+    const variable = !o.active;
+    const note = [o.citation,
+                  o.scope==='until-noon' ? 'half-staff until noon' : null,
+                  variable ? 'date is set each year by proclamation' : null]
+                 .filter(Boolean).map(esc).join(' &middot; ');
+    return `
     <div class="row">
       <span class="when">${o.d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span>
-      <span class="what">${o.name}<span class="note">${o.cite}</span></span>
-      <span class="tag law">by law</span>
-    </div>`).join('');
+      <span class="what">${esc(o.name)}<span class="note">${note}</span></span>
+      <span class="tag ${variable?'expected':'law'}">${variable?'expected':'by law'}</span>
+    </div>`;}).join('');
 }
 
 function buildSelect(){
@@ -723,7 +822,7 @@ function buildSelect(){
     if(!sel.value) return;
     current=sel.value;saveState(current);
     const ph=sel.querySelector('option[value=""]'); if(ph) ph.remove();
-    render();renderFederal();renderSubs();
+    render();renderFederal();renderSubs();announce();
   };
 }
 
@@ -736,7 +835,7 @@ document.getElementById('locate').onclick=function(){
     if(r.code && DATA.states[r.code]){
       current=r.code;saveState(current);
       document.getElementById('state').value=r.code;
-      render();renderFederal();renderSubs();
+      render();renderFederal();renderSubs();announce();
       // Near a state line the rectangles overlap and we genuinely cannot
       // tell. Say so and let the person correct it, rather than quietly
       // showing another state's flag status.
@@ -803,6 +902,8 @@ showNote();
 const ua=navigator.userAgent;
 const isIOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 const isAndroid=/Android/.test(ua);
+const isFirefox=/Firefox\//.test(ua) && !isAndroid;
+const isSafariMac=/Macintosh/.test(ua) && /Safari\//.test(ua) && !/Chrome|Chromium|Edg\//.test(ua) && !isIOS;
 const installed=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 let deferredPrompt=null;
 
@@ -817,30 +918,47 @@ document.getElementById('installBtn').onclick=async function(){
 };
 
 function renderInstall(){
+  const card=document.getElementById('installCard');
   const why=document.getElementById('installWhy');
   const steps=document.getElementById('installSteps');
   const title=document.getElementById('installTitle');
+  // Only iPhone and iPad need the app installed before alerts work. The old
+  // copy told desktop Chrome, Edge and Firefox users the same thing - false -
+  // and described an install button Firefox does not have. Where installing
+  // is optional it now says so, and comes AFTER "Turn on alerts".
+  if(!isIOS){
+    const alerts=document.getElementById('notifyCard');
+    if(alerts && card.previousElementSibling!==alerts) alerts.after(card);
+  }
   if(installed){
     title.textContent='Installed';
-    why.textContent='Flagstaff is on your home screen. Alerts will work.';
+    why.textContent='Half Staff Now is on your home screen.';
     steps.innerHTML='';return;
   }
   if(isIOS){
-    why.textContent='On iPhone and iPad, alerts only work once Flagstaff is on your home screen. This takes about ten seconds.';
+    title.textContent='Add to your home screen first';
+    why.textContent='On iPhone and iPad, alerts only work once Half Staff Now is on your home screen. This takes about ten seconds.';
     steps.innerHTML=`<li>Tap the <strong>Share</strong> button at the bottom of Safari (the square with an arrow).</li>
       <li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>
       <li>Tap <strong>Add</strong>.</li>
-      <li>Open Flagstaff from your home screen, then come back here and turn on alerts.</li>`;
+      <li>Open Half Staff Now from your home screen, then come back here and turn on alerts.</li>`;
   } else if(isAndroid){
-    why.textContent='Add Flagstaff to your home screen so it opens like an app and can send alerts.';
+    title.textContent='Add to your home screen (optional)';
+    why.textContent='Alerts work without this. It just gives you an app icon.';
     steps.innerHTML=`<li>Tap the <strong>three-dot menu</strong> in Chrome.</li>
-      <li>Tap <strong>Add to Home screen</strong> or <strong>Install app</strong>.</li>
-      <li>Tap <strong>Install</strong>.</li>`;
+      <li>Tap <strong>Add to Home screen</strong> or <strong>Install app</strong>.</li>`;
+  } else if(isFirefox){
+    // Firefox on the desktop has no way to install a site. Nothing to explain.
+    card.hidden=true;
+  } else if(isSafariMac){
+    title.textContent='Add to your Dock (optional)';
+    why.textContent='Alerts work in Safari without this. It just gives the site its own window.';
+    steps.innerHTML=`<li>Open the <strong>File</strong> menu and choose <strong>Add to Dock</strong>.</li>`;
   } else {
-    why.textContent='Install Flagstaff so it opens in its own window and can send alerts.';
-    steps.innerHTML=`<li>Click the <strong>install icon</strong> in the address bar (a screen with a down arrow).</li>
-      <li>Or open the browser menu and choose <strong>Install Flagstaff</strong>.</li>
-      <li>Click <strong>Install</strong>.</li>`;
+    title.textContent='Install as an app (optional)';
+    why.textContent='Alerts work in your browser without installing. Installing just gives the site its own window.';
+    steps.innerHTML=`<li>Chrome: click the <strong>install icon</strong> at the right of the address bar.</li>
+      <li>Edge: open the <strong>&hellip;</strong> menu, then <strong>Apps</strong> &rarr; <strong>Install this site as an app</strong>.</li>`;
   }
 }
 renderInstall();
@@ -863,7 +981,7 @@ const SUBSCRIBE_ENDPOINT = CFG.SUBSCRIBE_ENDPOINT || '';
 if(!VAPID_PUBLIC_KEY || !SUBSCRIBE_ENDPOINT){
   // Loud. The old failure was a working-looking app that quietly subscribed
   // nobody, which took hours to notice.
-  console.error('Flagstaff: config.js missing or incomplete — notifications '
+  console.error('Half Staff Now: config.js missing or incomplete — notifications '
     + 'cannot work. VAPID_PUBLIC_KEY=' + (VAPID_PUBLIC_KEY ? 'set' : 'MISSING')
     + ', SUBSCRIBE_ENDPOINT=' + (SUBSCRIBE_ENDPOINT ? 'set' : 'MISSING'));
 }
@@ -964,7 +1082,7 @@ document.getElementById('notifyBtn').onclick=async function(){
     // save still said "Subscribed" and showed an "Alerts are on" notice.
     const data=await postJSON('/subscribe',{subscription:sub.toJSON(),state:current});
     btn.textContent='Alerts are on';
-    new Notification('Alerts are on',{body:"You'll hear from Flagstaff when the flag changes position \u2014 and not otherwise.",icon:'./icon-192.png'});
+    new Notification('Alerts are on',{body:"You'll hear from Half Staff Now when the flag changes position \u2014 and not otherwise.",icon:'./icon-192.png'});
     notifyStatus('Subscribed for '+((DATA.states[current]||{}).state||current)+'.');
     if(Array.isArray(data.states)){
       mySubs=data.states; subsError=null; rememberAlerts(sub, mySubs); renderSubs();
@@ -1139,7 +1257,9 @@ async function changeSub(path,extra){
 }
 
 // Build stamp in the footer, so which version is live is visible at a glance.
-try{ document.getElementById('buildStamp').textContent = CFG.BUILD || ''; }catch(_){}
+// Labelled: a bare date beside live data read as "last updated". It is the
+// version of the site, not the age of the answer (that is "checked ... ago").
+try{ document.getElementById('buildStamp').textContent = CFG.BUILD ? 'Site version ' + CFG.BUILD : ''; }catch(_){}
 
 /* --- Boot -------------------------------------------------------------- */
 fetch('status.json',{cache:'no-store'})

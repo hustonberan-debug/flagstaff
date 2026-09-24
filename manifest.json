@@ -1,6 +1,6 @@
 {
-  "name": "Flagstaff — US flag half-staff status",
-  "short_name": "Flagstaff",
+  "name": "Half Staff Now — US flag half-staff status",
+  "short_name": "Half Staff Now",
   "description": "Whether the US flag should be at half-staff today, by state. Federal proclamations and governor orders, with the official source for every answer.",
   "start_url": "./index.html",
   "scope": "./",

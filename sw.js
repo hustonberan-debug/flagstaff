@@ -24,7 +24,7 @@
  * caching rules. HTML does not need a bump: it is network-first.
  */
 
-const VERSION = 'flagstaff-v5';
+const VERSION = 'flagstaff-v6';
 const SHELL = ['./index.html', './manifest.json'];
 
 self.addEventListener('install', (e) => {
@@ -186,9 +186,9 @@ self.addEventListener('pushsubscriptionchange', (e) => {
       // Could not reconnect. Say so - the one thing that must not happen is
       // silence that looks exactly like "no flag news".
       await writePrefs(Object.assign(p, { lost: new Date().toISOString() }));
-      await self.registration.showNotification('Flagstaff alerts stopped', {
+      await self.registration.showNotification('Half Staff Now alerts stopped', {
         body: 'Your browser reset its alert connection and it could not be '
-            + 'restored. Open Flagstaff to turn alerts back on.',
+            + 'restored. Open Half Staff Now to turn alerts back on.',
         icon: './icon-192.png', badge: './icon-192.png', tag: 'flagstaff-alerts-lost',
         data: { url: './index.html#alerts' },
       });
