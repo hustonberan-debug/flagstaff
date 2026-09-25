@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T14:15:25+00:00",
+  "generated_at": "2026-09-25T14:30:28+00:00",
   "orders": {},
   "channels_seen": {
     "MI": "2026-09-10",
@@ -35,12 +35,14 @@
       ]
     },
     "flagsexpress.com": {
-      "count": 1,
+      "count": 2,
       "subjects": [
-        "American Flag Half-Staff Alerts"
+        "American Flag Half-Staff Alerts",
+        "New Jersey - Half-Staff Alert - Barry Tallman Parker"
       ],
       "senders": [
-        "mikeb@flagsexpress.com"
+        "mikeb@flagsexpress.com",
+        "halfstaff@flagsexpress.com"
       ]
     }
   },
