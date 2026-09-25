@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T13:15:25+00:00",
+  "generated_at": "2026-09-25T13:30:26+00:00",
   "orders": {},
   "channels_seen": {
     "MI": "2026-09-10",
@@ -23,13 +23,15 @@
   },
   "unattributed_senders": {
     "service.govdelivery.com": {
-      "count": 2,
+      "count": 3,
       "subjects": [
         "Subscription Change Confirmation",
-        "Welcome New User"
+        "Welcome New User",
+        "NEW Flag-Lowering Order - Executive Order #290 Gov. Evers Orders Flags"
       ],
       "senders": [
-        "govnebraska@service.govdelivery.com"
+        "govnebraska@service.govdelivery.com",
+        "dma_wi@service.govdelivery.com"
       ]
     },
     "flagsexpress.com": {
