@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T21:15:26+00:00",
+  "generated_at": "2026-09-25T21:30:33+00:00",
   "orders": {},
   "channels_seen": {
     "MI": "2026-09-10",
@@ -35,13 +35,14 @@
       ]
     },
     "flagsexpress.com": {
-      "count": 5,
+      "count": 6,
       "subjects": [
         "American Flag Half-Staff Alerts",
         "New Jersey - Half-Staff Alert - Barry Tallman Parker",
         "Wisconsin - Half-Staff Alert - Final Alarm Ceremony",
         "Florida - Half-Staff Alert - Alice M. Baker",
-        "Minnesota - Half-Staff Alert - Minnesota Fallen Firefighters Memorial "
+        "Minnesota - Half-Staff Alert - Minnesota Fallen Firefighters Memorial ",
+        "Maryland - Half-Staff Alert - Chief George Bacorn"
       ],
       "senders": [
         "mikeb@flagsexpress.com",
