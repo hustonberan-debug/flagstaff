@@ -18,8 +18,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:34+00:00",
+    "last_checked": "2026-09-28T19:31:34+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://os.dc.gov/service/flag-status|fetch"
@@ -33,8 +33,8 @@
     "hash": "ba30acd2cf219fb9",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:34+00:00",
+    "last_checked": "2026-09-28T19:31:34+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://www.gov.ca.gov/feed/|fetch"
@@ -48,8 +48,8 @@
     "hash": "0fd0758cff2ed548",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:34+00:00",
+    "last_checked": "2026-09-28T19:31:34+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.alabama.gov/flag-status/|fetch"
@@ -63,8 +63,8 @@
     "hash": "39115882509bdb4c",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:34+00:00",
+    "last_checked": "2026-09-28T19:31:34+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governorsoffice.colorado.gov/governor/flag-status|fetch"
@@ -86,8 +86,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:34+00:00",
+    "last_checked": "2026-09-28T19:31:34+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://az.gov/half-staff-notices|fetch"
@@ -109,8 +109,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:34+00:00",
+    "last_checked": "2026-09-28T19:31:34+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://gov.alaska.gov/services/status-of-the-flag/|fetch"
@@ -140,8 +140,8 @@
       "date": "2026-09-26",
       "coverage_reason": "window 2026-09-26..2026-09-28"
     },
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {
       "https://governor.iowa.gov/press-release/2026-09-26/gov-reynolds-orders-flags-half-staff-honor-and-remembrance-borlaug-elementary-school-teacher-and": {
         "opening_status": "half",
@@ -167,8 +167,8 @@
     "hash": "ef229bd7172b8619",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://governor.hawaii.gov/category/newsroom/feed/|fetch"
@@ -182,8 +182,8 @@
     "hash": "adc7de6cb9a92352",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://gov.ga.gov/rss.xml|fetch"
@@ -191,10 +191,10 @@
   "DE": {
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:54+00:00",
-    "hash_changed_at": "2026-09-28T19:01:30+00:00",
+    "hash_changed_at": "2026-09-28T19:31:34+00:00",
     "order_first_seen": "2026-09-25",
     "order_sig": "https://news.delaware.gov/flag-status/||declaration: 'Flag Status - FULL STAFF'||",
-    "hash": "5733c3f59265f3fb",
+    "hash": "aeaca60a81d16533",
     "state_status": "full",
     "state_order": {
       "title": null,
@@ -205,23 +205,31 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:01:30+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:34+00:00",
+    "last_checked": "2026-09-28T19:31:34+00:00",
     "articles": {},
-    "consecutive_errors": 1,
+    "consecutive_errors": 0,
     "source": "diff|https://news.delaware.gov/flag-status/|fetch"
   },
   "FL": {
     "last_known_status": "full",
     "last_status_change_at": "2026-09-17T18:24:59+00:00",
-    "hash_changed_at": "2026-09-28T19:16:34+00:00",
-    "order_first_seen": null,
-    "order_sig": null,
-    "hash": "ab1560fe2de14719",
-    "state_status": "unknown",
-    "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "hash_changed_at": "2026-09-28T19:31:34+00:00",
+    "order_first_seen": "2026-09-28",
+    "order_sig": "https://www.flgov.com/eog/info/flag-information||declaration: 'Flag Status: Full Staff'||",
+    "hash": "5e9a671ae154fd40",
+    "state_status": "full",
+    "state_order": {
+      "title": null,
+      "url": "https://www.flgov.com/eog/info/flag-information",
+      "status": "full",
+      "authority": "governor",
+      "evidence": "declaration: 'Flag Status: Full Staff'",
+      "start_date": null,
+      "end_date": null
+    },
+    "last_parsed": "2026-09-28T19:31:34+00:00",
+    "last_checked": "2026-09-28T19:31:34+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.flgov.com/eog/info/flag-information|fetch"
@@ -235,8 +243,8 @@
     "hash": "41ce2d99cdb89613",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:34+00:00",
+    "last_checked": "2026-09-28T19:31:34+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.arkansas.gov/newsroom/|fetch"
@@ -258,8 +266,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://gov.louisiana.gov/page/flag-status|fetch"
@@ -272,8 +280,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00"
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00"
   },
   "MD": {
     "last_known_status": "full",
@@ -284,8 +292,8 @@
     "hash": "73c5b2bca1f4d6e8",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.maryland.gov/news/press-releases|fetch"
@@ -299,8 +307,8 @@
     "hash": "402fe59f8e0ac5ad",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://governor.nc.gov/news/feed|fetch"
@@ -314,8 +322,8 @@
     "hash": "f8eaa1b5e461bdd3",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {
       "https://www.maine.gov/governor/mills/news/governor-mills-orders-flags-lowered-honor-victims-and-survivors-september-11th-2026-09-10": {
         "opening_status": "half",
@@ -352,8 +360,8 @@
     "hash": "d7a83144674eb205",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {
       "https://governor.nebraska.gov/gov-pillen-orders-flags-flown-half-staff-honor-yutan-firefighter": {
         "opening_status": "half",
@@ -378,8 +386,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00"
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00"
   },
   "CT": {
     "last_known_status": "full",
@@ -390,8 +398,8 @@
     "hash": "2c8c31037ff34bf1",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:34+00:00",
+    "last_checked": "2026-09-28T19:31:34+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://portal.ct.gov/governor/news/press-releases|fetch"
@@ -405,8 +413,8 @@
     "hash": "83341033f90aa1dd",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://events.in.gov/group/gov|fetch"
@@ -428,8 +436,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governorreeves.ms.gov/flag-status/|fetch"
@@ -451,8 +459,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://gov.idaho.gov/flag-status/|fetch"
@@ -466,8 +474,8 @@
     "hash": "ec9d2c7546c6da98",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://governor.ri.gov/press-releases.xml|fetch"
@@ -481,8 +489,8 @@
     "hash": "7addc8ef91477882",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {
       "https://www.governor.nd.gov/news/armstrong-directs-flags-flown-half-staff-friday-memory-911-victims-25th-anniversary-attacks": {
         "opening_status": "half",
@@ -502,10 +510,10 @@
   "NV": {
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:56+00:00",
-    "hash_changed_at": "2026-09-28T19:16:35+00:00",
+    "hash_changed_at": "2026-09-28T19:31:36+00:00",
     "order_first_seen": "2026-09-24",
     "order_sig": "https://www.gov.nv.gov/constituent-services/flag-status/||declaration: 'Flag Status Flags at Full-Staff'||",
-    "hash": "381b85c43cd36834",
+    "hash": "6f881dba7261e855",
     "state_status": "full",
     "state_order": {
       "title": null,
@@ -516,8 +524,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.gov.nv.gov/constituent-services/flag-status/|fetch"
@@ -531,8 +539,8 @@
     "hash": "3cb078f0d9e9ea2e",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://www.tn.gov/governor/news.html|fetch"
@@ -546,8 +554,8 @@
     "hash": "268d9100e3077090",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.sc.gov/news|fetch"
@@ -561,8 +569,8 @@
     "hash": "9133340c277ee297",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {
       "https://www.nj.gov/governor/news/2026/approved/20260924a.shtml": {
         "opening_status": "unknown",
@@ -588,8 +596,8 @@
     "hash": "fe13f355e48eead9",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {
       "https://www.congress.gov/107/plaws/publ89/PLAW-107publ89.pdf": {
         "opening_status": "unknown",
@@ -623,8 +631,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.ohio.gov/flag-honors|fetch"
@@ -638,8 +646,8 @@
     "hash": "0d69636d23671569",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://governor.vermont.gov/taxonomy/term/3/feed|fetch"
@@ -661,8 +669,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.governor.virginia.gov/constituent-services/flag-information/|fetch"
@@ -676,8 +684,8 @@
     "hash": "baad31a3594da578",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:38+00:00",
+    "last_checked": "2026-09-28T19:31:38+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://governor.wa.gov/rss.xml|fetch"
@@ -691,8 +699,8 @@
     "hash": "3708541138d744f0",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:38+00:00",
+    "last_checked": "2026-09-28T19:31:38+00:00",
     "articles": {
       "https://governor.wv.gov/article/governor-morrisey-orders-flags-half-staff-honor-25th-anniversary-september-11-attacks": {
         "opening_status": "half",
@@ -712,15 +720,38 @@
   "MN": {
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:55+00:00",
-    "hash_changed_at": "2026-09-28T19:16:34+00:00",
+    "hash_changed_at": "2026-09-28T19:31:36+00:00",
     "order_first_seen": null,
     "order_sig": null,
-    "hash": "184dd18f208d581f",
+    "hash": "0ab52e259c37e6d6",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
-    "articles": {},
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
+    "articles": {
+      "https://mn.gov/governor/newsroom/flag-status/index.jsp?id=1055-769668": {
+        "opening_status": "half",
+        "opening_evidence": "at Half-Staff",
+        "opening_authority": "governor",
+        "opening_authority_evidence": "Governor Walz Orders",
+        "body_start": "2026-09-27",
+        "body_end": "2026-09-27",
+        "opening": "Governor Walz Orders Flags Flown at Half-Staff for Fallen Firefighters All United States flags and Minnesota flags to be flown at half-staff at all state buildings in the State of Minnesota from sunrise until sunset on Sunday, September 27, to honor Minnesota firefighters killed in the line of duty. \"> All United States flags and Minnesota flags to be flown at half-staff at all state buildings in the State of Minnesota from sunrise until sunset on Sunday, September 27, to honor Minnesota firefighters killed in the line of duty. \"> skip to content Office of Governor Tim Walz and Lt.",
+        "scope": "statewide",
+        "scope_evidence": "at all state buildings"
+      },
+      "https://mn.gov/governor/newsroom/flag-status/index.jsp?id=1055-769665": {
+        "opening_status": "half",
+        "opening_evidence": "at Half-Staff",
+        "opening_authority": "governor",
+        "opening_authority_evidence": "Governor Walz Orders",
+        "body_start": null,
+        "body_end": null,
+        "opening": "Governor Walz Orders Flags at Half-Staff in Honor of Patriot Day All United States flags and Minnesota flags to be flown at half-staff at all state buildings in the State of Minnesota in honor of Patriot Day. \"> All United States flags and Minnesota flags to be flown at half-staff at all state buildings in the State of Minnesota in honor of Patriot Day. \"> skip to content Office of Governor Tim Walz and Lt.",
+        "scope": "statewide",
+        "scope_evidence": "at all state buildings"
+      }
+    },
     "consecutive_errors": 0,
     "source": "feed|https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp|fetch"
   },
@@ -741,8 +772,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.pa.gov/agencies/dgs/flag-notices.html|fetch"
@@ -755,8 +786,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00"
+    "last_parsed": "2026-09-28T19:31:38+00:00",
+    "last_checked": "2026-09-28T19:31:38+00:00"
   },
   "OR": {
     "last_known_status": "full",
@@ -783,8 +814,8 @@
       "date": null,
       "coverage_reason": "order page could not be read to date it"
     },
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {
       "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts/Search?cat=Flag%20at%20half%20staff": {
         "opening_status": "half",
@@ -851,8 +882,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.utah.gov/flag-status|fetch"
@@ -881,8 +912,8 @@
     "hash": "bc207e8d15c8678f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {
       "https://governor.nm.gov/newsroom/gov-lujan-grisham-orders-flags-to-half-staff-100004483": {
         "opening_status": "half",
@@ -949,10 +980,10 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:01:32+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
-    "consecutive_errors": 1,
+    "consecutive_errors": 0,
     "source": "diff|https://gov.texas.gov/flag-status|fetch"
   },
   "KS": {
@@ -963,8 +994,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00"
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00"
   },
   "WY": {
     "last_known_status": "full",
@@ -974,8 +1005,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00"
+    "last_parsed": "2026-09-28T19:31:38+00:00",
+    "last_checked": "2026-09-28T19:31:38+00:00"
   },
   "IL": {
     "last_known_status": null,
@@ -985,8 +1016,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00"
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00"
   },
   "MA": {
     "last_known_status": null,
@@ -996,8 +1027,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00"
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00"
   },
   "MT": {
     "last_known_status": "full",
@@ -1022,8 +1053,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00"
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00"
   },
   "OK": {
     "last_known_status": "full",
@@ -1066,8 +1097,8 @@
   "NY": {
     "last_known_status": null,
     "last_status_change_at": null,
-    "last_checked": "2026-09-28T19:16:35+00:00",
-    "consecutive_errors": 418
+    "last_checked": "2026-09-28T19:31:37+00:00",
+    "consecutive_errors": 419
   },
   "AL~2": {
     "hash_changed_at": "2026-09-28T19:16:34+00:00",
@@ -1076,8 +1107,8 @@
     "hash": "a7c7117dd091d440",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.alabama.gov/newsroom/|fetch"
@@ -1089,8 +1120,8 @@
     "hash": "0d22e77b8769e604",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://gov.alaska.gov/newsroom/|fetch"
@@ -1102,8 +1133,8 @@
     "hash": "9b26b946a51cc769",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://mayor.dc.gov/newsroom|fetch"
@@ -1115,8 +1146,8 @@
     "hash": "d2310f6aec16bd34",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governorsoffice.colorado.gov/governor/news|fetch"
@@ -1128,25 +1159,25 @@
     "hash": "74234e98afe7498f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00"
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00"
   },
   "FL~2": {
-    "hash_changed_at": "2026-09-28T19:16:34+00:00",
+    "hash_changed_at": "2026-09-28T19:31:35+00:00",
     "order_first_seen": null,
     "order_sig": null,
-    "hash": "ab1560fe2de14719",
-    "state_status": "unknown",
+    "hash": "cd7972f8cd3b5086",
+    "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://www.flgov.com/eog/news|fetch"
   },
   "KS~2": {
-    "last_checked": "2026-09-28T19:16:34+00:00",
-    "consecutive_errors": 418
+    "last_checked": "2026-09-28T19:31:35+00:00",
+    "consecutive_errors": 419
   },
   "LA~2": {
     "hash_changed_at": "2026-09-25T13:45:29+00:00",
@@ -1155,8 +1186,8 @@
     "hash": "8fd4f0b230b451d1",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://gov.louisiana.gov/news|fetch"
@@ -1168,8 +1199,8 @@
     "hash": "60f3712a492810d2",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.ky.gov/flag-status|fetch"
@@ -1189,8 +1220,8 @@
       "start_date": null,
       "end_date": null
     },
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.michigan.gov/whitmer/news/flag-honors|fetch"
@@ -1202,8 +1233,8 @@
     "hash": "6ada31b04a3fab81",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://portal.ct.gov/governor/flag-status|fetch"
@@ -1215,15 +1246,15 @@
     "hash": "64804d0704d9ceb6",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:01:30+00:00",
-    "last_checked": "2026-09-28T19:17:04+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
-    "consecutive_errors": 1,
+    "consecutive_errors": 0,
     "source": "index|https://governor.delaware.gov/press-releases/|fetch"
   },
   "MT~2": {
-    "last_checked": "2026-09-28T19:16:35+00:00",
-    "consecutive_errors": 418
+    "last_checked": "2026-09-28T19:31:36+00:00",
+    "consecutive_errors": 419
   },
   "ID~2": {
     "hash_changed_at": null,
@@ -1232,8 +1263,8 @@
     "hash": "6badc938b0b08ef8",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00",
     "articles": {
       "https://gov.idaho.gov/pressrelease/half-staff-flag-directive-patriot-day-2026/": {
         "opening_status": "half",
@@ -1257,8 +1288,8 @@
     "hash": "0f284d35d8316faa",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governorreeves.ms.gov/newsroom/|fetch"
@@ -1270,8 +1301,8 @@
     "hash": "dfe595f52519866b",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00",
+    "last_parsed": "2026-09-28T19:31:38+00:00",
+    "last_checked": "2026-09-28T19:31:38+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://mn.gov/governor/newsroom/flag-status/index.jsp|fetch"
@@ -1283,8 +1314,8 @@
     "hash": "deaa13c8d7a45d6b",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.ohio.gov/media/news-and-media|fetch"
@@ -1296,21 +1327,21 @@
     "hash": "9133340c277ee297",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://www.nj.gov/governor/news/2026/approved/news_archive.shtml|fetch"
   },
   "NV~2": {
-    "hash_changed_at": "2026-09-28T19:01:32+00:00",
+    "hash_changed_at": "2026-09-28T19:31:37+00:00",
     "order_first_seen": null,
     "order_sig": null,
-    "hash": "9b64e9f4fcc0a880",
+    "hash": "eddbbf5e9845808f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {
       "https://www.gov.nv.gov/press-releases/governor-joe-lombardo-signs-patriot-day-proclamation-orders-flags-to-half-staff-in-honor-of-911-victims-and-first-responders2/": {
         "opening_status": "half",
@@ -1334,8 +1365,8 @@
     "hash": "72c1c5815fb5343b",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://governor.utah.gov/news|fetch"
@@ -1347,8 +1378,8 @@
     "hash": "c7e1c2dff19a2d4f",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:38+00:00",
+    "last_checked": "2026-09-28T19:31:38+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.wyo.gov/flag-status|fetch"
@@ -1360,8 +1391,8 @@
     "hash": "7d906cde02299a08",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:36+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:37+00:00",
+    "last_checked": "2026-09-28T19:31:37+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "index|https://www.pa.gov/governor/newsroom.html|fetch"
@@ -1373,8 +1404,8 @@
     "hash": "811317c3378ace78",
     "state_status": "unknown",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00",
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00",
     "articles": {},
     "consecutive_errors": 0,
     "source": "diff|https://governor.hawaii.gov/flag-orders|fetch"
@@ -1386,10 +1417,10 @@
     "hash": "33bfbe006ec51003",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:01:34+00:00",
-    "last_checked": "2026-09-28T19:16:36+00:00",
+    "last_parsed": "2026-09-28T19:31:39+00:00",
+    "last_checked": "2026-09-28T19:31:39+00:00",
     "articles": {},
-    "consecutive_errors": 1,
+    "consecutive_errors": 0,
     "source": "index|https://gov.texas.gov/news|fetch"
   },
   "MO~2": {
@@ -1398,8 +1429,8 @@
     "hash": "74234e98afe7498f",
     "state_status": "full",
     "state_order": null,
-    "last_parsed": "2026-09-28T19:16:35+00:00",
-    "last_checked": "2026-09-28T19:16:35+00:00"
+    "last_parsed": "2026-09-28T19:31:36+00:00",
+    "last_checked": "2026-09-28T19:31:36+00:00"
   },
   "_federal_articles_v2": {
     "https://www.whitehouse.gov/presidential-actions/2026/09/restriction-on-entry-of-certain-nonimmigrant-workers-faad/": "Restriction on Entry of Certain Nonimmigrant Workers &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Ratepayer Protection Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions RESTRICTION ON ENTRY OF CERTAIN NONIMMIGRANT WORKERS Proclamations September 18, 2026 BY THE PRESIDENT OF THE UNITED STATES OF AMERICA A PROCLAMATION On September 19, 2025, Proclamation 10973 (Restriction on Entry of Certain Nonimmigrant Workers) (2025 Proclamation), was issued to address significant abuses of the H-1B nonimmigrant visa program. The restrictions enacted by the 2025 Proclamation have proven to be highly effective but the underlying conditions necessitating the restrictions persist. It is therefore in the interests of the United States to extend the 2025 Proclamation for an additional 12 months, until 12:00 a.m. eastern daylight time on September 21, 2027. As explained in the 2025 Proclamation, the H-1B nonimmigrant visa program was created to bring temporary workers in high-skilled functions into the United States, but it has been exploited to replace, not supplement, American workers with lower-paid labor. Certain employers, including information technology (IT) staffing and outsourcing firms, have abused the system to suppress wages and displace American workers, and this has both harmed the labor market for American workers while also making it difficult to attract and retain the most highly skilled temporary workers. IT staffing and outsourcing firms were found to supply a large volume of entry-level temporary H\u20111B workers, generally at a much lower salary compared to full\u2011time, traditional workers, and some of these firms later outsourced IT roles to cheap labor markets overseas. This has led to a proliferation of lower-paid foreign labor flooding the American labor market and making it difficult for American workers and recent graduates, especially in science, technology, engineering, and math (STEM) fields, to find employment. To combat these abuses, the 2025 Proclamation set forth a restriction on entry of certain H-1B nonimmigrant workers, except for those petitions that were accompanied or supplemented by a $100,000 payment, subject to very limited exceptions. The 2025 Proclamation went into effect on September 21, 2025, and, since then, the $100,000 payment has been made for over 700 petitions. Additionally, the 2025 Proclamation required initiation of rulemakings by the Department of Homeland Security (DHS) and the Department of Labor (DOL) to address systemic H-1B program concerns. On December 29, 2025, DHS published a final rule, titled Weighted Selection Process for Registrants and Petitioners Seeking to File Cap-Subject H-1B Petitions, 90 Fed. Reg. 60864 (DHS final rule), to address the policy goals consistent with section 4(b) of the 2025 Proclamation. Through this rule, DHS created and implemented a weighted selection process that prioritizes the allocation of visas to higher-skilled and higher-paid aliens to better protect the wages, working conditions, and job opportunities for American workers. This policy better serves the intent of the H-1B statutory scheme, incentivizes employers to recruit temporary workers for roles at the highest pay and skill levels, and was in effect for the Fiscal Year (FY) 2027 H-1B cap season. On March 27, 2026, DOL published a notice of proposed rulemaking, titled Improving Wage Protections for the Temporary and Permanent Employment of Certain Foreign Nationals in the United States, 91 Fed. Reg. 15454, to address the policy goals consistent with section 4(a) of the 2025 Proclamation. The DOL&#8217;s analysis of labor condition application data found that the average wage actually paid to H-1B workers, and the prevailing wage assigned to their positions, both remain well below the average wage earned by comparable American workers. The rule, once finalized, will better align prevailing wage levels with wages paid to similarly employed and located American workers and will strengthen overall program integrity. Finally, my Administration continues to explore other complementary efforts that would, among other things, reform the H-1B program and assist with cost-recovery for immigration program administration. Since the effective date of the 2025 Proclamation and subsequent promulgation of the DHS final rule, there have been several measurable impacts on the H-1B program, including a significant reduction in H-1B registrations filed by large IT outsourcing firms, with the largest IT staffing and outsourcing firms reducing their combined H-1B registrations from 24,946 to 2,055, a 92 percent decrease. There has also been a large reduction in consular processing requests, which are used to bring workers into the United States, noting a nearly 97 percent decrease from the FY 2025 to FY 2027 cap seasons. Finally, there has been a positive shift in FY 2027 H-1B registration and selection data toward higher-skilled and higher-paid workers, with registrations for beneficiaries with at least a U.S. Master&#8217;s degree rising from 45.1 percent of total registrants for FY 2026 to 66.1 percent for FY 2027. Job offers with wages corresponding to the two highest wage levels accounted for approximately 46.3 percent of H-1B registration selections while those corresponding with the lowest wage level accounted for only 17.8 percent. It is reasonable to conclude that the required $100,000 payment and newly implemented weighted selection process have had the combined effect of deterring low-wage and low-skilled recruitment while increasing access for high-skilled and high-wage workers, as intended by the 2025 Proclamation. Although the 2025 Proclamation and subsequent rulemaking have had the desired effects, the underlying conditions precipitating their issuance persist and, without an extension of the 2025 Proclamation, it is highly likely that progress will halt and program abuse will resume, undermining American workers and posing a threat to the labor market that would be detrimental to the interests of the United States. The 2025 Proclamation highlighted a number of concerns, including high unemployment rates for recent graduates, wage suppression, fraud, and national security threats. Currently, these issues continue to undermine our economy, with unemployment rates for recent college graduates standing at 5.7 percent as of June 2026, a marginal decrease from September 2025, when the rate was 5.8 percent. Underemployment for recent college graduates also continues to cause concern, having risen from 41.8 percent in September 2025 to 42 percent as of June 2026. Additionally, while DOL is actively in the process of promulgating a rule to restore integrity to the prevailing wage system, it will take a significant amount of time to correct and balance the labor market. Finally, while fraud and abuse continue to be identified and investigated, these are ongoing and pervasive concerns that require a sustained, comprehensive response reflected in the entry restriction imposed by the 2025 Proclamation. A review of the 2025 Proclamation&#8217;s impacts and other recent policy changes has shown significant measurable changes in H-1B filing patterns that demonstrate the effectiveness of the 2025 Proclamation and a need for its extension. An extension of the 2025 Proclamation will continue to protect the economic and national security interests of the United States, improve labor market access for American workers and graduates, and ensure that employers recruit only the most highly-skilled and essential alien workers when needed in line with the original intent of the program. As a result, the Secretary of State, the Attorney General, the Secretary of Labor, and the Secretary of Homeland Security have jointly recommended an extension of the 2025 Proclamation. As a result of these reviews and considerations, I have decided to continue to impose the limitations set forth in Proclamation 10973 on the entry into the United States by certain nonimmigrant workers. Accordingly, by the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Restriction on Entry . (a) Pursuant to sections 212(f) and 215(a) of the Immigration and Nationality Act (INA) (8 U.S.C. 1182(f) and 1185(a)), the entry into the United States of aliens as nonimmigrants to perform services in a specialty occupation under section 101(a)(15)(H)(i)(b) of the INA (8 U.S.C. 1101(a)(15)(H)(i)(b)), is restricted, except for those aliens whose petitions are accompanied or supplemented by a payment of $100,000 &#8212; subject to the exceptions set forth in subsection (c) of this section. This restriction shall expire, absent extension, 12 months after the effective date of this proclamation, which shall be 12:01 a.m. eastern daylight time on September 21, 2026. (b) The Secretary of Homeland Security shall restrict decisions on petitions not accompanied by a $100,000 payment for H-1B specialty occupation workers under section 101(a)(15)(H)(i)(b) of the INA, who are currently outside the United States, for 12 months following the effective date of this proclamation as set forth in subsection (a) of this section. (c) The restriction imposed pursuant to subsections (a) and (b) of this section shall not apply to any individual alien, all aliens working for a company, or all aliens working in an industry, if the Secretary of Homeland Security determines, in the Secretary&#8217;s discretion, that the hiring of such aliens to be employed as H-1B specialty occupation workers is in the national interest and does not pose a threat to the security or welfare of the United States. Sec . 2 . Compliance . (a) Employers shall, prior to filing an H-1B petition on behalf of an alien outside the United States, obtain and retain documentation showing that the payment described in section 1 of this proclamation has been made. (b) The Secretary of State shall verify receipt of payment of the amount described in section 1 of this proclamation during the H-1B visa petition process and shall approve only those visa applications for which the filing employer has made the payment described in section 1 of this proclamation. (c) The Department of State and the Department of Homeland Security shall coordinate to take all necessary and appropriate action to implement this proclamation and to deny entry to the United States to any H-1B nonimmigrant for whom the prospective employer has not made the payment described in section 1 of this proclamation. Sec . 3 . Scope and Implementation of Restriction on Entry . (a) The restriction on entry pursuant to section 1 of this proclamation shall apply only to aliens who enter or attempt to enter the United States after the effective date of this proclamation as set forth in section 1(a) of this proclamation. This restriction applies to aliens who must seek admission to the United States to effectuate the approval of a petition described in section 1 of this proclamation, including through consular notification, notification at a port of entry, pre\u2011flight inspection, or pre-clearance. (b) No later than 30 days following the completion of the H-1B lottery that immediately follows this proclamation, the Secretary of State, the Attorney General, the Secretary of Labor, and the Secretary of Homeland Security shall jointly submit to the President, through the Assistant to the President and Homeland Security Advisor, a recommendation on whether an additional extension or renewal of the restriction on entry pursuant to section 1 of this proclamation is in the interests of the United States. Sec . 4 . General Provisions . (a) Nothing in this proclamation shall be construed to impair or otherwise affect: (i) the authority granted by law to an executive department or agency, or the head thereof; or (ii) the functions of the Director of the Office of Management and Budget relating to budgetary, administrative, or legislative proposals. (b) This proclamation shall be implemented consistent with applicable law and subject to the availability of appropriations. (c) This proclamation is not intended to, and does not, create any right or benefit, substantive or procedural, enforceable at law or in equity by any party against the United States, its departments, agencies, or entities, its officers, employees, or agents, or any other person. IN WITNESS WHEREOF, I have hereunto set my hand this eighteenth day of September, in the year of our Lord two thousand twenty-six, and of the Independence of the United States of America the two hundred and fifty-first. DONALD J. TRUMP Related Restriction on Entry of Certain Nonimmigrant Workers Presidential Actions , Proclamations September 19, 2025 Fact Sheet: President Donald J. Trump Suspends the Entry of Certain Alien Nonimmigrant Workers Fact Sheets September 19, 2025 Enhancing Program Integrity and Integrity and Interagency Coordination in the Administration of the H-1B Nonimmigrant Visa Program Presidential Actions , Executive Orders September 18, 2026 H-1B FAQ Releases September 21, 2025 Fact Sheet: President Donald J. Trump Further Enhances Program Integrity and Interagency Coordination in the H-1B Visa Program Fact Sheets September 18, 2026 1 2 3 &hellip; 86 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Your browser does not support the audio element. Click to listen 0:00 11:35 0.75\u00d7 1\u00d7 1.5\u00d7 2\u00d7 Notifications",
@@ -1412,7 +1443,13 @@
     "https://www.whitehouse.gov/presidential-actions/2026/09/modifying-the-scope-of-products-of-canada-subject-to-the-additional-duties-imposed-to-offset-canadian-discrimination-against-the-commerce-of-the-united-states-with-respect-to-alcoholic-beverages/": "Modifying the Scope of Products of Canada Subject to the Additional Duties Imposed to Offset Canadian Discrimination Against the Commerce of the United States with Respect to Alcoholic Beverages &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Ratepayer Protection Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions MODIFYING THE SCOPE OF PRODUCTS OF CANADA SUBJECT TO THE ADDITIONAL DUTIES IMPOSED TO OFFSET CANADIAN DISCRIMINATION AGAINST THE COMMERCE OF THE UNITED STATES WITH RESPECT TO ALCOHOLIC BEVERAGES Proclamations September 8, 2026 By the President of the United States of America A Proclamation 1. In Proclamation 11046 of July 20, 2026 (Imposing Additional Duties To Offset Canadian Discrimination Against the Commerce of the United States With Respect to Alcoholic Beverages), I found as a fact that Canada is discriminating in fact against the commerce of the United States by banning the purchase, distribution, or retailing of U.S. alcoholic beverages while not banning or similarly restricting such products from other countries; that this discrimination places the commerce of the United States at a disadvantage compared to the commerce of other countries; and that Canada&#8217;s imposition is unreasonable, is not equally enforced upon the like articles of every foreign country, and places a burden on the commerce of the United States. To offset the burden or disadvantage on U.S. commerce from Canada&#8217;s discrimination or unreasonable and unequal imposition on U.S. alcoholic beverages, I imposed under section 338 of the Tariff Act of 1930 (19 U.S.C. 1338) (section 338) additional ad valorem duties, effective August 19, 2026, on certain products of Canada. 2. In Proclamation 11056 of August 18, 2026 (Temporary Suspension of Additional Duties To Offset Canadian Discrimination Against the Commerce of the United States With Respect to Alcoholic Beverages, Dairy, and Motor Vehicles), I temporarily suspended for 3 days the effective date of the additional ad valorem duties imposed under Proclamation 11046 after Canada expressed a commitment to remove the discrimination or unreasonable and unequal imposition at issue in Proclamation 11046. 3. On August 21, 2026, Canada reneged on its commitment, ceased negotiating in good faith, and did not remove the discrimination or unreasonable and unequal imposition at issue in Proclamation 11046. 4. Accordingly, at 12:01 a.m. eastern time on August 22, 2026, the 3-day suspension imposed by Proclamation 11056 lapsed, and the additional ad valorem duties imposed under Proclamation 11046 became effective. 5. I have received certain information, opinions, and recommendations from senior executive branch officials on the status of the circumstances involved in Proclamation 11046 and the effect of the additional ad valorem duties imposed in Proclamation 11046, including how effectively those duties are offsetting the burden or disadvantage on U.S. commerce. According to senior executive branch officials, although the additional ad valorem duties imposed in Proclamation 11046 offset the burden or disadvantage on U.S. commerce, modifying the scope of products subject to the additional ad valorem duties imposed in Proclamation 11046 would still offset the burden or disadvantage on U.S. commerce while better serving the public interest. In my senior executive branch officials&#8217; opinion, modifying the scope of products subject to the additional ad valorem duties imposed in Proclamation 11046 is required by the public interests and is consistent with the interests of the United States. 6. After considering the information, opinions, and recommendations that have been provided to me by senior executive branch officials, among other relevant information and considerations, I determine that the public interests require modifying the scope of products subject to the additional ad valorem duties imposed in Proclamation 11046. 7. In my judgment, the modification in this proclamation will offset the burden or disadvantage on U.S. commerce, is consistent with the public interests and the interests of the United States, is required by the public interests, and will better serve the public interest. 8. Section 338 authorizes the President, if he determines it will serve the public interest, to offset any burden or disadvantage placed on the commerce of the United States by an unequal imposition or discrimination by a foreign country by specifying and declaring additional duties not to exceed 50 percent ad valorem (or its equivalent) and not to take effect earlier than 30 days after the President&#8217;s proclamation finding that a foreign country is imposing an unreasonable charge, exaction, regulation, or limitation that is not equally enforced on the like articles of every foreign country, or discriminates in fact against U.S. commerce in a way that places the commerce of the United States at a disadvantage compared to the commerce of any foreign country. Section 338 also authorizes the President to suspend, revoke, supplement, or amend any proclamation under section 338 whenever the President deems that the public interests require such action. Further, section 338 authorizes the President to exclude from importation articles of the foreign country if the foreign country maintains or increases the discrimination against the commerce of the United States and the President deems the exclusion to be consistent with the public interests and the interests of the United States. 9. Section 604 of the Trade Act of 1974, as amended (19 U.S.C. 2483) (section 604), authorizes the President to embody in the Harmonized Tariff Schedule of the United States (HTSUS) the substance of statutes affecting import treatment, and actions thereunder, including the removal, modification, continuance, or imposition of any rate of duty or other import restriction. NOW, THEREFORE, I, DONALD J. TRUMP, President of the United States of America, by the authority vested in me by the Constitution and the laws of the United States, including section 338; section 301 of title 3, United States Code; and section 604, do hereby proclaim as follows: (1) Except as otherwise provided in this proclamation, certain products of Canada, as set forth in Annex I, Part A to this proclamation, imported into the United States shall be subject to the additional ad valorem duty of 50 percent imposed pursuant to Proclamation 11046. In addition, certain products of Canada, as set forth in Annex I, Part B to this proclamation, imported into the United States shall no longer be subject to the additional ad valorem duty of 50 percent imposed pursuant to Proclamation 11046. The duties imposed pursuant to Proclamation 11046, as modified in this proclamation, shall apply in addition to duties imposed pursuant to section 232 of the Trade Expansion Act of 1962, as amended (19 U.S.C. 1862). These changes shall be effective with respect to goods entered for consumption, or withdrawn from warehouse for consumption, on or after 12:01 a.m. eastern time on September 15, 2026. (2) The HTSUS is modified as provided in Annex II to this proclamation, effective with respect to goods entered for consumption, or withdrawn from warehouse for consumption, on or after 12:01 a.m. eastern time on September 15, 2026, and the modifications shall continue in effect unless this action is expressly suspended, revoked, supplemented, amended, or terminated. (3) The head of each executive department and agency (agency) is authorized to and shall take all appropriate measures within the agency&#8217;s authority to implement this proclamation. The head of each agency may, consistent with applicable law, including section 301 of title 3, United States Code, redelegate the authority to take such appropriate measures within the agency. (4) The Commissioner of U.S. Customs and Border Protection (CBP), in consultation with the Secretary of the Treasury, the Secretary of Commerce, and the United States Trade Representative, is authorized to issue such rules, regulations, guidance, instructions, or determinations as may be necessary to implement this proclamation and is authorized to take any necessary measures to administer this proclamation. (5) The Commissioner of CBP, in consultation with the Secretary of the Treasury, the Secretary of Commerce, the United States Trade Representative, the Chairman of the United States International Trade Commission, and any other senior executive branch official he deems appropriate, shall determine whether any additional modifications to the HTSUS are necessary to effectuate this proclamation and shall make such modifications to the HTSUS through notice in the Federal Register , including any technical or ministerial correction to the annexes to this proclamation. (6) For any rule or regulation the Commissioner of CBP makes to implement this proclamation, the Commissioner of CBP shall, to the extent required by law, obtain the approval of the President or the United States Trade Representative. The United States Trade Representative is delegated the President&#8217;s approval authority in 19 U.S.C. 1338(h). (7) Any provision of previous proclamations and Executive Orders that is inconsistent with this proclamation is superseded to the extent of such inconsistency. (8) If any provision of this proclamation or the application of any provision to any individual or circumstance is held to be invalid, the remainder of this proclamation and the application of its provisions to any other individuals or circumstances shall not be affected. IN WITNESS WHEREOF, I have hereunto set my hand this eighth day of September, in the year of our Lord two thousand twenty-six, and of the Independence of the United States of America the two hundred and fifty-first. DONALD J. TRUMP ANNEX-1 ANNEX-2 Related Modifying the Scope of Products of Canada Subject to the Additional Duties Imposed to Offset Canadian Discrimination Against the United States with Respect to Motor Vehicles Presidential Actions , Proclamations September 8, 2026 Temporary Suspension of Additional Duties to Offset Canadian Discrimination Against the Commerce of the United States with Respect to Alcoholic Beverages, Dairy, and Motor Vehicles Presidential Actions , Proclamations August 18, 2026 Imposing Additional Duties to Offset Canadian Discrimination Against the Commerce of the United States with Respect to Alcoholic Beverages Presidential Actions , Proclamations July 20, 2026 Excluding Certain Canadian Alcoholic Beverages from Importation into the United States in Response to Continued Discrimination Against the Commerce of the United States with Respect to Alcoholic Beverages Presidential Actions , Proclamations September 8, 2026 Imposing Additional Duties to Offset Canadian Discrimination Against the Commerce of the United States with Respect to Dairy Presidential Actions , Proclamations July 20, 2026 1 2 3 &hellip; 32 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Notifications",
     "https://www.whitehouse.gov/presidential-actions/2026/09/excluding-certain-canadian-products-from-importation-into-the-united-states-in-response-to-continued-discrimination-against-the-commerce-of-the-united-states-with-respect-to-motor-vehicles/": "Excluding Certain Canadian Products from Importation into the United States in Response to Continued Discrimination Against the Commerce of the United States with Respect to Motor Vehicles &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Ratepayer Protection Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions EXCLUDING CERTAIN CANADIAN PRODUCTS FROM IMPORTATION INTO THE UNITED STATES IN RESPONSE TO CONTINUED DISCRIMINATION AGAINST THE COMMERCE OF THE UNITED STATES WITH RESPECT TO MOTOR VEHICLES Proclamations September 8, 2026 BY THE PRESIDENT OF THE UNITED STATES OF AMERICA A PROCLAMATION 1. In Proclamation 11048 of July 20, 2026 (Imposing Additional Duties To Offset Canadian Discrimination Against the Commerce of the United States With Respect to Motor Vehicles), I found as a fact that Canada is discriminating in fact against the commerce of the United States through Canada&#8217;s motor vehicle tariff scheme; that this discrimination places the commerce of the United States at a disadvantage compared to the commerce of other countries; and that Canada&#8217;s imposition is unreasonable, is not equally enforced upon the like articles of every foreign country, and places a burden on the commerce of the United States. To offset the burden or disadvantage on U.S. commerce from Canada&#8217;s discrimination or unreasonable and unequal imposition on U.S. auto and auto parts exports, I imposed under section 338 of the Tariff Act of 1930 (19 U.S.C. 1338) (section 338) additional ad valorem duties, effective August 19, 2026, on certain products of Canada. 2. In Proclamation 11056 of August 18, 2026 (Temporary Suspension of Additional Duties To Offset Canadian Discrimination Against the Commerce of the United States With Respect to Alcoholic Beverages, Dairy, and Motor Vehicles), I temporarily suspended for 3 days the effective date of the additional ad valorem duties imposed under Proclamation 11048 after Canada expressed a commitment to remove the discrimination or unreasonable and unequal imposition at issue in Proclamation 11048. 3. On August 21, 2026, Canada reneged on its commitment, ceased negotiating in good faith, and did not remove the discrimination or unreasonable and unequal imposition at issue in Proclamation 11048. 4. Accordingly, at 12:01 a.m. eastern time on August 22, 2026, the 3-day suspension imposed by Proclamation 11056 lapsed, and the additional ad valorem duties imposed under Proclamation 11048 became effective. 5. I have received certain information, opinions, and recommendations from senior executive branch officials on the status of the circumstances involved in Proclamation 11048 and of negotiations between the United States and Canada regarding the discrimination or imposition described in Proclamation 11048. According to senior executive branch officials, after the issuance of Proclamation 11048 and after the additional ad valorem duties imposed in Proclamation 11048 became effective, Canada did not revoke its discriminatory motor vehicle tariff scheme but has maintained the discrimination or unreasonable and unequal imposition at issue in Proclamation 11048. In my senior executive branch officials&#8217; opinion, an import ban on certain Canadian products currently subject to the additional ad valorem duties imposed in Proclamation 11048 is consistent with the interests of the United States and the public interests. 6. After considering the information, opinions, and recommendations that have been provided to me by senior executive branch officials, among other relevant information and considerations, I find it to be a fact that Canada has, after the issuance of Proclamation 11048 and after the additional ad valorem duties imposed in Proclamation 11048 became effective, maintained the discriminations against the commerce of the United States described in Proclamation 11048. 7. I determine that it is consistent with the interests of the United States to issue this further proclamation directing that certain products of Canada that are currently subject to the additional ad valorem duties imposed in Proclamation 11048 be excluded from importation into the United States. I determine that it is consistent with the public interests to exclude from importation into the United States certain products of Canada that are currently subject to the additional ad valorem duties imposed in Proclamation 11048, as further detailed in the Annex to this proclamation. 8. In my judgment, the action in this proclamation is consistent with the public interests and the interests of the United States, is required by the public interests, and will serve the public interest. 9. Section 338 authorizes the President, if he determines it will serve the public interest, to offset any burden or disadvantage placed on the commerce of the United States by an unequal imposition or discrimination by a foreign country by specifying and declaring additional duties not to exceed 50 percent ad valorem (or its equivalent) and not to take effect earlier than 30 days after the President&#8217;s proclamation finding that a foreign country is imposing an unreasonable charge, exaction, regulation, or limitation that is not equally enforced on the like articles of every foreign country, or discriminates in fact against U.S. commerce in a way that places the commerce of the United States at a disadvantage compared to the commerce of any foreign country. Section 338 also authorizes the President to suspend, revoke, supplement, or amend any proclamation under section 338 whenever the President deems that the public interests require such action. Further, section 338 authorizes the President to exclude from importation articles of the foreign country if the foreign country maintains or increases the discrimination against the commerce of the United States and the President deems the exclusion to be consistent with the public interests and the interests of the United States. 10. Section 604 of the Trade Act of 1974, as amended (19 U.S.C. 2483) (section 604), authorizes the President to embody in the Harmonized Tariff Schedule of the United States (HTSUS) the substance of statutes affecting import treatment, and actions thereunder, including the removal, modification, continuance, or imposition of any rate of duty or other import restriction. NOW, THEREFORE, I, DONALD J. TRUMP, President of the United States of America, by the authority vested in me by the Constitution and the laws of the United States, including section 338; section 301 of title 3, United States Code; and section 604, do hereby proclaim as follows: (1) Except as otherwise provided in this proclamation, certain products of Canada, as set forth in the Annex to this proclamation, are excluded from importation into the United States, effective with respect to goods imported on or after 12:01 a.m. eastern time on September 29, 2026. (2) Products that will be subject to the import ban in this proclamation that were imported, but not yet entered for consumption, or withdrawn from warehouse for consumption, prior to September 29, 2026, will remain subject to the 50 percent duty rate established by Proclamation 11048. (3) Besides changing certain products from being subject to the additional ad valorem duties imposed in Proclamation 11048 to being subject to the import ban set forth in this proclamation, this proclamation does not otherwise affect the products, as further established in the Proclamation of September 8, 2026 (Modifying the Scope of Products of Canada Subject to the Additional Duties Imposed To Offset Canadian Discrimination Against the Commerce of the United States With Respect to Motor Vehicles), that are subject to the additional ad valorem duties imposed in Proclamation 11048. (4) The head of each executive department and agency (agency) is authorized to and shall take all appropriate measures within the agency&#8217;s authority to implement this proclamation. The head of each agency may, consistent with applicable law, including section 301 of title 3, United States Code, redelegate the authority to take such appropriate measures within the agency. (5) The Commissioner of U.S. Customs and Border Protection (CBP), in consultation with the Secretary of the Treasury, the Secretary of Commerce, and the United States Trade Representative, is authorized to issue such rules, regulations, guidance, instructions, or determinations as may be necessary to implement this proclamation and is authorized to take any necessary measures to administer the import ban imposed in this proclamation. (6) The Commissioner of CBP, in consultation with the Secretary of the Treasury, the Secretary of Commerce, the United States Trade Representative, the Chairman of the United States International Trade Commission, and any other senior executive branch official he deems appropriate, shall determine whether any additional modifications to the HTSUS are necessary to effectuate this proclamation and shall make such modifications to the HTSUS through notice in the Federal Register , including any technical or ministerial correction to the Annex to this proclamation. (7) For any rule or regulation the Commissioner of CBP makes to implement this proclamation, the Commissioner of CBP shall, to the extent required by law, obtain the approval of the President or the United States Trade Representative. The United States Trade Representative is delegated the President&#8217;s approval authority in 19 U.S.C. 1338(h). (8) Any provision of previous proclamations and Executive Orders that is inconsistent with this proclamation is superseded to the extent of such inconsistency. (9)(a) If any provision of this proclamation or the application of any provision to any individual or circumstance is held to be invalid, the remainder of this proclamation and the application of its provisions to any other individuals or circumstances shall not be affected. (b) If the import ban imposed in this proclamation is invalidated in whole or in part as to any import, then the 50 percent ad valorem duty imposed in Proclamation 11048 shall apply to the import to which the invalidated import ban or the invalidated part of the import ban had applied before its invalidation. No other import ban imposed in this proclamation shall be affected, and no additional ad valorem duty imposed in Proclamation 11048 or a proclamation issued subsequent to Proclamation 11048 shall be affected. This severability provision, including its operative effect if triggered, is consistent with the public interests and the interests of the United States, is required by the public interests, and will serve the public interest. IN WITNESS WHEREOF, I have hereunto set my hand this eighth day of September, in the year of our Lord two thousand twenty-six, and of the Independence of the United States of America the two hundred and fifty-first. ANNEX DONALD J. TRUMP Related Excluding Certain Canadian Products from Importation into the United States in Response to Continued Discrimination Against the Commerce of the United States with Respect to Dairy Presidential Actions , Proclamations September 8, 2026 Excluding Certain Canadian Alcoholic Beverages from Importation into the United States in Response to Continued Discrimination Against the Commerce of the United States with Respect to Alcoholic Beverages Presidential Actions , Proclamations September 8, 2026 Temporary Suspension of Additional Duties to Offset Canadian Discrimination Against the Commerce of the United States with Respect to Alcoholic Beverages, Dairy, and Motor Vehicles Presidential Actions , Proclamations August 18, 2026 Modifying the Scope of Products of Canada Subject to the Additional Duties Imposed to Offset Canadian Discrimination Against the United States with Respect to Motor Vehicles Presidential Actions , Proclamations September 8, 2026 Imposing Additional Duties to Offset Canadian Discrimination Against the Commerce of the United States with Respect to Motor Vehicles Presidential Actions , Proclamations July 20, 2026 1 2 3 &hellip; 37 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Notifications",
     "https://www.whitehouse.gov/presidential-actions/2026/09/labor-day-2026/": "Labor Day, 2026 &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Ratepayer Protection Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions LABOR DAY, 2026 Proclamations September 7, 2026 By the President of the United States of America A Proclamation This Labor Day, we recognize the hard work, dedication, and unwavering commitment of the American worker. Their inspiring skill and unbreakable spirit have propelled our country forward for generations. Their strength built our cities, their genius launched and sustained our most advanced industries, and their ingenuity carried American craftsmanship to every corner of the globe. Time and again, their resilience has seen our people through hardship and has consistently brought us to even greater heights of wealth and prosperity. The American worker deserves a Government that is determined to fight for them, as they have fought for us for generations, and we are delivering. Since returning to office, my Administration has remained steadfast in its mission to empower the American worker and families by strengthening the economy, bolstering manufacturing, and unleashing innovation like never before. Last year, I proudly signed the Working Families Tax Cuts Act into law, making the largest tax cuts in American history permanent and boosting take-home pay for millions of hardworking families across our Nation. The law also makes the small business tax deduction permanent, allowing small business owners to deduct 20 percent of their qualified business income. After decades of disastrous trade policies that surrendered our industrial strength to foreign nations, companies are now returning home, investing trillions of dollars into the United States economy, and adding over 900,000 American jobs. Thanks to my protective tariffs, our Nation&#8217;s workers are being shielded from unfair foreign competition, ensuring that their labor is honored, their businesses are defended, and their jobs remain on American soil. Through landmark trade deals, American manufacturing has expanded for 6 months straight, and more auto plants are being built in America today than ever before. To ensure we are hiring and training American workers, we are proposing a new fee on H-1B visa petitions that will encourage companies to invest in qualified Americans before looking overseas for labor. Our Nation is entering a bold new era of American manufacturing, technological innovation, and economic prosperity &#8212; powered by the might of the American worker. Today and every day, we commit to ensuring their hard work remains the driving force behind our Nation&#8217;s strength and prosperity and the foundation for an even greater future. NOW, THEREFORE, I, DONALD J. TRUMP, President of the United States of America, by virtue of the authority vested in me by the Constitution and the laws of the United States, do hereby proclaim September 7, 2026, as Labor Day. I call upon all public officials and people of the United States to observe this day with appropriate programs, ceremonies, and activities that honor the contributions and resilience of working Americans. IN WITNESS WHEREOF, I have hereunto set my hand this fourth day of September, in the year of our Lord two thousand twenty-six, and of the Independence of the United States of America the two hundred and fifty-first. DONALD J. TRUMP Related Made in America Week, 2026 Presidential Actions , Proclamations July 20, 2026 Labor Day, 2025 Presidential Actions , Proclamations August 28, 2025 National Day of Patriotic Devotion, 2026 Presidential Actions , Proclamations January 20, 2026 Women&#8217;s History Month, 2026 Presidential Actions , Proclamations March 12, 2026 National Manufacturing Day, 2025 Presidential Actions , Proclamations October 7, 2025 1 2 3 &hellip; 229 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Notifications",
-    "https://www.whitehouse.gov/presidential-actions/2026/09/gold-star-mothers-and-familys-day-2026/": "Gold Star Mother&#039;s And Family&#039;s Day, 2026 &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Trump TV Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Trump TV Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Trump TV Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions GOLD STAR MOTHER&#8217;S AND FAMILY&#8217;S DAY, 2026 Proclamations September 25, 2026 BY THE PRESIDENT OF THE UNITED STATES OF AMERICA A PROCLAMATION America is free, strong, secure, and prosperous due to the courage of the heroes in uniform who are willing to lay down their lives in the defense of our Republic. The supreme sacrifice paid by every fallen warrior is borne in perpetual sorrow and profound anguish by the loved ones left behind. On Gold Star Mother&#8217;s and Family&#8217;s Day, we pause to honor the surviving families of our valiant patriots and renew our sacred obligation to always support them. Gold Star Families endure the unfathomable &#8212; burying their Soldier, Sailor, Marine, Airman, Guardian, or Coast Guardsman who fell protecting our birthright of freedom. In an instant, their lives are forever changed; their future plans, hopes, and dreams are replaced by a folded flag, medals, awards, precious pictures, and cherished memories. In spite of incalculable loss, many bereaved often turn their grief into resolve, selflessly devoting themselves to service and outreach efforts in aid of those who have lost a family member in the Armed Forces. In communities nationwide, they support military members, families, and veterans and bring hope and healing to other shattered souls. Each act of kindness and compassion honors the memory of their beloved and is a testament to the uncommon resilience and grace of those from whom so much has been taken. As President, I will always ensure that our Gold Star spouses and families have the support they deserve to carry forward with strength and to preserve their loved ones&#8217; legacies. To that end, I was proud to recently establish the first-ever Military Spouse Commission, whose members &#8212; the spouses of our Nation&#8217;s highest-ranking military leaders and officials &#8212; bring more than 544 years of combined military family experience and a deep understanding of the sacrifices made on the home front. As part of this important work, they are finding solutions to the challenges facing military families, including strengthening deployment-readiness. Furthermore, the Commission members are standing with our Gold Star Mothers and Families, as well as working with the Department of War&#8217;s Gold Star Advisory Council. Under my leadership, our Nation will always support those who have stood beside our fallen warriors &#8212; patriots who kept their oath to our Republic to the very end &#8212; and together, we will keep faith with their families and forever honor their sacrifices. Today, the First Lady joins me in prayer, sympathy, and gratitude for every American whose loved one gave the last full measure of devotion. As Commander in Chief, I pledge to do everything in my power to love and support them and to valiantly safeguard the blessed freedom their spouses, children, and parents died to defend. The Congress, by Senate Joint Resolution 115 of June 23, 1936 (49 Stat. 1895 as amended), has designated the last Sunday in September as &#8220;Gold Star Mother&#8217;s Day.&#8221; NOW, THEREFORE, I, DONALD J. TRUMP, President of the United States of America, by virtue of the authority vested in me by the Constitution and the laws of the United States, do hereby proclaim Sunday, September 27, 2026, as Gold Star Mother&#8217;s and Family&#8217;s Day. I call upon all Government officials to display the flag of the United States over Government buildings, and I encourage the American people to display the flag and hold appropriate ceremonies as an expression of our Nation&#8217;s gratitude and respect. IN WITNESS WHEREOF, I have hereunto set my hand this twenty-fifth day of September, in the year of our Lord two thousand twenty-six, and of the Independence of the United States of America the two hundred and fifty-first. DONALD J. TRUMP Related Gold Star Mother&#8217;s and Family&#8217;s Day, 2025 Presidential Actions , Proclamations September 25, 2025 National Purple Heart Day, 2026 Presidential Actions , Proclamations August 6, 2026 First Lady Melania Trump Honors Military Mothers, the Soul of our Nation Briefings & Statements May 6, 2026 Mother&#8217;s Day, 2025 Presidential Actions , Proclamations May 9, 2025 National POW/MIA Recognition Day, 2025 Presidential Actions , Proclamations September 19, 2025 1 2 3 &hellip; 100 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Notifications"
+    "https://www.whitehouse.gov/presidential-actions/2026/09/gold-star-mothers-and-familys-day-2026/": "Gold Star Mother&#039;s And Family&#039;s Day, 2026 &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Trump TV Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Trump TV Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Trump TV Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions GOLD STAR MOTHER&#8217;S AND FAMILY&#8217;S DAY, 2026 Proclamations September 25, 2026 BY THE PRESIDENT OF THE UNITED STATES OF AMERICA A PROCLAMATION America is free, strong, secure, and prosperous due to the courage of the heroes in uniform who are willing to lay down their lives in the defense of our Republic. The supreme sacrifice paid by every fallen warrior is borne in perpetual sorrow and profound anguish by the loved ones left behind. On Gold Star Mother&#8217;s and Family&#8217;s Day, we pause to honor the surviving families of our valiant patriots and renew our sacred obligation to always support them. Gold Star Families endure the unfathomable &#8212; burying their Soldier, Sailor, Marine, Airman, Guardian, or Coast Guardsman who fell protecting our birthright of freedom. In an instant, their lives are forever changed; their future plans, hopes, and dreams are replaced by a folded flag, medals, awards, precious pictures, and cherished memories. In spite of incalculable loss, many bereaved often turn their grief into resolve, selflessly devoting themselves to service and outreach efforts in aid of those who have lost a family member in the Armed Forces. In communities nationwide, they support military members, families, and veterans and bring hope and healing to other shattered souls. Each act of kindness and compassion honors the memory of their beloved and is a testament to the uncommon resilience and grace of those from whom so much has been taken. As President, I will always ensure that our Gold Star spouses and families have the support they deserve to carry forward with strength and to preserve their loved ones&#8217; legacies. To that end, I was proud to recently establish the first-ever Military Spouse Commission, whose members &#8212; the spouses of our Nation&#8217;s highest-ranking military leaders and officials &#8212; bring more than 544 years of combined military family experience and a deep understanding of the sacrifices made on the home front. As part of this important work, they are finding solutions to the challenges facing military families, including strengthening deployment-readiness. Furthermore, the Commission members are standing with our Gold Star Mothers and Families, as well as working with the Department of War&#8217;s Gold Star Advisory Council. Under my leadership, our Nation will always support those who have stood beside our fallen warriors &#8212; patriots who kept their oath to our Republic to the very end &#8212; and together, we will keep faith with their families and forever honor their sacrifices. Today, the First Lady joins me in prayer, sympathy, and gratitude for every American whose loved one gave the last full measure of devotion. As Commander in Chief, I pledge to do everything in my power to love and support them and to valiantly safeguard the blessed freedom their spouses, children, and parents died to defend. The Congress, by Senate Joint Resolution 115 of June 23, 1936 (49 Stat. 1895 as amended), has designated the last Sunday in September as &#8220;Gold Star Mother&#8217;s Day.&#8221; NOW, THEREFORE, I, DONALD J. TRUMP, President of the United States of America, by virtue of the authority vested in me by the Constitution and the laws of the United States, do hereby proclaim Sunday, September 27, 2026, as Gold Star Mother&#8217;s and Family&#8217;s Day. I call upon all Government officials to display the flag of the United States over Government buildings, and I encourage the American people to display the flag and hold appropriate ceremonies as an expression of our Nation&#8217;s gratitude and respect. IN WITNESS WHEREOF, I have hereunto set my hand this twenty-fifth day of September, in the year of our Lord two thousand twenty-six, and of the Independence of the United States of America the two hundred and fifty-first. DONALD J. TRUMP Related Gold Star Mother&#8217;s and Family&#8217;s Day, 2025 Presidential Actions , Proclamations September 25, 2025 National Purple Heart Day, 2026 Presidential Actions , Proclamations August 6, 2026 First Lady Melania Trump Honors Military Mothers, the Soul of our Nation Briefings & Statements May 6, 2026 Mother&#8217;s Day, 2025 Presidential Actions , Proclamations May 9, 2025 National POW/MIA Recognition Day, 2025 Presidential Actions , Proclamations September 19, 2025 1 2 3 &hellip; 100 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Notifications",
+    "https://www.whitehouse.gov/presidential-actions/2026/09/enhancing-program-integrity-and-integrity-and-interagency-coordination-in-the-administration-of-the-h-1b-nonimmigrant-visa-program/": "Enhancing Program Integrity and Integrity and Interagency Coordination in the Administration of the H-1B Nonimmigrant Visa Program &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Trump TV Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Trump TV Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Trump TV Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions ENHANCING PROGRAM INTEGRITY AND INTERAGENCY COORDINATION IN THE ADMINISTRATION OF THE H-1B NONIMMIGRANT VISA PROGRAM Executive Orders September 18, 2026 By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose . The H-1B nonimmigrant visa program was created to identify uniquely skilled and highly specialized foreign temporary workers to strategically supplement the United States economy. Instead, the program has been widely abused by certain employers, third-party placement groups, and outsourcing firms to undercut and displace the supply of skilled United States labor. The large-scale, systematic abuse of the H-1B program to obtain non-qualifying foreign labor has undermined the additive purpose of the program and harmed the wages, working conditions, and job opportunities of skilled American workers. The abuse of cheaper H-1B labor places downward pressure on domestic pay. H-1B visa holders earn far less than comparable United States-born workers, despite the statutory mandate that H-1B workers be paid equally to their domestic peers, with the estimated wage gap starting at $9,000 and climbing as high as $20,000 in H-1B reliant industries. One company even warned its shareholders that restrictions on cheap H-1B labor could force the company to use &#8220;local&#8221; workers, which &#8220;may only be available at higher wages.&#8221; Many employers have laid off large numbers of highly skilled American workers, only to promptly hire large numbers of H-1B workers who are often lower-skilled and lower-paid. For instance, technology sector employers have collectively requested H-1B visas for hundreds of thousands of workers, yet have also laid off somewhere between 800,000 to 1.3 million American employees from 2022 through 2026. Employers have even forced laid off American workers to train their foreign replacements. Many jobs held by H-1B workers eventually leave the United States entirely. Employers with outsourcing business models use teams of H-1B visa holders to replace United States workers at third\u2011party client businesses and liaise with other individuals working off-site from their country of origin. As soon as practicable, much of their own work is transferred offshore. In Fiscal Year 2026, the top six users of the H-1B program operating with this outsourcing business model accounted for over 25,000 H-1B cap registrations. One foreign country&#8217;s foreign minister even publicly admitted that H-1B &#8220;has become the outsourcing visa.&#8221; The systematic and organized abuse of the H-1B program is also a national security threat. Domestic law enforcement agencies have investigated H-1B-reliant outsourcing firms for engaging in visa fraud, conspiracy to launder money, and other illicit activities to encourage foreign workers to come to the United States. Abuses of the H-1B program also present a national security threat by discouraging Americans from pursuing careers in science and technology, risking vital United States leadership in these fields. Numerous executive departments and agencies (agencies) have flagged employers&#8217; large\u2011scale, systematic abuse of the H-1B program to obtain lower\u2011paid, lower-skilled labor from abroad. These ongoing Government probes continue to identify widespread fraud and noncompliance among H-1B employers, such as: displacing American workers or otherwise giving preference to alien workers; misrepresenting the duties, requirements, or working conditions of job opportunities to avoid hiring or training American workers, falsely qualify jobs as specialty occupations, or lower applicable wage requirements; and misrepresenting aliens&#8217; qualifications to perform specialty occupations by submitting questionable foreign degrees from diploma mills as support for their H-1B visa applications. The pervasiveness of these violations and the persistence of the violators confirm that more needs to be done to preserve the H-1B program&#8217;s integrity. I have determined that continued efforts must be made to protect and prioritize the American workforce. It is therefore the policy of the United States that all relevant agencies shall implement appropriate measures to protect American workers from abuse of the H-1B program and ensure that the program serves the national interest. Sec . 2 . Interagency Coordination . When processing petitions, labor condition applications, and visas for the entry into the United States of aliens as nonimmigrants to perform services in a specialty occupation under section 101(a)(15)(H)(i)(b) of the Immigration and Nationality Act (INA) (8 U.S.C. 1101(a)), the Secretary of State, the Secretary of Labor, and the Secretary of Homeland Security shall coordinate and consult with the Secretary of Commerce, the Secretary of Education, and the Administrator of the Small Business Administration to ensure the compliance of such petitions, applications, and visas with statutory requirements, including those in sections 101(a)(15)(H)(i)(b), 212(n), 214(i), and 274B of the INA. The Secretary of Commerce, the Secretary of Education, and the Administrator of the Small Business Administration shall provide any relevant wage, employment, academic, industrial, or other economic information. Sec . 3 . Consideration of Applications, Petitions, and Visas . (a) Consistent with sections 101(a)(15)(H)(i)(b), 212(n), 214(i), 215(a), and 274B of the INA, the Secretary of State, the Secretary of Labor, and the Secretary of Homeland Security shall take into account in any labor condition application, petition, visa, and entry of aliens entering or attempting to enter the United States as H-1B nonimmigrants to perform services in a specialty occupation whether the employer sponsor directly or indirectly engaged in layoffs within the previous year or plans future layoffs that negatively affect the employment of similarly situated United States workers. (b) Within 30 days of the date of this order, the Secretary of Labor, through the Administrator of the Wage and Hour Division, shall begin reviewing data related to previously submitted labor condition applications to determine whether further action against sponsoring employers is warranted under section 212(n)(2)(G). (c) Pursuant to 3 U.S.C. 301, the authority granted to the President under section 215(a) of the INA is hereby delegated to the Secretary of State, the Secretary of Commerce, the Secretary of Labor, and the Secretary of Homeland Security to the extent necessary to implement this order, including the authority to issue or adopt rules, policies, operational guidance, or other guidance to carry out this order. Sec . 4 . General Provisions . (a) Nothing in this order shall be construed to impair or otherwise affect: (i) the authority granted by law to an executive department or agency, or the head thereof; or (ii) the functions of the Director of the Office of Management and Budget relating to budgetary, administrative, or legislative proposals. (b) This order shall be implemented consistent with applicable law and subject to the availability of appropriations. (c) This order is not intended to, and does not, create any right or benefit, substantive or procedural, enforceable at law or in equity by any party against the United States, its departments, agencies, or entities, its officers, employees, or agents, or any other person. (d) If any provision of this order, or the application of any provision to any person or circumstances, is held to be invalid, the remainder of this order and the application of any of its other provisions to any other persons or circumstances shall not be affected thereby. (e) The costs for publication of this order shall be borne by the Department of Homeland Security. DONALD J. TRUMP THE WHITE HOUSE, September 18, 2026. Related Fact Sheet: President Donald J. Trump Further Enhances Program Integrity and Interagency Coordination in the H-1B Visa Program Fact Sheets September 18, 2026 Restriction on Entry of Certain Nonimmigrant Workers Presidential Actions , Proclamations September 19, 2025 Restriction on Entry of Certain Nonimmigrant Workers Presidential Actions , Proclamations September 18, 2026 H-1B FAQ Releases September 21, 2025 Fact Sheet: President Donald J. Trump Suspends the Entry of Certain Alien Nonimmigrant Workers Fact Sheets September 19, 2025 1 2 3 &hellip; 62 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Your browser does not support the audio element. Click to listen 0:00 6:47 0.75\u00d7 1\u00d7 1.5\u00d7 2\u00d7 Notifications",
+    "https://www.whitehouse.gov/presidential-actions/2026/09/restoring-american-saltwater-angling-and-recreation/": "RESTORING AMERICAN SALTWATER ANGLING AND RECREATION &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Trump TV Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Trump TV Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Trump TV Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions RESTORING AMERICAN SALTWATER ANGLING AND RECREATION Executive Orders September 17, 2026 Executive Order 14430 By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose and Policy . (a) America&#8217;s outdoor recreation sector generates over $1.2 trillion annually and supports over 5 million jobs. To ensure America&#8217;s recreational fishing remains strong, Federal fisheries management must appropriately prioritize both recreational and commercial fishing. From saltwater anglers and offshore boaters to charter operators, the recreational fishing industry is a strong driver of our Nation&#8217;s outdoor economy. Aligning both with the Make America Beautiful Again (MABA) Commission, established under Executive Order 14313 of July 3, 2025 (Establishing the President&#8217;s Make America Beautiful Again Commission), and with Executive Order 14276 of April 17, 2025 (Restoring American Seafood Competitiveness), this order modernizes Federal management by shifting the Federal posture from restricting recreational access to fishing to actively empowering affiliated industries and coastal communities. (b) It is the policy of the United States to elevate the marine recreational fishing industry as an important consideration in all Federal ocean, coastal, and public land decision-making. Sec . 2 . Agency Implementation . (a) To effectuate the policy described in section 1 of this order, all relevant executive departments and agencies (agencies) shall partner with States and the private sector to vigorously rebuild, expand, permit, and modernize data collection. All such agencies shall eliminate unnecessary restrictions that harm our coastal economies, burden charter fishing businesses, and limit public access to our marine resources. Furthermore, it is the policy of my Administration to demand accurate cutting-edge data collection and empower State-Federal partnerships to produce the information needed for responsible management. (b) Within 180 days of the date of this order, pursuant to 16 U.S.C. 1851, the Secretary of Commerce (Secretary) shall review targeted National Standards Guidelines issued under the Magnuson-Stevens Fishery Conservation and Management Act (16 U.S.C. 1801 et seq. ) for consistency with the purpose of this order. Specifically, the Secretary shall, at a minimum, consider revising the guidelines for National Standard 1 (Optimum Yield) and National Standard 2 (Best Scientific Information Available), to ensure they appropriately account for the unique biological, economic, and social characteristics of the recreational fishery, and to facilitate the rapid integration of State-level data into Federal management decisions, where appropriate. Sec . 3 . Modernizing Data Collection Infrastructure for Recreational Catch-and-Effort Estimates . (a) To resolve chronic inaccuracies and latency in Federal recreational catch and effort estimates, the Federal Government must transition away from antiquated data collection and sampling practices. Accordingly, the Secretary, acting through the Administrator of the National Oceanic and Atmospheric Administration (NOAA), shall to the extent feasible and consistent with applicable law, take appropriate action, including through rulemaking pursuant to 16 U.S.C. 1851 and 1855(d), where necessary, to modernize Federal data collection infrastructure. (b) The Secretary, acting through the NOAA Administrator, shall evaluate the statistical reliability of traditional mail\u2011in survey systems for recreational catch-and-effort data collection and their adequacy for dynamic fishery management. The results of this analysis should be considered in determining whether, and to what extent, such mail-in survey systems shall be phased out. (c) The Secretary, acting through the NOAA Administrator, shall harness existing platforms and potential successor platforms and technologies to deploy standardized, user-friendly mobile applications for mandatory and voluntary electronic reporting by recreational anglers and for-hire operators. (d) To the extent feasible and consistent with applicable law, data collected via mobile applications described in subsection (c) of this section shall be securely aggregated into a modernized Federal data architecture. This data architecture will process real-time catch, effort, and observational data, serving as the primary analytical repository for fishery managers to inform stock assessments, establish seasonal quotas, and make rapid, data-driven regulatory decisions. Sec . 4 . Restoring Integrity to Fisheries Science and Data . (a) To further ensure that management decisions made during the modernization transition outlined in section 3 of this order are based on improved data collection practices, I have determined that certain additional measures are necessary. (b) Along the Gulf of America and the Atlantic Coast, recreational access has been improperly restricted by inaccuracies within NOAA&#8217;s Marine Recreational Information Program (MRIP) data. To ameliorate these data deficiencies, the Secretary, acting through the NOAA Administrator, shall, consistent with applicable law, including 16 U.S.C. 1801 et seq. , consider establishing a data-replacement threshold tethered to the Percent Standard Error (PSE) for MRIP data collected for any seasonal fishery. Where the PSE for MRIP data for a seasonal fishery meets or exceeds such specified data\u2011replacement threshold, and an affected State collects recreational catch-and-effort data with a lower error rate, NOAA shall then consider substituting the relevant State&#8217;s data in place of MRIP data for management decisions concerning such fishery. This approach will help ensure that, consistent with National Standard 2, conservation and management measures are based upon the best scientific information available. (c) To address the decline of iconic recreational fisheries, such as the Atlantic striped bass and other depleted stocks, the Secretary shall generate a list of key species to use in partnership with the recreational angling community, charter captains, and State agencies to gather real\u2011time data, deploy advanced tagging technologies, and improve catch\u2011and\u2011release mortality estimates. The Secretary shall develop and initiate at least two new pilot programs for recreational fisheries data collection or management approaches working with the angling community that test innovative solutions for achieving sustainable fisheries management that maximizes fishing access. (d) Within 180 days of the date of this order, the Secretary shall develop a comprehensive 5-year strategic plan with clear implementation milestones to improve the collection, analysis, and application of recreational fisheries economic data to support fisheries management. This plan shall ensure that the economic impact and value of recreational fishing, including for-hire fisheries and shoreside support industries, is fully accounted for in Federal fishery management decisions and harvest opportunities. Sec . 5 . Rescission of Regulations that Restrict Marine Infrastructure and Access . (a) Within 30 days of the date of this order, the Secretary of the Interior, the Secretary of Agriculture, the Secretary of Commerce, and the Assistant Secretary of the Army for Civil Works shall, consistent with applicable law, take steps to initiate action to suspend, revise, or rescind regulations that overly burden boaters, anglers, and outdoor businesses. (b) Accordingly, the Secretary shall, to the extent feasible and consistent with applicable law, make use of technological advancements for marine mammal avoidance. In so doing, the Secretary, acting through the NOAA Administrator and, where necessary, in consultation with the Commandant of the United States Coast Guard, shall facilitate coordination with the private sector to integrate key technologies. (c) To reduce administrative burdens, within 60 days of the date of this order, relevant agencies shall evaluate existing agency permitting authorities to effectuate a transition to multi-year permit terms (minimum of 3 years) that include, to the extent permitted by applicable law, a standard presumption of renewal. To implement this presumption of renewal without creating new information collection burdens, these agencies shall, to the extent feasible and consistent with applicable law, rely on interagency data sharing agreements and internal database verification rather than new applicant submissions. Agencies shall consider whether this presumption of renewal should apply exclusively to permittees in &#8220;good standing,&#8221; which may be defined as permittees about which agency records confirm: (i) are in full compliance with United States Coast Guard safety regulations; (ii) have incurred no major environmental or fisheries violations; and (iii) maintain a 100-percent compliance rate with the mandatory electronic catch-reporting requirements established in section 3 of this order. (d) To minimize duplicative applications across Federal agencies, relevant agencies shall, to the extent feasible and consistent with applicable law, establish the infrastructure necessary to develop a single, unified interagency Special Use Permit (SUP) application, with the aim of deploying a unified &#8220;One-Stop&#8221; joint permit portal within 1 year of the date of this order. Sec . 6 . Fast-Tracking Artificial Reefs and Habitat Creation . (a) Within 60 days of the date of this order, the Secretary of the Interior, acting through the Marine Minerals Administration, shall establish a Federal Outer Continental Shelf Reef-in-Place Program (Program) to facilitate the conversion of decommissioned offshore oil and gas and other-use structures, with the exception of infrastructure associated with offshore wind energy facilities, into permanent artificial reefs through reef-in-place, topple-in-place, or other approved reefing methods, where consistent with applicable law. (b) The Program shall be available to qualifying offshore structures and leaseholders that satisfy all applicable statutory, regulatory, environmental, navigational, and safety requirements. The Secretary of the Interior shall establish criteria and standards for the program that ensure protection of navigation and national security interests. (c) In establishing the Program, the Secretary of the Interior shall coordinate with the Secretary of Commerce, the Secretary of War, the Commandant of the United States Coast Guard, and the heads of other appropriate agencies to streamline interagency review and permitting to the maximum extent permitted by law, reduce unnecessary administrative delays, and promote timely decisions for qualifying reef projects. (d) Within 120 days of the date of this order, the Secretary, acting through the NOAA Administrator, in coordination with the Secretary of the Interior, shall review and, as appropriate and consistent with applicable law, revise policies and procedures governing SUPs and other applicable authorizations for the placement and management of artificial reefs within National Marine Sanctuaries and Marine National Monuments. Such revisions shall seek to establish transparent and efficient permitting pathways, identify areas suitable for artificial reef development and other national interest uses, and enhance fisheries, recreational fishing, diving, and other compatible public uses. Sec . 7 . Managing Predators . (a) To address the rising rates of shark and pinniped depredation, the Secretary shall establish an Interagency Shark and Pinniped Depredation Task Force. The Secretary of State, the Secretary of the Interior, and the Secretary of Commerce, along with the United States Trade Representative, shall actively address international and domestic barriers to sustainable shark fisheries to the extent permitted by applicable law. Such actions shall include assessing listings under the Convention on International Trade in Endangered Species, directing the United States Fish and Wildlife Service to expedite Non-Detriment Findings for global export, and reviewing all regional fisheries management organizations, conventions, treaties, and agreements to ensure that their measures and actions promote robust commercial and recreational harvests. (b) To reduce the economic and ecological impact of shark depredation on the recreational angling sector, the Secretary shall, to the extent permitted by law: (i) Pursuant to the Secretary&#8217;s grant-making authority, including under 15 U.S.C. 713c-3(c), give priority to partnerships involving charter boat captains and recreational angling organizations. (ii) Within 90 days of the date of this order, develop and implement, including through rulemaking as necessary, a standardized &#8220;Real-Time Depredation Reporting&#8221; protocol. Consistent with applicable law, the Secretary shall integrate this protocol into existing Federal and State-linked mobile data collection platforms to enable the rapid mapping of depredation events and support dynamic fishery management decisions. Sec . 8 . Projects for Increasing Fish Abundance . (a) The Secretary of the Interior and the Director of the United States Fish and Wildlife Service shall identify regulatory and administrative hurdles that delay the disbursement from the Sport Fish Restoration and Boating Trust Fund and shall, to the extent consistent with applicable law, remove such hurdles. (b) Within 60 days of the date of this order, the MABA Commission shall convene a Restoration Coordination Working Group to develop a shared framework to identify and reduce duplicative restoration efforts within the same watersheds, ensuring that Federal resources are used effectively across agencies. Agencies are encouraged to transition habitat restoration metrics toward production-based goals. Sec . 9 . General Provisions . (a) Nothing in this order shall be construed to impair or otherwise affect: (i) the authority granted by law to an executive department or agency; or (ii) the functions of the Director of the Office of Management and Budget relating to budgetary, administrative, or legislative proposals. (b) This order shall be implemented consistent with applicable law and subject to the availability of appropriations. (c) This order is not intended to, and does not, create any right or benefit, substantive or procedural, enforceable at law or in equity by any party against the United States, its departments, agencies, or entities, its officers, employees, or agents, or any other person. (d) The costs for publication of this order shall be borne by the Department of Commerce. DONALD J. TRUMP THE WHITE HOUSE, September 17, 2026. eo-14430 Download Related Fact Sheet: President Donald J. Trump Restores American Saltwater Angling and Recreation Fact Sheets September 17, 2026 Restoring American Seafood Competitiveness Presidential Actions , Executive Orders April 17, 2025 Restoring American Commercial Fishing in the Pacific Presidential Actions , Proclamations June 11, 2026 Unleashing American Commercial Fishing in the Pacific Presidential Actions , Proclamations April 17, 2025 Immediate Expansion of American Timber Production Presidential Actions March 1, 2025 1 2 3 &hellip; 102 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Your browser does not support the audio element. Click to listen 0:00 12:10 0.75\u00d7 1\u00d7 1.5\u00d7 2\u00d7 Notifications",
+    "https://www.whitehouse.gov/presidential-actions/2026/09/reinvigorating-americas-hunting-heritage/": "Reinvigorating America&#039;s Hunting Heritage &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Trump TV Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Trump TV Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Trump TV Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions REINVIGORATING AMERICA&#8217;S HUNTING HERITAGE Executive Orders September 17, 2026 Executive Order 14429 By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose and Policy . American hunters, anglers, and landowners are the greatest conservationists the world has ever known. Hunting promotes healthy and robust animal populations, conserves our beautiful wildlife for future generations, and ensures that every American can enjoy our rugged, diverse, and untamed frontier areas. Our forefathers looked with awe on our vast prairies, towering mountains, serene deserts, coastal paradises, and rushing rivers. That same awe motivates millions of Americans to invest billions of dollars and countless hours into stewarding our land and conserving our wildlife. Despite this legacy, accessing Federal lands for hunting has never been harder. Hunting opportunities in our Nation have declined due to the Federal Government&#8217;s regulatory overreach, confusing and inconsistent access policies, and heavy-handed restrictions on hunter education and recruitment efforts. Reform of these restrictions is long overdue. It is therefore the policy of my Administration to reinvigorate, protect, and expand America&#8217;s hunting heritage to benefit our people and our land. Under this order, American hunters, anglers, and landowners will reclaim our Nation&#8217;s wilderness. My Administration, keeping our promise to Make America Beautiful Again, will conserve and protect America&#8217;s natural resources by stewarding Federal lands and promoting cooperative federalism. We will apply a presumption of accessibility to federally managed lands, and the next generation of Americans shall once again have the opportunity to share in our Nation&#8217;s rich sporting heritage. Sec . 2 . Expanding Access to Federal Lands . (a) Within 90 days of the date of this order, the Secretary of the Interior is directed to allow for the hunting of species that are not subject to 16 U.S.C. 1533 within Castle Mountains National Monument, established by Proclamation 9394 of February 12, 2016 (Establishment of the Castle Mountains National Monument), and within Craters of the Moon National Monument and Preserve, established by Proclamation 1694 of May 2, 1924 (Craters of the Moon National Monument), and expanded by various Acts of the Congress and Proclamations, most recently Proclamation 7373 of November 9, 2000 (Boundary Enlargement of the Craters of the Moon National Monument). I have determined that appropriately managed hunting would not put the objects of historic and scientific interest that these monuments protect at risk. (b) Within 180 days of the date of this order, the Secretary of War, the Secretary of the Interior, the Secretary of Agriculture, and the Secretary of Commerce shall, consistent with applicable law, propose modifications to policies or regulations that prohibit or restrict access to lands under their respective jurisdictions, with the exception of national parks and national monuments other than as set forth in section 2(a) of this order, to: (i) expand Federal hunting, fishing, shooting, and other land access opportunities for recreation, including by generally allowing for hunting unless a specific closure is justified by local resource conditions, except within national parks; (ii) allow for the construction, repair, and maintenance of infrastructure that provides access to Federal land for the purposes of outdoor recreation and wildlife management; (iii) improve public access to difficult-to-access Federal lands and waters by prioritizing practical access opportunities, including voluntary access easements, land exchanges, cooperative agreements with States and local governments, and other tools that respect private property rights; (iv) encourage the use of qualified volunteers to manage wildlife populations and invasive species, consistent with 54 U.S.C. 104909; (v) authorize the use of assistive technology on access trails and hunting locations; and (vi) permit the use of traditional lead ammunition and tackle. (c) Within 60 days of the date of this order, the Secretary of Agriculture shall review high-demand Forest Service-administered river access lotteries, and shall initiate the reform of such lotteries to prioritize United States citizens, including prior unsuccessful applicants, and prohibit the use of automatic computer entries into the lotteries. (d) Within 90 days of the date of this order, the Department of the Interior shall propose regulations improving the administrative process for authorizing seasonal migratory game bird hunting. These improvements shall continue to engage the Flyway Councils as full partners and shall take special consideration of annual surveys, applicable guidance, and history. (e) Within 365 days of the date of this order, the Secretary of the Interior shall encourage State fish and wildlife agencies to promote and expand Sunday hunting opportunities on State and Federal lands. Sec . 3 . Growing a New Generation of Hunters . (a) Within 90 days of the date of this order, the Secretary of Labor and the Secretary of Education shall issue guidance to clarify the permissibility of Federal education funding for archery and hunter education programs in schools. (b) Within 180 days of the date of this order, the Secretary of the Interior shall, through the use of existing Federal funding and authorities, identify additional opportunities and incentives to assist States in cultivating the hunting tradition among American youth and veterans. (c) The Department of Veterans Affairs shall prioritize, to the extent permitted by law, grants to support outdoor hunting and fishing opportunities in its Adaptive Sports Grant Program. Sec . 4 . Promoting Robust Game Species Populations . The Secretary of War, the Secretary of the Interior, and the Secretary of Agriculture shall coordinate with State agencies to align management practices and conservation plans to promote the growth of game species populations through the: (a) voluntary removal or reduction of barriers to wildlife movement and habitat connectivity; (b) reduction of invasive species, habitat degradation, disease, and other factors contributing to population declines; (c) targeted management of predators, competing species, and other population-limiting factors; (d) use of prescribed fire, vegetation management, water development, grazing, agricultural practices, and appropriate habitat-management tools; and (e) voluntary agreements with private landowners and agricultural producers. Sec . 5 . Increasing Wild Game Donation . (a) The Secretary of Agriculture shall issue guidance supporting State-based wild game venison donation programs, including through the Emergency Food Assistance Program. (b) The Secretary of the Interior shall encourage State wildlife agencies to use Pittman-Robertson funds to manage hyperabundant populations of wildlife, especially whitetail deer, including through activities that facilitate the donation and processing of wild game meat for consumption in schools and food banks. Sec . 6 . General Provisions . (a) Nothing in this order shall be construed to impair or otherwise affect: (i) the authority granted by law to an executive department or agency, or the head thereof; or (ii) the functions of the Director of the Office of Management and Budget relating to budgetary, administrative, or legislative proposals. (b) This order shall be implemented consistent with applicable law, including Executive Order 13443, and subject to the availability of appropriations. (c) This order is not intended to, and does not, create any right or benefit, substantive or procedural, enforceable at law or in equity by any party against the United States, its departments, agencies, instrumentalities, or entities, its officers, employees, or agents, or any other person. (d) The costs for publication of this order shall be borne by the Department of the Interior. DONALD J. TRUMP THE WHITE HOUSE, September 17, 2026. eo-14429 Download Related Fact Sheet: President Donald J. Trump Reinvigorates America\u2019s Hunting Heritage Fact Sheets September 17, 2026 WHAT THEY ARE SAYING: President Trump Delivers Historic Victories for America\u2019s Hunters, Anglers, and Outdoorsmen Releases September 18, 2026 Establishing the President&#8217;s Make America Beautiful Again Commission Presidential Actions , Executive Orders July 3, 2025 Presidential Message on National Hunting and Fishing Day Briefings & Statements September 26, 2026 Reinvigorating America&#8217;s Beautiful Clean Coal Industry and Amending Executive Order 14241 Presidential Actions , Executive Orders April 8, 2025 1 2 3 &hellip; 87 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Your browser does not support the audio element. Click to listen 0:00 6:48 0.75\u00d7 1\u00d7 1.5\u00d7 2\u00d7 Notifications",
+    "https://www.whitehouse.gov/presidential-actions/2026/09/withdrawals-sent-to-the-senate/": "Withdrawals Sent to the Senate &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Trump TV Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Trump TV Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Trump TV Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions Withdrawals Sent to the Senate Nominations & Appointments September 17, 2026 WITHDRAWALS SENT TO THE SENATE: Jeffrey Anderson, of Georgia, to be Representative of the United States of America on the Council of the International Civil Aviation Organization, with the rank of Ambassador, which was sent to the Senate on January 13, 2026. John Grunewald II, of Oklahoma, to be a Member of the Farm Credit Administration Board, Farm Credit Administration, for a term expiring October 13, 2030. Richard Schroyer, of Oklahoma, to be an Assistant Secretary of Homeland Security. Heidi Semann, of Missouri, to be Inspector General, Department of Education. Robert Stebbins, of New York, to be Deputy Chief Executive Officer of the United States International Development Finance Corporation. Related Nominations and Withdrawal Sent to the Senate Presidential Actions , Nominations & Appointments May 11, 2026 Nominations Sent to the Senate Presidential Actions , Nominations & Appointments September 10, 2025 Nominations and Withdrawal Sent to the Senate Presidential Actions , Nominations & Appointments June 1, 2026 Nominations and Withdrawals Sent to the Senate Presidential Actions , Nominations & Appointments September 30, 2025 Nominations and Withdrawals Sent to the Senate Presidential Actions , Nominations & Appointments April 27, 2026 1 2 3 &hellip; 8 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Your browser does not support the audio element. Click to listen 0:00 0:37 0.75\u00d7 1\u00d7 1.5\u00d7 2\u00d7 Notifications",
+    "https://www.whitehouse.gov/presidential-actions/2026/09/restoring-reciprocity-in-government-procurement/": "Restoring Reciprocity in Government Procurement &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Trump TV Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Trump TV Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Trump TV Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions RESTORING RECIPROCITY IN GOVERNMENT PROCUREMENT Presidential Memoranda September 16, 2026 MEMORANDUM FOR THE SECRETARY OF WAR THE UNITED STATES TRADE REPRESENTATIVE THE DIRECTOR OF THE OFFICE OF MANAGEMENT AND BUDGET THE ADMINISTRATOR FOR FEDERAL PROCUREMENT POLICY THE ADMINISTRATOR OF GENERAL SERVICES THE ADMINISTRATOR OF THE NATIONAL AERONAUTICS AND SPACE ADMINISTRATION By the authority vested in me as President by the Constitution and the laws of the United States of America, I hereby direct the following: Restoring Reciprocity in Government Procurement By the authority vested in me as President by the Constitution and the laws of the United States of America, I hereby direct: Section 1 . Purpose and Policy . Canada has unreasonably imposed new barriers to United States companies seeking to access the Canadian government procurement market by, among other things, establishing preferences for Canadian products and Canadian content under its &#8220;Buy Canadian&#8221; policy. Canadian provinces have also limited the access of United States companies to their government procurement markets. Meanwhile, Canadian companies continue to have preferential access to the United States Government procurement system. This includes access to all procurement the United States has agreed to cover at the Federal level under the World Trade Organization Agreement on Government Procurement, which amounts to over $280 billion annually. My Administration will always act to combat such unreasonable or discriminatory practices. Sec . 2 . Removing Canadian Origin Items From the Federal Procurement System . (a) The Director of the Office of Management and Budget (Director) and the United States Trade Representative (Trade Representative), in coordination with the members of the Federal Acquisition Regulatory Council, and in consultation with any other senior executive branch official the Director and the Trade Representative deem appropriate, shall, to the extent appropriate and consistent with law, identify and take all steps permitted by applicable law with respect to Canadian origin items in the Federal civil procurement system that can, where warranted, be removed or made non-available for purchase. Further, the Director, in consultation with any senior executive branch officials he deems appropriate, shall take appropriate steps to notify relevant executive departments and agencies (agencies), as determined by the Director, of domestic alternatives to Canadian origin items, to the extent permitted by law. (b) The Director shall, from time to time, update me on the progress of actions taken to implement this memorandum. (c) The Trade Representative shall continue to monitor Canada&#8217;s treatment of United States origin items in the Canadian federal and provincial government procurement markets and shall inform me of any circumstances that, in the Trade Representative&#8217;s opinion, might indicate the need for further action. The Trade Representative shall also inform me of any circumstances that, in the Trade Representative&#8217;s opinion, might warrant restoring a Canadian origin item&#8217;s availability for Federal civil procurement, such as a change in policy by the Canadian government that would end the current treatment toward United States origin items. (d) The head of each agency is authorized to and shall take all appropriate measures within the agency&#8217;s authority to implement this memorandum. The head of each agency may, consistent with applicable law, including section 301 of title 3, United States Code, redelegate the authority to take such appropriate measures within the agency. Sec . 3 . General Provisions . (a) Nothing in this memorandum shall be construed to impair or otherwise affect: (i) the authority granted by law to an executive department or agency, or the head thereof; or (ii) the functions of the Director of the Office of Management and Budget relating to budgetary, administrative, or legislative proposals. (b) This memorandum shall be implemented consistent with applicable law and subject to the availability of appropriations. (c) This memorandum is not intended to, and does not, create any right or benefit, substantive or procedural, enforceable at law or in equity by any party against the United States, its departments, agencies, or entities, its officers, employees, or agents, or any other person. (d) The costs for publication of this memorandum shall be borne by the Office of Management and Budget. DONALD J. TRUMP Related Fact Sheet: President Donald J. Trump Restores Reciprocity in Government Procurement Fact Sheets September 16, 2026 Restoring Common Sense to Federal Procurement Presidential Actions , Executive Orders April 15, 2025 Reciprocal Trade and Tariffs Releases February 13, 2025 Eliminating Waste and Saving Taxpayer Dollars by Consolidating Procurement Presidential Actions , Executive Orders March 20, 2025 Ensuring Truthful Advertising of Products Claiming to be Made in America Presidential Actions , Executive Orders March 13, 2026 1 2 3 &hellip; 156 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Your browser does not support the audio element. Click to listen 0:00 3:39 0.75\u00d7 1\u00d7 1.5\u00d7 2\u00d7 Notifications",
+    "https://www.whitehouse.gov/presidential-actions/2026/09/providing-meaningful-water-quality-improvements-through-collaboration-and-oversight-of-federal-support/": "Providing Meaningful Water Quality Improvements Through Collaboration and Oversight of Federal Support &#8211; The White House Skip to content Menu Search Search for: Scroll Left News Gallery Livestream Election Integrity SAVE America Trump Accounts Trump TV Contact News Contact Election Integrity SAVE America Trump Accounts Gallery Trump TV Livestream Investments Scroll Right Close News Featured Releases Aliens Lab Leak: The True Origins of Covid-19 January 6: A Date Which Will Live in Infamy Arrested: Worst of the Worst This Is Our Why Criminal Aliens Receiving Medicaid The JFK Files The RFK Files Briefings & Statements Fact Sheets Presidential Actions Executive Orders Nominations & Appointments Presidential Memoranda Proclamations Remarks Research Administration President Donald J. Trump First Lady Melania Trump Vice President JD Vance Second Lady Usha Vance The Cabinet Executive Office of The President Office of Management and Budget Office of Science and Technology Policy Council of Economic Advisors Office of the National Cyber Director Office of National Drug Control Policy Council on Environmental Quality Media Trump TV Photo Gallery Video Library Livestream White House Wire Media Offenders Arcade Priorities Top Priorities Lead the World in AI Grow the Economy Strengthen National Security Reform Government (DOGE) Make America Healthy Again Secure the Border Unleash American Energy Support Public Safety Protect Religious Liberty Key Initiatives Election Integrity The SAVE America Act Working Families Tax Cuts Ratepayer Protection Pledge Fraud Task Force Science: A New Golden Age School Choice Freedom 250 AI.Gov Crypto FIFA Agriculture Restoring Maritime Dominance Fostering the Future Summer Reading Challenge Make America Healthy Again The MAHA Report The Great Healthcare Plan TrumpRx Eat Real Food Presidential Physical Fitness Test Council on Sports, Fitness, and Nutrition Investments Major Investments in America Trump Accounts for Children Trump IRA The Trump Gold Card Pledge to America\u2019s Youth Wins and Achievements About The White House A Timeline History of the United States Our Government America&#8217;s Founding Freedom 250 The Founders Museum America&#8217;s Founding Fathers The Story of America: Video Series Road to Liberty: Video Series Signers of the Declaration of Independence Presidential Walk of Fame Holidays at The White House Christmas at The White House The White House Easter Egg Roll Get Involved Contact The White House Presidential Greetings Visit The White House Download the White House App Apply for an Internship Find Your Representative SAVE America Stay Informed Email Updates Text WIN to 45470 for Alerts Download the White House App Follow on Social Media Featured Featured Official White House App 365 Days of Wins About President Trump About Vice President Vance 365 Days of Wins Official White House App The Great Healthcare Plan INVESTMENT ANNOUNCEMENTS White House Wire First Year in Office America&#039;s Founding East Wing Expansion View Full Video Contact The White House X Instagram TikTok Share Icon Share Icon Facebook YouTube Presidential Actions PROVIDING MEANINGFUL WATER QUALITY IMPROVEMENTS THROUGH COLLABORATION AND OVERSIGHT OF FEDERAL SUPPORT Executive Orders September 16, 2026 Executive Order 14428 By the authority vested in me as President by the Constitution and the laws of the United States of America, and in furtherance of the purposes of the Clean Water Act of 1972, as amended (33 U.S.C. 1251 et seq .), it is hereby ordered: Section 1 . Purpose and Policy . The Chesapeake Bay is the largest estuary in the United States and serves a critically important economic purpose to the communities it directly and indirectly touches. In managing the Chesapeake Bay, as with other resources, governmental actors should prioritize environmental protection and economic objectives. Executive Order 13508 of May 12, 2009 (Chesapeake Bay Protection and Restoration), which has been in effect for 17 years, instituted a broad mandate for States and municipalities to contribute to improving the environmental health of the Chesapeake Bay, without providing clarity on how to implement that order&#8217;s requirements. In some instances, this lack of clarity has led to harmful economic impacts on affected Americans. For example, many localities have implemented stormwater management fees, commonly referred to as &#8220;rain taxes,&#8221; that impose hundreds of dollars in annual financial burdens on residents and small businesses in the name of implementing Executive Order 13508, though nothing in that order required or explicitly justified such measures, with little to no measurable benefits to Chesapeake Bay or to those residents. States use these rain taxes to pay for their stormwater infrastructure, whether or not it contributes to the environmental health of the Chesapeake Bay. Since Executive Order 13508 was signed, a number of other Federal, State, and local government initiatives and programs have resulted in significant improvements in water quality in the Chesapeake Bay. As of 2025, the jurisdictions of the Chesapeake Bay watershed &#8212; New York, Pennsylvania, Maryland, Virginia, the District of Columbia, Delaware, and West Virginia &#8212; have collectively met 100 percent of their goal for sediment reduction, 90 percent of their goal for phosphorus reduction, and 57 percent of their goal for nitrogen reduction. These pollution reductions are improving Chesapeake Bay health and have resulted in thousands of acres of restored reefs and remain consistent with commitments made in the 2025 revised Chesapeake Bay Watershed Agreement, to which the Federal Government and the executive departments and agencies (agencies) mentioned in section 3 of this order are signatories. In 2026, scientists from the College of William & Mary, the Virginia Institute of Marine Science, FlowWest, and the University of Maryland Center for Environmental Science reported that the Chesapeake Bay&#8217;s annual dead zone is projected to be among the smallest since 1985, about 31 percent below the long-term average. Given this significant progress, and the need to provide clarity on how to continue improving the environmental health of the Chesapeake Bay, it is appropriate to revoke Executive Order 13508, which relevant jurisdictions have erroneously relied on to impose rain taxes, and to implement new actions and best practices that promote the economic health and wellbeing of the communities the Chesapeake Bay serves. Sec . 2 . Revocation of Order . Executive Order 13508 is hereby revoked. Sec . 3 . Prioritization of Programs Directly Benefiting and Protecting Bay Health . (a) The Secretary of War, the Secretary of the Interior, the Secretary of Agriculture, the Secretary of Commerce, the Secretary of Homeland Security, and the Administrator of the Environmental Protection Agency shall assess the current support that their respective agencies provide for the health of the Chesapeake Bay and focus any resources &#8212; fiscal or personnel &#8212; on more direct, on-the-ground projects, in areas of highest need, that would result in the most impactful water quality improvements. All agencies that provide funding to support the health of the Chesapeake Bay shall prioritize funding in a manner that addresses water quality goals directly, redirecting funding away from activities that do not generate measurable progress towards stated goals, to implementation of projects that will directly reduce nutrient and sediment run-off into the Chesapeake Bay and its tributaries. (b) The Environmental Protection Agency shall coordinate with the States of Maryland, Virginia, Pennsylvania, Delaware, New York, and West Virginia, and the District of Columbia, to: (i) assess the additional financial burdens placed on residents of these jurisdictions through the imposition of stormwater management fees; (ii) explore initiatives and opportunities to effectuate this order and promote the environmental health of the Chesapeake Bay that do not increase costs on individual residents of these jurisdictions; and (iii) take measures to encourage the repeal or rescission of stormwater management fees imposed by States or localities and funded by their respective residents. (c) Actions taken pursuant to this section shall prioritize strategies that are grounded in objective metrics and proven water management practices, supported by empirical data and scientific analysis, and measurable in impact. Strategies shall use and rigorously document performance indicators and outcomes, such as reductions in sediment, phosphorus, and nitrogen loads, and improvements in water quality. Sec . 4 . General Provisions . (a) Nothing in this order shall be construed to impair or otherwise affect: (i) the authority granted by law to an executive department or agency, or the head thereof; or (ii) the functions of the Director of the Office of Management and Budget relating to budgetary, administrative, or legislative proposals. (b) This order shall be implemented consistent with applicable law and subject to the availability of appropriations. (c) This order is not intended to, and does not, create any right or benefit, substantive or procedural, enforceable at law or in equity by any party against the United States, its departments, agencies, or entities, its officers, employees, or agents, or any other person. (d) The costs of publication of this order shall be borne by the Environmental Protection Agency. DONALD J. TRUMP THE WHITE HOUSE, September 16, 2026. eo-14428 Download Related Fact Sheet: President Donald J. Trump Provides Meaningful Water Quality Improvements Through Collaboration and Oversight of Federal Support Fact Sheets September 16, 2026 Emergency Measures to Provide Water Resources in California and Improve Disaster Response in Certain Areas Presidential Actions January 24, 2025 Improving Oversight of Federal Grantmaking Presidential Actions , Executive Orders August 7, 2025 Putting People Over Fish: Stopping Radical Environmentalism to Provide Water to Southern California Presidential Actions January 20, 2025 Improving Our Nation Through Better Design Presidential Actions , Executive Orders August 21, 2025 1 2 3 &hellip; 54 Next Page About Administration Contact Internships Stay Informed Privacy Policy Media News Gallery Video Library Media Offenders White House Wire Initiatives Freedom 250 Investments Working Families Tax Cuts AI.Gov DOGE Subscribe to the WH Newsletter Please leave blank. Click here or text 45470 to receive updates Download The White House App: Available On The App Store Get It On Google Play Get Updates Straight to Your Desktop Available On Download Browser Extension Enable Desktop Notifications X Instagram TikTok Share Icon Share Icon Facebook YouTube Your browser does not support the audio element. Click to listen 0:00 5:20 0.75\u00d7 1\u00d7 1.5\u00d7 2\u00d7 Notifications"
   },
   "_parser_version": "28",
   "IA~2": {
@@ -1421,7 +1458,7 @@
     "state_order": null,
     "order_first_seen": null,
     "order_sig": null,
-    "last_parsed": "2026-09-28T19:16:34+00:00",
-    "last_checked": "2026-09-28T19:16:34+00:00"
+    "last_parsed": "2026-09-28T19:31:35+00:00",
+    "last_checked": "2026-09-28T19:31:35+00:00"
   }
 }
