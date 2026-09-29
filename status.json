@@ -953,9 +953,25 @@
       "error": null,
       "last_expired_order": {
         "title": "Governor Walz Orders Flags Flown at Half-Staff for Fallen Firefighters",
-        "url": "https://mn.gov/governor/newsroom/flag-status/index.jsp?id=1055-769668",
-        "why": "window 2026-09-27..2026-09-27"
+        "url": "https://mn.gov/governor/resources/flags-half-staff/index.jsp?id=1055-769668",
+        "status": "half",
+        "authority": "governor",
+        "start_date": null,
+        "end_date": null,
+        "until_noon": false,
+        "status_evidence": "at Half-Staff",
+        "authority_evidence": "Governor Walz Orders",
+        "usable_as_state_order": true,
+        "scope": "unknown",
+        "scope_evidence": "no scope stated in: Governor Walz Orders Flags Flown at Half-Staff for Fallen Firefighters",
+        "date": "2026-09-28",
+        "coverage_reason": "order dated 2026-09-28 (1d ago), no stated end - treated as live"
       },
+      "source_url": "https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp",
+      "checked_at": "2026-09-29T19:31:39+00:00",
+      "last_changed_at": "2026-09-15T18:20:55+00:00",
+      "content_changed": true,
+      "error": "order found and current, but it does not say whether it is statewide (no scope stated in: Governor Walz Orders Flags Flown at Half-Staff for Fallen Firefighters)",
       "items_parsed": 10,
       "flag_items": 10,
       "dated_items": 10,
@@ -965,8 +981,8 @@
         {
           "kind": "press feed",
           "url": "https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp",
-          "status": "full",
-          "evidence": null
+          "status": "unknown",
+          "evidence": "Governor Walz Orders Flags Flown at Half-Staff for Fallen Firefighters"
         },
         {
           "kind": "status page",
@@ -975,13 +991,13 @@
           "evidence": "no explicit status declaration in page text"
         }
       ],
-      "confidence_basis": "single-source",
-      "effective_status": "full",
+      "confidence_basis": "no source answered",
+      "effective_status": "unknown",
       "reason": null,
       "reason_source": null,
       "scope": null,
       "changed": false,
-      "authority": null
+      "authority": "governor"
     },
     "MO": {
       "state": "Missouri",
@@ -2066,11 +2082,11 @@
   },
   "meta": {
     "covered": 46,
-    "answered": 44,
+    "answered": 43,
     "not_covered": 5,
     "stale": 0,
     "frozen": 0,
-    "errors": 7,
+    "errors": 8,
     "total": 51
   }
 }

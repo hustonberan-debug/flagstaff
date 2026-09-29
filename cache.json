@@ -758,6 +758,9 @@
         "scope_evidence": "at all state buildings"
       }
     },
+    "last_parsed": "2026-09-29T19:31:39+00:00",
+    "last_checked": "2026-09-29T19:31:39+00:00",
+    "articles": {},
     "consecutive_errors": 0,
     "source": "feed|https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp|fetch"
   },
