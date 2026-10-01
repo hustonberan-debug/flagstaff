@@ -20,11 +20,22 @@
  *   icons, manifest -> cache first. They genuinely never change, and when they
  *            do the filename changes with them.
  *
+ *   analytics -> NOT TOUCHED AT ALL. Cloudflare versions the beacon behind a
+ *            fixed URL, so the cache-first branch below would pin whatever
+ *            copy a visitor happened to fetch first and keep serving it for
+ *            ever - the same bug that froze index.html, with no version
+ *            string to bump. It is also the reason a blocked beacon cannot
+ *            break anything: we return without respondWith, so the request
+ *            is the browser's business and there is no code path of ours
+ *            left to fail. Google Fonts deliberately stay cache-first: they
+ *            are content-addressed and are what makes an offline visit still
+ *            look like the site.
+ *
  * Bump VERSION on any release that changes cached assets or this file's
  * caching rules. HTML does not need a bump: it is network-first.
  */
 
-const VERSION = 'flagstaff-v7';
+const VERSION = 'flagstaff-v8';
 const SHELL = ['./index.html', './manifest.json'];
 
 self.addEventListener('install', (e) => {
@@ -47,6 +58,14 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+// Cloudflare Web Analytics: static.cloudflareinsights.com serves the beacon,
+// cloudflareinsights.com receives the page view. Matching the registrable
+// domain covers both, and any subdomain Cloudflare moves it to later.
+function isAnalytics(url) {
+  return url.hostname === 'cloudflareinsights.com'
+      || url.hostname.endsWith('.cloudflareinsights.com');
+}
+
 function networkFirst(request) {
   return fetch(request)
     .then((resp) => {
@@ -65,6 +84,10 @@ self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+
+  // Analytics: hand it straight back to the browser. Not cached, not
+  // intercepted, not retried, not reported. See the note at the top.
+  if (isAnalytics(url)) return;
 
   // Any page navigation, plus the HTML itself.
   const isPage = req.mode === 'navigate'

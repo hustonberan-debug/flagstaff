@@ -1308,5 +1308,41 @@ fetch('status.json',{cache:'no-store'})
     }
   });
 </script>
+
+<!-- Cloudflare Web Analytics ------------------------------------------------
+     Cookieless and with no cross-site tracking, so there is nothing here to
+     ask consent for and no banner to add.
+
+     Cloudflare's own current snippet, verbatim, with onerror added. type is
+     "module" because that is the form they publish - and a module script is
+     deferred by definition, so it still cannot block parsing or rendering.
+     It also means the fetch is made in CORS mode rather than no-cors; that
+     works because static.cloudflareinsights.com answers with
+     Access-Control-Allow-Origin: *, which is worth knowing if it ever
+     silently stops loading.
+
+     It is LAST and nothing on this page reads anything it defines. That is
+     deliberate: an ad blocker, a privacy extension, a DNS filter or a
+     Cloudflare outage all end the same way - the script never loads, the
+     onerror below runs instead of nothing, and the page is untouched. A flag
+     answer must not depend on an analytics vendor being reachable. Both
+     paths are covered by the browser test in test-canary.py.
+
+     sw.js leaves cloudflareinsights.com alone entirely rather than serving it
+     cache-first, which would have pinned one copy of the beacon for ever.
+
+     The token identifies the site, not the visitor, and is public by design -
+     it is readable in the HTML of every site using this product.
+
+     There is no CSP on this page. If one is ever added it needs
+     https://static.cloudflareinsights.com/beacon.min.js in script-src and
+     cloudflareinsights.com in connect-src, or the page view goes nowhere.
+------------------------------------------------------------------------- -->
+<script
+	type="module"
+	src="https://static.cloudflareinsights.com/beacon.min.js"
+	data-cf-beacon='{"token": "61a176fb9f024a6b828f07f2b004fa05"}'
+	onerror="window.__cfBeaconBlocked = true"
+></script>
 </body>
 </html>
