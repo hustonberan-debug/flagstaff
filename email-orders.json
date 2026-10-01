@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T18:16:23+00:00",
+  "generated_at": "2026-10-01T18:30:58+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -67,7 +67,7 @@
       ]
     },
     "flagsexpress.com": {
-      "count": 8,
+      "count": 9,
       "subjects": [
         "American Flag Half-Staff Alerts",
         "New Jersey - Half-Staff Alert - Barry Tallman Parker",
@@ -76,7 +76,8 @@
         "Minnesota - Half-Staff Alert - Minnesota Fallen Firefighters Memorial ",
         "Maryland - Half-Staff Alert - Chief George Bacorn",
         "Iowa - Half-Staff Alert - Hannah Jorgensen & Ahmed Osman",
-        "America\u2019s capital\u2014for just one day"
+        "America\u2019s capital\u2014for just one day",
+        "Hawai'i - Half-Staff Alert - Patricia Saiki"
       ],
       "senders": [
         "mikeb@flagsexpress.com",
