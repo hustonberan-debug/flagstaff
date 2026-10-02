@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T17:30:58+00:00",
+  "generated_at": "2026-10-02T17:46:01+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -67,7 +67,7 @@
       ]
     },
     "flagsexpress.com": {
-      "count": 13,
+      "count": 14,
       "subjects": [
         "American Flag Half-Staff Alerts",
         "New Jersey - Half-Staff Alert - Barry Tallman Parker",
@@ -81,7 +81,8 @@
         "Connecticut - Half-Staff Alert - Elvin Hernandez",
         "Maryland - Half-Staff Alert - Ronald Shane Hinson",
         "North Carolina - Half-Staff Alert - Dottie Martin",
-        "Kentucky - Half-Staff Alert - Hayden W. Phillips"
+        "Kentucky - Half-Staff Alert - Hayden W. Phillips",
+        "Update - Maryland - Half-Staff Alert - Chief George Bacorn"
       ],
       "senders": [
         "mikeb@flagsexpress.com",
