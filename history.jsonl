@@ -1557,3 +1557,4 @@
 {"at": "2026-09-29T00:01:36+00:00", "state": "IA", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
 {"at": "2026-10-02T00:01:24+00:00", "state": "CT", "status": "half", "reason": "State order", "reason_source": "state", "start_date": null, "end_date": null}
 {"at": "2026-10-03T00:01:35+00:00", "state": "CT", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
+{"at": "2026-10-04T00:01:14+00:00", "state": "KY", "status": "half", "reason": "Gov. Beshear Orders Flags to Half-Staff Sunday in Honor of Kentucky State Trooper", "reason_source": "state", "start_date": "2026-10-04", "end_date": "2026-10-04"}
