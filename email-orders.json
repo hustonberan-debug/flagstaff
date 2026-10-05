@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T19:51:22+00:00",
+  "generated_at": "2026-10-05T21:01:40+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -21,11 +21,11 @@
       "identified_by": "sender domain subscriptions.kentucky.gov, dkim=pass subscriptions.kentucky.gov",
       "status": "half",
       "authority": "governor",
-      "subject": "Gov. Beshear Orders Flags to Half-Staff Sunday in Honor of Kentucky State Trooper",
+      "subject": "Gov. Beshear Orders Flags to Half-Staff Tuesday in Honor of Kentucky Airman Who Died in World War II",
       "from": "Governor's Communications Office <governor@subscriptions.kentucky.gov>",
-      "sent_date": "2026-09-29",
-      "start_date": "2026-10-04",
-      "end_date": "2026-10-04",
+      "sent_date": "2026-10-05",
+      "start_date": "2026-10-06",
+      "end_date": "2026-10-06",
       "until_noon": false,
       "evidence": "to Half-Staff",
       "scope": "statewide",
@@ -34,7 +34,7 @@
   },
   "channels_seen": {
     "MI": "2026-09-10",
-    "KY": "2026-09-29",
+    "KY": "2026-10-05",
     "MO": "2026-09-10",
     "WY": "2026-09-10",
     "KS": "2026-09-10",
@@ -45,7 +45,7 @@
     "WY": "2026-09-25",
     "MI": "2026-09-10",
     "KS": "2026-09-10",
-    "KY": "2026-09-29",
+    "KY": "2026-10-05",
     "AZ": "2026-09-10",
     "WI": "2026-09-15",
     "MO": "2026-09-10",
