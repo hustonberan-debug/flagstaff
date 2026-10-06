@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T19:39:35+00:00",
+  "generated_at": "2026-10-06T19:45:53+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -67,7 +67,7 @@
       ]
     },
     "flagsexpress.com": {
-      "count": 16,
+      "count": 17,
       "subjects": [
         "American Flag Half-Staff Alerts",
         "New Jersey - Half-Staff Alert - Barry Tallman Parker",
@@ -84,7 +84,8 @@
         "Kentucky - Half-Staff Alert - Hayden W. Phillips",
         "Update - Maryland - Half-Staff Alert - Chief George Bacorn",
         "Maryland - Half-Staff Alert - Carolyn J.B. Howard",
-        "A Threat. A Mountain. A Turning Point."
+        "A Threat. A Mountain. A Turning Point.",
+        "Texas - Half-Staff Alert - Solidarity with the State of Israel"
       ],
       "senders": [
         "mikeb@flagsexpress.com",
