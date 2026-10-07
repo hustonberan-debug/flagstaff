@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T18:30:59+00:00",
+  "generated_at": "2026-10-07T18:46:02+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -67,7 +67,7 @@
       ]
     },
     "flagsexpress.com": {
-      "count": 19,
+      "count": 20,
       "subjects": [
         "American Flag Half-Staff Alerts",
         "New Jersey - Half-Staff Alert - Barry Tallman Parker",
@@ -87,7 +87,8 @@
         "A Threat. A Mountain. A Turning Point.",
         "Texas - Half-Staff Alert - Solidarity with the State of Israel",
         "Alabama - Half -Staff Alert - Bobby Mac Junkins",
-        "New York - Half-Staff Alert - Victims of the Hamas attack"
+        "New York - Half-Staff Alert - Victims of the Hamas attack",
+        "Delaware - Half-Staff Alert - Patricia \u201cPatti\u201d Blevins"
       ],
       "senders": [
         "mikeb@flagsexpress.com",
