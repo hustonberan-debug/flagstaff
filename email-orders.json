@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T23:45:57+00:00",
+  "generated_at": "2026-10-08T00:01:19+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -55,21 +55,17 @@
   },
   "unattributed_senders": {
     "service.govdelivery.com": {
-      "count": 3,
+      "count": 1,
       "subjects": [
-        "Subscription Change Confirmation",
-        "Welcome New User",
         "NEW Flag-Lowering Order - Executive Order #290 Gov. Evers Orders Flags"
       ],
       "senders": [
-        "govnebraska@service.govdelivery.com",
         "dma_wi@service.govdelivery.com"
       ]
     },
     "flagsexpress.com": {
-      "count": 20,
+      "count": 19,
       "subjects": [
-        "American Flag Half-Staff Alerts",
         "New Jersey - Half-Staff Alert - Barry Tallman Parker",
         "Wisconsin - Half-Staff Alert - Final Alarm Ceremony",
         "Florida - Half-Staff Alert - Alice M. Baker",
@@ -91,7 +87,6 @@
         "Delaware - Half-Staff Alert - Patricia \u201cPatti\u201d Blevins"
       ],
       "senders": [
-        "mikeb@flagsexpress.com",
         "halfstaff@flagsexpress.com"
       ]
     }
