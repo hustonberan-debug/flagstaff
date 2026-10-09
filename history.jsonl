@@ -1563,3 +1563,4 @@
 {"at": "2026-10-07T00:01:22+00:00", "state": "KY", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
 {"at": "2026-10-07T14:17:13+00:00", "state": "TX", "status": "half", "reason": "Governor Abbott Orders Flags To Half-Staff In Solidarity With Israel", "reason_source": "state", "start_date": "2026-10-07", "end_date": "2026-10-07"}
 {"at": "2026-10-07T16:01:31+00:00", "state": "DE", "status": "half", "reason": "State order", "reason_source": "state", "start_date": null, "end_date": null}
+{"at": "2026-10-09T20:01:09+00:00", "state": "TX", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
