@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T18:30:59+00:00",
+  "generated_at": "2026-10-09T18:45:54+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -55,9 +55,10 @@
   },
   "unattributed_senders": {
     "service.govdelivery.com": {
-      "count": 1,
+      "count": 2,
       "subjects": [
-        "NEW Flag-Lowering Order - Executive Order #290 Gov. Evers Orders Flags"
+        "NEW Flag-Lowering Order - Executive Order #290 Gov. Evers Orders Flags",
+        "NEW Flag-Lowering Order - Executive Order #305 Gov. Evers Orders Flags"
       ],
       "senders": [
         "dma_wi@service.govdelivery.com"
