@@ -38,6 +38,13 @@ from gh_issues import GitHub, file_all, summary
 QUIET_DAYS = 90
 TITLE_PREFIX = "Drift: "
 
+# Page fingerprints have only been timestamped since this date. Until we have
+# watched for QUIET_DAYS, "no record of this page ever changing" is the
+# EXPECTED state of every healthy page that simply has not moved yet, and it
+# opened one issue per state (30 of them, none actionable). The check that
+# really catches a frozen page in that window is DATES, which still fires.
+WATCHING_SINCE = date(2026, 9, 17)
+
 
 # Three outcomes, not two. "Nobody ever wrote a date down", "somebody wrote
 # something we cannot read" and "it was N days ago" are different facts, and
@@ -109,7 +116,8 @@ def find_drift(registry, cache, status, mail, today, quiet_days=QUIET_DAYS):
                         "kind": "BAD STAMP", "days": 0,
                         "detail": f"page-change date {stamp!r} cannot be read",
                         "source": url})
-        if kind == ABSENT and entry.get("last_parsed"):
+        if (kind == ABSENT and entry.get("last_parsed")
+                and (today - WATCHING_SINCE).days >= quiet_days):
             # We have checked this page but have no record of it ever
             # changing. That is not the same as "it changed recently", which
             # is how a missing stamp used to read - the source could have

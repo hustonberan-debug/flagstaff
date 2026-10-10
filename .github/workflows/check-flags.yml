@@ -63,14 +63,14 @@ concurrency:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # 10 was enough for the pipeline; a large notification fan-out needs room.
     timeout-minutes: 25
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -112,7 +112,7 @@ jobs:
       # are cached between runs and re-rendered only when over 3 hours old,
       # so most runs install nothing and start no browser.
       - name: Rendered pages - restore snapshots
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         continue-on-error: true
         with:
           path: rendered
@@ -126,7 +126,7 @@ jobs:
 
       - name: Rendered pages - restore browser
         if: steps.render-check.outputs.needed == 'true'
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         continue-on-error: true
         with:
           path: ~/.cache/ms-playwright
@@ -144,7 +144,7 @@ jobs:
 
       - name: Rendered pages - save snapshots
         if: always() && steps.render-check.outputs.needed == 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         continue-on-error: true
         with:
           path: rendered
