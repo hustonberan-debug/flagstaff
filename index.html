@@ -622,8 +622,8 @@ function unclearReason(s){
     return say(`The state's page hasn't been updated in months, so we don't rely on it.`);
   if(/navigation only|no press listing|no items parsed/.test(e))
     return say(`We couldn't find the state's announcements on its website today.`);
-  if(/bulletin|channel|email/.test(e))
-    return say(`We haven't been able to read the state's official email announcements.`);
+  // Email is how we hear some states, but readers get the answer, not the
+  // plumbing: a bulletin/channel problem falls through to the generic line.
   return say(`We couldn't read a clear answer from the state's official sources today.`);
 }
 
