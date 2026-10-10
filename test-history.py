@@ -38,6 +38,17 @@ import parsers as P
 HISTORY = "history.jsonl"
 CALENDAR = "statutory-calendar.json"
 BASELINE = "2026-09-15T21:26:00+00:00"   # first run with answer-change tracking
+# History is append-only, so a violation stays in it forever. Without this,
+# one reviewed incident turns every later run red and the failure email goes
+# out every run (every 15 minutes with the external nudge) until someone
+# edits the file. A WINDOW violation whose half-staff period ended at or
+# before this time has been looked at and is printed as "ACK", not failed.
+# A violation still ongoing, or ending after this time, still fails the run.
+# Do NOT move BASELINE for this: it also decides how older rows' windows are
+# derived. Bump this instead, after reviewing a new incident.
+#   2026-10-09: TX shown half-staff Oct 7 14:17 -> Oct 9 20:01 for an
+#   Oct 7-only order (1.8 days late); back to full on its own, reviewed.
+ACKNOWLEDGED_THROUGH = "2026-10-09T20:02:00+00:00"
 TOLERANCE = timedelta(days=1)
 MAX_CHANGES_PER_DAY = 2
 
@@ -262,7 +273,9 @@ def main():
 
     wins, unverifiable, national = window_violations(rows, now, statutory, base)
     flaps = flap_violations(rows)
-    new_wins = [w for w in wins if w["at"] >= base]
+    ack = ts(ACKNOWLEDGED_THROUGH)
+    since_base = [w for w in wins if w["at"] >= base]
+    new_wins = [w for w in since_base if w.get("ongoing") or w["end"] > ack]
     new_flaps = flap_violations([r for r in rows if ts(r["at"]) >= base])
 
     print(f"\nRULE 1 - half-staff outside the order's stated window: "
@@ -272,7 +285,8 @@ def main():
           f"never logged")
     for w in sorted(wins, key=lambda w: w["start"]):
         ws, we = w["window"]
-        tag = "NEW " if w in new_wins else "    "
+        tag = ("NEW " if w in new_wins
+               else "ACK " if w in since_base else "    ")
         span = f"{w['start']:%m-%d %H:%M} -> " + (
             "still half" if w.get("ongoing") else f"{w['end']:%m-%d %H:%M}")
         print(f"  {tag}{w['state']} {w['kind']:5} by {fmt_td(w['over']):>5}  "
