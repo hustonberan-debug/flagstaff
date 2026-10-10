@@ -433,6 +433,7 @@ def main():
     print(f"{len(ids)} message(s) since {since}\n")
 
     orders, rejected = {}, []
+    order_senders = {}      # (state, start, end) -> {authenticated sender addresses}
     # channels_seen: the last day each channel delivered a flag ORDER.
     # channels_heard: the last day each channel delivered ANY authenticated
     # message. A channel that has spoken before and is quiet today means "no
@@ -483,6 +484,14 @@ def main():
             continue
         code = rec["state_code"]
         seen[code] = max(seen.get(code) or "", rec.get("sent_date") or "") or None
+        # Who announced this order. Only DKIM-authenticated mail gets this far,
+        # so each address here is a real sender, not a From line. Two different
+        # addresses announcing the same window is two subscriptions agreeing.
+        _l, _d = sender_address(rec.get("from") or "")
+        if _l and _d:
+            order_senders.setdefault(
+                (code, rec.get("start_date"), rec.get("end_date")), set()
+            ).add(f"{_l}@{_d}".lower())
         # Keep the most recent order per state.
         if code not in orders or (rec.get("sent_date") or "") > (orders[code].get("sent_date") or ""):
             orders[code] = rec
@@ -493,6 +502,11 @@ def main():
         M.logout()
     except Exception:
         pass
+
+    # Record how many distinct senders stand behind each state's current order.
+    for code, rec in orders.items():
+        rec["senders"] = sorted(order_senders.get(
+            (code, rec.get("start_date"), rec.get("end_date")), set()))
 
     print(f"\n  {len(orders)} state order(s) found")
     if rejected:

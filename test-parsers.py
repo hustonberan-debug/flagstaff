@@ -1511,6 +1511,42 @@ t("...and says it could not tell, rather than 'no national order'",
   "states no day" in (ferr or ""), True)
 del os.environ["FEDERAL_PROCLAMATION_URL"]
 
+# --- the state's own email decides - in ONE direction ----------------------
+# A DKIM-verified bulletin announcing a current order outranks a web page that
+# still says full (the page is far more likely stale). An email channel that
+# merely says nothing is an absence of news and must never override a page
+# that shows an order.
+_mail_rec, _web_rec = {"ingest_mode": "email"}, {"ingest_mode": "diff"}
+def _mail_half(n=1):
+    return {"state_status": P.HALF, "source_url": "u-mail", "coverage": "covered",
+            "error": None,
+            "state_order": {"via": "official notification email", "email_senders": n,
+                            "title": "Governor orders flags lowered"}}
+def _web_r(status):
+    return {"state_status": status, "source_url": "u-web", "state_order": None,
+            "error": None}
+
+_r = R.combine(_web_r(P.FULL), _mail_half(), _web_rec, _mail_rec)
+t("email announces an order, web says full -> HALF is published",
+  _r["state_status"], P.HALF)
+t("...and it is recorded as email-decided, with the web disagreement kept",
+  (_r["confidence_basis"].startswith("email decides"), bool(_r.get("web_disagrees")),
+   "source_conflict" in _r), (True, True, False))
+_r = R.combine(_mail_half(), _web_r(P.FULL), _mail_rec, _web_rec)
+t("same when email is the primary reading", _r["state_status"], P.HALF)
+_r = R.combine(_web_r(P.HALF), {"state_status": P.FULL, "source_url": "u-mail",
+                                "state_order": None, "error": None}, _web_rec, _mail_rec)
+t("email SILENCE (full) never overrides a page showing an order -> withheld",
+  (_r["state_status"], "source_conflict" in _r), (P.UNKNOWN, True))
+t("email half + web half: corroborated, naming 1 email sender",
+  R.combine(_web_r(P.HALF), _mail_half(1), _web_rec, _mail_rec)["confidence_basis"],
+  "corroborated by 1 email sender and the web page")
+t("two distinct email senders + web: 'two emails, then the check'",
+  R.combine(_web_r(P.HALF), _mail_half(2), _web_rec, _mail_rec)["confidence_basis"],
+  "corroborated by 2 email senders and the web page")
+t("email half, web page could not answer -> still published",
+  R.combine(_web_r(P.UNKNOWN), _mail_half(), _web_rec, _mail_rec)["state_status"], P.HALF)
+
 # --- an unconfirmed half-staff claim is not a failed read (Colorado) -------
 # Colorado's status page says "Flag at Half Staff" with no dated order (its
 # newest date is 2007). We rightly would not publish half from it - and then

@@ -400,6 +400,12 @@ jobs:
                  and 'no verified source' not in v['error']]
           if bad:
               print(f"::warning::Sources with errors: {' '.join(sorted(bad))}")
+          # The state's own email outranks a web page that still says full.
+          # That is the intended rule, but an override should never be silent:
+          # the page is either stale or our reading of it is wrong.
+          overridden = [c for c, v in st.items() if v.get('web_disagrees')]
+          if overridden:
+              print(f"::warning::Email decided over a disagreeing web page: {' '.join(sorted(overridden))}")
           stale_half = [c for c, v in st.items() if v.get('stale_half_claim')]
           if stale_half:
               print(f"::warning::Page says half-staff with no recent order (withheld): {' '.join(sorted(stale_half))}")

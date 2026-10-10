@@ -859,6 +859,10 @@ def check_state(rec, cache, session, verbose=False):
                 "start_date": o.get("start_date"), "end_date": o.get("end_date"),
                 "until_noon": o.get("until_noon"), "coverage_reason": why,
                 "via": "official notification email",
+                # How many distinct authenticated senders announced this
+                # order. read_email.py records the list; an older file has
+                # none, and a bulletin we read has at least one sender.
+                "email_senders": len(o.get("senders") or []) or 1,
             }
             out["error"] = ingest_err
         elif v is None and o and undated_recent(o.get("start_date"), today()):
@@ -1552,13 +1556,50 @@ def unconfirmed_half(out):
     return None
 
 
+def email_wins(out, second, rec, second_rec):
+    """(email reading, web reading, web rec) when the state's own bulletin
+    affirmatively announces a current order and the other source says full.
+
+    EMAIL DECIDES, BUT ONLY IN ONE DIRECTION. A DKIM-verified bulletin that
+    announces an order covering today is positive evidence: the state itself
+    told us. A web page still saying full beside it is far more likely stale
+    than right, and a missed alert costs more than a late "full". The reverse
+    is not symmetric: an email channel saying nothing is only an ABSENCE of
+    news, and must never override a page that affirmatively shows an order.
+    That case stays a disagreement and is withheld.
+    """
+    if (rec or {}).get("ingest_mode") == "email":
+        em, web, wrec = out, second, second_rec
+    elif (second_rec or {}).get("ingest_mode") == "email":
+        em, web, wrec = second, out, rec
+    else:
+        return None
+    o = (em or {}).get("state_order") or {}
+    if (em.get("state_status") == P.HALF and web.get("state_status") == P.FULL
+            and o.get("via") == "official notification email"):
+        return em, web, wrec
+    return None
+
+
+def email_label(out, second, rec, second_rec):
+    """"N email senders" for the email reading in this pair, or None."""
+    for reading, r in ((out, rec), (second, second_rec)):
+        if (r or {}).get("ingest_mode") == "email":
+            n = ((reading or {}).get("state_order") or {}).get("email_senders")
+            if n:
+                return n
+    return None
+
+
 def combine(out, second, rec, second_rec):
     """Fold a second reading into the published answer.
 
     Two agreeing -> publish, recorded as corroborated. Two disagreeing ->
     Unclear, with both readings and both URLs, because a disagreement is
-    information. One reading only -> publish it, marked single-source, so how
-    much of the map rests on one page is visible rather than implied.
+    information - except that the state's own bulletin announcing a current
+    order outranks a web page saying full (see email_wins). One reading only
+    -> publish it, marked single-source, so how much of the map rests on one
+    page is visible rather than implied.
     """
     a, b = out["state_status"], (second or {}).get("state_status")
     out["sources"] = [{"kind": source_kind(rec), "url": out.get("source_url"),
@@ -1599,7 +1640,22 @@ def combine(out, second, rec, second_rec):
         return out
     if a in definite and b in definite:
         if a == b:
-            out["confidence_basis"] = "corroborated by 2 independent sources"
+            n = email_label(out, second, rec, second_rec)
+            out["confidence_basis"] = (
+                f"corroborated by {n} email sender{'s' if n > 1 else ''} and the web page"
+                if n else "corroborated by 2 independent sources")
+        elif email_wins(out, second, rec, second_rec):
+            em, web, wrec = email_wins(out, second, rec, second_rec)
+            n = (em.get("state_order") or {}).get("email_senders") or 1
+            out["web_disagrees"] = {"kind": source_kind(wrec), "url": web.get("source_url"),
+                                    "status": web.get("state_status")}
+            out["state_status"] = em["state_status"]
+            out["state_order"] = em.get("state_order")
+            out["coverage"] = em.get("coverage") or "covered"
+            out["error"] = None
+            out["confidence_basis"] = (
+                f"email decides ({n} sender{'s' if n > 1 else ''}): the state's own "
+                f"bulletin announces the order; its {source_kind(wrec)} still says full")
         else:
             out["source_conflict"] = {
                 "ours": a, "other": b,
