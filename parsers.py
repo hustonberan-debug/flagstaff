@@ -1312,6 +1312,12 @@ def parse_archive(html, base_url=None):
 # Parser 3: index (18 states) — press release index, headline scan
 # ---------------------------------------------------------------------------
 
+# Query-string filters (?cat=, ?category=, ?tag=) and /Search? pages list
+# releases; they are never one. Deliberately narrow: only the query-string
+# forms, so a real post whose path happens to contain "category" is kept.
+FILTER_LINK_RE = re.compile(r"[?&](?:cat|category|tag)=|/search\?", re.I)
+
+
 def parse_index(html, base_url=None):
     """Press index -> ALL headlines, each marked with is_flag.
 
@@ -1334,6 +1340,12 @@ def parse_index(html, base_url=None):
         href = HREF_RE.search(block)
         d = parse_any_date(text)
         url = _abs(href.group(1), base_url) if href else base_url
+        # A category or search filter in a site's menu is not a release.
+        # Oregon's newsroom has a "Flag at half staff" filter link; read as a
+        # headline it was an undated, unreadable half-staff order, and Oregon
+        # sat at UNKNOWN indefinitely instead of full staff.
+        if href and FILTER_LINK_RE.search(url or ""):
+            continue
         cands.append({
             "title": text[:200],
             "url": url,
