@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T01:01:41+00:00",
+  "generated_at": "2026-10-10T01:10:50+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -14,7 +14,10 @@
       "until_noon": false,
       "evidence": "at half-staff",
       "scope": "statewide",
-      "scope_evidence": "across the state"
+      "scope_evidence": "across the state",
+      "senders": [
+        "stateofiowa@email.iowa.gov"
+      ]
     },
     "KY": {
       "state_code": "KY",
@@ -29,7 +32,10 @@
       "until_noon": false,
       "evidence": "to Half-Staff",
       "scope": "statewide",
-      "scope_evidence": "at all state buildings"
+      "scope_evidence": "at all state buildings",
+      "senders": [
+        "governor@subscriptions.kentucky.gov"
+      ]
     }
   },
   "channels_seen": {
