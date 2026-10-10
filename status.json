@@ -957,8 +957,8 @@
       "error": null,
       "last_expired_order": {
         "title": "Governor Walz Orders Flags Flown at Half-Staff for Fallen Firefighters",
-        "url": "https://mn.gov/governor/resources/flags-half-staff/index.jsp?id=1055-769668",
-        "why": "order dated 2026-09-28 stated no end date; undated orders are not trusted beyond 3 days"
+        "url": "https://mn.gov/governor/newsroom/flag-status/index.jsp?id=1055-769668",
+        "why": "window 2026-09-27..2026-09-27"
       },
       "items_parsed": 10,
       "flag_items": 10,
@@ -1698,7 +1698,6 @@
       "last_changed_at": "2026-09-12T00:00:00+00:00",
       "content_changed": false,
       "error": null,
-      "used_alternate_url": true,
       "listing_evidence": "13 headline-length links to this site",
       "last_expired_order": null,
       "items_parsed": 60,
@@ -1707,7 +1706,7 @@
       "sources": [
         {
           "kind": "press listing",
-          "url": "https://www.tn.gov/governor/news",
+          "url": "https://www.tn.gov/governor/news.html",
           "status": "full",
           "evidence": null
         }
