@@ -501,6 +501,21 @@ ok_nav, _ = P.listing_evidence(P.parse_index(nav, "https://gov.test/news"), "htt
 ok_news, _ = P.listing_evidence(P.parse_index(news, "https://gov.test/news"), "https://gov.test/news")
 t("navigation links are not a listing", ok_nav, False)
 t("eight release headlines are", ok_news, True)
+# Oregon's newsroom menu has a category filter literally titled "Flag at half
+# staff". It was read as an undated half-staff order whose page "could not be
+# read", pinning Oregon at UNKNOWN. A filter link is not a release; a real
+# post sitting next to it still is.
+_or = ('<h3><a href="/oregon-newsroom/OR/GOV/Posts/Search?cat=Flag%20at%20half%20staff">'
+       'Flag at half staff</a></h3>'
+       '<h3><a href="/oregon-newsroom/OR/GOV/Posts/Search?cat=Flag%20at%20half%20staff&amp;org=GOV">'
+       'Flag at half staff</a></h3>'
+       '<h3><a href="/oregon-newsroom/OR/GOV/Posts/Post/governor-orders-flags-lowered-to-half-staff">'
+       'Governor Orders Flags Lowered to Half-Staff in Honor of a Fallen Trooper</a></h3>')
+_or_items = P.parse_index(_or, "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts")
+t("category filter links are not releases",
+  [i["url"].split("/Posts/")[-1][:4] for i in _or_items], ["Post"])
+t("the real post beside them is kept and still flagged",
+  [i["is_flag"] for i in _or_items], [True])
 t("links to other agencies' sites do not count", P.listing_evidence(
     [{"title": "Governor's Office of Crime Prevention Youth and Victim Services",
       "url": f"https://agency{n}.test/"} for n in range(9)], "https://gov.test/news")[0],
