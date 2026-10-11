@@ -1,24 +1,6 @@
 {
-  "generated_at": "2026-10-10T23:45:54+00:00",
+  "generated_at": "2026-10-11T00:01:01+00:00",
   "orders": {
-    "IA": {
-      "state_code": "IA",
-      "identified_by": "sender domain email.iowa.gov, dkim=pass email.iowa.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "FLAG RELEASE: Gov. Reynolds orders flags at half-staff in honor and remembrance of Borlaug Elementary School teacher and student",
-      "from": "State Of Iowa <StateOfIowa@email.iowa.gov>",
-      "sent_date": "2026-09-26",
-      "start_date": "2026-09-26",
-      "end_date": "2026-09-26",
-      "until_noon": false,
-      "evidence": "at half-staff",
-      "scope": "statewide",
-      "scope_evidence": "across the state",
-      "senders": [
-        "stateofiowa@email.iowa.gov"
-      ]
-    },
     "KY": {
       "state_code": "KY",
       "identified_by": "sender domain subscriptions.kentucky.gov, dkim=pass subscriptions.kentucky.gov",
