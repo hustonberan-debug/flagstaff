@@ -1567,3 +1567,4 @@
 {"at": "2026-10-10T16:31:22+00:00", "state": "PA", "status": "half", "reason": "State order", "reason_source": "state", "start_date": null, "end_date": null}
 {"at": "2026-10-11T08:01:37+00:00", "state": "DE", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
 {"at": "2026-10-11T08:16:05+00:00", "state": "DE", "status": "half", "reason": "State order", "reason_source": "state", "start_date": null, "end_date": null}
+{"at": "2026-10-12T14:04:03+00:00", "state": "MI", "status": "half", "reason": "RELEASE: Gov. Whitmer Lowers Flags to Honor Former State Senator John Pappageorge", "reason_source": "state", "start_date": "2026-10-12", "end_date": null}
