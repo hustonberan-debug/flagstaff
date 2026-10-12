@@ -961,12 +961,12 @@
       "source_url": "https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp",
       "checked_at": "2026-10-12T17:17:28+00:00",
       "last_changed_at": "2026-09-15T18:20:55+00:00",
-      "content_changed": false,
+      "content_changed": true,
       "error": null,
       "last_expired_order": {
         "title": "Governor Walz Orders Flags Flown at Half-Staff for Fallen Firefighters",
-        "url": "https://mn.gov/governor/resources/flags-half-staff/index.jsp?id=1055-769668",
-        "why": "order dated 2026-09-28 stated no end date; undated orders are not trusted beyond 3 days"
+        "url": "https://mn.gov/governor/newsroom/flag-status/index.jsp?id=1055-769668",
+        "why": "window 2026-09-27..2026-09-27"
       },
       "items_parsed": 10,
       "flag_items": 10,
