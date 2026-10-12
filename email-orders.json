@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T20:01:16+00:00",
+  "generated_at": "2026-10-12T20:15:48+00:00",
   "orders": {
     "KY": {
       "state_code": "KY",
@@ -79,7 +79,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 20,
+      "count": 21,
       "subjects": [
         "Iowa - Half-Staff Alert - Hannah Jorgensen & Ahmed Osman",
         "America\u2019s capital\u2014for just one day",
@@ -99,7 +99,8 @@
         "Wisconsin - Half-Staff Alert - Trooper Bradley Ritger",
         "Pennsylvania - Half-Staff Alert - Shane Seiber",
         "New Jersey - Half-Staff Alert - Sandra Bolden Cunningham",
-        "Michigan - Half-Staff Alert - John Pappageorge"
+        "Michigan - Half-Staff Alert - John Pappageorge",
+        "Iowa - Half-Staff Alert - Charles \u201cChuck\u201d Jones"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
