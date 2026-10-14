@@ -1569,3 +1569,4 @@
 {"at": "2026-10-11T08:16:05+00:00", "state": "DE", "status": "half", "reason": "State order", "reason_source": "state", "start_date": null, "end_date": null}
 {"at": "2026-10-12T14:04:03+00:00", "state": "MI", "status": "half", "reason": "RELEASE: Gov. Whitmer Lowers Flags to Honor Former State Senator John Pappageorge", "reason_source": "state", "start_date": "2026-10-12", "end_date": null}
 {"at": "2026-10-12T18:31:11+00:00", "state": "DE", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
+{"at": "2026-10-14T00:01:14+00:00", "state": "IA", "status": "half", "reason": "Gov. Reynolds orders flags at half-staff in honor and remembrance of Council Bluffs firefighter and paramedic Charles Jones", "reason_source": "state", "start_date": "2026-10-14", "end_date": "2026-10-15"}
