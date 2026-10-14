@@ -42,10 +42,10 @@
   "AL": {
     "last_known_status": "full",
     "last_status_change_at": null,
-    "hash_changed_at": "2026-10-14T02:45:47+00:00",
+    "hash_changed_at": "2026-10-14T03:15:48+00:00",
     "order_first_seen": null,
     "order_sig": null,
-    "hash": "0fd0758cff2ed548",
+    "hash": "f456a098f0cdd9ce",
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-10-14T03:17:12+00:00",
@@ -104,7 +104,7 @@
     "last_parsed": "2026-10-14T03:17:12+00:00",
     "last_checked": "2026-10-14T03:17:12+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "diff|https://gov.alaska.gov/services/status-of-the-flag/|fetch"
   },
   "IA": {
@@ -419,7 +419,7 @@
     "last_parsed": "2026-10-14T03:17:12+00:00",
     "last_checked": "2026-10-14T03:17:12+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "index|https://events.in.gov/group/gov|fetch"
   },
   "MS": {
@@ -465,7 +465,7 @@
     "last_parsed": "2026-10-14T03:17:12+00:00",
     "last_checked": "2026-10-14T03:17:12+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "diff|https://gov.idaho.gov/flag-status/|fetch"
   },
   "RI": {
@@ -480,7 +480,7 @@
     "last_parsed": "2026-10-14T03:17:14+00:00",
     "last_checked": "2026-10-14T03:17:14+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "feed|https://governor.ri.gov/press-releases.xml|fetch"
   },
   "ND": {
@@ -548,7 +548,7 @@
     "last_parsed": "2026-10-14T03:17:14+00:00",
     "last_checked": "2026-10-14T03:17:14+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "index|https://governor.sc.gov/news|fetch"
   },
   "NJ": {
@@ -698,10 +698,10 @@
   "MN": {
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:55+00:00",
-    "hash_changed_at": "2026-10-14T02:45:47+00:00",
+    "hash_changed_at": "2026-10-14T03:15:50+00:00",
     "order_first_seen": null,
     "order_sig": null,
-    "hash": "0ab52e259c37e6d6",
+    "hash": "2d05667af36ff34e",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-10-14T03:17:13+00:00",
@@ -1029,7 +1029,7 @@
     "last_parsed": "2026-10-14T03:17:12+00:00",
     "last_checked": "2026-10-14T03:17:12+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "index|https://gov.alaska.gov/newsroom/|fetch"
   },
   "DC~2": {
@@ -1055,7 +1055,7 @@
     "last_parsed": "2026-10-14T03:17:12+00:00",
     "last_checked": "2026-10-14T03:17:12+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "index|https://governorsoffice.colorado.gov/governor/news|fetch"
   },
   "AZ~2": {
@@ -1136,7 +1136,7 @@
     "last_parsed": "2026-10-14T03:17:12+00:00",
     "last_checked": "2026-10-14T03:17:12+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "diff|https://governor.ky.gov/flag-status|fetch"
   },
   "MI~2": {
@@ -1157,7 +1157,7 @@
     "last_parsed": "2026-10-14T03:17:13+00:00",
     "last_checked": "2026-10-14T03:17:13+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "diff|https://www.michigan.gov/whitmer/news/flag-honors|fetch"
   },
   "CT~2": {
@@ -1228,7 +1228,7 @@
     "last_parsed": "2026-10-14T03:17:13+00:00",
     "last_checked": "2026-10-14T03:17:13+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "index|https://gov.idaho.gov/pressrelease/|fetch"
   },
   "MS~2": {

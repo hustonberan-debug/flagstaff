@@ -7,7 +7,7 @@
     "AK": {
       "state": "Alaska",
       "state_code": "AK",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "diff",
       "confidence": "high",
       "state_status": "full",
@@ -23,15 +23,9 @@
       "source_url": "https://gov.alaska.gov/services/status-of-the-flag/",
       "checked_at": "2026-10-14T03:17:12+00:00",
       "last_changed_at": "2026-09-23T01:38:13+00:00",
-      "content_changed": false,
-      "error": null,
-      "source_last_modified": "2026-09-18",
-      "source_age_days": 26,
-      "declared": "unknown",
-      "last_expired_order": {
-        "why": "window 2026-09-22..2026-09-22",
-        "url": "https://gov.alaska.gov/services/status-of-the-flag/"
-      },
+      "content_changed": null,
+      "error": "HTTP 405; last read 2026-10-14",
+      "consecutive_errors": 1,
       "sources": [
         {
           "kind": "status page",
@@ -43,7 +37,7 @@
           "kind": "press listing",
           "url": "https://gov.alaska.gov/newsroom/",
           "status": "full",
-          "evidence": null
+          "evidence": "HTTP 405; last read 2026-10-14"
         }
       ],
       "confidence_basis": "corroborated by 2 independent sources",
@@ -65,7 +59,7 @@
       "source_url": "https://governor.alabama.gov/flag-status/",
       "checked_at": "2026-10-14T03:17:12+00:00",
       "last_changed_at": null,
-      "content_changed": false,
+      "content_changed": true,
       "error": "source appears frozen: newest date on page is 2019-12-10 (2500d old) - not trusted",
       "source_last_modified": "2019-12-10",
       "source_age_days": 2500,
@@ -202,7 +196,7 @@
     "CO": {
       "state": "Colorado",
       "state_code": "CO",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "diff",
       "confidence": "high",
       "state_status": "full",
@@ -226,7 +220,7 @@
           "kind": "press listing",
           "url": "https://governorsoffice.colorado.gov/governor/news",
           "status": "full",
-          "evidence": null
+          "evidence": "HTTP 403; last read 2026-10-14"
         }
       ],
       "confidence_basis": "single-source (press listing; primary: unknown)",
@@ -562,7 +556,7 @@
     "ID": {
       "state": "Idaho",
       "state_code": "ID",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "diff",
       "confidence": "high",
       "state_status": "full",
@@ -578,11 +572,9 @@
       "source_url": "https://gov.idaho.gov/flag-status/",
       "checked_at": "2026-10-14T03:17:12+00:00",
       "last_changed_at": "2026-09-15T21:26:28+00:00",
-      "content_changed": false,
-      "error": null,
-      "source_last_modified": "2026-09-14",
-      "source_age_days": 30,
-      "declared": "full",
+      "content_changed": null,
+      "error": "timeout; last read 2026-10-14",
+      "consecutive_errors": 1,
       "sources": [
         {
           "kind": "status page",
@@ -594,7 +586,7 @@
           "kind": "press listing",
           "url": "https://gov.idaho.gov/pressrelease/",
           "status": "full",
-          "evidence": null
+          "evidence": "timeout; last read 2026-10-14"
         }
       ],
       "confidence_basis": "corroborated by 2 independent sources",
@@ -644,7 +636,7 @@
     "IN": {
       "state": "Indiana",
       "state_code": "IN",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "index",
       "confidence": "medium",
       "state_status": "full",
@@ -652,19 +644,15 @@
       "source_url": "https://events.in.gov/group/gov",
       "checked_at": "2026-10-14T03:17:12+00:00",
       "last_changed_at": "2026-09-15T18:20:55+00:00",
-      "content_changed": false,
-      "error": null,
-      "listing_evidence": "10 headline-length links to this site",
-      "last_expired_order": null,
-      "items_parsed": 60,
-      "flag_items": 0,
-      "dated_items": 0,
+      "content_changed": null,
+      "error": "HTTP 403; last read 2026-10-14",
+      "consecutive_errors": 1,
       "sources": [
         {
           "kind": "press listing",
           "url": "https://events.in.gov/group/gov",
           "status": "full",
-          "evidence": null
+          "evidence": "HTTP 403; last read 2026-10-14"
         }
       ],
       "confidence_basis": "single-source",
@@ -736,7 +724,7 @@
           "kind": "status page",
           "url": "https://governor.ky.gov/flag-status",
           "status": "unknown",
-          "evidence": "no explicit status declaration in page text"
+          "evidence": "HTTP 403; last read 2026-10-14"
         }
       ],
       "confidence_basis": "single-source",
@@ -972,12 +960,12 @@
       "source_url": "https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp",
       "checked_at": "2026-10-14T03:17:13+00:00",
       "last_changed_at": "2026-09-15T18:20:55+00:00",
-      "content_changed": false,
+      "content_changed": true,
       "error": null,
       "last_expired_order": {
         "title": "Governor Walz Orders Flags Flown at Half-Staff for Fallen Firefighters",
-        "url": "https://mn.gov/governor/newsroom/flag-status/index.jsp?id=1055-769668",
-        "why": "window 2026-09-27..2026-09-27"
+        "url": "https://mn.gov/governor/resources/flags-half-staff/index.jsp?id=1055-769668",
+        "why": "order dated 2026-09-28 stated no end date; undated orders are not trusted beyond 3 days"
       },
       "items_parsed": 10,
       "flag_items": 10,
@@ -1601,7 +1589,7 @@
     "RI": {
       "state": "Rhode Island",
       "state_code": "RI",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "feed",
       "confidence": "high",
       "state_status": "full",
@@ -1609,20 +1597,15 @@
       "source_url": "https://governor.ri.gov/press-releases.xml",
       "checked_at": "2026-10-14T03:17:14+00:00",
       "last_changed_at": "2026-09-12T00:00:00+00:00",
-      "content_changed": false,
-      "error": null,
-      "last_expired_order": null,
-      "items_parsed": 6,
-      "flag_items": 0,
-      "dated_items": 6,
-      "source_last_modified": "2026-10-01",
-      "source_age_days": 13,
+      "content_changed": null,
+      "error": "HTTP 403; last read 2026-10-14",
+      "consecutive_errors": 1,
       "sources": [
         {
           "kind": "press feed",
           "url": "https://governor.ri.gov/press-releases.xml",
           "status": "full",
-          "evidence": null
+          "evidence": "HTTP 403; last read 2026-10-14"
         }
       ],
       "confidence_basis": "single-source",
@@ -1636,7 +1619,7 @@
     "SC": {
       "state": "South Carolina",
       "state_code": "SC",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "index",
       "confidence": "medium",
       "state_status": "full",
@@ -1644,19 +1627,15 @@
       "source_url": "https://governor.sc.gov/news",
       "checked_at": "2026-10-14T03:17:14+00:00",
       "last_changed_at": "2026-09-12T00:00:00+00:00",
-      "content_changed": false,
-      "error": null,
-      "listing_evidence": "16 headline-length links to this site",
-      "last_expired_order": null,
-      "items_parsed": 47,
-      "flag_items": 0,
-      "dated_items": 5,
+      "content_changed": null,
+      "error": "HTTP 403; last read 2026-10-14",
+      "consecutive_errors": 1,
       "sources": [
         {
           "kind": "press listing",
           "url": "https://governor.sc.gov/news",
           "status": "full",
-          "evidence": null
+          "evidence": "HTTP 403; last read 2026-10-14"
         }
       ],
       "confidence_basis": "single-source",
@@ -2048,12 +2027,12 @@
     }
   },
   "meta": {
-    "covered": 45,
+    "covered": 39,
     "answered": 43,
     "not_covered": 5,
-    "stale": 0,
+    "stale": 6,
     "frozen": 1,
-    "errors": 8,
+    "errors": 13,
     "total": 51
   }
 }
