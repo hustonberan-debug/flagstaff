@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T16:46:23+00:00",
+  "generated_at": "2026-10-15T16:58:47+00:00",
   "orders": {
     "KY": {
       "state_code": "KY",
@@ -17,24 +17,6 @@
       "scope_evidence": "at all state buildings",
       "senders": [
         "governor@subscriptions.kentucky.gov"
-      ]
-    },
-    "MI": {
-      "state_code": "MI",
-      "identified_by": "sender domain govsubscriptions.michigan.gov, dkim=pass govsubscriptions.michigan.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "RELEASE: Gov. Whitmer Lowers Flags to Honor Former State Senator John Pappageorge",
-      "from": "Michigan Executive Office of the Governor <mieog@govsubscriptions.michigan.gov>",
-      "sent_date": "2026-10-12",
-      "start_date": "2026-10-13",
-      "end_date": "2026-10-13",
-      "until_noon": false,
-      "evidence": "Lowers Flags",
-      "scope": "statewide",
-      "scope_evidence": "within the State",
-      "senders": [
-        "mieog@govsubscriptions.michigan.gov"
       ]
     },
     "IA": {
