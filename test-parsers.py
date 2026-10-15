@@ -1466,6 +1466,45 @@ t("with no publication day given, the dateline resolves 'Friday' - and only that
   P.order_window("Bismarck, Wednesday, September 9, 2026. Flags will fly at "
                  "half-staff on Friday."), (date(2026, 9, 11), date(2026, 9, 11)))
 
+# --- listings: a status label is not a release; a release's date is its own -
+# Louisiana's menu says "Flag Status: Half-Staff" on every page, nine days
+# after its last order expired. It was read as an undated half-staff order.
+LA_NAV = ('<ul><li><a href="/page/flag-status-half-staff">Flag Status: Half-Staff</a></li>'
+          '<li><a href="/news/4701">Governor Landry Announces New Funding for Rural '
+          'Hospitals Across the State</a></li></ul>')
+la = [i for i in P.parse_index(LA_NAV, "https://gov.louisiana.gov/news") if i.get("is_flag")]
+t("a 'Flag Status: Half-Staff' menu label is not a half-staff release", la, [])
+t("...nor a 'Current Flag Status - Half Staff' widget",
+  [i for i in P.parse_index('<a href="/x">Current Flag Status - Half Staff</a>', "https://x.gov/")
+   if i.get("is_flag")], [])
+kept = P.parse_index('<a href="/n/1">Governor Orders Flags to Half-Staff; Flag Status '
+                     'Updated Statewide</a>', "https://x.gov/")
+t("a real headline that mentions flag status later on is kept",
+  [i["is_flag"] for i in kept], [True])
+
+# Delaware's listing dates each release in a <time> inside its own <li>, and
+# stamps a WRONG datetime attribute (2025-01-31) on every one of them.
+DE_LIST = (
+  '<ul><li><div><h3><a href="https://news.delaware.gov/2026/10/08/coalition/">Governor '
+  'Meyer Joins Coalition of Governors to Fight Rising Electricity Costs</a></h3>'
+  '<div class="excerpt">Energy.</div><time datetime="2025-01-31T07:27:03-05:00">'
+  'October 8, 2026</time></div></li>'
+  '<li><div><h3><a href="https://news.delaware.gov/2026/10/07/blevins/">Governor Meyer has '
+  'ordered the Delaware state flag to be lowered to half-staff in honor of Sen. Patti '
+  'Blevins life</a></h3><div class="excerpt">Delaware lost a dedicated public servant.'
+  '</div><time datetime="2025-01-31T07:27:03-05:00">October 7, 2026</time></div></li></ul>')
+de = {i["url"].rstrip("/").rsplit("/", 1)[-1]: i["date"]
+      for i in P.parse_index(DE_LIST, "https://governor.delaware.gov/")}
+t("a release is dated by the <time> in its own item", de.get("blevins"), "2026-10-07")
+t("...its neighbour by ITS own, not borrowed across items", de.get("coalition"), "2026-10-08")
+t("the visible date wins over a broken datetime attribute",
+  "2025-01-31" in de.values(), False)
+DATE_FIRST = ('<li><time>October 1, 2026</time></li>'
+              '<li><a href="/n/2">Governor Orders Flags Lowered to Half-Staff Statewide '
+              'Today</a></li>')
+t("a date in a DIFFERENT item is never attributed to this headline",
+  [i["date"] for i in P.parse_index(DATE_FIRST, "https://x.gov/") if i.get("is_flag")], [None])
+
 # --- the end of an order, stated from the other side ----------------------
 # Michigan sat at half-staff for two days after it had returned to full. Both
 # faults are reproduced here from the real bulletin text.

@@ -1418,6 +1418,53 @@ def parse_archive(html, base_url=None):
 # forms, so a real post whose path happens to contain "category" is kept.
 FILTER_LINK_RE = re.compile(r"[?&](?:cat|category|tag)=|/search\?", re.I)
 
+# A status LABEL is a widget, not a release. Louisiana's site menu carries
+# "Flag Status: Half-Staff" on every page - including its own flag-status
+# page, whose content reads "Today, the flags are at full-staff", nine days
+# after the last order expired. Read as a headline it was an undated
+# half-staff order whose page could not be dated, and Louisiana sat at
+# Unclear while the state was telling us plainly. A release announces an
+# order; a label reports a state. Anchored at the start of the title, so a
+# real headline that merely mentions flag status further in is kept.
+STATUS_LABEL_RE = re.compile(
+    r"^\s*(?:current\s+|today'?s\s+)?flag\s+status\s*[:\-\u2013\u2014|]", re.I)
+
+# The release a headline belongs to, for finding its date. A listing that
+# puts the date in a <time> element next to the headline gives it to us
+# structurally - but only inside the same item. Matching on proximity alone
+# would hand a headline its NEIGHBOUR's date on a site that puts dates first.
+ITEM_OPEN_RE = re.compile(r"<(li|article)\b[^>]*>", re.I)
+TIME_TEXT_RE = re.compile(r"<time\b[^>]*>(.*?)</time>", re.S | re.I)
+
+
+def _item_date(html, at, end):
+    """The date shown in a <time> element inside the same <li>/<article> as
+    the headline spanning html[at:end], or None.
+
+    The element's TEXT, never its datetime attribute. Delaware's listing
+    stamps datetime="2025-01-31..." on every release - a broken WordPress
+    block - while the visible text says "October 7, 2026". What a reader sees
+    is what the state published."""
+    opens = list(ITEM_OPEN_RE.finditer(html, max(0, at - 4000), at))
+    if not opens:
+        return None
+    o = opens[-1]
+    close = re.search(r"</" + o.group(1) + r">", html[end:end + 4000], re.I)
+    # Another item opening before this one closes: a nested or broken
+    # structure we cannot attribute safely.
+    stop = end + close.start() if close else None
+    if stop is None:
+        return None
+    nxt = ITEM_OPEN_RE.search(html, end, stop)
+    if nxt:
+        stop = nxt.start()
+    for m in TIME_TEXT_RE.finditer(html, o.end(), stop):
+        d = parse_any_date(strip_html(m.group(1)))
+        if d:
+            return d
+    return None
+
+
 
 def parse_index(html, base_url=None):
     """Press index -> ALL headlines, each marked with is_flag.
@@ -1438,8 +1485,10 @@ def parse_index(html, base_url=None):
         text = strip_html(block)
         if not text or len(text) < 12 or len(text) > 300:
             continue
+        if STATUS_LABEL_RE.search(text):
+            continue
         href = HREF_RE.search(block)
-        d = parse_any_date(text)
+        d = parse_any_date(text) or _item_date(html, m.start(), m.end())
         url = _abs(href.group(1), base_url) if href else base_url
         # A category or search filter in a site's menu is not a release.
         # Oregon's newsroom has a "Flag at half staff" filter link; read as a
