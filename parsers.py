@@ -269,9 +269,9 @@ def diff_page_dates(html):
 # per state without this over-reports South Dakota constantly, and the same
 # distinction almost certainly exists in other states' wording.
 LIMITED_SCOPE_RE = re.compile(
-    r"\bat\s+(?:the\s+)?state\s+capitol\b"
+    r"\b(?:at|in|within|upon|on)\s+the\s+(?:state\s+)?capitol"
+    r"(?:\s+(?:complex|building|grounds))?\b"
     r"|\bcapitol\s+(?:building\s+)?only\b"
-    r"|\bat\s+the\s+capitol\s+complex\b"
     r"|\bonly\s+at\s+the\s+state\s+capitol\b"
     r"|\b(?:in|within)\s+[A-Z][a-z]+\s+County\s+only\b",
     re.I,
@@ -286,6 +286,24 @@ LIMITED_SCOPE_RE = re.compile(
 # governors writing however they please, a default of statewide guarantees
 # over-reporting; the unrecognised phrasing is the common case, not the rare
 # one.
+# A scope marker that turns out to be the opening of a NARROWER place phrase
+# is not a statewide marker at all. "within the State Capitol Complex" starts
+# with "within the State", and the word boundary after "State" is satisfied by
+# the space in front of "Capitol" - so a Capitol-only order read as statewide.
+# Michigan published exactly that, and its own status page said full staff the
+# whole time. Same shape as the Yutan order: the reach of an order is the
+# longest phrase that states it, never a prefix of one.
+#
+# Checked immediately after a candidate match; if it hits, that match is
+# skipped and scanning continues, so a genuinely statewide order that also
+# names the Capitol ("...and at the State Capitol") is unaffected - the word
+# after its marker is "and", not a building.
+NARROWING_AFTER_RE = re.compile(
+    r"\s*,?\s*(?:(?:at|in|within|upon|on|around|near)\s+the\s+)?"
+    r"(?:the\s+)?(?:state\s+)?"
+    r"(?:capitol|capital|statehouse|state\s+house)\b", re.I)
+
+
 STATEWIDE_SCOPE_RE = re.compile(
     r"\bstate[-\s]?wide\b"
     r"|\b(?:throughout|across|within)\s+the\s+(?:entire\s+)?(?:state|commonwealth)\b"
@@ -359,6 +377,12 @@ def order_scope(text, state_name=None):
         spans = [m.span() for m in FLAG_SENTENCE_RE.finditer(s)]
         for pat in (p for p in (STATEWIDE_SCOPE_RE, name_re) if p):
             for m in pat.finditer(s):
+                # "within the State" that is really "within the State Capitol
+                # Complex", or "Michigan flags" that is really "Michigan flags
+                # within the State Capitol Complex": the marker is the prefix
+                # of a narrower phrase, so it says nothing about statewide.
+                if NARROWING_AFTER_RE.match(s, m.end()):
+                    continue
                 if any(min(abs(m.start() - b), abs(a - m.end())) <= SCOPE_NEAR_CHARS
                        for a, b in spans):
                     return "statewide", m.group(0).strip()[:90]
