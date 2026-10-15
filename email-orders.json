@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T22:02:07+00:00",
+  "generated_at": "2026-10-15T22:16:30+00:00",
   "orders": {
     "KY": {
       "state_code": "KY",
@@ -61,7 +61,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 21,
+      "count": 22,
       "subjects": [
         "Hawai'i - Half-Staff Alert - Patricia Saiki",
         "Connecticut - Half-Staff Alert - Elvin Hernandez",
@@ -82,7 +82,8 @@
         "Michigan - Half-Staff Alert - John Pappageorge",
         "Iowa - Half-Staff Alert - Charles \u201cChuck\u201d Jones",
         "Two Ships Against an Empire",
-        "South Dakota - Half-Staff Alert - Elmer Bietz"
+        "South Dakota - Half-Staff Alert - Elmer Bietz",
+        "Oregon - Half-Staff Alert - David Taylor"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
