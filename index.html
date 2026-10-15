@@ -159,9 +159,9 @@ select:focus-visible{outline:2px solid var(--navy-lit);outline-offset:2px}
   font-family:var(--mono);font-size:13px;color:var(--muted);
   display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .receipt a{color:var(--muted);text-underline-offset:3px}
-/* A credential, not a status line: its own quiet row in the body face, a
-   small seal, the second source linked. Absent when an answer rests on one
-   source - the absence is the signal. */
+/* A credential, not a status line: its own quiet row in the body face and a
+   small seal. No link - see credential() for why. Absent when an answer
+   rests on one source - the absence is the signal. */
 .credential{flex-basis:100%;display:flex;align-items:center;gap:8px;
   font-family:var(--body);font-size:13px;letter-spacing:.01em;color:var(--muted)}
 .credential .seal{display:inline-grid;place-items:center;width:16px;height:16px;
@@ -568,15 +568,19 @@ function headline(v){
 // A corroborated answer carries a small credential: two independent official
 // sources were read separately and agreed. A single reading shows nothing -
 // the absence of the credential is the signal, and "read from one source"
-// read like debug output. (confidence_basis stays in status.json.)
+// read like debug output. (confidence_basis and sources stay in status.json;
+// this only decides what the page shows.)
+//
+// The badge does NOT link to the second source. It used to, and some of those
+// URLs are a state's own email signup page - so the one element on the page
+// whose job is to say "you can trust this answer" was sending people away to
+// subscribe somewhere else. The credential is a statement about how the
+// answer was reached, not a citation to go and read.
 function credential(s){
   if(s.reason_source === 'federal') return '';
   if((s.confidence_basis || '').indexOf('corroborated') !== 0) return '';
-  const srcs = (s.sources || []).filter(x => x && /^https?:\/\//i.test(x.url||''));
-  const second = srcs.find(x => x.url !== s.source_url);
   return `<div class="credential"><span class="seal" aria-hidden="true">&#10003;</span>`
     + `Confirmed by two independent sources`
-    + (second ? ` &middot; <a href="${esc(second.url)}" target="_blank" rel="noopener">second source &nearr;</a>` : '')
     + `</div>`;
 }
 

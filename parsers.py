@@ -1027,8 +1027,19 @@ RANGE_RE = re.compile(
     r"\b(?:from|beginning|effective|starting)\s+(.{0,90}?)\s+"
     r"(?:through|until|thru|to)\s+(.{0,90})", re.I)
 OW_UNTIL_RE = re.compile(r"\b(?:until|through|thru)\s+(.{0,70})", re.I)
+# "on Friday, September 11", "Friday, September 11", or "on September 11".
+#
+# "on day, October 13, 2026" is accepted too, and that is not a typo on our
+# side. Michigan renders the weekday from a template token that is not always
+# filled, and ships the order with a bare "day" where the weekday belongs -
+# in the press release AND in the GovDelivery bulletin built from it. Without
+# this the date is not recognised as a day at all, order_window returns
+# nothing, and the order falls through to the undated grace window: Michigan
+# sat at half-staff for two days after it had returned to full. A stray
+# "day," in front of a date carries no meaning of its own, so accepting it
+# costs nothing and recovers every order this sender sends.
 ON_DAY_BEFORE_RE = re.compile(
-    r"(?:\bon\s+(?:[a-z]+day,?\s+)?|\b[a-z]+day,?\s+)$", re.I)
+    r"(?:\bon\s+(?:[a-z]*day,?\s+)?|\b[a-z]+day,?\s+)$", re.I)
 HISTORIC_DAYS = 366
 # The sentence that carries the order. Wider than HALF_SIGNALS, which decide
 # half vs full and must stay strict: "flags be lowered from sunrise to sunset
@@ -1074,6 +1085,52 @@ def release_date(text):
     for _, d in _dates_in((text or "")[:1500]):
         return d
     return None
+
+
+# "Flags should be returned to full staff on <date>" - the end of the order,
+# stated from the other side. It is a fact about when half-staff STOPS, so it
+# is read from the whole document, not from the order sentence's span:
+# Michigan puts it in its own paragraph, several hundred characters after the
+# half-staff sentence and well outside any span bounded around it.
+RETURN_FULL_RE = re.compile(
+    r"\b(?:may|should|shall|will|can|are\s+to|is\s+to)?\s*(?:be\s+)?"
+    r"(?:return(?:ed|s|ing)?|restor(?:ed|e)|rais(?:ed|e))\s+to\s+"
+    r"full[-\s]?(?:staff|mast)\b(?P<tail>.{0,90})", re.I)
+
+
+def return_to_full(text, ref=None):
+    """(last half-staff day, evidence) implied by a "return to full staff"
+    sentence, or (None, None).
+
+    THE OFF-BY-ONE IS THE POINT. "Returned to full staff on Wednesday,
+    October 14" means half-staff ends with Tuesday the 13th: the return date
+    is the first FULL-staff day, not the last half-staff one. Read as the end
+    date it flies a state at half-staff a day longer than it ordered.
+
+    Unless a time of day is attached. "Return to full-staff at 6 p.m. on
+    Saturday" keeps the flag down for most of Saturday, so Saturday IS the
+    last half-staff day.
+    """
+    t = strip_html(text) if "<" in (text or "") else (text or "")
+    for m in RETURN_FULL_RE.finditer(t):
+        tail = m.group("tail")
+        dates = _dates_in(tail, ref)
+        if not dates:
+            continue
+        at, d = dates[0]
+        # The date has to be in THIS sentence. "Flags should be returned to
+        # full staff. The memorial service will be held on October 20" states
+        # no return date at all, and reading the service date as one would end
+        # the order a week late. A full stop only counts as a boundary when a
+        # capital follows it, so the "p.m." in "at 6 p.m. on Saturday" does not
+        # split the sentence it belongs to.
+        if at > 70 or re.search(r"[.!?]\s+[A-Z]", tail[:at]):
+            continue
+        timed = TIME_OF_DAY_RE.search(tail[:at])
+        if timed:
+            return d, "returns to full staff " + timed.group(0) + " on " + d.isoformat()
+        return d - timedelta(days=1), "returns to full staff " + d.isoformat()
+    return None, None
 
 
 def _window_in(span, published):
@@ -1169,11 +1226,31 @@ def order_window(text, published=None):
     # same words - "shall be flown at half-staff ... until sunset, September
     # 1" - and skipping it lost the Dolly Parton window.
     spans.sort(key=lambda s: bool(BOILERPLATE_RE.search(t[s[0]:s[1]])))
+    # A stated return to full staff is the most explicit thing a bulletin can
+    # say about when the order ENDS, and it is routinely in a paragraph of its
+    # own that no span around the half-staff sentence reaches. It therefore
+    # overrides the end the span produced: where both are present the span is
+    # inferring ("these are the dates mentioned") and the return sentence is
+    # declaring ("this is when the flag goes back up"). Without this a span
+    # that happens to see both dates reads the return day as a half-staff day
+    # and keeps the flag down one day too long.
+    ret_end, _ = return_to_full(t, published)
     for lo, hi1, hi2 in spans:
         for span in (t[lo:hi1], t[lo:hi2]):
             w = _window_in(span, published)
             if w:
-                return w
+                start, end = w
+                # Ignore a return that predates the start: that is a different
+                # order being referred to, not this one ending.
+                if ret_end and not (start and ret_end < start):
+                    return start, ret_end
+                return start, end
+    # No order sentence we can read a window from, but the bulletin still says
+    # when the flag goes back up. The caller supplies the start (the release
+    # date); an end that the state actually stated beats the undated grace
+    # window, which is what Michigan fell into.
+    if ret_end:
+        return None, ret_end
     return None, None
 
 

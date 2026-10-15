@@ -1466,6 +1466,65 @@ t("with no publication day given, the dateline resolves 'Friday' - and only that
   P.order_window("Bismarck, Wednesday, September 9, 2026. Flags will fly at "
                  "half-staff on Friday."), (date(2026, 9, 11), date(2026, 9, 11)))
 
+# --- the end of an order, stated from the other side ----------------------
+# Michigan sat at half-staff for two days after it had returned to full. Both
+# faults are reproduced here from the real bulletin text.
+MI_REAL = (
+    "Gov. Whitmer Lowers Flags to Honor Former State Senator John Pappageorge\n"
+    "October 12, 2026\nFOR IMMEDIATE RELEASE\nOctober 12, 2026\n"
+    "Contact: press@michigan.gov\n\n"
+    "LANSING, Mich. - Governor Gretchen Whitmer has ordered U.S. and Michigan flags "
+    "within the State Capitol Complex to be lowered to half-staff on day, October 13, "
+    "2026, to honor and remember former state Senator John Pappageorge.\n\n"
+    "The State of Michigan recognizes the duty, honor, and service of former state "
+    "Senator John Pappageorge by lowering flags to half-staff within the State Capitol "
+    "Complex. To lower flags to half-staff, flags should be hoisted first to the peak "
+    "for an instant and then lowered to the half-staff position. The process is "
+    "reversed before the flag is lowered for the day.\n\n"
+    "Flags should be returned to full staff on day, October 14, 2026.\n")
+t("THE MICHIGAN BUG: the real bulletin parses to the one day it covers",
+  P.order_window(MI_REAL, date(2026, 10, 12)), (date(2026, 10, 13), date(2026, 10, 13)))
+
+# "on day," is Michigan's CMS failing to render the weekday. It is in the
+# published release, so it is in the GovDelivery bulletin built from it.
+t("a weekday token the sender failed to render still reads as a day",
+  P.order_window("Flags are to be lowered to half-staff on day, October 13, 2026.",
+                 date(2026, 10, 12)), (date(2026, 10, 13), date(2026, 10, 13)))
+t("a real weekday still works", P.order_window(
+  "Flags are to be lowered to half-staff on Tuesday, October 13, 2026.",
+  date(2026, 10, 12)), (date(2026, 10, 13), date(2026, 10, 13)))
+
+# THE OFF-BY-ONE. The return date is the first FULL-staff day, not the last
+# half-staff one. Reading it as the end flies a state low a day too long.
+t("'returned to full staff on X' ends the order the day BEFORE X",
+  P.return_to_full("Flags should be returned to full staff on October 14, 2026.",
+                   date(2026, 10, 12))[0], date(2026, 10, 13))
+t("'may be returned to full staff on X' likewise",
+  P.return_to_full("Flags may be returned to full staff on Wednesday, October 14, 2026.",
+                   date(2026, 10, 12))[0], date(2026, 10, 13))
+t("a return at a TIME of day keeps that day at half-staff",
+  P.return_to_full("Flags return to full-staff at 6 p.m. on Saturday, October 10, 2026.",
+                   date(2026, 10, 9))[0], date(2026, 10, 10))
+t("boilerplate with no date states nothing",
+  P.return_to_full("Flags should be returned to full staff at sunrise.",
+                   date(2026, 10, 12)), (None, None))
+t("a date in the NEXT sentence is not this sentence's return date",
+  P.return_to_full("Flags should be returned to full staff. The memorial service "
+                   "will be held on October 20, 2026.", date(2026, 10, 12)), (None, None))
+
+t("a stated return overrides a span that read the return day as a half-staff day",
+  P.order_window("Flags shall fly at half-staff on Monday, October 12, 2026. Flags "
+                 "should be returned to full staff on Wednesday, October 14, 2026.",
+                 date(2026, 10, 12)), (date(2026, 10, 12), date(2026, 10, 13)))
+t("a return that predates the start belongs to another order and is ignored",
+  P.order_window("Flags shall fly at half-staff from October 20, 2026 until October 22, "
+                 "2026. Flags were returned to full staff on October 2, 2026.",
+                 date(2026, 10, 19)), (date(2026, 10, 20), date(2026, 10, 22)))
+t("an explicit 'until sunset' window is still read as before",
+  P.order_window("Flags shall be flown at half-staff from Monday, October 12, 2026 "
+                 "until sunset on Wednesday, October 14, 2026.", date(2026, 10, 12)),
+  (date(2026, 10, 12), date(2026, 10, 14)))
+
 # --- a statutory observance's day comes from the law, not a 3-day hold -----
 PD_URL = "https://www.whitehouse.gov/presidential-actions/2026/09/patriot-day-2026-the-25th-anniversary/"
 PD_LIST = f'<a href="{PD_URL}">Patriot Day 2026, The 25th Anniversary of the September 11 Terrorist Attacks</a>'
