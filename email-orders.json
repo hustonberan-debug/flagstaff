@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T23:47:33+00:00",
+  "generated_at": "2026-10-16T00:01:30+00:00",
   "orders": {
     "KY": {
       "state_code": "KY",
@@ -61,12 +61,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 22,
+      "count": 18,
       "subjects": [
-        "Hawai'i - Half-Staff Alert - Patricia Saiki",
-        "Connecticut - Half-Staff Alert - Elvin Hernandez",
-        "Maryland - Half-Staff Alert - Ronald Shane Hinson",
-        "North Carolina - Half-Staff Alert - Dottie Martin",
         "Kentucky - Half-Staff Alert - Hayden W. Phillips",
         "Update - Maryland - Half-Staff Alert - Chief George Bacorn",
         "Maryland - Half-Staff Alert - Carolyn J.B. Howard",
