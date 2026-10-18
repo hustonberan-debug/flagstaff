@@ -459,7 +459,7 @@
       "source_url": "https://governor.hawaii.gov/category/newsroom/feed/",
       "checked_at": "2026-10-18T11:31:27+00:00",
       "last_changed_at": "2026-09-15T03:17:04+00:00",
-      "content_changed": false,
+      "content_changed": true,
       "error": null,
       "last_expired_order": null,
       "items_parsed": 10,
