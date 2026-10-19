@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T18:30:32+00:00",
+  "generated_at": "2026-10-19T18:45:38+00:00",
   "orders": {
     "KY": {
       "state_code": "KY",
@@ -61,7 +61,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 20,
+      "count": 21,
       "subjects": [
         "Maryland - Half-Staff Alert - Carolyn J.B. Howard",
         "A Threat. A Mountain. A Turning Point.",
@@ -81,7 +81,8 @@
         "Oregon - Half-Staff Alert - Silver Rail Elementary School",
         "Ohio - Half-Staff Alert - Gerald Stebelton",
         "Wyoming - Half-Staff Alert - Jonn Edmunds",
-        "Arkansas - Half-Staff Alert - Delmor W. Erwin"
+        "Arkansas - Half-Staff Alert - Delmor W. Erwin",
+        "Ohio - Half-Staff Alert - Jacob Roesler"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
