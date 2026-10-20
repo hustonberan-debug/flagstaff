@@ -1258,7 +1258,7 @@
     "last_parsed": "2026-10-20T23:18:10+00:00",
     "last_checked": "2026-10-20T23:18:10+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "index|https://gov.texas.gov/news|fetch"
   },
   "MO~2": {

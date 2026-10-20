@@ -1737,7 +1737,7 @@
           "kind": "press listing",
           "url": "https://gov.texas.gov/news",
           "status": "full",
-          "evidence": null
+          "evidence": "timeout; last read 2026-10-20"
         }
       ],
       "confidence_basis": "corroborated by 2 independent sources",
