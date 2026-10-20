@@ -1,24 +1,6 @@
 {
-  "generated_at": "2026-10-19T23:46:24+00:00",
+  "generated_at": "2026-10-20T00:00:42+00:00",
   "orders": {
-    "KY": {
-      "state_code": "KY",
-      "identified_by": "sender domain subscriptions.kentucky.gov, dkim=pass subscriptions.kentucky.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "Gov. Beshear Orders Flags to Half-Staff Tuesday in Honor of Kentucky Airman Who Died in World War II",
-      "from": "Governor's Communications Office <governor@subscriptions.kentucky.gov>",
-      "sent_date": "2026-10-05",
-      "start_date": "2026-10-06",
-      "end_date": "2026-10-06",
-      "until_noon": false,
-      "evidence": "to Half-Staff",
-      "scope": "statewide",
-      "scope_evidence": "at all state buildings",
-      "senders": [
-        "governor@subscriptions.kentucky.gov"
-      ]
-    },
     "IA": {
       "state_code": "IA",
       "identified_by": "sender domain email.iowa.gov, dkim=pass email.iowa.gov",
@@ -61,9 +43,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 21,
+      "count": 20,
       "subjects": [
-        "Maryland - Half-Staff Alert - Carolyn J.B. Howard",
         "A Threat. A Mountain. A Turning Point.",
         "Texas - Half-Staff Alert - Solidarity with the State of Israel",
         "Alabama - Half -Staff Alert - Bobby Mac Junkins",
