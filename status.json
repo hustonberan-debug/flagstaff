@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-20T23:46:33+00:00",
-  "date": "2026-10-20",
+  "generated_at": "2026-10-21T00:01:55+00:00",
+  "date": "2026-10-21",
   "federal": null,
   "federal_check": "ok",
   "states": {
@@ -21,12 +21,12 @@
         "end_date": null
       },
       "source_url": "https://gov.alaska.gov/services/status-of-the-flag/",
-      "checked_at": "2026-10-20T23:46:12+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-09-23T01:38:13+00:00",
       "content_changed": false,
       "error": null,
       "source_last_modified": "2026-09-18",
-      "source_age_days": 32,
+      "source_age_days": 33,
       "declared": "unknown",
       "last_expired_order": {
         "why": "window 2026-09-22..2026-09-22",
@@ -63,19 +63,19 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.alabama.gov/flag-status/",
-      "checked_at": "2026-10-20T23:46:12+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": null,
       "content_changed": false,
       "error": null,
       "source_last_modified": "2019-12-10",
-      "source_age_days": 2506,
+      "source_age_days": 2507,
       "declared": "full",
       "sources": [
         {
           "kind": "status page",
           "url": "https://governor.alabama.gov/flag-status/",
           "status": "unknown",
-          "evidence": "source appears frozen: newest date on page is 2019-12-10 (2506d old) - not trusted"
+          "evidence": "source appears frozen: newest date on page is 2019-12-10 (2507d old) - not trusted"
         },
         {
           "kind": "press listing",
@@ -101,7 +101,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.arkansas.gov/newsroom/",
-      "checked_at": "2026-10-20T23:46:12+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-09-15T14:06:24+00:00",
       "content_changed": false,
       "error": null,
@@ -139,17 +139,17 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://az.gov/half-staff-notices",
-      "checked_at": "2026-10-20T23:46:12+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-09-12T07:38:22+00:00",
       "content_changed": null,
       "error": null,
-      "consecutive_errors": 435,
+      "consecutive_errors": 436,
       "sources": [
         {
           "kind": "status page",
           "url": "https://az.gov/half-staff-notices",
           "status": "unknown",
-          "evidence": "HTTP 403; unreadable since 2026-10-16 (4d, 435 consecutive failures)"
+          "evidence": "HTTP 403; unreadable since 2026-10-16 (5d, 436 consecutive failures)"
         },
         {
           "kind": "email bulletin",
@@ -175,7 +175,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.gov.ca.gov/feed/",
-      "checked_at": "2026-10-20T23:46:12+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-09-15T18:20:54+00:00",
       "content_changed": false,
       "error": null,
@@ -184,7 +184,7 @@
       "flag_items": 0,
       "dated_items": 10,
       "source_last_modified": "2026-10-20",
-      "source_age_days": 0,
+      "source_age_days": 1,
       "sources": [
         {
           "kind": "press feed",
@@ -210,19 +210,19 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governorsoffice.colorado.gov/governor/flag-status",
-      "checked_at": "2026-10-20T23:46:12+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": null,
       "content_changed": false,
       "error": null,
       "source_last_modified": "2007-06-29",
-      "source_age_days": 7053,
+      "source_age_days": 7054,
       "declared": "full",
       "sources": [
         {
           "kind": "status page",
           "url": "https://governorsoffice.colorado.gov/governor/flag-status",
           "status": "unknown",
-          "evidence": "source appears frozen: newest date on page is 2007-06-29 (7053d old) - not trusted"
+          "evidence": "source appears frozen: newest date on page is 2007-06-29 (7054d old) - not trusted"
         },
         {
           "kind": "press listing",
@@ -248,7 +248,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://portal.ct.gov/governor/news/press-releases",
-      "checked_at": "2026-10-20T23:46:12+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-10-03T00:01:04+00:00",
       "content_changed": false,
       "error": null,
@@ -296,7 +296,7 @@
         "end_date": null
       },
       "source_url": "https://os.dc.gov/service/flag-status",
-      "checked_at": "2026-10-20T23:46:12+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-09-15T18:20:54+00:00",
       "content_changed": false,
       "error": null,
@@ -342,12 +342,12 @@
         "end_date": null
       },
       "source_url": "https://news.delaware.gov/flag-status/",
-      "checked_at": "2026-10-20T23:46:12+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-10-12T18:31:01+00:00",
-      "content_changed": true,
+      "content_changed": false,
       "error": null,
       "source_last_modified": "2026-10-12",
-      "source_age_days": 8,
+      "source_age_days": 9,
       "declared": "full",
       "sources": [
         {
@@ -388,12 +388,12 @@
         "end_date": null
       },
       "source_url": "https://www.flgov.com/eog/info/flag-information",
-      "checked_at": "2026-10-20T23:46:12+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-09-17T18:24:59+00:00",
-      "content_changed": true,
+      "content_changed": false,
       "error": null,
       "source_last_modified": "2026-05-28",
-      "source_age_days": 145,
+      "source_age_days": 146,
       "declared": "full",
       "sources": [
         {
@@ -426,7 +426,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://gov.ga.gov/rss.xml",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-09-12T00:00:00+00:00",
       "content_changed": false,
       "error": null,
@@ -435,7 +435,7 @@
       "flag_items": 0,
       "dated_items": 10,
       "source_last_modified": "2026-10-14",
-      "source_age_days": 6,
+      "source_age_days": 7,
       "sources": [
         {
           "kind": "press feed",
@@ -461,7 +461,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.hawaii.gov/category/newsroom/feed/",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-09-15T03:17:04+00:00",
       "content_changed": false,
       "error": null,
@@ -470,7 +470,7 @@
       "flag_items": 0,
       "dated_items": 10,
       "source_last_modified": "2026-10-20",
-      "source_age_days": 0,
+      "source_age_days": 1,
       "sources": [
         {
           "kind": "press feed",
@@ -502,7 +502,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.iowa.gov/news/all/all/all/rss.xml",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-10-16T00:01:31+00:00",
       "content_changed": false,
       "error": null,
@@ -515,7 +515,7 @@
       "flag_items": 1,
       "dated_items": 10,
       "source_last_modified": "2026-10-19",
-      "source_age_days": 1,
+      "source_age_days": 2,
       "sources": [
         {
           "kind": "press feed",
@@ -555,12 +555,12 @@
         "end_date": null
       },
       "source_url": "https://gov.idaho.gov/flag-status/",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-09-15T21:26:28+00:00",
       "content_changed": false,
       "error": null,
       "source_last_modified": "2026-09-14",
-      "source_age_days": 36,
+      "source_age_days": 37,
       "declared": "full",
       "sources": [
         {
@@ -593,7 +593,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.illinois.gov/about/communications-opt-in.html",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": null,
       "content_changed": false,
       "error": "subscription pending - no flag bulletin received from this channel yet",
@@ -629,7 +629,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://events.in.gov/group/gov",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:15+00:00",
       "last_changed_at": "2026-09-15T18:20:55+00:00",
       "content_changed": false,
       "error": null,
@@ -663,7 +663,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://public.govdelivery.com/accounts/KSOG/subscriber/new",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:16+00:00",
       "last_changed_at": null,
       "content_changed": false,
       "error": null,
@@ -699,7 +699,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://public.govdelivery.com/accounts/KYGOV/subscriber/new",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:16+00:00",
       "last_changed_at": "2026-10-07T00:01:15+00:00",
       "content_changed": false,
       "error": null,
@@ -743,7 +743,7 @@
         "end_date": null
       },
       "source_url": "https://gov.louisiana.gov/page/flag-status",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:16+00:00",
       "last_changed_at": "2026-09-12T00:00:00+00:00",
       "content_changed": false,
       "error": null,
@@ -781,7 +781,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.mass.gov/info-details/flag-status",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:16+00:00",
       "last_changed_at": null,
       "content_changed": false,
       "error": "subscription pending - no flag bulletin received from this channel yet",
@@ -817,7 +817,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.maryland.gov/news/press-releases",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:16+00:00",
       "last_changed_at": "2026-09-15T18:20:55+00:00",
       "content_changed": false,
       "error": null,
@@ -851,7 +851,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.maine.gov/governor/mills/newsroom",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:16+00:00",
       "last_changed_at": "2026-09-15T18:20:55+00:00",
       "content_changed": false,
       "error": null,
@@ -889,7 +889,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://public.govdelivery.com/accounts/MIEOG/subscriber/new",
-      "checked_at": "2026-10-20T23:46:13+00:00",
+      "checked_at": "2026-10-21T00:01:16+00:00",
       "last_changed_at": "2026-10-15T16:14:33+00:00",
       "content_changed": false,
       "error": null,
@@ -925,7 +925,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://mn.gov/governor/rest/rss/Flags%20Half%20Staff?id=1055-63312&detailPage=/governor/newsroom/flag-status/index.jsp",
-      "checked_at": "2026-10-20T23:46:14+00:00",
+      "checked_at": "2026-10-21T00:01:16+00:00",
       "last_changed_at": "2026-09-15T18:20:55+00:00",
       "content_changed": false,
       "error": null,
@@ -934,7 +934,7 @@
       "flag_items": 10,
       "dated_items": 10,
       "source_last_modified": "2026-09-28",
-      "source_age_days": 22,
+      "source_age_days": 23,
       "sources": [
         {
           "kind": "press feed",
@@ -966,7 +966,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://oa.mo.gov/facilities/facilities-operations/flag-display/flag-notifications",
-      "checked_at": "2026-10-20T23:46:14+00:00",
+      "checked_at": "2026-10-21T00:01:16+00:00",
       "last_changed_at": "2026-09-12T00:00:00+00:00",
       "content_changed": false,
       "error": null,
@@ -975,7 +975,7 @@
       "flag_items": 18,
       "dated_items": 17,
       "source_last_modified": "2026-09-10",
-      "source_age_days": 40,
+      "source_age_days": 41,
       "sources": [
         {
           "kind": "press listing",
@@ -1015,12 +1015,12 @@
         "end_date": null
       },
       "source_url": "https://governorreeves.ms.gov/flag-status/",
-      "checked_at": "2026-10-20T23:46:14+00:00",
+      "checked_at": "2026-10-21T00:01:16+00:00",
       "last_changed_at": "2026-09-20T01:21:36+00:00",
-      "content_changed": false,
+      "content_changed": true,
       "error": null,
       "source_last_modified": "2026-09-18",
-      "source_age_days": 32,
+      "source_age_days": 33,
       "declared": "full",
       "sources": [
         {
@@ -1094,7 +1094,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nc.gov/news/feed",
-      "checked_at": "2026-10-20T23:46:14+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-09-14T23:55:49+00:00",
       "content_changed": false,
       "error": null,
@@ -1103,7 +1103,7 @@
       "flag_items": 0,
       "dated_items": 10,
       "source_last_modified": "2026-10-20",
-      "source_age_days": 0,
+      "source_age_days": 1,
       "sources": [
         {
           "kind": "press feed",
@@ -1129,7 +1129,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.governor.nd.gov/rss/news",
-      "checked_at": "2026-10-20T23:46:14+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-09-15T18:20:55+00:00",
       "content_changed": false,
       "error": null,
@@ -1138,7 +1138,7 @@
       "flag_items": 0,
       "dated_items": 10,
       "source_last_modified": "2026-10-20",
-      "source_age_days": 0,
+      "source_age_days": 1,
       "sources": [
         {
           "kind": "press feed",
@@ -1164,7 +1164,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nebraska.gov/press-releases",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-09-22T22:40:40+00:00",
       "content_changed": false,
       "error": null,
@@ -1198,7 +1198,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://maillist.nh.gov/list/nhgov/?p=subscribe&id=6",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": null,
       "content_changed": false,
       "error": "subscription pending - no flag bulletin received from this channel yet",
@@ -1234,7 +1234,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.nj.gov/governor/news/2026/approved/news_archive.shtml",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-09-26T00:00:30+00:00",
       "content_changed": false,
       "error": null,
@@ -1243,7 +1243,7 @@
       "flag_items": 5,
       "dated_items": 5,
       "source_last_modified": "2026-10-13",
-      "source_age_days": 7,
+      "source_age_days": 8,
       "sources": [
         {
           "kind": "press listing",
@@ -1275,7 +1275,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.nm.gov/newsroom",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-09-14T21:20:45+00:00",
       "content_changed": false,
       "error": null,
@@ -1321,12 +1321,12 @@
         "end_date": null
       },
       "source_url": "https://www.gov.nv.gov/constituent-services/flag-status/",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-09-15T18:20:56+00:00",
       "content_changed": true,
       "error": null,
       "source_last_modified": "2026-09-12",
-      "source_age_days": 38,
+      "source_age_days": 39,
       "declared": "unknown",
       "sources": [
         {
@@ -1359,11 +1359,11 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://www.governor.ny.gov/news",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": null,
       "content_changed": null,
       "error": "HTTP 403",
-      "consecutive_errors": 2644,
+      "consecutive_errors": 2645,
       "sources": [
         {
           "kind": "press listing",
@@ -1389,7 +1389,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://governor.ohio.gov/flag-honors",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-09-15T18:20:56+00:00",
       "content_changed": false,
       "error": "its status page claims half-staff but it shows no dated order, and its press listing shows no order - neither is published",
@@ -1482,7 +1482,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://apps.oregon.gov/oregon-newsroom/OR/GOV/Posts",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-09-15T18:20:56+00:00",
       "content_changed": false,
       "error": null,
@@ -1528,7 +1528,7 @@
         "end_date": null
       },
       "source_url": "https://www.pa.gov/agencies/dgs/flag-notices.html",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-10-20T23:01:14+00:00",
       "content_changed": false,
       "error": null,
@@ -1566,7 +1566,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.ri.gov/press-releases.xml",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-09-12T00:00:00+00:00",
       "content_changed": false,
       "error": null,
@@ -1575,7 +1575,7 @@
       "flag_items": 0,
       "dated_items": 6,
       "source_last_modified": "2026-10-19",
-      "source_age_days": 1,
+      "source_age_days": 2,
       "sources": [
         {
           "kind": "press feed",
@@ -1601,7 +1601,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.sc.gov/news",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:17+00:00",
       "last_changed_at": "2026-09-12T00:00:00+00:00",
       "content_changed": false,
       "error": null,
@@ -1637,7 +1637,7 @@
       "source_url": "https://governor.sd.gov/news/press-releases.aspx",
       "checked_at": "2026-10-20T23:46:11+00:00",
       "last_changed_at": "2026-10-19T21:15:58+00:00",
-      "content_changed": true,
+      "content_changed": false,
       "error": null,
       "rendered_at": "2026-10-20T23:46:11+00:00",
       "listing_evidence": "50 dated cards",
@@ -1675,23 +1675,27 @@
     "TN": {
       "state": "Tennessee",
       "state_code": "TN",
-      "coverage": "stale",
+      "coverage": "covered",
       "ingest_mode": "index",
       "confidence": "medium",
       "state_status": "full",
       "state_order": null,
       "source_url": "https://www.tn.gov/governor/news.html",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:18+00:00",
       "last_changed_at": "2026-09-12T00:00:00+00:00",
-      "content_changed": null,
-      "error": "HTTP 403; last read 2026-10-20",
-      "consecutive_errors": 1,
+      "content_changed": false,
+      "error": null,
+      "listing_evidence": "13 headline-length links to this site",
+      "last_expired_order": null,
+      "items_parsed": 60,
+      "flag_items": 0,
+      "dated_items": 0,
       "sources": [
         {
           "kind": "press listing",
           "url": "https://www.tn.gov/governor/news.html",
           "status": "full",
-          "evidence": "HTTP 403; last read 2026-10-20"
+          "evidence": null
         }
       ],
       "confidence_basis": "single-source",
@@ -1719,7 +1723,7 @@
         "end_date": null
       },
       "source_url": "https://gov.texas.gov/flag-status",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:18+00:00",
       "last_changed_at": "2026-10-09T20:01:05+00:00",
       "content_changed": false,
       "error": null,
@@ -1765,12 +1769,12 @@
         "end_date": null
       },
       "source_url": "https://governor.utah.gov/flag-status",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:18+00:00",
       "last_changed_at": "2026-09-12T07:38:24+00:00",
       "content_changed": false,
       "error": null,
       "source_last_modified": "2026-09-01",
-      "source_age_days": 49,
+      "source_age_days": 50,
       "declared": "unknown",
       "sources": [
         {
@@ -1811,12 +1815,12 @@
         "end_date": null
       },
       "source_url": "https://www.governor.virginia.gov/constituent-services/flag-information/",
-      "checked_at": "2026-10-20T23:46:15+00:00",
+      "checked_at": "2026-10-21T00:01:18+00:00",
       "last_changed_at": "2026-09-15T08:51:30+00:00",
       "content_changed": false,
       "error": null,
       "source_last_modified": "2026-10-20",
-      "source_age_days": 0,
+      "source_age_days": 1,
       "declared": "full",
       "sources": [
         {
@@ -1843,7 +1847,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.vermont.gov/taxonomy/term/3/feed",
-      "checked_at": "2026-10-20T23:46:16+00:00",
+      "checked_at": "2026-10-21T00:01:18+00:00",
       "last_changed_at": "2026-09-12T00:00:00+00:00",
       "content_changed": false,
       "error": null,
@@ -1852,7 +1856,7 @@
       "flag_items": 0,
       "dated_items": 10,
       "source_last_modified": "2026-10-20",
-      "source_age_days": 0,
+      "source_age_days": 1,
       "sources": [
         {
           "kind": "press feed",
@@ -1878,7 +1882,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.wa.gov/rss.xml",
-      "checked_at": "2026-10-20T23:46:16+00:00",
+      "checked_at": "2026-10-21T00:01:18+00:00",
       "last_changed_at": "2026-09-14T21:20:46+00:00",
       "content_changed": false,
       "error": null,
@@ -1887,7 +1891,7 @@
       "flag_items": 0,
       "dated_items": 10,
       "source_last_modified": "2026-10-20",
-      "source_age_days": 0,
+      "source_age_days": 1,
       "sources": [
         {
           "kind": "press feed",
@@ -1913,7 +1917,7 @@
       "state_status": "unknown",
       "state_order": null,
       "source_url": "https://service.govdelivery.com/accounts/WIDMA/subscriber/new?topic_id=WIDMA_17",
-      "checked_at": "2026-10-20T23:46:16+00:00",
+      "checked_at": "2026-10-21T00:01:18+00:00",
       "last_changed_at": "2026-09-12T00:00:00+00:00",
       "content_changed": false,
       "error": "subscription pending - no flag bulletin received from this channel yet",
@@ -1943,7 +1947,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://governor.wv.gov/rss.xml",
-      "checked_at": "2026-10-20T23:46:16+00:00",
+      "checked_at": "2026-10-21T00:01:18+00:00",
       "last_changed_at": "2026-09-15T18:20:57+00:00",
       "content_changed": false,
       "error": null,
@@ -1952,7 +1956,7 @@
       "flag_items": 2,
       "dated_items": 80,
       "source_last_modified": "2026-10-20",
-      "source_age_days": 0,
+      "source_age_days": 1,
       "sources": [
         {
           "kind": "press feed",
@@ -1978,7 +1982,7 @@
       "state_status": "full",
       "state_order": null,
       "source_url": "https://public.govdelivery.com/accounts/WYGOV/subscriber/new",
-      "checked_at": "2026-10-20T23:46:16+00:00",
+      "checked_at": "2026-10-21T00:01:18+00:00",
       "last_changed_at": null,
       "content_changed": false,
       "error": null,
@@ -2007,12 +2011,12 @@
     }
   },
   "meta": {
-    "covered": 45,
+    "covered": 46,
     "answered": 45,
     "not_covered": 5,
-    "stale": 1,
+    "stale": 0,
     "frozen": 0,
-    "errors": 7,
+    "errors": 6,
     "total": 51
   }
 }
