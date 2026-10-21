@@ -1,6 +1,25 @@
 {
-  "generated_at": "2026-10-21T07:31:26+00:00",
-  "orders": {},
+  "generated_at": "2026-10-21T07:45:45+00:00",
+  "orders": {
+    "IA": {
+      "state_code": "IA",
+      "identified_by": "sender domain email.iowa.gov, dkim=pass email.iowa.gov",
+      "status": "half",
+      "authority": "governor",
+      "subject": "FLAGS: Gov. Reynolds orders flags at half-staff in honor and remembrance of Council Bluffs firefighter and paramedic Charles Jones",
+      "from": "State Of Iowa <StateOfIowa@email.iowa.gov>",
+      "sent_date": "2026-10-12",
+      "start_date": "2026-10-14",
+      "end_date": "2026-10-15",
+      "until_noon": false,
+      "evidence": "at half-staff",
+      "scope": "statewide",
+      "scope_evidence": "all public buildings",
+      "senders": [
+        "stateofiowa@email.iowa.gov"
+      ]
+    }
+  },
   "channels_seen": {
     "MI": "2026-10-12",
     "KY": "2026-10-05",
@@ -24,13 +43,25 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 5,
+      "count": 18,
       "subjects": [
         "New York - Half-Staff Alert - Victims of the Hamas attack",
         "Delaware - Half-Staff Alert - Patricia \u201cPatti\u201d Blevins",
         "North Carolina - Half-Staff Alert - Andrew Brokes",
         "Wisconsin - Half-Staff Alert - Trooper Bradley Ritger",
-        "Pennsylvania - Half-Staff Alert - Shane Seiber"
+        "Pennsylvania - Half-Staff Alert - Shane Seiber",
+        "New Jersey - Half-Staff Alert - Sandra Bolden Cunningham",
+        "Michigan - Half-Staff Alert - John Pappageorge",
+        "Iowa - Half-Staff Alert - Charles \u201cChuck\u201d Jones",
+        "Two Ships Against an Empire",
+        "South Dakota - Half-Staff Alert - Elmer Bietz",
+        "Oregon - Half-Staff Alert - David Taylor",
+        "Oregon - Half-Staff Alert - Silver Rail Elementary School",
+        "Ohio - Half-Staff Alert - Gerald Stebelton",
+        "Wyoming - Half-Staff Alert - Jonn Edmunds",
+        "Arkansas - Half-Staff Alert - Delmor W. Erwin",
+        "Ohio - Half-Staff Alert - Jacob Roesler",
+        "The Deal That Doubled America"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
