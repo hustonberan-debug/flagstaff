@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T23:45:58+00:00",
+  "generated_at": "2026-10-22T00:03:54+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -43,10 +43,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 18,
+      "count": 16,
       "subjects": [
-        "New York - Half-Staff Alert - Victims of the Hamas attack",
-        "Delaware - Half-Staff Alert - Patricia \u201cPatti\u201d Blevins",
         "North Carolina - Half-Staff Alert - Andrew Brokes",
         "Wisconsin - Half-Staff Alert - Trooper Bradley Ritger",
         "Pennsylvania - Half-Staff Alert - Shane Seiber",
