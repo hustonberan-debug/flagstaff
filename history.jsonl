@@ -1575,3 +1575,4 @@
 {"at": "2026-10-19T00:00:49+00:00", "state": "SD", "status": "half", "reason": "Flags at Half-Staff Statewide in Honor of Deputy Katherine Ann Frank", "reason_source": "state", "start_date": "2026-10-19", "end_date": "2026-10-19"}
 {"at": "2026-10-20T00:01:32+00:00", "state": "SD", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
 {"at": "2026-10-20T23:01:30+00:00", "state": "PA", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
+{"at": "2026-10-22T04:16:51+00:00", "state": "VA", "status": "half", "reason": "State order", "reason_source": "state", "start_date": null, "end_date": null}
