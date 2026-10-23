@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T00:00:52+00:00",
+  "generated_at": "2026-10-23T00:15:56+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -36,6 +36,24 @@
       "senders": [
         "govpress@list.ks.gov"
       ]
+    },
+    "AZ": {
+      "state_code": "AZ",
+      "identified_by": "sender domain azdoa.gov, dkim=pass azdoa.gov",
+      "status": "half",
+      "authority": "governor",
+      "subject": "Gov. Hobbs Orders Flags to Half-Staff for Sen. Jon Kyl\u2019s Memorial Service",
+      "from": "Half-Staff Notification <communications@azdoa.gov>",
+      "sent_date": "2026-10-23",
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "until_noon": false,
+      "evidence": "to Half-Staff",
+      "scope": "statewide",
+      "scope_evidence": "at all state buildings",
+      "senders": [
+        "communications@azdoa.gov"
+      ]
     }
   },
   "channels_seen": {
@@ -44,7 +62,7 @@
     "MO": "2026-09-10",
     "WY": "2026-09-10",
     "KS": "2026-10-22",
-    "AZ": "2026-09-10",
+    "AZ": "2026-10-23",
     "IA": "2026-10-12"
   },
   "channels_heard": {
@@ -52,7 +70,7 @@
     "MI": "2026-10-12",
     "KS": "2026-10-22",
     "KY": "2026-10-05",
-    "AZ": "2026-09-10",
+    "AZ": "2026-10-23",
     "WI": "2026-09-15",
     "MO": "2026-09-10",
     "OR": "2026-09-23",
