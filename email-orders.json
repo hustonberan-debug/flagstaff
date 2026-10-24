@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T23:46:45+00:00",
+  "generated_at": "2026-10-24T00:01:14+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -79,10 +79,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 17,
+      "count": 15,
       "subjects": [
-        "North Carolina - Half-Staff Alert - Andrew Brokes",
-        "Wisconsin - Half-Staff Alert - Trooper Bradley Ritger",
         "Pennsylvania - Half-Staff Alert - Shane Seiber",
         "New Jersey - Half-Staff Alert - Sandra Bolden Cunningham",
         "Michigan - Half-Staff Alert - John Pappageorge",
@@ -100,15 +98,6 @@
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
-      ]
-    },
-    "service.govdelivery.com": {
-      "count": 1,
-      "subjects": [
-        "NEW Flag-Lowering Order - Executive Order #305 Gov. Evers Orders Flags"
-      ],
-      "senders": [
-        "dma_wi@service.govdelivery.com"
       ]
     }
   },
