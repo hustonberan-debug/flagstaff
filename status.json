@@ -253,7 +253,7 @@
     "CT": {
       "state": "Connecticut",
       "state_code": "CT",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "index",
       "confidence": "high",
       "state_status": "full",
@@ -261,25 +261,21 @@
       "source_url": "https://portal.ct.gov/governor/news/press-releases",
       "checked_at": "2026-10-24T01:48:11+00:00",
       "last_changed_at": "2026-10-03T00:01:04+00:00",
-      "content_changed": false,
-      "error": null,
-      "listing_evidence": "10 headline-length links to this site",
-      "last_expired_order": null,
-      "items_parsed": 41,
-      "flag_items": 0,
-      "dated_items": 0,
+      "content_changed": null,
+      "error": "HTTP 403; last read 2026-10-24",
+      "consecutive_errors": 1,
       "sources": [
         {
           "kind": "press listing",
           "url": "https://portal.ct.gov/governor/news/press-releases",
           "status": "full",
-          "evidence": null
+          "evidence": "HTTP 403; last read 2026-10-24"
         },
         {
           "kind": "status page",
           "url": "https://portal.ct.gov/governor/flag-status",
           "status": "unknown",
-          "evidence": "no explicit status declaration in page text"
+          "evidence": "HTTP 403; last read 2026-10-24"
         }
       ],
       "confidence_basis": "single-source",
@@ -2024,12 +2020,12 @@
     }
   },
   "meta": {
-    "covered": 45,
+    "covered": 44,
     "answered": 45,
     "not_covered": 5,
-    "stale": 1,
+    "stale": 2,
     "frozen": 0,
-    "errors": 7,
+    "errors": 8,
     "total": 51
   }
 }
