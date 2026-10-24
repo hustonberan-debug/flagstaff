@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T01:47:27+00:00",
+  "generated_at": "2026-10-24T02:01:13+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -79,7 +79,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 16,
+      "count": 17,
       "subjects": [
         "Pennsylvania - Half-Staff Alert - Shane Seiber",
         "New Jersey - Half-Staff Alert - Sandra Bolden Cunningham",
@@ -95,7 +95,8 @@
         "Ohio - Half-Staff Alert - Jacob Roesler",
         "The Deal That Doubled America",
         "Virginia - Half-Staff Alert - Bianca C. Wilkerson",
-        "Kansas - Half-Staff Alert - Larry Paul Hibbard"
+        "Kansas - Half-Staff Alert - Larry Paul Hibbard",
+        "Arizona - Half-Staff Alert - Jon Kyl"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
