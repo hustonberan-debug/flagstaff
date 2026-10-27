@@ -1,24 +1,6 @@
 {
-  "generated_at": "2026-10-26T23:46:11+00:00",
+  "generated_at": "2026-10-27T00:01:08+00:00",
   "orders": {
-    "IA": {
-      "state_code": "IA",
-      "identified_by": "sender domain email.iowa.gov, dkim=pass email.iowa.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "FLAGS: Gov. Reynolds orders flags at half-staff in honor and remembrance of Council Bluffs firefighter and paramedic Charles Jones",
-      "from": "State Of Iowa <StateOfIowa@email.iowa.gov>",
-      "sent_date": "2026-10-12",
-      "start_date": "2026-10-14",
-      "end_date": "2026-10-15",
-      "until_noon": false,
-      "evidence": "at half-staff",
-      "scope": "statewide",
-      "scope_evidence": "all public buildings",
-      "senders": [
-        "stateofiowa@email.iowa.gov"
-      ]
-    },
     "KS": {
       "state_code": "KS",
       "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
@@ -98,11 +80,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 16,
+      "count": 12,
       "subjects": [
-        "New Jersey - Half-Staff Alert - Sandra Bolden Cunningham",
-        "Michigan - Half-Staff Alert - John Pappageorge",
-        "Iowa - Half-Staff Alert - Charles \u201cChuck\u201d Jones",
         "Two Ships Against an Empire",
         "South Dakota - Half-Staff Alert - Elmer Bietz",
         "Oregon - Half-Staff Alert - David Taylor",
