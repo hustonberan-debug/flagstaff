@@ -1699,7 +1699,7 @@
     "TX": {
       "state": "Texas",
       "state_code": "TX",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "diff",
       "confidence": "high",
       "state_status": "full",
@@ -1715,11 +1715,9 @@
       "source_url": "https://gov.texas.gov/flag-status",
       "checked_at": "2026-10-28T13:48:04+00:00",
       "last_changed_at": "2026-10-09T20:01:05+00:00",
-      "content_changed": false,
-      "error": null,
-      "source_age_days": null,
-      "freshness_unknown": true,
-      "declared": "full",
+      "content_changed": null,
+      "error": "ConnectionError; last read 2026-10-28",
+      "consecutive_errors": 1,
       "sources": [
         {
           "kind": "status page",
@@ -1731,7 +1729,7 @@
           "kind": "press listing",
           "url": "https://gov.texas.gov/news",
           "status": "full",
-          "evidence": null
+          "evidence": "ConnectionError; last read 2026-10-28"
         }
       ],
       "confidence_basis": "corroborated by 2 independent sources",
@@ -2001,12 +1999,12 @@
     }
   },
   "meta": {
-    "covered": 45,
+    "covered": 44,
     "answered": 46,
     "not_covered": 5,
-    "stale": 1,
+    "stale": 2,
     "frozen": 0,
-    "errors": 6,
+    "errors": 7,
     "total": 51
   }
 }

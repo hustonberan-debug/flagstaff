@@ -884,7 +884,7 @@
     "last_parsed": "2026-10-28T13:48:04+00:00",
     "last_checked": "2026-10-28T13:48:04+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "diff|https://gov.texas.gov/flag-status|fetch"
   },
   "KS": {
@@ -1266,7 +1266,7 @@
     "last_parsed": "2026-10-28T13:48:07+00:00",
     "last_checked": "2026-10-28T13:48:07+00:00",
     "articles": {},
-    "consecutive_errors": 0,
+    "consecutive_errors": 1,
     "source": "index|https://gov.texas.gov/news|fetch"
   },
   "MO~2": {
