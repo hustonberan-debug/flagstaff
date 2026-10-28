@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T23:46:08+00:00",
+  "generated_at": "2026-10-28T00:01:40+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -80,10 +80,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 14,
+      "count": 12,
       "subjects": [
-        "Two Ships Against an Empire",
-        "South Dakota - Half-Staff Alert - Elmer Bietz",
         "Oregon - Half-Staff Alert - David Taylor",
         "Oregon - Half-Staff Alert - Silver Rail Elementary School",
         "Ohio - Half-Staff Alert - Gerald Stebelton",
