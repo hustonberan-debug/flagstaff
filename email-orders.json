@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T02:00:57+00:00",
+  "generated_at": "2026-10-29T02:16:03+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -24,11 +24,11 @@
       "identified_by": "sender domain azdoa.gov, dkim=pass azdoa.gov",
       "status": "half",
       "authority": "governor",
-      "subject": "Gov. Hobbs Orders Flags to Half-Staff for Sen. Jon Kyl\u2019s Memorial Service",
+      "subject": "Gov. Hobbs Orders Flags to Half-Staff for Dolores Huerta",
       "from": "Half-Staff Notification <communications@azdoa.gov>",
-      "sent_date": "2026-10-23",
-      "start_date": "2026-10-24",
-      "end_date": "2026-10-24",
+      "sent_date": "2026-10-29",
+      "start_date": "2026-10-29",
+      "end_date": "2026-10-29",
       "until_noon": false,
       "evidence": "to Half-Staff",
       "scope": "statewide",
@@ -62,7 +62,7 @@
     "MO": "2026-09-10",
     "WY": "2026-09-10",
     "KS": "2026-10-22",
-    "AZ": "2026-10-23",
+    "AZ": "2026-10-29",
     "IA": "2026-10-12",
     "ME": "2026-10-25"
   },
@@ -71,7 +71,7 @@
     "MI": "2026-10-12",
     "KS": "2026-10-22",
     "KY": "2026-10-05",
-    "AZ": "2026-10-23",
+    "AZ": "2026-10-29",
     "WI": "2026-09-15",
     "MO": "2026-09-10",
     "OR": "2026-09-23",
