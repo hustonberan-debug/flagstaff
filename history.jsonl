@@ -1583,3 +1583,4 @@
 {"at": "2026-10-26T00:01:21+00:00", "state": "ME", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
 {"at": "2026-10-28T04:16:37+00:00", "state": "VA", "status": "half", "reason": "State order", "reason_source": "state", "start_date": null, "end_date": null}
 {"at": "2026-10-29T02:16:33+00:00", "state": "AZ", "status": "half", "reason": "Gov. Hobbs Orders Flags to Half-Staff for Dolores Huerta", "reason_source": "state", "start_date": "2026-10-29", "end_date": "2026-10-29"}
+{"at": "2026-10-29T04:16:46+00:00", "state": "VA", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
