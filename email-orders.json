@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-10-30T20:15:45+00:00",
+  "generated_at": "2026-10-30T20:30:45+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
       "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
       "status": "half",
       "authority": "governor",
-      "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Former Representative Larry Paul Hibbard",
+      "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Dolores Huerta",
       "from": "Kansas Office of the Governor <govpress@list.ks.gov>",
-      "sent_date": "2026-10-22",
-      "start_date": "2026-10-22",
-      "end_date": "2026-10-24",
+      "sent_date": "2026-10-30",
+      "start_date": "2026-10-30",
+      "end_date": "2026-11-02",
       "until_noon": false,
       "evidence": "at Half-Staff",
-      "scope": "unknown",
-      "scope_evidence": "no scope stated in: FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Former Repres",
+      "scope": "statewide",
+      "scope_evidence": "throughout the State",
       "senders": [
         "govpress@list.ks.gov"
       ]
@@ -61,7 +61,7 @@
     "KY": "2026-10-05",
     "MO": "2026-09-10",
     "WY": "2026-09-10",
-    "KS": "2026-10-22",
+    "KS": "2026-10-30",
     "AZ": "2026-10-29",
     "IA": "2026-10-12",
     "ME": "2026-10-25"
@@ -69,7 +69,7 @@
   "channels_heard": {
     "WY": "2026-10-15",
     "MI": "2026-10-12",
-    "KS": "2026-10-22",
+    "KS": "2026-10-30",
     "KY": "2026-10-05",
     "AZ": "2026-10-29",
     "WI": "2026-09-15",
