@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T23:45:41+00:00",
+  "generated_at": "2026-10-30T00:00:55+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -80,9 +80,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 15,
+      "count": 14,
       "subjects": [
-        "Oregon - Half-Staff Alert - David Taylor",
         "Oregon - Half-Staff Alert - Silver Rail Elementary School",
         "Ohio - Half-Staff Alert - Gerald Stebelton",
         "Wyoming - Half-Staff Alert - Jonn Edmunds",
