@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T21:15:50+00:00",
+  "generated_at": "2026-11-02T21:30:51+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -80,7 +80,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 14,
+      "count": 15,
       "subjects": [
         "Arkansas - Half-Staff Alert - Delmor W. Erwin",
         "Ohio - Half-Staff Alert - Jacob Roesler",
@@ -95,7 +95,8 @@
         "Arizona - Half-Staff Alert \u2013 October 29, 2026",
         "Kansas - Half-Staff Alert - Dolores Huerta",
         "Montana - Half-Staff Alert - Ryan Terpsma",
-        "Florida - Half-Staff Alert - John Anderson"
+        "Florida - Half-Staff Alert - John Anderson",
+        "Kansas - Half-Staff Alert - Dan Goddard"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
