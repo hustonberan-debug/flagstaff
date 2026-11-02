@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-11-02T20:30:56+00:00",
+  "generated_at": "2026-11-02T20:45:53+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
       "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
       "status": "half",
       "authority": "governor",
-      "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Dolores Huerta",
+      "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Representative Dan Goddard",
       "from": "Kansas Office of the Governor <govpress@list.ks.gov>",
-      "sent_date": "2026-10-30",
-      "start_date": "2026-10-30",
+      "sent_date": "2026-11-02",
+      "start_date": "2026-11-02",
       "end_date": "2026-11-02",
       "until_noon": false,
       "evidence": "at Half-Staff",
@@ -61,7 +61,7 @@
     "KY": "2026-10-05",
     "MO": "2026-09-10",
     "WY": "2026-09-10",
-    "KS": "2026-10-30",
+    "KS": "2026-11-02",
     "AZ": "2026-10-29",
     "IA": "2026-10-12",
     "ME": "2026-10-25"
@@ -69,7 +69,7 @@
   "channels_heard": {
     "WY": "2026-10-15",
     "MI": "2026-10-12",
-    "KS": "2026-10-30",
+    "KS": "2026-11-02",
     "KY": "2026-10-05",
     "AZ": "2026-10-29",
     "WI": "2026-09-15",
