@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T22:30:55+00:00",
+  "generated_at": "2026-11-04T22:45:53+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -80,7 +80,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 15,
+      "count": 16,
       "subjects": [
         "Virginia - Half-Staff Alert - Bianca C. Wilkerson",
         "Kansas - Half-Staff Alert - Larry Paul Hibbard",
@@ -96,7 +96,8 @@
         "Kansas - Half-Staff Alert - Dan Goddard",
         "Fly a beautiful new flag full-staff for Veterans Day, Nov. 11. ALL SIZ",
         "Ohio - Half-Staff Alert - Ryan Milligan",
-        "South Carolina - Half-Staff Alert - Alexander M. Sanders Jr."
+        "South Carolina - Half-Staff Alert - Alexander M. Sanders Jr.",
+        "Massachusetts - Half-Staff Alert - Joseph A. Gala"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
