@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T23:52:41+00:00",
+  "generated_at": "2026-11-04T00:00:50+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -80,9 +80,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 14,
+      "count": 13,
       "subjects": [
-        "The Deal That Doubled America",
         "Virginia - Half-Staff Alert - Bianca C. Wilkerson",
         "Kansas - Half-Staff Alert - Larry Paul Hibbard",
         "Arizona - Half-Staff Alert - Jon Kyl",
