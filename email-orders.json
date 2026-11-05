@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T22:10:02+00:00",
+  "generated_at": "2026-11-05T22:16:00+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -98,7 +98,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 18,
+      "count": 19,
       "subjects": [
         "Virginia - Half-Staff Alert - Bianca C. Wilkerson",
         "Kansas - Half-Staff Alert - Larry Paul Hibbard",
@@ -117,7 +117,8 @@
         "South Carolina - Half-Staff Alert - Alexander M. Sanders Jr.",
         "Massachusetts - Half-Staff Alert - Joseph A. Gala",
         "Michigan - Half-Staff Alert - Jack Kirksey",
-        "Iowa - Half-Staff Alert - Robert Shove"
+        "Iowa - Half-Staff Alert - Robert Shove",
+        "Indiana - Half-Staff Alert - Ted Ellis"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
