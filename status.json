@@ -619,7 +619,7 @@
     "IN": {
       "state": "Indiana",
       "state_code": "IN",
-      "coverage": "covered",
+      "coverage": "stale",
       "ingest_mode": "index",
       "confidence": "medium",
       "state_status": "full",
@@ -627,19 +627,15 @@
       "source_url": "https://events.in.gov/group/gov",
       "checked_at": "2026-11-05T16:02:19+00:00",
       "last_changed_at": "2026-09-15T18:20:55+00:00",
-      "content_changed": false,
-      "error": null,
-      "listing_evidence": "9 headline-length links to this site",
-      "last_expired_order": null,
-      "items_parsed": 59,
-      "flag_items": 0,
-      "dated_items": 0,
+      "content_changed": null,
+      "error": "HTTP 503; last read 2026-11-05",
+      "consecutive_errors": 1,
       "sources": [
         {
           "kind": "press listing",
           "url": "https://events.in.gov/group/gov",
           "status": "full",
-          "evidence": null
+          "evidence": "HTTP 503; last read 2026-11-05"
         }
       ],
       "confidence_basis": "single-source",
