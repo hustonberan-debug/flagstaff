@@ -1145,10 +1145,10 @@
     "source": "index|https://governorreeves.ms.gov/newsroom/|fetch"
   },
   "MN~2": {
-    "hash_changed_at": "2026-11-05T02:46:16+00:00",
+    "hash_changed_at": "2026-11-05T07:46:24+00:00",
     "order_first_seen": null,
     "order_sig": null,
-    "hash": "dfe595f52519866b",
+    "hash": "122b87a462085722",
     "state_status": "unknown",
     "state_order": null,
     "last_parsed": "2026-11-05T07:47:07+00:00",
