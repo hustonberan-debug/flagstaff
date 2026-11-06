@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-11-05T23:46:00+00:00",
+  "generated_at": "2026-11-06T00:00:58+00:00",
   "orders": {
-    "KS": {
-      "state_code": "KS",
-      "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
+    "ME": {
+      "state_code": "ME",
+      "identified_by": "sender domain subscriptions.maine.gov, dkim=pass subscriptions.maine.gov",
       "status": "half",
       "authority": "governor",
-      "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Representative Dan Goddard",
-      "from": "Kansas Office of the Governor <govpress@list.ks.gov>",
-      "sent_date": "2026-11-02",
-      "start_date": "2026-11-02",
-      "end_date": "2026-11-02",
+      "subject": "Governor Mills Directs Flags Lowered on Sunday in Honor of Three Year Anniversary of Lewiston Tragedy",
+      "from": "Governor Janet Mills <Governor@subscriptions.maine.gov>",
+      "sent_date": "2026-10-25",
+      "start_date": "2026-10-25",
+      "end_date": "2026-10-25",
       "until_noon": false,
-      "evidence": "at Half-Staff",
+      "evidence": "Flags Lowered",
       "scope": "statewide",
-      "scope_evidence": "throughout the State",
+      "scope_evidence": "statewide",
       "senders": [
-        "govpress@list.ks.gov"
+        "governor@subscriptions.maine.gov"
       ]
     },
     "AZ": {
@@ -37,22 +37,22 @@
         "communications@azdoa.gov"
       ]
     },
-    "ME": {
-      "state_code": "ME",
-      "identified_by": "sender domain subscriptions.maine.gov, dkim=pass subscriptions.maine.gov",
+    "KS": {
+      "state_code": "KS",
+      "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
       "status": "half",
       "authority": "governor",
-      "subject": "Governor Mills Directs Flags Lowered on Sunday in Honor of Three Year Anniversary of Lewiston Tragedy",
-      "from": "Governor Janet Mills <Governor@subscriptions.maine.gov>",
-      "sent_date": "2026-10-25",
-      "start_date": "2026-10-25",
-      "end_date": "2026-10-25",
+      "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Representative Dan Goddard",
+      "from": "Kansas Office of the Governor <govpress@list.ks.gov>",
+      "sent_date": "2026-11-02",
+      "start_date": "2026-11-02",
+      "end_date": "2026-11-02",
       "until_noon": false,
-      "evidence": "Flags Lowered",
+      "evidence": "at Half-Staff",
       "scope": "statewide",
-      "scope_evidence": "statewide",
+      "scope_evidence": "throughout the State",
       "senders": [
-        "governor@subscriptions.maine.gov"
+        "govpress@list.ks.gov"
       ]
     },
     "IA": {
@@ -98,9 +98,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 19,
+      "count": 18,
       "subjects": [
-        "Virginia - Half-Staff Alert - Bianca C. Wilkerson",
         "Kansas - Half-Staff Alert - Larry Paul Hibbard",
         "Arizona - Half-Staff Alert - Jon Kyl",
         "Huston, A Look at your Midterm Ballot.",
