@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T15:31:24+00:00",
+  "generated_at": "2026-11-06T15:46:11+00:00",
   "orders": {
     "ME": {
       "state_code": "ME",
@@ -98,7 +98,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 18,
+      "count": 19,
       "subjects": [
         "Kansas - Half-Staff Alert - Larry Paul Hibbard",
         "Arizona - Half-Staff Alert - Jon Kyl",
@@ -117,7 +117,8 @@
         "Massachusetts - Half-Staff Alert - Joseph A. Gala",
         "Michigan - Half-Staff Alert - Jack Kirksey",
         "Iowa - Half-Staff Alert - Robert Shove",
-        "Indiana - Half-Staff Alert - Ted Ellis"
+        "Indiana - Half-Staff Alert - Ted Ellis",
+        "Idaho - Half-Staff Alert - Joseph Wyatt Gates"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
