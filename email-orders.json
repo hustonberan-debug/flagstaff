@@ -1,24 +1,6 @@
 {
-  "generated_at": "2026-11-07T23:46:45+00:00",
+  "generated_at": "2026-11-08T00:01:08+00:00",
   "orders": {
-    "ME": {
-      "state_code": "ME",
-      "identified_by": "sender domain subscriptions.maine.gov, dkim=pass subscriptions.maine.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "Governor Mills Directs Flags Lowered on Sunday in Honor of Three Year Anniversary of Lewiston Tragedy",
-      "from": "Governor Janet Mills <Governor@subscriptions.maine.gov>",
-      "sent_date": "2026-10-25",
-      "start_date": "2026-10-25",
-      "end_date": "2026-10-25",
-      "until_noon": false,
-      "evidence": "Flags Lowered",
-      "scope": "statewide",
-      "scope_evidence": "statewide",
-      "senders": [
-        "governor@subscriptions.maine.gov"
-      ]
-    },
     "AZ": {
       "state_code": "AZ",
       "identified_by": "sender domain azdoa.gov, dkim=pass azdoa.gov",
