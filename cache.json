@@ -1239,10 +1239,10 @@
     "source": "diff|https://www.nj.gov/governor/news/2026/approved/news_archive.shtml|fetch"
   },
   "NV~2": {
-    "hash_changed_at": "2026-11-08T03:46:39+00:00",
+    "hash_changed_at": "2026-11-08T04:01:16+00:00",
     "order_first_seen": null,
     "order_sig": null,
-    "hash": "c1886e58602db662",
+    "hash": "bd7795f77915ef95",
     "state_status": "full",
     "state_order": null,
     "last_parsed": "2026-11-08T04:01:53+00:00",
