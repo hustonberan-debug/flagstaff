@@ -1,24 +1,6 @@
 {
-  "generated_at": "2026-11-12T00:00:07+00:00",
+  "generated_at": "2026-11-12T00:15:38+00:00",
   "orders": {
-    "AZ": {
-      "state_code": "AZ",
-      "identified_by": "sender domain azdoa.gov, dkim=pass azdoa.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "Gov. Hobbs Orders Flags to Half-Staff for Dolores Huerta",
-      "from": "Half-Staff Notification <communications@azdoa.gov>",
-      "sent_date": "2026-10-29",
-      "start_date": "2026-10-29",
-      "end_date": "2026-10-29",
-      "until_noon": false,
-      "evidence": "to Half-Staff",
-      "scope": "statewide",
-      "scope_evidence": "at all state buildings",
-      "senders": [
-        "communications@azdoa.gov"
-      ]
-    },
     "KS": {
       "state_code": "KS",
       "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
@@ -80,10 +62,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 19,
+      "count": 17,
       "subjects": [
-        "Ohio - Half-Staff Alert - Marilyn Slaby",
-        "Illinois - Half-Staff Alert - Greg Witt",
         "Arizona - Half-Staff Alert \u2013 October 29, 2026",
         "Kansas - Half-Staff Alert - Dolores Huerta",
         "Montana - Half-Staff Alert - Ryan Terpsma",
