@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-11-13T14:15:38+00:00",
+  "generated_at": "2026-11-13T14:31:34+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
       "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
       "status": "half",
       "authority": "governor",
-      "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Representative Dan Goddard",
+      "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Dolores Huerta",
       "from": "Kansas Office of the Governor <govpress@list.ks.gov>",
-      "sent_date": "2026-11-02",
-      "start_date": "2026-11-02",
+      "sent_date": "2026-10-30",
+      "start_date": "2026-10-30",
       "end_date": "2026-11-02",
       "until_noon": false,
       "evidence": "at Half-Staff",
@@ -17,24 +17,6 @@
       "scope_evidence": "throughout the State",
       "senders": [
         "govpress@list.ks.gov"
-      ]
-    },
-    "IA": {
-      "state_code": "IA",
-      "identified_by": "sender domain email.iowa.gov, dkim=pass email.iowa.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "FLAGS: Gov. Reynolds orders flags at half-staff Saturday to honor fallen World War II sailor",
-      "from": "State Of Iowa <StateOfIowa@email.iowa.gov>",
-      "sent_date": "2026-11-05",
-      "start_date": "2026-11-07",
-      "end_date": "2026-11-07",
-      "until_noon": false,
-      "evidence": "at half-staff",
-      "scope": "statewide",
-      "scope_evidence": "flags in Iowa",
-      "senders": [
-        "stateofiowa@email.iowa.gov"
       ]
     }
   },
@@ -62,25 +44,11 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 17,
+      "count": 3,
       "subjects": [
         "Kansas - Half-Staff Alert - Dolores Huerta",
         "Montana - Half-Staff Alert - Ryan Terpsma",
-        "Florida - Half-Staff Alert - John Anderson",
-        "Kansas - Half-Staff Alert - Dan Goddard",
-        "Fly a beautiful new flag full-staff for Veterans Day, Nov. 11. ALL SIZ",
-        "Ohio - Half-Staff Alert - Ryan Milligan",
-        "South Carolina - Half-Staff Alert - Alexander M. Sanders Jr.",
-        "Massachusetts - Half-Staff Alert - Joseph A. Gala",
-        "Michigan - Half-Staff Alert - Jack Kirksey",
-        "Iowa - Half-Staff Alert - Robert Shove",
-        "Indiana - Half-Staff Alert - Ted Ellis",
-        "Idaho - Half-Staff Alert - Joseph Wyatt Gates",
-        "West Virginia - Half-Staff Alert - Jay Rockefeller",
-        "Update - Ohio - Half-Staff Alert - Ryan Milligan",
-        "We the People - Special Veterans Day Edition",
-        "Maryland - Half-Staff Alert - Dennis C. McCoy",
-        "Colorado - Half-Staff Alert - Nick Graham"
+        "Florida - Half-Staff Alert - John Anderson"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
