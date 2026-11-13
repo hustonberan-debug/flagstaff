@@ -1594,3 +1594,4 @@
 {"at": "2026-11-07T00:01:15+00:00", "state": "IA", "status": "half", "reason": "Gov. Reynolds orders flags at half-staff Saturday to honor fallen World War II sailor", "reason_source": "state", "start_date": "2026-11-07", "end_date": "2026-11-07"}
 {"at": "2026-11-08T00:01:24+00:00", "state": "IA", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
 {"at": "2026-11-12T15:29:55+00:00", "state": "CO", "status": "half", "reason": "Governor Polis Orders Flags to Half-Staff In Honor of Lakewood Police Agent Nick Graham", "reason_source": "state", "start_date": "2026-11-12", "end_date": "2026-11-12"}
+{"at": "2026-11-13T16:31:21+00:00", "state": "KS", "status": "half", "reason": "FLAG HONORS: UPDATE: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Representative Dan Goddard", "reason_source": "state", "start_date": "2026-11-13", "end_date": null}

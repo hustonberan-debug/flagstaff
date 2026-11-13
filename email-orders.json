@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-11-13T16:15:36+00:00",
+  "generated_at": "2026-11-13T16:30:48+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
       "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
       "status": "half",
       "authority": "governor",
-      "subject": "FLAG HONORS: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Representative Dan Goddard",
+      "subject": "FLAG HONORS: UPDATE: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Representative Dan Goddard",
       "from": "Kansas Office of the Governor <govpress@list.ks.gov>",
-      "sent_date": "2026-11-02",
-      "start_date": "2026-11-02",
-      "end_date": "2026-11-02",
+      "sent_date": "2026-11-13",
+      "start_date": "2026-11-13",
+      "end_date": null,
       "until_noon": false,
       "evidence": "at Half-Staff",
       "scope": "statewide",
-      "scope_evidence": "throughout the State",
+      "scope_evidence": "all state buildings",
       "senders": [
         "govpress@list.ks.gov"
       ]
@@ -43,7 +43,7 @@
     "KY": "2026-10-05",
     "MO": "2026-09-10",
     "WY": "2026-09-10",
-    "KS": "2026-11-02",
+    "KS": "2026-11-13",
     "AZ": "2026-10-29",
     "IA": "2026-11-05",
     "ME": "2026-10-25"
@@ -51,7 +51,7 @@
   "channels_heard": {
     "WY": "2026-10-15",
     "MI": "2026-11-04",
-    "KS": "2026-11-02",
+    "KS": "2026-11-13",
     "KY": "2026-10-05",
     "AZ": "2026-10-29",
     "WI": "2026-09-15",
