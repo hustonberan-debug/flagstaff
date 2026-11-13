@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T17:00:40+00:00",
+  "generated_at": "2026-11-13T17:15:55+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -62,7 +62,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 18,
+      "count": 19,
       "subjects": [
         "Kansas - Half-Staff Alert - Dolores Huerta",
         "Montana - Half-Staff Alert - Ryan Terpsma",
@@ -81,7 +81,8 @@
         "We the People - Special Veterans Day Edition",
         "Maryland - Half-Staff Alert - Dennis C. McCoy",
         "Colorado - Half-Staff Alert - Nick Graham",
-        "Wyoming - Half-Staff Alert - Raymond Sarcletti"
+        "Wyoming - Half-Staff Alert - Raymond Sarcletti",
+        "Update - Kansas - Half-Staff Alert - Dan Goddard"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
