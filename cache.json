@@ -537,10 +537,10 @@
   "OH": {
     "last_known_status": "full",
     "last_status_change_at": "2026-09-15T18:20:56+00:00",
-    "hash_changed_at": "2026-11-13T21:46:10+00:00",
+    "hash_changed_at": "2026-11-13T22:46:13+00:00",
     "order_first_seen": "2026-10-23",
     "order_sig": "https://governor.ohio.gov/flag-honors||declaration: 'Flag Status Full Staff'||",
-    "hash": "03722f3ec838b7bb",
+    "hash": "ec38dad20c7006f5",
     "state_status": "full",
     "state_order": {
       "title": null,
