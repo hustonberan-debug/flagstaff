@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T23:45:36+00:00",
+  "generated_at": "2026-11-13T00:00:38+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -62,9 +62,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 18,
+      "count": 17,
       "subjects": [
-        "Arizona - Half-Staff Alert \u2013 October 29, 2026",
         "Kansas - Half-Staff Alert - Dolores Huerta",
         "Montana - Half-Staff Alert - Ryan Terpsma",
         "Florida - Half-Staff Alert - John Anderson",
