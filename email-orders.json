@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T00:16:01+00:00",
+  "generated_at": "2026-11-15T00:31:03+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -62,7 +62,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 21,
+      "count": 22,
       "subjects": [
         "Kansas - Half-Staff Alert - Dolores Huerta",
         "Montana - Half-Staff Alert - Ryan Terpsma",
@@ -84,7 +84,8 @@
         "Wyoming - Half-Staff Alert - Raymond Sarcletti",
         "Update - Kansas - Half-Staff Alert - Dan Goddard",
         "Virginia - Half-Staff Alert - Bill Whitehurst",
-        "New York - Half-Staff Alert - Ron Canestrari"
+        "New York - Half-Staff Alert - Ron Canestrari",
+        "North Carolina - Half-Staff Alert - Devin James"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
