@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T23:46:02+00:00",
+  "generated_at": "2026-11-16T00:01:03+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -62,10 +62,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 22,
+      "count": 20,
       "subjects": [
-        "Kansas - Half-Staff Alert - Dolores Huerta",
-        "Montana - Half-Staff Alert - Ryan Terpsma",
         "Florida - Half-Staff Alert - John Anderson",
         "Kansas - Half-Staff Alert - Dan Goddard",
         "Fly a beautiful new flag full-staff for Veterans Day, Nov. 11. ALL SIZ",
