@@ -1599,3 +1599,4 @@
 {"at": "2026-11-14T17:16:44+00:00", "state": "VA", "status": "half", "reason": "State order", "reason_source": "state", "start_date": null, "end_date": null}
 {"at": "2026-11-14T18:01:44+00:00", "state": "CO", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
 {"at": "2026-11-15T17:16:47+00:00", "state": "VA", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
+{"at": "2026-11-17T17:45:57+00:00", "state": "ID", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
