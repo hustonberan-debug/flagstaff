@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T15:15:46+00:00",
+  "generated_at": "2026-11-17T15:30:40+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -62,7 +62,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 19,
+      "count": 20,
       "subjects": [
         "Fly a beautiful new flag full-staff for Veterans Day, Nov. 11. ALL SIZ",
         "Ohio - Half-Staff Alert - Ryan Milligan",
@@ -82,7 +82,8 @@
         "Virginia - Half-Staff Alert - Bill Whitehurst",
         "New York - Half-Staff Alert - Ron Canestrari",
         "North Carolina - Half-Staff Alert - Devin James",
-        "Update - Idaho - Half-Staff Alert - Joseph Wyatt Gates"
+        "Update - Idaho - Half-Staff Alert - Joseph Wyatt Gates",
+        "He never said \u201cGettysburg.\u201d"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
