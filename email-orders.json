@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T18:00:57+00:00",
+  "generated_at": "2026-11-18T18:16:09+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -62,7 +62,7 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 19,
+      "count": 20,
       "subjects": [
         "Ohio - Half-Staff Alert - Ryan Milligan",
         "South Carolina - Half-Staff Alert - Alexander M. Sanders Jr.",
@@ -82,7 +82,8 @@
         "New York - Half-Staff Alert - Ron Canestrari",
         "North Carolina - Half-Staff Alert - Devin James",
         "Update - Idaho - Half-Staff Alert - Joseph Wyatt Gates",
-        "He never said \u201cGettysburg.\u201d"
+        "He never said \u201cGettysburg.\u201d",
+        "Michigan - Half-Staff Alert - John Reilly"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
