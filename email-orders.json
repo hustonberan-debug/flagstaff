@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T18:00:56+00:00",
+  "generated_at": "2026-11-19T18:17:29+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -84,6 +84,15 @@
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
+      ]
+    },
+    "service.govdelivery.com": {
+      "count": 1,
+      "subjects": [
+        "NEW Flag-Lowering Order - Executive Order #306 Gov. Evers Orders Flags"
+      ],
+      "senders": [
+        "dma_wi@service.govdelivery.com"
       ]
     }
   },
