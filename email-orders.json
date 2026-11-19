@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T23:49:47+00:00",
+  "generated_at": "2026-11-19T00:01:02+00:00",
   "orders": {
     "IA": {
       "state_code": "IA",
@@ -62,12 +62,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 20,
+      "count": 16,
       "subjects": [
-        "Ohio - Half-Staff Alert - Ryan Milligan",
-        "South Carolina - Half-Staff Alert - Alexander M. Sanders Jr.",
-        "Massachusetts - Half-Staff Alert - Joseph A. Gala",
-        "Michigan - Half-Staff Alert - Jack Kirksey",
         "Iowa - Half-Staff Alert - Robert Shove",
         "Indiana - Half-Staff Alert - Ted Ellis",
         "Idaho - Half-Staff Alert - Joseph Wyatt Gates",
