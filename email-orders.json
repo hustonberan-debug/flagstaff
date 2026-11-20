@@ -1,24 +1,6 @@
 {
-  "generated_at": "2026-11-19T23:46:03+00:00",
+  "generated_at": "2026-11-20T00:01:13+00:00",
   "orders": {
-    "IA": {
-      "state_code": "IA",
-      "identified_by": "sender domain email.iowa.gov, dkim=pass email.iowa.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "FLAGS: Gov. Reynolds orders flags at half-staff Saturday to honor fallen World War II sailor",
-      "from": "State Of Iowa <StateOfIowa@email.iowa.gov>",
-      "sent_date": "2026-11-05",
-      "start_date": "2026-11-07",
-      "end_date": "2026-11-07",
-      "until_noon": false,
-      "evidence": "at half-staff",
-      "scope": "statewide",
-      "scope_evidence": "flags in Iowa",
-      "senders": [
-        "stateofiowa@email.iowa.gov"
-      ]
-    },
     "KS": {
       "state_code": "KS",
       "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
@@ -62,10 +44,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 18,
+      "count": 16,
       "subjects": [
-        "Iowa - Half-Staff Alert - Robert Shove",
-        "Indiana - Half-Staff Alert - Ted Ellis",
         "Idaho - Half-Staff Alert - Joseph Wyatt Gates",
         "West Virginia - Half-Staff Alert - Jay Rockefeller",
         "Update - Ohio - Half-Staff Alert - Ryan Milligan",
