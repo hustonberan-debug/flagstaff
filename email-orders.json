@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T14:00:57+00:00",
+  "generated_at": "2026-11-21T14:17:01+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -18,6 +18,24 @@
       "senders": [
         "govpress@list.ks.gov"
       ]
+    },
+    "IA": {
+      "state_code": "IA",
+      "identified_by": "sender domain email.iowa.gov, dkim=pass email.iowa.gov",
+      "status": "half",
+      "authority": "governor",
+      "subject": "FLAGS: Gov. Reynolds orders flags at half-staff Monday in honor and remembrance of Wally E. Horn",
+      "from": "State Of Iowa <StateOfIowa@email.iowa.gov>",
+      "sent_date": "2026-11-21",
+      "start_date": "2026-11-23",
+      "end_date": "2026-11-23",
+      "until_noon": false,
+      "evidence": "at half-staff",
+      "scope": "statewide",
+      "scope_evidence": "flags in Iowa",
+      "senders": [
+        "stateofiowa@email.iowa.gov"
+      ]
     }
   },
   "channels_seen": {
@@ -27,7 +45,7 @@
     "WY": "2026-09-10",
     "KS": "2026-11-13",
     "AZ": "2026-10-29",
-    "IA": "2026-11-05",
+    "IA": "2026-11-21",
     "ME": "2026-10-25"
   },
   "channels_heard": {
@@ -39,7 +57,7 @@
     "WI": "2026-09-15",
     "MO": "2026-09-10",
     "OR": "2026-09-23",
-    "IA": "2026-11-05",
+    "IA": "2026-11-21",
     "ME": "2026-10-25"
   },
   "unattributed_senders": {
