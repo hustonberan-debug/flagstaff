@@ -1602,3 +1602,4 @@
 {"at": "2026-11-17T17:45:57+00:00", "state": "ID", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
 {"at": "2026-11-21T00:01:43+00:00", "state": "KS", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
 {"at": "2026-11-23T00:01:40+00:00", "state": "IA", "status": "half", "reason": "Gov. Reynolds orders flags at half-staff Monday in honor and remembrance of Wally E. Horn", "reason_source": "state", "start_date": "2026-11-23", "end_date": "2026-11-23"}
+{"at": "2026-11-24T00:01:15+00:00", "state": "IA", "status": "full", "reason": null, "reason_source": null, "start_date": null, "end_date": null}
