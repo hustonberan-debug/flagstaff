@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T17:30:58+00:00",
+  "generated_at": "2026-11-27T17:46:39+00:00",
   "orders": {
     "KS": {
       "state_code": "KS",
@@ -17,24 +17,6 @@
       "scope_evidence": "all state buildings",
       "senders": [
         "govpress@list.ks.gov"
-      ]
-    },
-    "IA": {
-      "state_code": "IA",
-      "identified_by": "sender domain email.iowa.gov, dkim=pass email.iowa.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "FLAGS: Gov. Reynolds orders flags at half-staff Monday in honor and remembrance of Wally E. Horn",
-      "from": "State Of Iowa <StateOfIowa@email.iowa.gov>",
-      "sent_date": "2026-11-21",
-      "start_date": "2026-11-23",
-      "end_date": "2026-11-23",
-      "until_noon": false,
-      "evidence": "at half-staff",
-      "scope": "statewide",
-      "scope_evidence": "flags in Iowa",
-      "senders": [
-        "stateofiowa@email.iowa.gov"
       ]
     }
   },
@@ -62,37 +44,13 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 17,
+      "count": 2,
       "subjects": [
         "Wyoming - Half-Staff Alert - Raymond Sarcletti",
-        "Update - Kansas - Half-Staff Alert - Dan Goddard",
-        "Virginia - Half-Staff Alert - Bill Whitehurst",
-        "New York - Half-Staff Alert - Ron Canestrari",
-        "North Carolina - Half-Staff Alert - Devin James",
-        "Update - Idaho - Half-Staff Alert - Joseph Wyatt Gates",
-        "He never said \u201cGettysburg.\u201d",
-        "Michigan - Half-Staff Alert - John Reilly",
-        "Louisiana - Half-Staff Alert - Mike Bayham",
-        "Colorado - Half-Staff Alert - Melissa Hart",
-        "Wisconsin - Half-Staff Alert - Waukesha Christmas Parade Remembrance",
-        "Oregon - Half-Staff Alert - George Martin",
-        "Iowa - Half-Staff Alert - Wally E. Horn",
-        "Michigan - Half-Staff Alert - David Hollister",
-        "Wyoming - Half-Staff Alert - Frank Prevedel",
-        "\u201cMary Had a Little Lamb\u201d and Thanksgiving?",
-        "West Virginia - Half-Staff Alert - Sarah Beckstrom and Andrew Wolfe"
+        "Update - Kansas - Half-Staff Alert - Dan Goddard"
       ],
       "senders": [
         "halfstaff@flagsexpress.com"
-      ]
-    },
-    "service.govdelivery.com": {
-      "count": 1,
-      "subjects": [
-        "NEW Flag-Lowering Order - Executive Order #306 Gov. Evers Orders Flags"
-      ],
-      "senders": [
-        "dma_wi@service.govdelivery.com"
       ]
     }
   },
