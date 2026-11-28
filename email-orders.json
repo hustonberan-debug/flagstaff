@@ -1,24 +1,6 @@
 {
-  "generated_at": "2026-11-27T23:45:47+00:00",
+  "generated_at": "2026-11-28T00:00:45+00:00",
   "orders": {
-    "KS": {
-      "state_code": "KS",
-      "identified_by": "sender domain ks.gov, dkim=pass list.ks.gov",
-      "status": "half",
-      "authority": "governor",
-      "subject": "FLAG HONORS: UPDATE: Governor Kelly Directs Flags be Flown at Half-Staff in Honor of Representative Dan Goddard",
-      "from": "Kansas Office of the Governor <govpress@list.ks.gov>",
-      "sent_date": "2026-11-13",
-      "start_date": "2026-11-13",
-      "end_date": null,
-      "until_noon": false,
-      "evidence": "at Half-Staff",
-      "scope": "statewide",
-      "scope_evidence": "all state buildings",
-      "senders": [
-        "govpress@list.ks.gov"
-      ]
-    },
     "IA": {
       "state_code": "IA",
       "identified_by": "sender domain email.iowa.gov, dkim=pass email.iowa.gov",
@@ -62,12 +44,8 @@
   },
   "unattributed_senders": {
     "flagsexpress.com": {
-      "count": 17,
+      "count": 13,
       "subjects": [
-        "Wyoming - Half-Staff Alert - Raymond Sarcletti",
-        "Update - Kansas - Half-Staff Alert - Dan Goddard",
-        "Virginia - Half-Staff Alert - Bill Whitehurst",
-        "New York - Half-Staff Alert - Ron Canestrari",
         "North Carolina - Half-Staff Alert - Devin James",
         "Update - Idaho - Half-Staff Alert - Joseph Wyatt Gates",
         "He never said \u201cGettysburg.\u201d",
